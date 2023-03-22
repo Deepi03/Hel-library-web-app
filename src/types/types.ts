@@ -3,7 +3,7 @@ export type Book = {
   isbn: string
   title: string
   description: string
-  publisher: Publisher
+  publisher: string
   authors: Author
   status: boolean
   borrowId: null | string
@@ -12,6 +12,8 @@ export type Book = {
   returnDate: null | string
   cover: string
 }
+
+export type PartialBook = Partial<Book>
 
 export type Author = {
   id: string
@@ -25,7 +27,17 @@ export type User = {
   email: string
 }
 
-export type Publisher = {
-  id: string
-  name: string
+export const initialBookstate = {
+  id: "",
+  isbn: "",
+  title: "",
+  description: "",
+  authors: {
+    id: "",
+    name: ""
+  },
+  publishedDate: "",
+  publisher: "",
+  status: true,
+  cover: ""
 }

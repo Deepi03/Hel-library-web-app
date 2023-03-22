@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { v4 as uuid } from "uuid"
+
 import { Book } from "../../types/types"
 import { fetchBooks } from "../middlewares/fetchBooks"
 
@@ -8,14 +10,16 @@ export type BookState = {
 const initialState: BookState = {
   items: []
 }
+const unique_id = uuid()
 
 const bookSlice = createSlice({
   name: "bookReducer",
   initialState: initialState,
   reducers: {
     addBooks(state, action) {
-      state.items = [...state.items, action.payload]
-      console.log("state", state.items)
+      action.payload.id = unique_id
+      state.items.push(action.payload)
+      console.log("book reducer", action.payload)
     }
   },
   extraReducers: (builder) => {

@@ -22,7 +22,6 @@ export const Books = () => {
             <th>Cover</th>
             <th>ISBN</th>
             <th>Title</th>
-            <th>Authors</th>
             <th>Available</th>
             <th>Borrow</th>
           </tr>
@@ -35,7 +34,7 @@ export const Books = () => {
               </td>
               <td>{book.isbn}</td>
               <td>{book.title}</td>
-              <td>{book.authors.name}</td>
+
               <td>{book.status === true ? "Yes" : "No"}</td>
               <td>
                 <button>Borrow</button>
