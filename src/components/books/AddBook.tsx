@@ -2,7 +2,8 @@
 import React, { useState } from "react"
 import { v4 as uuid } from "uuid"
 import { useDispatch } from "react-redux"
-import { addBooks } from "../../redux/reducers/bookReducer"
+
+import { addBook } from "../../redux/reducers/bookReducer"
 import { AppDispatch } from "../../redux/store"
 import { initialBookstate, PartialBook } from "../../types/types"
 
@@ -13,7 +14,7 @@ export const AddBook = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(addBooks(book))
+    dispatch(addBook(book))
   }
   return (
     <div>
@@ -26,6 +27,7 @@ export const AddBook = () => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setBook({ ...book, isbn: e.target.value })
           }}
+          required
         />
         <label htmlFor="title">Title</label>
         <input
@@ -38,6 +40,7 @@ export const AddBook = () => {
         <input
           type="text"
           name="author"
+          required
           value={book.authors?.name}
           onChange={(e) =>
             setBook({
@@ -50,6 +53,7 @@ export const AddBook = () => {
         <input
           type="text"
           name="publisher"
+          required
           value={book.publisher}
           onChange={(e) =>
             setBook({
@@ -62,6 +66,7 @@ export const AddBook = () => {
         <input
           type="date"
           name="publishedDate"
+          required
           pattern="\d{4}-\d{2}-\d{2}"
           value={book.publishedDate}
           onChange={(e) =>
@@ -75,6 +80,7 @@ export const AddBook = () => {
         <input
           type="text"
           name="cover"
+          required
           value={book.cover}
           onChange={(e) =>
             setBook({

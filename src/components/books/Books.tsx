@@ -1,18 +1,27 @@
+/* eslint-disable prettier/prettier */
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
 import { fetchBooks } from "../../redux/middlewares/fetchBooks"
+import { updateBook } from "../../redux/reducers/bookReducer"
 
 import { AppDispatch, RootState } from "../../redux/store"
 import "./Books.scss"
+import { UpdateBook } from "./updateBook"
 
 export const Books = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
   const books = useSelector((state: RootState) => state.book)
 
   useEffect(() => {
     dispatch(fetchBooks())
   }, [])
-  console.log(books.items.map((book) => book.title))
+
+  const handleUpdate = (id: string) => {
+    navigate(`${id}/updateBook`)
+  }
+
   return (
     <div>
       <h1>Books</h1>
@@ -38,6 +47,17 @@ export const Books = () => {
               <td>{book.status === true ? "Yes" : "No"}</td>
               <td>
                 <button>Borrow</button>
+              </td>
+              <td>
+                {
+                  <button
+                    onClick={() => {
+                      handleUpdate(book.id)
+                    }}
+                  >
+                    Update
+                  </button>
+                }
               </td>
             </tr>
           ))}

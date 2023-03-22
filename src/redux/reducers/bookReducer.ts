@@ -1,25 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { v4 as uuid } from "uuid"
 
 import { Book } from "../../types/types"
 import { fetchBooks } from "../middlewares/fetchBooks"
 
 export type BookState = {
   items: Book[]
+  item: Book | undefined
 }
 const initialState: BookState = {
-  items: []
+  items: [],
+  item: undefined
 }
-const unique_id = uuid()
 
 const bookSlice = createSlice({
   name: "bookReducer",
   initialState: initialState,
   reducers: {
-    addBooks(state, action) {
-      action.payload.id = unique_id
+    addBook(state, action) {
+      console.log(action.payload)
       state.items.push(action.payload)
-      console.log("book reducer", action.payload)
+    },
+    updateBook(state, action) {
+      console.log("update book reducer", action.payload)
+      state.items.filter((book) => {
+        if (action.payload == book.id) {
+          console.log(book.id)
+          book = {
+            ...book,
+            ...action.payload.update
+          }
+
+          return book
+        }
+      })
     }
   },
   extraReducers: (builder) => {
@@ -30,4 +43,4 @@ const bookSlice = createSlice({
 })
 
 export const bookReducer = bookSlice.reducer
-export const { addBooks } = bookSlice.actions
+export const { addBook, updateBook } = bookSlice.actions
