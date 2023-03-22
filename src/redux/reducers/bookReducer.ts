@@ -12,7 +12,12 @@ const initialState: BookState = {
 const bookSlice = createSlice({
   name: "bookReducer",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    addBooks(state, action) {
+      state.items = [...state.items, action.payload]
+      console.log("state", state.items)
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchBooks.fulfilled, (state, action) => {
       state.items = action.payload
@@ -21,3 +26,4 @@ const bookSlice = createSlice({
 })
 
 export const bookReducer = bookSlice.reducer
+export const { addBooks } = bookSlice.actions
