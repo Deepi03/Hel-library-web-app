@@ -14,8 +14,8 @@ import { NavBar } from "./components/nav/NavBar"
 import { RootState } from "./redux/store"
 
 function App() {
-  const isLoggedOut = useSelector((state: RootState) => {
-    return state.user.currentUser
+  const isLoggedIn = useSelector((state: RootState) => {
+    return state.user.isLoggedIn
   })
   return (
     <div className="App">
@@ -30,7 +30,7 @@ function App() {
           <Route path="/addBook" element={<AddBook />}></Route>
           <Route
             path="/login"
-            element={isLoggedOut ? <Navigate to="/" /> : <Login />}
+            element={isLoggedIn ? <Navigate to="/" /> : <Login />}
           />
         </Routes>
       </BrowserRouter>

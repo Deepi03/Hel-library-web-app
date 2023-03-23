@@ -3,12 +3,12 @@ import { GoogleLoggedInUser, googleUserInitialState } from "../../types/types"
 import { fetchData } from "../middlewares/googleLogin"
 
 export type UsersState = {
-  items: GoogleLoggedInUser
-  currentUser: boolean
+  items: GoogleLoggedInUser | undefined
+  isLoggedIn: boolean
 }
 const initialState: UsersState = {
   items: googleUserInitialState,
-  currentUser: false
+  isLoggedIn: false
 }
 
 const userSlice = createSlice({
@@ -16,17 +16,14 @@ const userSlice = createSlice({
   initialState: initialState,
   reducers: {
     logout(state) {
-      state.currentUser = false
-      console.log("logout after", state.currentUser)
+      state.isLoggedIn = false
+      state.items = undefined
     }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchData.fulfilled, (state, action) => {
-      console.log("user reducer", action.payload)
       state.items = action.payload
-      console.log("user reducer after", action.payload)
-      if (state.items) state.currentUser = true
-      console.log("current user", state.currentUser)
+      if (state.items) state.isLoggedIn = true
     })
   }
 })

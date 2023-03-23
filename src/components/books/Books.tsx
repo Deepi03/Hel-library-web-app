@@ -1,9 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { fetchBooks } from "../../redux/middlewares/fetchBooks"
-import { updateBook } from "../../redux/reducers/bookReducer"
 
 import { AppDispatch, RootState } from "../../redux/store"
 import "./Books.scss"
@@ -12,7 +11,7 @@ export const Books = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
   const books = useSelector((state: RootState) => state.book)
-  const user = useSelector((state: RootState) => state.user.items)
+
   useEffect(() => {
     dispatch(fetchBooks())
   }, [])
