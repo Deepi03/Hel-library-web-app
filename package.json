@@ -17,13 +17,14 @@
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.13",
+    "@react-oauth/google": "^0.9.0",
     "@reduxjs/toolkit": "^1.9.3",
+    "@types/react-dom": "^18.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "sass": "^1.58.3",
-    "uuidv4": "^6.2.13",
-    "@types/react-dom": "^18.0.5"
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
