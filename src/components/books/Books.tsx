@@ -7,17 +7,15 @@ import { updateBook } from "../../redux/reducers/bookReducer"
 
 import { AppDispatch, RootState } from "../../redux/store"
 import "./Books.scss"
-import { UpdateBook } from "./updateBook"
 
 export const Books = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
   const books = useSelector((state: RootState) => state.book)
-
+  const user = useSelector((state: RootState) => state.user.items)
   useEffect(() => {
     dispatch(fetchBooks())
   }, [])
-
   const handleUpdate = (id: string) => {
     navigate(`${id}/updateBook`)
   }

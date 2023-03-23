@@ -20,11 +20,33 @@ export type Author = {
   name: string
 }
 
-export type User = {
+/* export type User = {
   id: string
   firstname: string
   lastname: string
   email: string
+} */
+
+export type GoogleLoggedInUser = {
+  email: string
+  family_name: string
+  given_name: string
+  id: string
+  locale: string
+  name: string
+  picture: string
+  verified_email: string
+}
+
+export const googleUserInitialState = {
+  email: "",
+  family_name: "",
+  given_name: "",
+  id: "",
+  locale: "",
+  name: "",
+  picture: "",
+  verified_email: ""
 }
 
 export const initialBookstate = {

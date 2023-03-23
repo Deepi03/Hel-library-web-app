@@ -5,11 +5,9 @@ import { fetchBooks } from "../middlewares/fetchBooks"
 
 export type BookState = {
   items: Book[]
-  item: Book | undefined
 }
 const initialState: BookState = {
-  items: [],
-  item: undefined
+  items: []
 }
 
 const bookSlice = createSlice({
@@ -37,6 +35,7 @@ const bookSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchBooks.fulfilled, (state, action) => {
+      console.log("inside extra reducers")
       state.items = action.payload
     })
   }
