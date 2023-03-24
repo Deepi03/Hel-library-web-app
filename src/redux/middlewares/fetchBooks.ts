@@ -4,9 +4,7 @@ export const fetchBooks = createAsyncThunk("fetchBooks", async () => {
   try {
     const res = await fetch("assets/books.json")
     const books = await res.json()
-    console.log("inside fetch books")
     if (!res.ok) {
-      console.log(books)
       throw new Error("fetch")
     }
     return books

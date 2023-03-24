@@ -23,7 +23,6 @@ const authorSlice = createSlice({
       state.isLoading = true
     })
     builder.addCase(fetchAuthors.fulfilled, (state, action) => {
-      console.log(action.payload)
       state.items = action.payload
     })
     builder.addCase(fetchAuthors.rejected, (state, action) => {

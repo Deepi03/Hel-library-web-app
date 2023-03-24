@@ -18,7 +18,6 @@ export const NavBar = () => {
   const navigate = useNavigate()
 
   const dispatch = useDispatch<AppDispatch>()
-  console.log("nav bar", isLoggedIn)
   const handleLogout = () => {
     dispatch(logout(user))
     navigate("/")

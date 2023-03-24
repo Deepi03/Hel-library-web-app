@@ -7,6 +7,8 @@ import "./Profile.scss"
 
 export const Profile = () => {
   const user = useSelector((state: RootState) => state.user.items)
+  const books = useSelector((state: RootState) => state.book.borrowedBooks)
+  console.log("profile", books)
 
   return (
     <div>
@@ -19,6 +21,9 @@ export const Profile = () => {
           ></Avatar>
           <h5>{user.name}</h5>
           <i>{user.email}</i>
+          <ul>
+            {books && books.map((book) => <li key={book.id}>{book.title}</li>)}
+          </ul>
         </section>
       )}
     </div>

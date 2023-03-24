@@ -23,3 +23,9 @@ export const initialBookstate = {
   status: true,
   cover: ""
 }
+
+export const borrowInitialState = {
+  user: undefined,
+  items: [],
+  isBorrowed: false
+}

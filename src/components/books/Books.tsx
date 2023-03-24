@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom"
 import { useAdmin } from "../../hook/useAdmin"
 
 import { fetchBooks } from "../../redux/middlewares/fetchBooks"
+import { updateBook } from "../../redux/reducers/bookReducer"
+import { borrowBook } from "../../redux/reducers/bookReducer"
 import { AppDispatch, RootState } from "../../redux/store"
+import { Book, GoogleLoggedInUser } from "../../types_variables/types"
 import "./Books.scss"
 
 export const Books = () => {
@@ -15,12 +18,20 @@ export const Books = () => {
 
   const isAdmin = useAdmin()
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn)
+  const user = useSelector((state: RootState) => state.user.items)
 
   useEffect(() => {
     dispatch(fetchBooks())
   }, [])
   const handleUpdate = (id: string) => {
     navigate(`${id}/updateBook`)
+  }
+  const handleBorrowBook = (
+    user: GoogleLoggedInUser | undefined,
+    book: Book
+  ) => {
+    console.log("vfv")
+    dispatch(borrowBook({ user, book }))
   }
 
   return (
@@ -45,10 +56,15 @@ export const Books = () => {
               <td>{book.isbn}</td>
               <td>{book.title}</td>
 
-              <td>{book.status === true ? "Yes" : "No"}</td>
-              {isLoggedIn && book.status ? (
+              <td>{book.status ? "Yes" : "No"}</td>
+              {isLoggedIn ? (
                 <td>
-                  <button>Borrow</button>
+                  <button
+                    onClick={() => handleBorrowBook(user, book)}
+                    disabled={!book.status}
+                  >
+                    Borrow
+                  </button>
                 </td>
               ) : (
                 <td>

@@ -1,27 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { v4 as uuid } from "uuid"
+import { borrowInitialState } from "../../types_variables/constants"
 
-import { BookState } from "../../types_variables/types"
+import { Book, BookState } from "../../types_variables/types"
 import { fetchBooks } from "../middlewares/fetchBooks"
 
 const initialState: BookState = {
   items: [],
   isLoading: false,
-  error: ""
+  error: undefined,
+  user: undefined,
+  borrowedBooks: []
 }
+
+const unique_id = uuid()
 
 const bookSlice = createSlice({
   name: "bookReducer",
   initialState: initialState,
   reducers: {
     addBook(state, action) {
-      console.log(action.payload)
-      state.items.push(action.payload)
+      const book: Book = action.payload
+      state.items.push({ ...book, id: unique_id })
     },
     updateBook(state, action) {
-      console.log("update book reducer", action.payload)
       state.items.find((book) => {
         if (action.payload == book.id) {
-          console.log(book.id)
           book = {
             ...book,
             ...action.payload.update
@@ -30,6 +34,21 @@ const bookSlice = createSlice({
           return book
         }
       })
+    },
+    borrowBook(state, action) {
+      state.items.filter((book) => {
+        if (book.id === action.payload.book.id) {
+          book.status = false
+        }
+      })
+      state.user = action.payload.user
+      state.borrowedBooks.push(action.payload.book)
+
+      console.log("book reducer : user", state.user)
+      console.log(
+        "book reducer : book",
+        state.borrowedBooks.map((b) => b.title)
+      )
     }
   },
   extraReducers: (builder) => {
@@ -49,4 +68,4 @@ const bookSlice = createSlice({
 })
 
 export const bookReducer = bookSlice.reducer
-export const { addBook, updateBook } = bookSlice.actions
+export const { addBook, updateBook, borrowBook } = bookSlice.actions
