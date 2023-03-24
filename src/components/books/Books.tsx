@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { useAdmin } from "../../hook/useAdmin"
 
 import { fetchBooks } from "../../redux/middlewares/fetchBooks"
 import { AppDispatch, RootState } from "../../redux/store"
@@ -11,6 +12,9 @@ export const Books = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
   const books = useSelector((state: RootState) => state.book)
+
+  const isAdmin = useAdmin()
+  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn)
 
   useEffect(() => {
     dispatch(fetchBooks())
@@ -42,11 +46,19 @@ export const Books = () => {
               <td>{book.title}</td>
 
               <td>{book.status === true ? "Yes" : "No"}</td>
+              {isLoggedIn && book.status ? (
+                <td>
+                  <button>Borrow</button>
+                </td>
+              ) : (
+                <td>
+                  <p>
+                    <b>Login to Borrow</b>
+                  </p>
+                </td>
+              )}
               <td>
-                <button>Borrow</button>
-              </td>
-              <td>
-                {
+                {isAdmin && (
                   <button
                     onClick={() => {
                       handleUpdate(book.id)
@@ -54,7 +66,7 @@ export const Books = () => {
                   >
                     Update
                   </button>
-                }
+                )}
               </td>
             </tr>
           ))}

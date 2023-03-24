@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { logout } from "../../redux/reducers/userReducer"
 import { AppDispatch, RootState } from "../../redux/store"
@@ -15,10 +15,13 @@ export const NavBar = () => {
     return state.user.items
   })
 
+  const navigate = useNavigate()
+
   const dispatch = useDispatch<AppDispatch>()
   console.log("nav bar", isLoggedIn)
   const handleLogout = () => {
     dispatch(logout(user))
+    navigate("/")
   }
   return (
     <div className="navBar">
