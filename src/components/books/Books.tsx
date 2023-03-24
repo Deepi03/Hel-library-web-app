@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom"
 import { useAdmin } from "../../hook/useAdmin"
 
 import { fetchBooks } from "../../redux/middlewares/fetchBooks"
-import { updateBook } from "../../redux/reducers/bookReducer"
+import { searchBook, updateBook } from "../../redux/reducers/bookReducer"
 import { borrowBook } from "../../redux/reducers/bookReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Book, GoogleLoggedInUser } from "../../types_variables/types"
+import { Search } from "../search/search"
 import "./Books.scss"
 
 export const Books = () => {
@@ -30,13 +31,13 @@ export const Books = () => {
     user: GoogleLoggedInUser | undefined,
     book: Book
   ) => {
-    console.log("vfv")
     dispatch(borrowBook({ user, book }))
   }
 
   return (
     <div>
       <h1>Books</h1>
+      <Search></Search>
       <table id="books">
         <thead>
           <tr>

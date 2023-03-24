@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { v4 as uuid } from "uuid"
-import { borrowInitialState } from "../../types_variables/constants"
 
 import { Book, BookState } from "../../types_variables/types"
 import { fetchBooks } from "../middlewares/fetchBooks"
@@ -43,12 +42,11 @@ const bookSlice = createSlice({
       })
       state.user = action.payload.user
       state.borrowedBooks.push(action.payload.book)
-
-      console.log("book reducer : user", state.user)
-      console.log(
-        "book reducer : book",
-        state.borrowedBooks.map((b) => b.title)
-      )
+    },
+    searchBook(state, action) {
+      state.items = state.items.filter((book) => {
+        return book.title.toLowerCase().includes(action.payload)
+      })
     }
   },
   extraReducers: (builder) => {
@@ -68,4 +66,4 @@ const bookSlice = createSlice({
 })
 
 export const bookReducer = bookSlice.reducer
-export const { addBook, updateBook, borrowBook } = bookSlice.actions
+export const { addBook, updateBook, borrowBook, searchBook } = bookSlice.actions

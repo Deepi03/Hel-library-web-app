@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 
@@ -8,16 +9,14 @@ import logo from "../../assets/image/book.svg"
 import { Login } from "../login/Login"
 
 export const NavBar = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch<AppDispatch>()
   const isLoggedIn = useSelector((state: RootState) => {
     return state.user.isLoggedIn
   })
   const user = useSelector((state: RootState) => {
     return state.user.items
   })
-
-  const navigate = useNavigate()
-
-  const dispatch = useDispatch<AppDispatch>()
   const handleLogout = () => {
     dispatch(logout(user))
     navigate("/")
