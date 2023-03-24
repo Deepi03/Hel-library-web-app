@@ -5,7 +5,8 @@ import { useDispatch } from "react-redux"
 
 import { addBook } from "../../redux/reducers/bookReducer"
 import { AppDispatch } from "../../redux/store"
-import { initialBookstate, PartialBook } from "../../types/types"
+import { initialBookstate } from "../../types_variables/constants"
+import { PartialBook } from "../../types_variables/types"
 
 export const AddBook = () => {
   const dispatch = useDispatch<AppDispatch>()

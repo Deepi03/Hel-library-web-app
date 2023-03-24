@@ -1,7 +1,8 @@
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { fetchData } from "../../redux/middlewares/googleLogin"
+import { fetchUserDetails } from "../../redux/middlewares/googleLogin"
+
 import { AppDispatch } from "../../redux/store"
 
 export const Login = () => {
@@ -17,12 +18,12 @@ export const Login = () => {
   })
 
   useEffect(() => {
-    dispatch(fetchData(user))
+    dispatch(fetchUserDetails(user))
   }, [user])
 
   return (
     <div>
-      <button onClick={() => login()}>Sign in with Google 🚀 </button>
+      <button onClick={() => login()}>Singin </button>
     </div>
   )
 }

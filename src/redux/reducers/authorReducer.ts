@@ -1,12 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { Author } from "../../types/types"
+
+import { Author } from "../../types_variables/types"
 import { fetchAuthors } from "../middlewares/fetchAuthors"
 
 export type AuthorState = {
   items: Author[]
+  isLoading: boolean
+  error: string | undefined
 }
 const initialState: AuthorState = {
-  items: []
+  items: [],
+  isLoading: false,
+  error: ""
 }
 
 const authorSlice = createSlice({
@@ -14,9 +19,16 @@ const authorSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(fetchAuthors.pending, (state) => {
+      state.isLoading = true
+    })
     builder.addCase(fetchAuthors.fulfilled, (state, action) => {
       console.log(action.payload)
       state.items = action.payload
+    })
+    builder.addCase(fetchAuthors.rejected, (state, action) => {
+      state.isLoading = false
+      state.error = action.error.message
     })
   }
 })

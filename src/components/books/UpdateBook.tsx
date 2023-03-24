@@ -6,7 +6,8 @@ import { v4 as uuid } from "uuid"
 
 import { updateBook } from "../../redux/reducers/bookReducer"
 import { AppDispatch, RootState } from "../../redux/store"
-import { initialBookstate, PartialBook } from "../../types/types"
+import { initialBookstate } from "../../types_variables/constants"
+import { PartialBook } from "../../types_variables/types"
 
 export const UpdateBook = () => {
   const dispatch = useDispatch<AppDispatch>()

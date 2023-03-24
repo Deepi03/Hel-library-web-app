@@ -20,12 +20,17 @@ export type Author = {
   name: string
 }
 
-/* export type User = {
-  id: string
-  firstname: string
-  lastname: string
-  email: string
-} */
+export type BookState = {
+  items: Book[]
+  isLoading: boolean
+  error: string | undefined
+}
+export type UsersState = {
+  items: GoogleLoggedInUser | undefined
+  isLoggedIn: boolean
+  isLoading: boolean
+  error: string | undefined
+}
 
 export type GoogleLoggedInUser = {
   email: string
@@ -36,30 +41,4 @@ export type GoogleLoggedInUser = {
   name: string
   picture: string
   verified_email: string
-}
-
-export const googleUserInitialState = {
-  email: "",
-  family_name: "",
-  given_name: "",
-  id: "",
-  locale: "",
-  name: "",
-  picture: "",
-  verified_email: ""
-}
-
-export const initialBookstate = {
-  id: "",
-  isbn: "",
-  title: "",
-  description: "",
-  authors: {
-    id: "",
-    name: ""
-  },
-  publishedDate: "",
-  publisher: "",
-  status: true,
-  cover: ""
 }

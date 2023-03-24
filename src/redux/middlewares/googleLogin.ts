@@ -1,9 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { TokenResponse } from "@react-oauth/google"
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { GoogleLoggedInUser } from "../../types/types"
 
-export const fetchData = createAsyncThunk(
+export const fetchUserDetails = createAsyncThunk(
   "login",
   async (
     user: Omit<

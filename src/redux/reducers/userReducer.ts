@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { GoogleLoggedInUser, googleUserInitialState } from "../../types/types"
-import { fetchData } from "../middlewares/googleLogin"
 
-export type UsersState = {
-  items: GoogleLoggedInUser | undefined
-  isLoggedIn: boolean
-}
+import { googleUserInitialState } from "../../types_variables/constants"
+import { UsersState } from "../../types_variables/types"
+import { fetchUserDetails } from "../middlewares/googleLogin"
+
 const initialState: UsersState = {
   items: googleUserInitialState,
-  isLoggedIn: false
+  isLoading: false,
+  isLoggedIn: false,
+  error: ""
 }
 
 const userSlice = createSlice({
@@ -21,9 +21,20 @@ const userSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchData.fulfilled, (state, action) => {
+    builder.addCase(fetchUserDetails.pending, (state) => {
+      state.isLoggedIn = false
+      state.isLoading = true
+    })
+    builder.addCase(fetchUserDetails.fulfilled, (state, action) => {
       state.items = action.payload
+      state.isLoading = false
       if (state.items) state.isLoggedIn = true
+    })
+    builder.addCase(fetchUserDetails.rejected, (state, action) => {
+      state.isLoading = false
+      state.error = action.error.message
+      state.isLoggedIn = false
+      state.items = undefined
     })
   }
 })

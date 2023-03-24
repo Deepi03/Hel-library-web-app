@@ -1,13 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-import { Book } from "../../types/types"
+import { BookState } from "../../types_variables/types"
 import { fetchBooks } from "../middlewares/fetchBooks"
 
-export type BookState = {
-  items: Book[]
-}
 const initialState: BookState = {
-  items: []
+  items: [],
+  isLoading: false,
+  error: ""
 }
 
 const bookSlice = createSlice({
@@ -20,7 +19,7 @@ const bookSlice = createSlice({
     },
     updateBook(state, action) {
       console.log("update book reducer", action.payload)
-      state.items.filter((book) => {
+      state.items.find((book) => {
         if (action.payload == book.id) {
           console.log(book.id)
           book = {
@@ -34,9 +33,17 @@ const bookSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
+    builder.addCase(fetchBooks.pending, (state) => {
+      state.isLoading = true
+    })
     builder.addCase(fetchBooks.fulfilled, (state, action) => {
-      console.log("inside extra reducers")
       state.items = action.payload
+      state.isLoading = false
+    })
+
+    builder.addCase(fetchBooks.rejected, (state, action) => {
+      state.isLoading = false
+      state.error = action.error.message
     })
   }
 })

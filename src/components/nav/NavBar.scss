@@ -1,3 +1,43 @@
-.nav{
-    background-color: balack
+.navBar{
+  
+  height: 70px;
+  width: 100%;
+  text-align:center;
+  .navBar-container{
+    width: 1200px;
+    margin: 0 auto;
+    height: 70px;
+    img {
+      width: 5rem;
+      height: 5rem;
+      float: left;
+      position: absolute;
+      top:0;
+      left:1rem
+      }
+    .navBar-ul{
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+   display:inline-block;
+   vertical-align:top;
+  li{
+    list-style-type: none;
+    padding: 0px;
+    height: 24px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    display: inline;
+  a,button{
+    color: white;
+    font-size: 16px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    line-height: 70px;
+    padding: 5px 15px;
+    opacity: 0.7;
+  }
+  }
+}
+}
 }
