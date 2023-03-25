@@ -9,6 +9,6 @@ export const fetchAuthors = createAsyncThunk("fetchAuthors", async () => {
     }
     return authors
   } catch (error) {
-    console.log(error)
+    return error
   }
 })

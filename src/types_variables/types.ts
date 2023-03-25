@@ -18,6 +18,14 @@ export type PartialBook = Partial<Book>
 export type Author = {
   id: string
   name: string
+  books: []
+  info: string
+}
+
+export type AuthorState = {
+  items: Author[]
+  isLoading: boolean
+  error: string | undefined
 }
 
 export type BookState = {

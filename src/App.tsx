@@ -11,6 +11,7 @@ import { NavBar } from "./components/nav/NavBar"
 import { RootState } from "./redux/store"
 import "./App.scss"
 import { SingleBook } from "./components/singleBook/SingleBook"
+import { Authors } from "./components/author/Author"
 
 function App() {
   const isLoggedIn = useSelector((state: RootState) => {
@@ -32,6 +33,7 @@ function App() {
             path="/login"
             element={isLoggedIn ? <Navigate to="/" /> : <Login />}
           />
+          <Route path="/authors" element={<Authors></Authors>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

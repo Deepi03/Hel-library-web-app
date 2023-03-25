@@ -33,6 +33,9 @@ export const NavBar = () => {
             <Link to="/books">Books</Link>
           </li>
           <li>
+            <Link to="/authors">Authors</Link>
+          </li>
+          <li>
             {isLoggedIn ? (
               <button onClick={() => handleLogout()}>Logout</button>
             ) : (
