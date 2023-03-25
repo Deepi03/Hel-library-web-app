@@ -10,12 +10,15 @@ export const fetchUserDetails = createAsyncThunk(
       "error" | "error_description" | "error_uri"
     > | null
   ) => {
-    if (user) {
+    if (user?.access_token) {
+      /* localStorage.setItem("access_token", JSON.stringify(user.access_token)) */
+      /* const token = localStorage.getItem("access_token") */
+      /*  console.log(token) */
       const res = await fetch(
-        `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+        `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user?.access_token}`,
         {
           headers: {
-            Authorization: `Bearer ${user.access_token}`,
+            Authorization: `Bearer ${user?.access_token}`,
             Accept: "application/json"
           }
         }

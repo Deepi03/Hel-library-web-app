@@ -11,11 +11,12 @@ import { PartialBook } from "../../types_variables/types"
 
 export const UpdateBook = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const books = useSelector((state: RootState) => state.book)
+  const books = useSelector((state: RootState) => state.book.items)
+  const updatedBook = useSelector((state: RootState) => state.book.updatedBook)
   const unique_id = uuid()
   const { bookId } = useParams()
   const [uBook, setUBook] = useState<PartialBook>(initialBookstate)
-  const book = books.items.find((bo) => bookId === bo.id)
+  const book = books.find((bo) => bookId === bo.id)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

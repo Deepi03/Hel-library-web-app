@@ -25,7 +25,7 @@ export type BookState = {
   isLoading: boolean
   error: string | undefined
   user: GoogleLoggedInUser | undefined
-  borrowedBooks: Book[]
+  isBorrowed: boolean
 }
 export type UsersState = {
   items: GoogleLoggedInUser | undefined

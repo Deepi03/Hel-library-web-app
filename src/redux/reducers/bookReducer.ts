@@ -9,7 +9,7 @@ const initialState: BookState = {
   isLoading: false,
   error: undefined,
   user: undefined,
-  borrowedBooks: []
+  isBorrowed: false
 }
 
 const unique_id = uuid()
@@ -24,24 +24,19 @@ const bookSlice = createSlice({
     },
     updateBook(state, action) {
       state.items.find((book) => {
-        if (action.payload == book.id) {
-          book = {
-            ...book,
-            ...action.payload.update
-          }
-
-          return book
+        if (action.payload.id == book.id) {
+          console.log("updated book", { ...book, ...action.payload })
+          return { ...book, ...action.payload }
         }
       })
     },
     borrowBook(state, action) {
+      const date = new Date().toDateString()
       state.items.filter((book) => {
-        if (book.id === action.payload.book.id) {
-          book.status = false
+        if (book.id == action.payload.id) {
+          ;(book.status = false), (book.borrowDate = date)
         }
       })
-      state.user = action.payload.user
-      state.borrowedBooks.push(action.payload.book)
     },
     searchBook(state, action) {
       state.items = state.items.filter((book) => {

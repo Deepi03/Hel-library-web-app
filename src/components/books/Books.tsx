@@ -1,11 +1,10 @@
 /* eslint-disable prettier/prettier */
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { useAdmin } from "../../hook/useAdmin"
 
 import { fetchBooks } from "../../redux/middlewares/fetchBooks"
-import { searchBook, updateBook } from "../../redux/reducers/bookReducer"
 import { borrowBook } from "../../redux/reducers/bookReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Book, GoogleLoggedInUser } from "../../types_variables/types"
@@ -27,11 +26,8 @@ export const Books = () => {
   const handleUpdate = (id: string) => {
     navigate(`${id}/updateBook`)
   }
-  const handleBorrowBook = (
-    user: GoogleLoggedInUser | undefined,
-    book: Book
-  ) => {
-    dispatch(borrowBook({ user, book }))
+  const handleBorrowBook = (book: Book) => {
+    dispatch(borrowBook(book))
   }
 
   return (
@@ -61,7 +57,7 @@ export const Books = () => {
               {isLoggedIn ? (
                 <td>
                   <button
-                    onClick={() => handleBorrowBook(user, book)}
+                    onClick={() => handleBorrowBook(book)}
                     disabled={!book.status}
                   >
                     Borrow
