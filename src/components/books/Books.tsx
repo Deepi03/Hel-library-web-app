@@ -5,11 +5,10 @@ import { useNavigate } from "react-router-dom"
 import { useAdmin } from "../../hook/useAdmin"
 
 import { fetchBooks } from "../../redux/middlewares/fetchBooks"
-import { borrowBook, displayBook } from "../../redux/reducers/booksReducer"
+import { borrowBook, deleteBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
-import { Book, GoogleLoggedInUser } from "../../types_variables/types"
-import { SingleBook } from "../singleBook/SingleBook"
-import { Search } from "../search/search"
+import { Book } from "../../types_variables/types"
+import { Search } from "../search/Search"
 import "./Books.scss"
 
 export const Books = () => {
@@ -19,13 +18,15 @@ export const Books = () => {
 
   const isAdmin = useAdmin()
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn)
-  const user = useSelector((state: RootState) => state.user.items)
 
   useEffect(() => {
     dispatch(fetchBooks())
   }, [])
   const handleUpdate = (id: string) => {
     navigate(`${id}/updateBook`)
+  }
+  const handleDelete = (book: Book) => {
+    dispatch(deleteBook(book))
   }
   const handleBorrowBook = (book: Book) => {
     dispatch(borrowBook(book))
@@ -75,6 +76,13 @@ export const Books = () => {
                   </p>
                 </td>
               )}
+
+              <td>
+                {" "}
+                <button onClick={() => handleDisplaySingleBook(book)}>
+                  more
+                </button>{" "}
+              </td>
               <td>
                 {isAdmin && (
                   <button
@@ -87,10 +95,15 @@ export const Books = () => {
                 )}
               </td>
               <td>
-                {" "}
-                <button onClick={() => handleDisplaySingleBook(book)}>
-                  more
-                </button>{" "}
+                {isAdmin && (
+                  <button
+                    onClick={() => {
+                      handleDelete(book)
+                    }}
+                  >
+                    Delete
+                  </button>
+                )}
               </td>
             </tr>
           ))}
