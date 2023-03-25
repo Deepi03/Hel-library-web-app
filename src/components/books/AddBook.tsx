@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { v4 as uuid } from "uuid"
 import { useDispatch } from "react-redux"
 
-import { addBook } from "../../redux/reducers/bookReducer"
+import { addBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch } from "../../redux/store"
 import { initialBookstate } from "../../types_variables/constants"
 import { PartialBook } from "../../types_variables/types"

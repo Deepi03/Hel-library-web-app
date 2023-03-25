@@ -10,6 +10,7 @@ import { Login } from "./components/login/Login"
 import { NavBar } from "./components/nav/NavBar"
 import { RootState } from "./redux/store"
 import "./App.scss"
+import { SingleBook } from "./components/singleBook/SingleBook"
 
 function App() {
   const isLoggedIn = useSelector((state: RootState) => {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/books">
             <Route path="" element={<Books />} />
             <Route path={":bookId/updateBook/"} element={<UpdateBook />} />
+            <Route path={":bookId/book"} element={<SingleBook />}></Route>
           </Route>
           <Route path="/addBook" element={<AddBook />}></Route>
           <Route

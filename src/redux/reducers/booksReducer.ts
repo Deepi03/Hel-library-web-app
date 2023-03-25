@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import { v4 as uuid } from "uuid"
 
 import { Book, BookState } from "../../types_variables/types"
+import { fetchBook } from "../middlewares/fetchBook"
 import { fetchBooks } from "../middlewares/fetchBooks"
 
 const initialState: BookState = {
@@ -15,7 +16,7 @@ const initialState: BookState = {
 const unique_id = uuid()
 
 const bookSlice = createSlice({
-  name: "bookReducer",
+  name: "booksReducer",
   initialState: initialState,
   reducers: {
     addBook(state, action) {
@@ -60,5 +61,5 @@ const bookSlice = createSlice({
   }
 })
 
-export const bookReducer = bookSlice.reducer
+export const booksReducer = bookSlice.reducer
 export const { addBook, updateBook, borrowBook, searchBook } = bookSlice.actions

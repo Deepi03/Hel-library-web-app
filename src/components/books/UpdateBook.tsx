@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { v4 as uuid } from "uuid"
 
-import { updateBook } from "../../redux/reducers/bookReducer"
+import { updateBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { initialBookstate } from "../../types_variables/constants"
 import { PartialBook } from "../../types_variables/types"
@@ -12,7 +12,7 @@ import { PartialBook } from "../../types_variables/types"
 export const UpdateBook = () => {
   const dispatch = useDispatch<AppDispatch>()
   const books = useSelector((state: RootState) => state.book.items)
-  const updatedBook = useSelector((state: RootState) => state.book.updatedBook)
+
   const unique_id = uuid()
   const { bookId } = useParams()
   const [uBook, setUBook] = useState<PartialBook>(initialBookstate)

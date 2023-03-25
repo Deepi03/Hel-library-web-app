@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux"
 
 import { AppDispatch } from "../../redux/store"
-import { searchBook } from "../../redux/reducers/bookReducer"
+import { searchBook } from "../../redux/reducers/booksReducer"
 import { fetchBooks } from "../../redux/middlewares/fetchBooks"
 
 export const Search = () => {

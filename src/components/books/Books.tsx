@@ -5,16 +5,17 @@ import { useNavigate } from "react-router-dom"
 import { useAdmin } from "../../hook/useAdmin"
 
 import { fetchBooks } from "../../redux/middlewares/fetchBooks"
-import { borrowBook } from "../../redux/reducers/bookReducer"
+import { borrowBook, displayBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Book, GoogleLoggedInUser } from "../../types_variables/types"
+import { SingleBook } from "../singleBook/SingleBook"
 import { Search } from "../search/search"
 import "./Books.scss"
 
 export const Books = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const books = useSelector((state: RootState) => state.book)
+  const books = useSelector((state: RootState) => state.book.items)
 
   const isAdmin = useAdmin()
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn)
@@ -28,6 +29,10 @@ export const Books = () => {
   }
   const handleBorrowBook = (book: Book) => {
     dispatch(borrowBook(book))
+  }
+
+  const handleDisplaySingleBook = (book: Book) => {
+    navigate(`${book.id}/book`)
   }
 
   return (
@@ -45,7 +50,7 @@ export const Books = () => {
           </tr>
         </thead>
         <tbody>
-          {books.items.map((book) => (
+          {books.map((book) => (
             <tr key={book.id}>
               <td>
                 <img src={book.cover} alt="" width={50} />
@@ -80,6 +85,12 @@ export const Books = () => {
                     Update
                   </button>
                 )}
+              </td>
+              <td>
+                {" "}
+                <button onClick={() => handleDisplaySingleBook(book)}>
+                  more
+                </button>{" "}
               </td>
             </tr>
           ))}
