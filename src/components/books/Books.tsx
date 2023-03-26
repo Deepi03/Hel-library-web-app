@@ -2,8 +2,8 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-
 import { useAdmin } from "../../hook/useAdmin"
+
 import { fetchBooks } from "../../redux/middlewares/fetchBooks"
 import { borrowBook, deleteBook } from "../../redux/reducers/booksReducer"
 import { userBorrowBook } from "../../redux/reducers/userReducer"
@@ -21,7 +21,7 @@ export const Books = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
   const books = useSelector((state: RootState) => state.book.items)
-  console.log("book comp", books)
+
   const isAdmin = useAdmin()
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn)
 
@@ -36,7 +36,13 @@ export const Books = () => {
   }
   const handleBorrowBook = (book: Book) => {
     dispatch(borrowBook({ book, bDateString, rDateString, unique_id }))
-    dispatch(userBorrowBook({ book, bDateString, rDateString, unique_id }))
+    book = {
+      ...book,
+      borrowDate: bDateString,
+      returnDate: rDateString,
+      borrowId: unique_id
+    }
+    dispatch(userBorrowBook(book))
   }
 
   const handleDisplaySingleBook = (book: Book) => {

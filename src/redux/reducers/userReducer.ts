@@ -21,10 +21,7 @@ const userSlice = createSlice({
       state.item = undefined
     },
     userBorrowBook(state, action) {
-      console.log("user reducer add book", action.payload)
-      console.log("before adding", state.books.length)
       state.books.push(action.payload)
-      console.log("after adding", state.books.length)
     }
   },
   extraReducers: (builder) => {

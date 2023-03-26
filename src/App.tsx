@@ -14,6 +14,7 @@ import { SingleBook } from "./components/singleBook/SingleBook"
 import { Authors } from "./components/author/Author"
 import { AddAuthor } from "./components/author/AddAuthor"
 import { UpdateAuthor } from "./components/author/UpdateAuthor"
+import { Profile } from "./components/profile/Profile"
 
 function App() {
   const isLoggedIn = useSelector((state: RootState) => {
@@ -41,6 +42,11 @@ function App() {
             <Route path="" element={<Authors />} />
             <Route path={":authorId/updateAuthor"} element={<UpdateAuthor />} />
           </Route>
+
+          {/*  <Route
+            path="/profile"
+            element={isLoggedIn && <Profile></Profile>}
+          ></Route> */}
         </Routes>
       </BrowserRouter>
     </div>
