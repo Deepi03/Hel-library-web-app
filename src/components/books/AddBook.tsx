@@ -1,20 +1,19 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from "react"
-import { v4 as uuid } from "uuid"
 import { useDispatch } from "react-redux"
 
 import { addBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch } from "../../redux/store"
-import { initialBookstate } from "../../types_variables/constants"
+import { initialBookstate, unique_id } from "../../types_variables/constants"
 import { PartialBook } from "../../types_variables/types"
 
 export const AddBook = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [book, setBook] = useState<PartialBook>(initialBookstate)
-  const unique_id = uuid()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    book.id = unique_id
     dispatch(addBook(book))
   }
   return (
@@ -60,6 +59,19 @@ export const AddBook = () => {
             setBook({
               ...book,
               publisher: e.target.value
+            })
+          }
+        />
+        <label htmlFor="publisher">Description</label>
+        <input
+          type="text-area"
+          name="description"
+          required
+          value={book.description}
+          onChange={(e) =>
+            setBook({
+              ...book,
+              description: e.target.value
             })
           }
         />

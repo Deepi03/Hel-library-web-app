@@ -1,7 +1,5 @@
 /* eslint-disable prettier/prettier */
 import { createSlice } from "@reduxjs/toolkit"
-import { v4 as uuid } from "uuid"
-
 import { Book, BookState } from "../../types_variables/types"
 import { fetchBooks } from "../middlewares/fetchBooks"
 
@@ -9,11 +7,8 @@ const initialState: BookState = {
   items: [],
   isLoading: false,
   error: undefined,
-  user: undefined,
   isBorrowed: false
 }
-
-const unique_id = uuid()
 
 const bookSlice = createSlice({
   name: "booksReducer",
@@ -21,32 +16,68 @@ const bookSlice = createSlice({
   reducers: {
     addBook(state, action) {
       const book: Book = action.payload
-      state.items.push({ ...book, id: unique_id })
-      console.log("add boo", state.items.length)
+      state.items.push(book)
     },
     updateBook(state, action) {
-      state.items.find((book) => {
-        if (action.payload.id == book.id) {
-          console.log("updated book", { ...book, ...action.payload })
-          return { ...book, ...action.payload }
-        }
-      })
+      const {
+        id,
+        isbn,
+        title,
+        cover,
+        authors,
+        description,
+        publisher,
+        publishedDate
+      } = action.payload
+      return {
+        ...state,
+        items: [...state.items].map((book) => {
+          if (id !== book.id) {
+            return book
+          }
+
+          return {
+            ...book,
+            isbn: isbn,
+            title: title,
+            cover: cover,
+            description: description,
+            publisher: publisher,
+            authors: {
+              id: book.authors.id,
+              name: authors.name
+            },
+            publishedDate: publishedDate
+          }
+        })
+      }
     },
     borrowBook(state, action) {
-      const bDate = new Date()
-      const rDate = new Date()
-      rDate.setDate(bDate.getDate() + 30)
-      state.items.filter((book) => {
-        if (book.id == action.payload.id) {
-          ;(book.status = false),
-            (book.borrowDate = bDate.toDateString()),
-            (book.returnDate = rDate.toDateString())
-        }
-      })
-      console.log(
-        "b",
-        state.items.map((b) => b.returnDate)
-      )
+      const { id } = action.payload.book
+      const { bDateString, rDateString, unique_id } = action.payload
+      return {
+        ...state,
+        items: [...state.items].map((book) => {
+          console.log("idddd", id)
+          if (book.id !== id) return book
+          console.log({
+            ...book,
+            status: false,
+            borrowDate: bDateString,
+            returnDate: rDateString,
+            borrowId: unique_id
+          })
+          return {
+            ...book,
+            status: false,
+            borrowDate: bDateString,
+            returnDate: rDateString,
+            borrowId: unique_id
+          }
+        })
+      }
+
+      /* need a ask dates and status not updating */
     },
     returnBook(state, action) {
       state.items.filter((book) => {

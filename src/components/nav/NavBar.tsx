@@ -15,10 +15,10 @@ export const NavBar = () => {
     return state.user.isLoggedIn
   })
   const user = useSelector((state: RootState) => {
-    return state.user.items
+    return state.user.item
   })
   const handleLogout = () => {
-    dispatch(logout(user))
+    dispatch(logout())
     navigate("/")
   }
   return (

@@ -6,7 +6,7 @@ import { RootState } from "../../redux/store"
 import "./Profile.scss"
 
 export const Profile = () => {
-  const user = useSelector((state: RootState) => state.user.items)
+  const user = useSelector((state: RootState) => state.user.item)
 
   return (
     <div>

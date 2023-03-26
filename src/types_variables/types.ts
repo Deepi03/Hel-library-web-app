@@ -14,12 +14,13 @@ export type Book = {
 }
 
 export type PartialBook = Partial<Book>
+export type PartialAuthor = Partial<Author>
 
 export type Author = {
   id: string
   name: string
-  books: []
-  info: string
+  books?: never[]
+  info?: string
 }
 
 export type AuthorState = {
@@ -32,14 +33,14 @@ export type BookState = {
   items: Book[]
   isLoading: boolean
   error: string | undefined
-  user: GoogleLoggedInUser | undefined
   isBorrowed: boolean
 }
 export type UsersState = {
-  items: GoogleLoggedInUser | undefined
+  item: GoogleLoggedInUser | undefined
   isLoggedIn: boolean
   isLoading: boolean
   error: string | undefined
+  books: Book[]
 }
 
 export type GoogleLoggedInUser = {

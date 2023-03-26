@@ -1,6 +1,7 @@
 import { Box, Modal, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import { useAdmin } from "../../hook/useAdmin"
 import { fetchAuthors } from "../../redux/middlewares/fetchAuthors"
 import { deleteAuthor } from "../../redux/reducers/authorReducer"
@@ -23,12 +24,20 @@ const style = {
 export const Authors = () => {
   const dispatch = useDispatch<AppDispatch>()
   const authors = useSelector((state: RootState) => state.author.items)
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [info, setInfo] = useState("")
   const isAdmin = useAdmin()
   const handleOpen = (author: Author) => {
-    setInfo(author.info)
-    setOpen(true)
+    if (author.info) {
+      setInfo(author.info)
+      setOpen(true)
+    } else {
+      setOpen(false)
+    }
+  }
+  const handleUpdate = (id: string) => {
+    navigate(`${id}/updateAuthor`)
   }
   const handleClose = () => setOpen(false)
 
@@ -54,12 +63,23 @@ export const Authors = () => {
             <tr key={author.id}>
               <td>{author.name}</td>
               <td>
-                {author.books.map((book) => (
+                {author?.books?.map((book) => (
                   <li key={book}>{book}</li>
                 ))}
               </td>
               <td>
                 <button onClick={() => handleOpen(author)}>Info</button>
+              </td>
+              <td>
+                {isAdmin && (
+                  <button
+                    onClick={() => {
+                      handleUpdate(author.id)
+                    }}
+                  >
+                    Update
+                  </button>
+                )}
               </td>
               <td>
                 {isAdmin && (

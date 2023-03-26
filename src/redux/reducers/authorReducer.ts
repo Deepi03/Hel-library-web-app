@@ -16,15 +16,24 @@ const authorSlice = createSlice({
   reducers: {
     addAuthor(state, action) {
       const author: Author = action.payload
-      state.items.push({ ...author, id: unique_id })
+      state.items.push(author)
     },
     updateAuthor(state, action) {
-      state.items.find((author) => {
-        if (action.payload.id == author.id) {
-          console.log("updated author", { ...author, ...action.payload })
-          return { ...author, ...action.payload }
-        }
-      })
+      const { id, name, books, info } = action.payload
+      return {
+        ...state,
+        items: [...state.items].map((author) => {
+          if (id !== author.id) {
+            return author
+          }
+          return {
+            ...author,
+            name: name,
+            books: books,
+            info: info
+          }
+        })
+      }
     },
     deleteAuthor(state, action) {
       state.items = state.items.filter((author) => {
