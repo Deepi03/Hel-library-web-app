@@ -26,6 +26,13 @@ const authorSlice = createSlice({
           if (id !== author.id) {
             return author
           }
+
+          console.log({
+            ...author,
+            name: name,
+            books: books,
+            info: info
+          })
           return {
             ...author,
             name: name,
