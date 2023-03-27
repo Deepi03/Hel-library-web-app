@@ -12,7 +12,8 @@ import Avatar from "@mui/material/Avatar"
 import Button from "@mui/material/Button"
 import Tooltip from "@mui/material/Tooltip"
 import MenuItem from "@mui/material/MenuItem"
-import { BookRounded, Link } from "@mui/icons-material"
+import { BookRounded } from "@mui/icons-material"
+import Link from "@mui/material/Link"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -227,7 +228,7 @@ export const NavBar = () => {
                     }}
                     onClick={() => handleLogout()}
                   >
-                    Logout
+                    {"Logout"}
                   </Link>
                 ) : (
                   <Login></Login>

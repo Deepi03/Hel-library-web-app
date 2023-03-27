@@ -25,6 +25,7 @@ const bookSlice = createSlice({
       console.log("add boo", state.items.length)
     },
     updateBook(state, action) {
+      console.log("boo red", action.payload)
       state.items.find((book) => {
         if (action.payload.id == book.id) {
           console.log("updated book", { ...book, ...action.payload })

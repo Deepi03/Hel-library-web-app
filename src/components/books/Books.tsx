@@ -1,4 +1,10 @@
 /* eslint-disable prettier/prettier */
+import { Avatar, IconButton } from "@mui/material"
+import ReadMoreIcon from "@mui/icons-material/ReadMore"
+import UpdateIcon from "@mui/icons-material/Update"
+import DeleteIcon from "@mui/icons-material/Delete"
+import BlockIcon from "@mui/icons-material/Block"
+import AutoStoriesIcon from "@mui/icons-material/AutoStories"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
@@ -37,9 +43,10 @@ export const Books = () => {
   }
 
   return (
-    <div>
-      <h1>Books</h1>
+    <div className="books-table">
+      {" "}
       <Search></Search>
+      <h2>Books</h2>
       <table id="books">
         <thead>
           <tr>
@@ -48,63 +55,76 @@ export const Books = () => {
             <th>Title</th>
             <th>Available</th>
             <th>Borrow</th>
+            <th>Detail</th>
+            {isAdmin && <th>Update</th>}
+            {isAdmin && <th>Delete</th>}
           </tr>
         </thead>
         <tbody>
           {books.map((book) => (
             <tr key={book.id}>
               <td>
-                <img src={book.cover} alt="" width={50} />
+                <Avatar
+                  src={book.cover}
+                  variant="square"
+                  sx={{ width: 70, height: 70 }}
+                />
               </td>
               <td>{book.isbn}</td>
               <td>{book.title}</td>
 
               <td>{book.status ? "Yes" : "No"}</td>
-              {isLoggedIn ? (
+              {!isLoggedIn ? (
                 <td>
-                  <button
-                    onClick={() => handleBorrowBook(book)}
-                    disabled={!book.status}
-                  >
-                    Borrow
-                  </button>
+                  {!book.status ? (
+                    <IconButton onClick={() => handleBorrowBook(book)}>
+                      <AutoStoriesIcon
+                        sx={{ color: "#323232" }}
+                      ></AutoStoriesIcon>
+                    </IconButton>
+                  ) : (
+                    <BlockIcon
+                      sx={{ color: "#323232", textAlign: "center" }}
+                    ></BlockIcon>
+                  )}
                 </td>
               ) : (
                 <td>
-                  <p>
-                    <b>Login to Borrow</b>
-                  </p>
+                  <span>Login to Borrow</span>
                 </td>
               )}
-
               <td>
-                {" "}
-                <button onClick={() => handleDisplaySingleBook(book)}>
-                  more
-                </button>{" "}
+                <IconButton>
+                  <ReadMoreIcon
+                    sx={{ color: "#323232" }}
+                    onClick={() => handleDisplaySingleBook(book)}
+                  ></ReadMoreIcon>
+                </IconButton>
               </td>
-              <td>
-                {isAdmin && (
-                  <button
-                    onClick={() => {
-                      handleUpdate(book.id)
-                    }}
-                  >
-                    Update
-                  </button>
-                )}
-              </td>
-              <td>
-                {isAdmin && (
-                  <button
-                    onClick={() => {
-                      handleDelete(book)
-                    }}
-                  >
-                    Delete
-                  </button>
-                )}
-              </td>
+              {!isAdmin && (
+                <td>
+                  <IconButton>
+                    <UpdateIcon
+                      sx={{ color: "#323232" }}
+                      onClick={() => {
+                        handleUpdate(book.id)
+                      }}
+                    ></UpdateIcon>
+                  </IconButton>
+                </td>
+              )}
+              {isAdmin && (
+                <td>
+                  <IconButton>
+                    <DeleteIcon
+                      sx={{ color: "#323232" }}
+                      onClick={() => {
+                        handleDelete(book)
+                      }}
+                    ></DeleteIcon>
+                  </IconButton>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material"
+import { v4 as uuid } from "uuid"
 
 export const googleUserInitialState = {
   email: "",
@@ -32,8 +32,9 @@ export const borrowInitialState = {
   isBorrowed: false
 }
 
-export const theme = {
-  iconbutton: {
-    fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"].join(",")
-  }
-}
+export const unique_id = uuid()
+const bDate = new Date()
+const rDate = new Date()
+rDate.setDate(bDate.getDate() + 30)
+export const bDateString = bDate.toDateString()
+export const rDateString = rDate.toDateString()
