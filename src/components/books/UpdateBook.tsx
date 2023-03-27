@@ -1,5 +1,4 @@
 import { Box, Button, Card, TextField, Typography } from "@mui/material"
-import { makeStyles } from "@mui/styles"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
@@ -9,24 +8,26 @@ import { initialBookstate, unique_id } from "../../types_variables/constants"
 import { PartialBook } from "../../types_variables/types"
 import "./UpdateBook.css"
 
-const useStyles = makeStyles({
-  root: {
-    "& .MuiFilledInput-underline:after": {
-      borderBottomColor: "#323232"
-    },
-    // focused color for input with variant='outlined'
-    "& .MuiOutlinedInput-root": {
-      "&.Mui-focused fieldset": {
-        borderColor: "#323232"
-      }
-    }
-  },
-  typography: {
-    fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"].join(",")
-  }
-})
+import { makeStyles } from "@mui/styles"
 
 export const UpdateBook = () => {
+  const useStyles = makeStyles({
+    root: {
+      "& .MuiFilledInput-underline:after": {
+        borderBottomColor: "#323232"
+      },
+      // focused color for input with variant='outlined'
+      "& .MuiOutlinedInput-root": {
+        "&.Mui-focused fieldset": {
+          borderColor: "#323232"
+        }
+      }
+    },
+    typography: {
+      fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"].join(",")
+    }
+  })
+  const classes = useStyles()
   const dispatch = useDispatch<AppDispatch>()
   const books = useSelector((state: RootState) => state.book.items)
 
@@ -36,7 +37,7 @@ export const UpdateBook = () => {
   const handleSubmit = () => {
     dispatch(updateBook(uBook))
   }
-  const classes = useStyles()
+
   return (
     <div>
       <Box sx={{ paddingBottom: "20em", color: "text.primary" }}>
