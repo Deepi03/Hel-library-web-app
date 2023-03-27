@@ -35,6 +35,19 @@ const bookSlice = createSlice({
           if (id !== book.id) {
             return book
           }
+          console.log({
+            ...book,
+            isbn: isbn,
+            title: title,
+            cover: cover,
+            description: description,
+            publisher: publisher,
+            authors: {
+              id: book.authors.id,
+              name: authors.name
+            },
+            publishedDate: publishedDate
+          })
 
           return {
             ...book,

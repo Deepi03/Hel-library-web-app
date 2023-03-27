@@ -1,4 +1,9 @@
-import { Box, Modal, Typography } from "@mui/material"
+/* eslint-disable prettier/prettier */
+import { Box, IconButton, Modal, Typography } from "@mui/material"
+import AutoStoriesIcon from "@mui/icons-material/AutoStories"
+import DeleteIcon from "@mui/icons-material/Delete"
+import UpdateIcon from "@mui/icons-material/Update"
+import ReadMoreIcon from "@mui/icons-material/ReadMore"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
@@ -56,6 +61,8 @@ export const Authors = () => {
             <th>Name</th>
             <th>Books</th>
             <th>Info</th>
+            {isAdmin && <th>Update</th>}
+            {isAdmin && <th>Delete</th>}
           </tr>
         </thead>
         <tbody>
@@ -67,31 +74,41 @@ export const Authors = () => {
                   <li key={book}>{book}</li>
                 ))}
               </td>
+
               <td>
-                <button onClick={() => handleOpen(author)}>Info</button>
+                <IconButton>
+                  <ReadMoreIcon
+                    sx={{ color: "#323232" }}
+                    onClick={() => handleOpen(author)}
+                  ></ReadMoreIcon>
+                </IconButton>
               </td>
+
               <td>
                 {isAdmin && (
-                  <button
+                  <IconButton
                     onClick={() => {
                       handleUpdate(author.id)
                     }}
                   >
-                    Update
-                  </button>
+                    <AutoStoriesIcon
+                      sx={{ color: "#323232" }}
+                    ></AutoStoriesIcon>
+                  </IconButton>
                 )}
               </td>
-              <td>
-                {isAdmin && (
-                  <button
-                    onClick={() => {
-                      handleDelete(author)
-                    }}
-                  >
-                    Delete
-                  </button>
-                )}
-              </td>
+              {isAdmin && (
+                <td>
+                  <IconButton>
+                    <DeleteIcon
+                      sx={{ color: "#323232" }}
+                      onClick={() => {
+                        handleDelete(author)
+                      }}
+                    ></DeleteIcon>
+                  </IconButton>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

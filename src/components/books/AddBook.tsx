@@ -8,6 +8,7 @@ import { AppDispatch } from "../../redux/store"
 import { makeStyles } from "@mui/styles"
 import { PartialBook } from "../../types_variables/types"
 import { initialBookstate, unique_id } from "../../types_variables/constants"
+import "./UpdateBook.css"
 
 export const AddBook = () => {
   const useStyles = makeStyles({
