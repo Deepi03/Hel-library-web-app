@@ -1,3 +1,4 @@
+import { List, ListItem, ListItemButton } from "@mui/material"
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
@@ -22,8 +23,10 @@ export const Login = () => {
   }, [user])
 
   return (
-    <div>
-      <button onClick={() => login()}>Singin </button>
-    </div>
+    <List sx={{ textDecoration: "none" }}>
+      <ListItem disablePadding>
+        <ListItemButton onClick={() => login()}>Login</ListItemButton>
+      </ListItem>
+    </List>
   )
 }

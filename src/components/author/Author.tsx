@@ -10,9 +10,9 @@ import { useNavigate } from "react-router-dom"
 import { useAdmin } from "../../hook/useAdmin"
 import { fetchAuthors } from "../../redux/middlewares/fetchAuthors"
 import { deleteAuthor } from "../../redux/reducers/authorReducer"
-
 import { AppDispatch, RootState } from "../../redux/store"
 import { Author } from "../../types_variables/types"
+import "../books/Books.css"
 
 const style = {
   position: "absolute",
@@ -54,7 +54,8 @@ export const Authors = () => {
     dispatch(fetchAuthors())
   }, [])
   return (
-    <div>
+    <Box sx={{ m: "5rem" }}>
+      <h2>Authors</h2>
       <table id="books">
         <thead>
           <tr>
@@ -129,6 +130,6 @@ export const Authors = () => {
           </Typography>
         </Box>
       </Modal>
-    </div>
+    </Box>
   )
 }

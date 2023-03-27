@@ -6,6 +6,7 @@ import { fetchBooks } from "../../redux/middlewares/fetchBooks"
 import { borrowBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Book } from "../../types_variables/types"
+import "./SingleBook.css"
 
 export const SingleBook = () => {
   const { bookId } = useParams()
@@ -21,44 +22,45 @@ export const SingleBook = () => {
     dispatch(borrowBook(book))
   }
   return (
-    <div>
+    <section className="single-book">
       {singlebook && (
-        <div>
-          <div>
+        <section className="single-book-container">
+          <aside className="cover-borrow">
             <img src={singlebook.cover} alt="book cover" />
-            <i>Available</i>{" "}
-            {singlebook.status ? <span>yes</span> : <span>No</span>}
             <button
               onClick={() => handleBorrowBook(singlebook)}
               disabled={!singlebook.status}
             >
               Borrow
             </button>
-          </div>
-          <div>
-            <h4>{singlebook.title}</h4>
-            <i>by</i>
-            <h6>{singlebook.authors.name}</h6>
-          </div>
-          <div>
-            <div>
-              <i>Published Date</i>
-              <span>{singlebook.publishedDate}</span>
+          </aside>
+          <div className="second-half">
+            <div className="title-author">
+              <h1>
+                {singlebook.title} <small className="by">by</small>{" "}
+                <small className="author">{singlebook.authors.name}</small>
+              </h1>
             </div>
-            <div>
-              <i>Publisher</i>
-              <span>{singlebook.publisher}</span>
+            <div className="publisher">
+              <div className="publisher-isbn">
+                <i>ISBN</i>
+                <span>{singlebook.isbn}</span>
+              </div>
+              <div className="publisher-name">
+                <i>Publisher</i>
+                <span>{singlebook.publisher}</span>
+              </div>
+              <div className="publisher-date">
+                <i>Published Date</i>
+                <span>{singlebook.publishedDate}</span>
+              </div>
             </div>
-            <div>
-              <i>ISBN</i>
-              <span>{singlebook.isbn}</span>
+            <div className="description">
+              <p className="description-p">{singlebook.description}</p>
             </div>
           </div>
-          <div>
-            <p>{singlebook.description}</p>
-          </div>
-        </div>
+        </section>
       )}
-    </div>
+    </section>
   )
 }

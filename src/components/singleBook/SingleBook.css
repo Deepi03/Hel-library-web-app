@@ -1,0 +1,46 @@
+.single-book{
+    margin:5rem
+}
+
+.single-book-container{
+    display: flex;
+    flex-direction: row;
+    gap:4rem
+}
+
+
+.cover-borrow{
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1{
+    font-size: 2rem;
+}
+.by{
+font-weight: 100;
+    font-size: 1rem;
+}
+
+.author{
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+
+.publisher span {
+    letter-spacing: 0.2px;
+    margin-left: 1rem;
+}
+
+.description-p{
+    letter-spacing: 0.2px;
+}
+
+button{
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    padding: 0.8rem;
+    border: 1px solid #DDCFC8;
+    background-color: #DDCFC8;
+    border-radius: 0.5rem;
+}
