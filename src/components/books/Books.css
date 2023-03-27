@@ -1,0 +1,32 @@
+.books-table{
+font-family: "Roboto","Helvetica","Arial",sans-serif;
+
+}
+h2{
+  text-align: center;
+  font-weight: 200;
+}
+#books {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+ #books td {
+  padding: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: 200;
+}
+
+#books tr:hover {background-color: #ddd;}
+#books th {
+  text-align: center;
+  background-color: #DDD0C8;
+  color: #323232;
+  padding: 1rem;
+  font-size: 1.8rem;
+  font-weight: 200;
+}

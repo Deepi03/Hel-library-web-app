@@ -60,13 +60,6 @@ const bookSlice = createSlice({
         items: [...state.items].map((book) => {
           console.log("idddd", id)
           if (book.id !== id) return book
-          console.log({
-            ...book,
-            status: false,
-            borrowDate: bDateString,
-            returnDate: rDateString,
-            borrowId: unique_id
-          })
           return {
             ...book,
             status: false,
@@ -76,8 +69,6 @@ const bookSlice = createSlice({
           }
         })
       }
-
-      /* need a ask dates and status not updating */
     },
     returnBook(state, action) {
       state.items.filter((book) => {
