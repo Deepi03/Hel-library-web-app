@@ -7,11 +7,12 @@ import { Books } from "./components/books/Books"
 import { UpdateBook } from "./components/books/UpdateBook"
 import { Home } from "./components/home/Home"
 import { Login } from "./components/login/Login"
-import { NavBar } from "./components/nav/NavBar"
 import { RootState } from "./redux/store"
 import "./App.scss"
 import { SingleBook } from "./components/singleBook/SingleBook"
 import { Authors } from "./components/author/Author"
+import { Footer } from "./components/footer/Footer"
+import { NavBar } from "./components/nav/NavBar"
 
 function App() {
   const isLoggedIn = useSelector((state: RootState) => {
@@ -35,6 +36,7 @@ function App() {
           />
           <Route path="/authors" element={<Authors></Authors>}></Route>
         </Routes>
+        <Footer></Footer>
       </BrowserRouter>
     </div>
   )

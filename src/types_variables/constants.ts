@@ -1,3 +1,5 @@
+import { createTheme } from "@mui/material"
+
 export const googleUserInitialState = {
   email: "",
   family_name: "",
@@ -28,4 +30,10 @@ export const borrowInitialState = {
   user: undefined,
   items: [],
   isBorrowed: false
+}
+
+export const theme = {
+  iconbutton: {
+    fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"].join(",")
+  }
 }

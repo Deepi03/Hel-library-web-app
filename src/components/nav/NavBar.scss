@@ -1,4 +1,4 @@
-.navBar{
+/* .navBar{
   
   height: 70px;
   width: 100%;
@@ -7,14 +7,7 @@
     width: 1200px;
     margin: 0 auto;
     height: 70px;
-    img {
-      width: 5rem;
-      height: 5rem;
-      float: left;
-      position: absolute;
-      top:0;
-      left:1rem
-      }
+    
     .navBar-ul{
     padding: 0px;
     margin: 0px;
@@ -40,4 +33,13 @@
   }
 }
 }
-}
+} */
+
+img {
+      width: 5rem;
+      height: 5rem;
+      float: left;
+      position: absolute;
+      top:0;
+      left:1rem
+      }
