@@ -5,19 +5,31 @@ import { useParams } from "react-router-dom"
 import { fetchBooks } from "../../redux/middlewares/fetchBooks"
 import { borrowBook, singleBookFilter } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
+import {
+  bDateString,
+  rDateString,
+  unique_id
+} from "../../types_variables/constants"
 import { Book } from "../../types_variables/types"
 import "./SingleBook.css"
 
 export const SingleBook = () => {
   const { bookId } = useParams()
   const dispatch = useDispatch<AppDispatch>()
+  const isLoggedIn = useSelector((state: RootState) => {
+    return state.user.isLoggedIn
+  })
+  const userEmail = useSelector((state: RootState) => state.user.item?.email)
 
   useEffect(() => {
     dispatch(singleBookFilter(bookId))
   }, [bookId])
   const books = useSelector((state: RootState) => state.book.items)
   const handleBorrowBook = (book: Book) => {
-    dispatch(borrowBook(book))
+    console.log("book", book.id)
+    dispatch(
+      borrowBook({ book, bDateString, rDateString, unique_id, userEmail })
+    )
   }
   return (
     <section className="single-book">
@@ -25,12 +37,16 @@ export const SingleBook = () => {
         <section className="single-book-container">
           <aside className="cover-borrow">
             <img src={books[0].cover} alt="book cover" />
-            <button
-              onClick={() => handleBorrowBook(books[0])}
-              disabled={books[0].status}
-            >
-              Borrow
-            </button>
+            {isLoggedIn ? (
+              <button
+                onClick={() => handleBorrowBook(books[0])}
+                disabled={!books[0].status}
+              >
+                Borrow
+              </button>
+            ) : (
+              <p>Login to Borrow</p>
+            )}
           </aside>
           <div className="second-half">
             <div className="title-author">
