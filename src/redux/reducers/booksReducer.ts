@@ -93,13 +93,35 @@ const bookSlice = createSlice({
       }
     },
     returnBook(state, action) {
-      state.items.filter((book) => {
+      console.log("book reducer return book payload", action.payload)
+      const { id } = action.payload
+      return {
+        ...state,
+        items: [...state.items].map((book) => {
+          if (book.id !== id) return book
+          console.log({
+            ...book,
+            status: true,
+            borrowDate: null,
+            returnDate: null,
+            borrowId: null
+          })
+          return {
+            ...book,
+            status: true,
+            borrowDate: null,
+            returnDate: null,
+            borrowId: null
+          }
+        })
+      }
+      /* state.items.filter((book) => {
         if (book.id == action.payload.id) {
           ;(book.status = true),
             (book.returnDate = null),
             (book.borrowDate = null)
         }
-      })
+      }) */
     },
     searchBook(state, action) {
       state.items = state.items.filter((book) => {
@@ -134,6 +156,7 @@ export const {
   updateBook,
   borrowBook,
   searchBook,
+  returnBook,
   deleteBook,
   singleBookFilter
 } = bookSlice.actions
