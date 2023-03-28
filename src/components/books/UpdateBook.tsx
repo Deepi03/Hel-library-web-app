@@ -154,7 +154,7 @@ export const UpdateBook = () => {
             onClick={() => {
               handleSubmit()
             }}
-            sx={{ bgcolor: "#DDD0C8", color: "btn.text" }}
+            sx={{ bgcolor: "#DDD0C8", color: "#323232" }}
           >
             Update Book
           </Button>

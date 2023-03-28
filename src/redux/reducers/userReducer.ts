@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 import { googleUserInitialState } from "../../types_variables/constants"
-import { UsersState } from "../../types_variables/types"
+import { Book, UsersState } from "../../types_variables/types"
 import { fetchUserDetails } from "../middlewares/googleLogin"
 
 const initialState: UsersState = {
@@ -21,7 +21,11 @@ const userSlice = createSlice({
       state.item = undefined
     },
     userBorrowBook(state, action) {
-      state.books.push(action.payload)
+      /* state.books.push(action.payload) */
+      console.log("action in userReducer", action.payload)
+      const book: Book = action.payload
+      state.books = [book, ...state.books]
+      console.log("after adding", Array.isArray(state.books))
     }
   },
   extraReducers: (builder) => {
@@ -31,6 +35,7 @@ const userSlice = createSlice({
     })
     builder.addCase(fetchUserDetails.fulfilled, (state, action) => {
       state.item = action.payload
+
       state.isLoading = false
       if (state.item) state.isLoggedIn = true
     })

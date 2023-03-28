@@ -32,8 +32,8 @@ export const NavBar = () => {
     return state.user.item
   })
   const handleLogout = () => {
+    navigate("/books")
     dispatch(logout())
-    navigate("/")
   }
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
@@ -227,6 +227,7 @@ export const NavBar = () => {
                       fontSize: "1rem",
                       textDecoration: "none"
                     }}
+                    to={"/"}
                     onClick={() => handleLogout()}
                   >
                     {"Logout"}
@@ -235,6 +236,20 @@ export const NavBar = () => {
                   <Login></Login>
                 )}
               </MenuItem>
+              {isLoggedIn && (
+                <MenuItem>
+                  <Link
+                    sx={{
+                      color: "#323232",
+                      fontSize: "1rem",
+                      textDecoration: "none"
+                    }}
+                    to={"/profile"}
+                  >
+                    Profile
+                  </Link>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
         </Toolbar>

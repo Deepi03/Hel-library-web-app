@@ -4,11 +4,6 @@ import { RootState } from "../../redux/store"
 import { Profile } from "../profile/Profile"
 
 export const Home = () => {
-  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn)
-  return (
-    <div>
-      Home
-      {isLoggedIn && <Profile></Profile>}
-    </div>
-  )
+  /*  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn) */
+  return <div>Home</div>
 }

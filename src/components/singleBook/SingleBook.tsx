@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { fetchBooks } from "../../redux/middlewares/fetchBooks"
-import { borrowBook } from "../../redux/reducers/booksReducer"
+import { borrowBook, singleBookFilter } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Book } from "../../types_variables/types"
 import "./SingleBook.css"
@@ -11,25 +11,23 @@ import "./SingleBook.css"
 export const SingleBook = () => {
   const { bookId } = useParams()
   const dispatch = useDispatch<AppDispatch>()
-  const books = useSelector((state: RootState) => state.book.items)
-  const singlebook = books.find((book) => book.id === bookId)
 
   useEffect(() => {
-    dispatch(fetchBooks())
-  }, [])
-
+    dispatch(singleBookFilter(bookId))
+  }, [bookId])
+  const books = useSelector((state: RootState) => state.book.items)
   const handleBorrowBook = (book: Book) => {
     dispatch(borrowBook(book))
   }
   return (
     <section className="single-book">
-      {singlebook && (
+      {books && (
         <section className="single-book-container">
           <aside className="cover-borrow">
-            <img src={singlebook.cover} alt="book cover" />
+            <img src={books[0].cover} alt="book cover" />
             <button
-              onClick={() => handleBorrowBook(singlebook)}
-              disabled={!singlebook.status}
+              onClick={() => handleBorrowBook(books[0])}
+              disabled={books[0].status}
             >
               Borrow
             </button>
@@ -37,30 +35,31 @@ export const SingleBook = () => {
           <div className="second-half">
             <div className="title-author">
               <h1>
-                {singlebook.title} <small className="by">by</small>{" "}
-                <small className="author">{singlebook.authors.name}</small>
+                {books[0].title} <small className="by">by</small>{" "}
+                <small className="author">{books[0].authors.name}</small>
               </h1>
             </div>
             <div className="publisher">
               <div className="publisher-isbn">
                 <i>ISBN</i>
-                <span>{singlebook.isbn}</span>
+                <span>{books[0].isbn}</span>
               </div>
               <div className="publisher-name">
                 <i>Publisher</i>
-                <span>{singlebook.publisher}</span>
+                <span>{books[0].publisher}</span>
               </div>
               <div className="publisher-date">
                 <i>Published Date</i>
-                <span>{singlebook.publishedDate}</span>
+                <span>{books[0].publishedDate}</span>
               </div>
             </div>
             <div className="description">
-              <p className="description-p">{singlebook.description}</p>
+              <p className="description-p">{books[0].description}</p>
             </div>
           </div>
         </section>
       )}
+      <p>Single</p>
     </section>
   )
 }

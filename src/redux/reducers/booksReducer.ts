@@ -16,7 +16,7 @@ const bookSlice = createSlice({
   reducers: {
     addBook(state, action) {
       const book: Book = action.payload
-      state.items.push(book)
+      state.items = [book, ...state.items]
     },
     updateBook(state, action) {
       const {
@@ -65,7 +65,16 @@ const bookSlice = createSlice({
         })
       }
     },
-    borrowBook(state, action) {
+    singleBookFilter(state, action) {
+      const id = action.payload
+      return {
+        ...state,
+        items: [...state.items].filter((book) => {
+          if (book.id === id) return book
+        })
+      }
+    },
+    borrowBook(state, action): BookState {
       const { id } = action.payload.book
       const { bDateString, rDateString, unique_id } = action.payload
       return {
@@ -120,5 +129,11 @@ const bookSlice = createSlice({
 })
 
 export const booksReducer = bookSlice.reducer
-export const { addBook, updateBook, borrowBook, searchBook, deleteBook } =
-  bookSlice.actions
+export const {
+  addBook,
+  updateBook,
+  borrowBook,
+  searchBook,
+  deleteBook,
+  singleBookFilter
+} = bookSlice.actions

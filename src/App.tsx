@@ -42,10 +42,7 @@ function App() {
             <Route path={":authorId/updateAuthor"} element={<UpdateAuthor />} />
           </Route>
 
-          {/*  <Route
-            path="/profile"
-            element={isLoggedIn && <Profile></Profile>}
-          ></Route> */}
+          <Route path="/profile" element={<Profile></Profile>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
