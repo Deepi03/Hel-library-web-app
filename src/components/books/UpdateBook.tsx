@@ -139,13 +139,6 @@ export const UpdateBook = () => {
               }
             />
           </Box>
-          {/* <Box mb={2}>
-            <DatePicker
-              label="Controlled picker"
-              value={value}
-              onChange={(newValue) => setValue(newValue)}
-            />
-          </Box> */}
           <Button
             type="submit"
             variant="filled"

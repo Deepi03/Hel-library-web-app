@@ -8,8 +8,8 @@ import AutoStoriesIcon from "@mui/icons-material/AutoStories"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { useAdmin } from "../../hook/useAdmin"
 
+import { useAdmin } from "../../hook/useAdmin"
 import { fetchBooks } from "../../redux/middlewares/fetchBooks"
 import { borrowBook, deleteBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
@@ -21,7 +21,6 @@ import {
   rDateString,
   unique_id
 } from "../../types_variables/constants"
-import { userBorrowBook } from "../../redux/reducers/userReducer"
 
 export const Books = () => {
   const navigate = useNavigate()
@@ -30,7 +29,7 @@ export const Books = () => {
 
   const isAdmin = useAdmin()
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn)
-
+  const userEmail = useSelector((state: RootState) => state.user.item?.email)
   useEffect(() => {
     dispatch(fetchBooks())
   }, [])
@@ -41,14 +40,9 @@ export const Books = () => {
     dispatch(deleteBook(book))
   }
   const handleBorrowBook = (book: Book) => {
-    dispatch(borrowBook({ book, bDateString, rDateString, unique_id }))
-    book = {
-      ...book,
-      borrowDate: bDateString,
-      returnDate: rDateString,
-      borrowId: unique_id
-    }
-    dispatch(userBorrowBook(book))
+    dispatch(
+      borrowBook({ book, bDateString, rDateString, unique_id, userEmail })
+    )
   }
 
   const handleDisplaySingleBook = (book: Book) => {

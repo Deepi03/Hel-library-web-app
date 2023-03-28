@@ -11,6 +11,7 @@ export type Book = {
   borrowDate: null | string
   returnDate: null | string
   cover: string
+  userMail: string
 }
 
 export type PartialBook = Partial<Book>
@@ -40,7 +41,6 @@ export type UsersState = {
   isLoggedIn: boolean
   isLoading: boolean
   error: string | undefined
-  books: Book[]
 }
 
 export type GoogleLoggedInUser = {

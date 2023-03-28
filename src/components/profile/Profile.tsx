@@ -12,10 +12,9 @@ import { returnBook } from "../../redux/reducers/booksReducer"
 export const Profile = () => {
   const user = useSelector((state: RootState) => state.user.item)
   const dispatch = useDispatch<AppDispatch>()
-  const books: Book[] = useSelector((state: RootState) => state.user.books)
-  console.log(
-    "user profile",
-    books.map((book) => book.borrowDate)
+  const books: Book[] = useSelector((state: RootState) => state.book.items)
+  const borrowedBooks: Book[] = books.filter(
+    (book) => book.userMail === user?.email
   )
 
   const handleReturn = (book: Book) => {
@@ -66,7 +65,7 @@ export const Profile = () => {
           <i>{user.email}</i>
 
           <Box>
-            {books.length > 0 && (
+            {borrowedBooks.length > 0 && (
               <table id="books-table">
                 <thead>
                   <tr>
@@ -77,7 +76,7 @@ export const Profile = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {books.map((book) => (
+                  {borrowedBooks.map((book) => (
                     <tr key={book.id}>
                       <td>{book.title}</td>
                       <td>{book.borrowDate}</td>
