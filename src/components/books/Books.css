@@ -30,3 +30,15 @@ h2{
   font-size: 1.8rem;
   font-weight: 200;
 }
+
+.add-btn{
+      position: absolute;
+    top: 8.7rem;
+    right: 14rem;
+    padding: 0.6rem;
+    background-color: #DDD0C8;
+    border: 1px solid #DDD0C8;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+}

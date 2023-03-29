@@ -38,7 +38,7 @@ export const Books = () => {
     dispatch(fetchBooks())
   }, []) */
   const handleUpdate = (id: string) => {
-    navigate(`${id}/updateBook`)
+    navigate(`/${id}/updateBook`)
   }
   const handleDelete = (book: Book) => {
     dispatch(deleteBook(book))
@@ -53,11 +53,19 @@ export const Books = () => {
     navigate(`${book.id}`)
     dispatch(singleBookFilter(book.id))
   }
+  const handleAddBook = () => {
+    navigate("/addBook")
+  }
 
   return (
     <div className="books-table">
       {" "}
       <Search></Search>
+      {isAdmin && (
+        <button className="add-btn" onClick={() => handleAddBook()}>
+          Add Book
+        </button>
+      )}
       <h2>Books</h2>
       <table id="books">
         <thead>

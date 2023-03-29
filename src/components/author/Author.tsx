@@ -1,14 +1,12 @@
 /* eslint-disable prettier/prettier */
 import { Box, IconButton, Modal, Typography } from "@mui/material"
-import AutoStoriesIcon from "@mui/icons-material/AutoStories"
 import DeleteIcon from "@mui/icons-material/Delete"
 import UpdateIcon from "@mui/icons-material/Update"
 import ReadMoreIcon from "@mui/icons-material/ReadMore"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { useAdmin } from "../../hook/useAdmin"
-import { fetchAuthors } from "../../redux/middlewares/fetchAuthors"
 import { deleteAuthor } from "../../redux/reducers/authorReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Author } from "../../types_variables/types"
@@ -42,20 +40,25 @@ export const Authors = () => {
     }
   }
   const handleUpdate = (id: string) => {
-    navigate(`${id}/updateAuthor`)
+    navigate(`/${id}/updateAuthor`)
   }
   const handleClose = () => setOpen(false)
 
   const handleDelete = (author: Author) => {
     dispatch(deleteAuthor(author))
   }
+  const handleAddAuthor = () => {
+    navigate("/addAuthor")
+  }
 
-  useEffect(() => {
-    dispatch(fetchAuthors())
-  }, [])
   return (
     <Box sx={{ m: "5rem" }}>
       <h2>Authors</h2>
+      {isAdmin && (
+        <button className="add-btn" onClick={() => handleAddAuthor()}>
+          Add Author
+        </button>
+      )}
       <table id="books">
         <thead>
           <tr>
@@ -92,9 +95,7 @@ export const Authors = () => {
                       handleUpdate(author.id)
                     }}
                   >
-                    <AutoStoriesIcon
-                      sx={{ color: "#323232" }}
-                    ></AutoStoriesIcon>
+                    <UpdateIcon sx={{ color: "#323232" }}></UpdateIcon>
                   </IconButton>
                 )}
               </td>

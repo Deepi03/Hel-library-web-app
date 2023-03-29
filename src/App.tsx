@@ -19,15 +19,21 @@ import { Profile } from "./components/profile/Profile"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { fetchBooks } from "./redux/middlewares/fetchBooks"
+import { useAdmin } from "./hook/useAdmin"
+import { fetchAuthors } from "./redux/middlewares/fetchAuthors"
 
 function App() {
-  const isLoggedIn = useSelector((state: RootState) => {
-    return state.user.isLoggedIn
+  const { isLoggedIn } = useSelector((state: RootState) => {
+    return state.user
   })
+  const isAdmin = useAdmin()
   const dispatch = useDispatch<AppDispatch>()
 
   useEffect(() => {
     dispatch(fetchBooks())
+  }, [])
+  useEffect(() => {
+    dispatch(fetchAuthors())
   }, [])
 
   return (
@@ -36,25 +42,38 @@ function App() {
         <NavBar />
         <ToastContainer />
         <Routes>
-          <Route path="" element={<Home />}></Route>
+          <Route path="" element={<Home />} />
           <Route path="/books">
             <Route path="" element={<Books />} />
-            <Route path={":bookId/updateBook/"} element={<UpdateBook />} />
-            <Route path={":bookId"} element={<SingleBook />}></Route>
+            <Route path={":bookId"} element={<SingleBook />} />
           </Route>
-          <Route path="/addBook" element={<AddBook />}></Route>
-          <Route path="/addAuthor" element={<AddAuthor />}></Route>
-
           <Route
             path="/login"
             element={isLoggedIn ? <Navigate to="/" /> : <Login />}
           />
           <Route path="/authors">
             <Route path="" element={<Authors />} />
-            <Route path={":authorId/updateAuthor"} element={<UpdateAuthor />} />
           </Route>
-
-          <Route path="/profile" element={<Profile></Profile>}></Route>
+          <Route
+            path="/profile"
+            element={isLoggedIn ? <Profile /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/addBook"
+            element={isAdmin ? <AddBook /> : <Navigate to="/" />}
+          />
+          <Route
+            path={":bookId/updateBook/"}
+            element={isAdmin ? <UpdateBook /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/addAuthor"
+            element={isAdmin ? <AddAuthor /> : <Navigate to="/" />}
+          />
+          <Route
+            path={":authorId/updateAuthor"}
+            element={isAdmin ? <UpdateAuthor /> : <Navigate to="/" />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
