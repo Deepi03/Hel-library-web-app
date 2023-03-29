@@ -29,30 +29,34 @@ const bookSlice = createSlice({
       })
     },
     updateBook(state, action) {
-      const { id, isbn, title, cover, description, publisher, publishedDate } =
+      const { id, isbn, title, cover, description, publisher, authorId } =
         action.payload
-      return {
+
+      const stateWithUpdatedBook = {
         ...state,
         items: [...state.items].map((book) => {
           if (id !== book.id) {
             return book
           }
-          toast.info("Book Updated", {
-            position: "bottom-right"
-          })
-          const updatedBook = {
+          const bookToBeUpdate = {
             ...book,
             isbn: isbn,
             title: title,
             cover: cover,
             description: description,
             publisher: publisher,
-            publishedDate: publishedDate
+            authorId: authorId
           }
-          return updatedBook
+          toast.info("Book Updated", {
+            position: "bottom-right"
+          })
+          return bookToBeUpdate
         })
       }
+      console.log(stateWithUpdatedBook.items.map((b) => b.authorId))
+      return stateWithUpdatedBook
     },
+
     singleBookFilter(state, action) {
       const id = action.payload
       const filteredBook = [...state.items].find((item) => {

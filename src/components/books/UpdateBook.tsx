@@ -1,35 +1,26 @@
-import { Box, Button, Card, TextField, Typography } from "@mui/material"
+import {
+  Box,
+  Button,
+  Card,
+  MenuItem,
+  Select,
+  TextField,
+  Typography
+} from "@mui/material"
 /* import { makeStyles } from "@mui/styles" */
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { updateBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
-import { initialBookstate, unique_id } from "../../types_variables/constants"
+import { initialBookstate } from "../../types_variables/constants"
 import { PartialBook } from "../../types_variables/types"
 import "./UpdateBook.css"
 
 export const UpdateBook = () => {
-  /*  const useStyles = makeStyles({
-    root: {
-      "& .MuiFilledInput-underline:after": {
-        borderBottomColor: "#323232"
-      },
-      // focused color for input with variant='outlined'
-      "& .MuiOutlinedInput-root": {
-        "&.Mui-focused fieldset": {
-          borderColor: "#323232"
-        }
-      }
-    },
-    typography: {
-      fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"].join(",")
-    }
-  }) */
-  /* const classes = useStyles() */
   const dispatch = useDispatch<AppDispatch>()
   const { items: books } = useSelector((state: RootState) => state.book)
-
+  const { items: authors } = useSelector((state: RootState) => state.author)
   const { bookId } = useParams()
   const [uBook, setUBook] = useState<PartialBook>(initialBookstate)
   const book = books.find((bo) => bookId === bo.id)
@@ -49,7 +40,6 @@ export const UpdateBook = () => {
             color: "#323232",
             fontWeight: "200"
           }}
-          /* className={classes.typography} */
         >
           Update Book
         </Typography>
@@ -65,13 +55,11 @@ export const UpdateBook = () => {
               onChange={(e) => {
                 setUBook({ ...book, isbn: e.target.value })
               }}
-              /* className={classes.root} */
             />
           </Box>
           <Box mb={2}>
             <TextField
               variant="outlined"
-              /* className={classes.root} */
               placeholder="title"
               type="text"
               fullWidth
@@ -83,28 +71,33 @@ export const UpdateBook = () => {
             />
           </Box>
           <Box mb={2}>
-            <TextField
-              variant="outlined"
-              /* className={classes.root} */
-              placeholder="author"
-              fullWidth
-              type="text"
-              defaultValue={book?.authors.name}
-              autoComplete="author"
-              autoFocus
-              required
-              onChange={(e) =>
-                setUBook({
-                  ...book,
-                  authors: { id: unique_id, name: e.target.value }
-                })
-              }
-            />
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={book?.authorId}
+              label="author"
+              onChange={(e) => {
+                setUBook({ ...book, authorId: e.target.value })
+              }}
+              sx={{
+                pb: 0.15,
+                pl: 10,
+                width: "100%",
+                color: "#323232",
+                textAlign: "center",
+                fontWeight: "300"
+              }}
+            >
+              {authors.map((author) => (
+                <MenuItem value={author.id} key={author.id}>
+                  {author.name}
+                </MenuItem>
+              ))}
+            </Select>
           </Box>
           <Box mb={2}>
             <TextField
               variant="outlined"
-              /* className={classes.root} */
               placeholder="publisher"
               fullWidth
               autoComplete="publisher"
@@ -123,7 +116,6 @@ export const UpdateBook = () => {
           <Box mb={2}>
             <TextField
               variant="outlined"
-              /* className={classes.root} */
               placeholder="cover"
               fullWidth
               autoComplete="cover"

@@ -13,8 +13,6 @@ import { useDispatch, useSelector } from "react-redux"
 
 import { addBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
-/* import { makeStyles } from "@mui/styles" */
-import { styled } from "@mui/material/styles"
 import { PartialBook } from "../../types_variables/types"
 import { initialBookstate, unique_id } from "../../types_variables/constants"
 import "./UpdateBook.css"
@@ -23,8 +21,6 @@ export const AddBook = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [book, setBook] = useState<PartialBook>(initialBookstate)
   const { items: authors } = useSelector((state: RootState) => state.author)
-  const authorId = authors.map((author) => author.id)
-  console.log(authorId)
   const handleSubmit = () => {
     book.id = unique_id
     dispatch(addBook(book))
@@ -42,7 +38,6 @@ export const AddBook = () => {
             fontWeight: "200",
             fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"]
           }}
-          /* className={classes.typography} */
         >
           Create Book
         </Typography>
@@ -58,13 +53,11 @@ export const AddBook = () => {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setBook({ ...book, isbn: e.target.value })
               }}
-              /*  className={classes.root} */
             />
           </Box>
           <Box mb={2}>
             <TextField
               variant="outlined"
-              /* className={classes.root} */
               placeholder="title"
               type="text"
               fullWidth
@@ -121,7 +114,6 @@ export const AddBook = () => {
           <Box mb={2}>
             <TextField
               variant="outlined"
-              /*  className={classes.root} */
               placeholder="description"
               fullWidth
               autoComplete="description"
@@ -140,7 +132,6 @@ export const AddBook = () => {
           <Box mb={2}>
             <TextField
               variant="outlined"
-              /* className={classes.root} */
               placeholder="cover"
               fullWidth
               autoComplete="cover"
