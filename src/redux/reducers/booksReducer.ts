@@ -108,7 +108,7 @@ const bookSlice = createSlice({
         })
       }
     },
-    searchBook(state, action) {
+    searchByBookTitle(state, action) {
       state.items = state.items.filter((book) => {
         return book.title.toLowerCase().includes(action.payload)
       })
@@ -125,7 +125,6 @@ const bookSlice = createSlice({
         }
         return 0
       })
-      console.log(state.items)
     },
     deleteBook(state, action) {
       state.items = state.items.filter((book) => {
@@ -157,7 +156,7 @@ export const {
   addBook,
   updateBook,
   borrowBook,
-  searchBook,
+  searchByBookTitle,
   returnBook,
   deleteBook,
   singleBookFilter,

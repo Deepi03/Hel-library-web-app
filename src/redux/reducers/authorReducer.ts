@@ -52,7 +52,11 @@ const authorSlice = createSlice({
         }
         return 0
       })
-      console.log(state.items)
+    },
+    searchByAuthorName(state, action) {
+      state.items = state.items.filter((author) => {
+        return author.name.toLowerCase().includes(action.payload)
+      })
     },
     deleteAuthor(state, action) {
       state.items = state.items.filter((author) => {

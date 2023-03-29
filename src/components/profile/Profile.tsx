@@ -2,42 +2,24 @@
 import { Avatar, Box, Card, IconButton, Typography } from "@mui/material"
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn"
 import { useDispatch, useSelector } from "react-redux"
-/* import { makeStyles } from "@mui/styles" */
 
 import { AppDispatch, RootState } from "../../redux/store"
 import "./Profile.css"
 import { Book } from "../../types_variables/types"
 import { returnBook } from "../../redux/reducers/booksReducer"
+import { useAdmin } from "../../hook/useAdmin"
 
 export const Profile = () => {
-  const user = useSelector((state: RootState) => state.user.item)
-  const dispatch = useDispatch<AppDispatch>()
+  const { item: user } = useSelector((state: RootState) => state.user)
   const { items: books } = useSelector((state: RootState) => state.book)
+  const isAdmin = useAdmin()
+  const dispatch = useDispatch<AppDispatch>()
   const borrowedBooks: Book[] = books.filter(
     (book) => book.userMail === user?.email
   )
-
   const handleReturn = (book: Book) => {
     dispatch(returnBook(book))
   }
-
-  /*  const useStyles = makeStyles({
-    root: {
-      "& .MuiFilledInput-underline:after": {
-        borderBottomColor: "#323232"
-      },
-      // focused color for input with variant='outlined'
-      "& .MuiOutlinedInput-root": {
-        "&.Mui-focused fieldset": {
-          borderColor: "#323232"
-        }
-      }
-    },
-    typography: {
-      fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"].join(",")
-    }
-  })
-  const classes = useStyles() */
 
   return (
     <div>
@@ -58,7 +40,6 @@ export const Profile = () => {
               mt: "0.5rem",
               fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"]
             }}
-            /* className={classes.typography} */
           >
             {" "}
             {user.name}
@@ -96,6 +77,30 @@ export const Profile = () => {
             )}
           </Box>
         </Card>
+      )}
+      {isAdmin && (
+        <Box>
+          <table id="books-table">
+            <thead>
+              <tr>
+                <th>Books</th>
+                <th>Borrowed Date</th>
+                <th>Should be Returned By</th>
+                <th>User</th>
+              </tr>
+            </thead>
+            <tbody>
+              {borrowedBooks.map((book) => (
+                <tr key={book.id}>
+                  <td>{book.title}</td>
+                  <td>{book.borrowDate}</td>
+                  <td>{book.returnDate}</td>
+                  <td>{book.userMail}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Box>
       )}
     </div>
   )
