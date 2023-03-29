@@ -50,7 +50,7 @@ export const Books = () => {
   }
 
   const handleDisplaySingleBook = (book: Book) => {
-    navigate(`${book.id}/book`)
+    navigate(`${book.id}`)
     dispatch(singleBookFilter(book.id))
   }
 

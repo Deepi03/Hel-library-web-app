@@ -59,20 +59,16 @@ const bookSlice = createSlice({
         })
       }
     },
-    /* singleBookFilter(state, action) {
+    singleBookFilter(state, action) {
       const id = action.payload
       const filteredBook = [...state.items].find((item) => {
         if (item.id === id) return item
-      })
-      console.log({
-        ...state,
-        singleBook: filteredBook
       })
       return {
         ...state,
         singleBook: filteredBook
       }
-    }, */
+    },
     borrowBook(state, action): BookState {
       const { id } = action.payload.book
       const { bDateString, rDateString, unique_id, userEmail } = action.payload
