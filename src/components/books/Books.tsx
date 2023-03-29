@@ -11,7 +11,11 @@ import { useNavigate } from "react-router-dom"
 
 import { useAdmin } from "../../hook/useAdmin"
 import { fetchBooks } from "../../redux/middlewares/fetchBooks"
-import { borrowBook, deleteBook } from "../../redux/reducers/booksReducer"
+import {
+  borrowBook,
+  deleteBook,
+  singleBookFilter
+} from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Book } from "../../types_variables/types"
 import { Search } from "../search/Search"
@@ -30,9 +34,9 @@ export const Books = () => {
   const isAdmin = useAdmin()
   const { isLoggedIn, item } = useSelector((state: RootState) => state.user)
   const userEmail = item?.email
-  useEffect(() => {
+  /*  useEffect(() => {
     dispatch(fetchBooks())
-  }, [])
+  }, []) */
   const handleUpdate = (id: string) => {
     navigate(`${id}/updateBook`)
   }
@@ -47,6 +51,7 @@ export const Books = () => {
 
   const handleDisplaySingleBook = (book: Book) => {
     navigate(`${book.id}/book`)
+    dispatch(singleBookFilter(book.id))
   }
 
   return (

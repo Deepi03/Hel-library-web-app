@@ -121,7 +121,7 @@ export const NavBar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page.label} onClick={handleCloseNavMenu}>
-                  <Link
+                  <Button
                     sx={{
                       textDecoration: "none",
                       color: "#323232",
@@ -130,7 +130,7 @@ export const NavBar = () => {
                     href={page.to}
                   >
                     {page.label}
-                  </Link>
+                  </Button>
                 </MenuItem>
               ))}
             </Menu>

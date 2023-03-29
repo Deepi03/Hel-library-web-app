@@ -32,6 +32,7 @@ export type AuthorState = {
 
 export type BookState = {
   items: Book[]
+  singleBook: Book | undefined
   isLoading: boolean
   error: string | undefined
   isBorrowed: boolean

@@ -10,17 +10,26 @@ import { UpdateBook } from "./components/books/UpdateBook"
 import { Home } from "./components/home/Home"
 import { Login } from "./components/login/Login"
 import { NavBar } from "./components/nav/NavBar"
-import { RootState } from "./redux/store"
+import { AppDispatch, RootState } from "./redux/store"
 import { SingleBook } from "./components/singleBook/SingleBook"
 import { Authors } from "./components/author/Author"
 import { AddAuthor } from "./components/author/AddAuthor"
 import { UpdateAuthor } from "./components/author/UpdateAuthor"
 import { Profile } from "./components/profile/Profile"
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { fetchBooks } from "./redux/middlewares/fetchBooks"
 
 function App() {
   const isLoggedIn = useSelector((state: RootState) => {
     return state.user.isLoggedIn
   })
+  const dispatch = useDispatch<AppDispatch>()
+
+  useEffect(() => {
+    dispatch(fetchBooks())
+  }, [])
+
   return (
     <div className="App">
       <BrowserRouter>
