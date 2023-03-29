@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { useSelector } from "react-redux"
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 import { AddBook } from "./components/books/AddBook"
 import { Books } from "./components/books/Books"
@@ -23,6 +25,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <NavBar />
+        <ToastContainer />
         <Routes>
           <Route path="" element={<Home />}></Route>
           <Route path="/books">

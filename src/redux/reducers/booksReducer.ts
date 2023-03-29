@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { createSlice } from "@reduxjs/toolkit"
+import { toast } from "react-toastify"
 import { Book, BookState } from "../../types_variables/types"
 import { fetchBooks } from "../middlewares/fetchBooks"
 
@@ -17,6 +18,9 @@ const bookSlice = createSlice({
     addBook(state, action) {
       const book: Book = action.payload
       state.items = [book, ...state.items]
+      toast.success("Book Added", {
+        position: "bottom-right"
+      })
     },
     updateBook(state, action) {
       const {
@@ -35,6 +39,9 @@ const bookSlice = createSlice({
           if (id !== book.id) {
             return book
           }
+          toast.info("Book Updated", {
+            position: "bottom-right"
+          })
           return {
             ...book,
             isbn: isbn,
@@ -67,6 +74,9 @@ const bookSlice = createSlice({
         ...state,
         items: [...state.items].map((book) => {
           if (book.id !== id) return book
+          toast.info("Book Borrowed", {
+            position: "bottom-right"
+          })
           return {
             ...book,
             status: false,
@@ -84,13 +94,8 @@ const bookSlice = createSlice({
         ...state,
         items: [...state.items].map((book) => {
           if (book.id !== id) return book
-          console.log({
-            ...book,
-            status: true,
-            borrowDate: null,
-            returnDate: null,
-            borrowId: null,
-            userMail: undefined
+          toast.info("Book Returned", {
+            position: "bottom-right"
           })
           return {
             ...book,
@@ -111,6 +116,9 @@ const bookSlice = createSlice({
     deleteBook(state, action) {
       state.items = state.items.filter((book) => {
         return book.id !== action.payload.id
+      })
+      toast.warning("Book Deleted", {
+        position: "bottom-right"
       })
     }
   },

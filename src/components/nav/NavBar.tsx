@@ -25,25 +25,21 @@ import { useState } from "react"
 export const NavBar = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const isLoggedIn = useSelector((state: RootState) => {
-    return state.user.isLoggedIn
-  })
-  const user = useSelector((state: RootState) => {
-    return state.user.item
-  })
-  const handleLogout = () => {
-    navigate("/books")
-    dispatch(logout())
-  }
-
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
-
   const pages = [
     { to: "/", label: "Home" },
     { to: "/books", label: "Books" },
     { to: "/authors", label: "Authors" }
   ]
+  const { isLoggedIn, item: user } = useSelector((state: RootState) => {
+    return state.user
+  })
+
+  const handleLogout = () => {
+    navigate("/books")
+    dispatch(logout())
+  }
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)

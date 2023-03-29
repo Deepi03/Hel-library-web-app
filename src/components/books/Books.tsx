@@ -28,8 +28,8 @@ export const Books = () => {
   const books = useSelector((state: RootState) => state.book.items)
 
   const isAdmin = useAdmin()
-  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn)
-  const userEmail = useSelector((state: RootState) => state.user.item?.email)
+  const { isLoggedIn, item } = useSelector((state: RootState) => state.user)
+  const userEmail = item?.email
   useEffect(() => {
     dispatch(fetchBooks())
   }, [])

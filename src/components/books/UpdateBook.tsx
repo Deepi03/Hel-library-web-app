@@ -1,5 +1,5 @@
 import { Box, Button, Card, TextField, Typography } from "@mui/material"
-import { makeStyles } from "@mui/styles"
+/* import { makeStyles } from "@mui/styles" */
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
@@ -10,7 +10,7 @@ import { PartialBook } from "../../types_variables/types"
 import "./UpdateBook.css"
 
 export const UpdateBook = () => {
-  const useStyles = makeStyles({
+  /*  const useStyles = makeStyles({
     root: {
       "& .MuiFilledInput-underline:after": {
         borderBottomColor: "#323232"
@@ -25,10 +25,10 @@ export const UpdateBook = () => {
     typography: {
       fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"].join(",")
     }
-  })
-  const classes = useStyles()
+  }) */
+  /* const classes = useStyles() */
   const dispatch = useDispatch<AppDispatch>()
-  const books = useSelector((state: RootState) => state.book.items)
+  const { items: books } = useSelector((state: RootState) => state.book)
 
   const { bookId } = useParams()
   const [uBook, setUBook] = useState<PartialBook>(initialBookstate)
@@ -49,7 +49,7 @@ export const UpdateBook = () => {
             color: "#323232",
             fontWeight: "200"
           }}
-          className={classes.typography}
+          /* className={classes.typography} */
         >
           Update Book
         </Typography>
@@ -65,13 +65,13 @@ export const UpdateBook = () => {
               onChange={(e) => {
                 setUBook({ ...book, isbn: e.target.value })
               }}
-              className={classes.root}
+              /* className={classes.root} */
             />
           </Box>
           <Box mb={2}>
             <TextField
               variant="outlined"
-              className={classes.root}
+              /* className={classes.root} */
               placeholder="title"
               type="text"
               fullWidth
@@ -85,7 +85,7 @@ export const UpdateBook = () => {
           <Box mb={2}>
             <TextField
               variant="outlined"
-              className={classes.root}
+              /* className={classes.root} */
               placeholder="author"
               fullWidth
               type="text"
@@ -104,7 +104,7 @@ export const UpdateBook = () => {
           <Box mb={2}>
             <TextField
               variant="outlined"
-              className={classes.root}
+              /* className={classes.root} */
               placeholder="publisher"
               fullWidth
               autoComplete="publisher"
@@ -123,7 +123,7 @@ export const UpdateBook = () => {
           <Box mb={2}>
             <TextField
               variant="outlined"
-              className={classes.root}
+              /* className={classes.root} */
               placeholder="cover"
               fullWidth
               autoComplete="cover"

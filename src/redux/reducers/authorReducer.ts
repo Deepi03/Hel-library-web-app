@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { toast } from "react-toastify"
 import { v4 as uuid } from "uuid"
 
 import { Author, AuthorState } from "../../types_variables/types"
@@ -9,7 +10,6 @@ const initialState: AuthorState = {
   isLoading: false,
   error: ""
 }
-const unique_id = uuid()
 const authorSlice = createSlice({
   name: "authorReducer",
   initialState: initialState,
@@ -17,6 +17,9 @@ const authorSlice = createSlice({
     addAuthor(state, action) {
       const author: Author = action.payload
       state.items.push(author)
+      toast.success(" Author Added ", {
+        position: "bottom-right"
+      })
     },
     updateAuthor(state, action) {
       const { id, name, books, info } = action.payload
@@ -26,12 +29,8 @@ const authorSlice = createSlice({
           if (id !== author.id) {
             return author
           }
-
-          console.log({
-            ...author,
-            name: name,
-            books: books,
-            info: info
+          toast.success("Author Updated", {
+            position: "bottom-right"
           })
           return {
             ...author,
@@ -45,6 +44,9 @@ const authorSlice = createSlice({
     deleteAuthor(state, action) {
       state.items = state.items.filter((author) => {
         return author.id !== action.payload.id
+      })
+      toast.warning("Author Deleted", {
+        position: "bottom-right"
       })
     }
   },

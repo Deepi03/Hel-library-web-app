@@ -2,7 +2,7 @@
 import { Avatar, Box, Card, IconButton, Typography } from "@mui/material"
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn"
 import { useDispatch, useSelector } from "react-redux"
-import { makeStyles } from "@mui/styles"
+/* import { makeStyles } from "@mui/styles" */
 
 import { AppDispatch, RootState } from "../../redux/store"
 import "./Profile.css"
@@ -12,7 +12,7 @@ import { returnBook } from "../../redux/reducers/booksReducer"
 export const Profile = () => {
   const user = useSelector((state: RootState) => state.user.item)
   const dispatch = useDispatch<AppDispatch>()
-  const books: Book[] = useSelector((state: RootState) => state.book.items)
+  const { items: books } = useSelector((state: RootState) => state.book)
   const borrowedBooks: Book[] = books.filter(
     (book) => book.userMail === user?.email
   )
@@ -21,7 +21,7 @@ export const Profile = () => {
     dispatch(returnBook(book))
   }
 
-  const useStyles = makeStyles({
+  /*  const useStyles = makeStyles({
     root: {
       "& .MuiFilledInput-underline:after": {
         borderBottomColor: "#323232"
@@ -37,7 +37,7 @@ export const Profile = () => {
       fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"].join(",")
     }
   })
-  const classes = useStyles()
+  const classes = useStyles() */
 
   return (
     <div>
@@ -55,9 +55,10 @@ export const Profile = () => {
               color: "#323232",
               fontWeight: "200",
               fontSize: "1.6rem",
-              mt: "0.5rem"
+              mt: "0.5rem",
+              fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"]
             }}
-            className={classes.typography}
+            /* className={classes.typography} */
           >
             {" "}
             {user.name}
