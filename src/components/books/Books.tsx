@@ -57,7 +57,7 @@ export const Books = () => {
     <div className="books-table">
       {" "}
       <Search></Search>
-      {!isAdmin && (
+      {isAdmin && (
         <button className="add-btn" onClick={() => handleAddBook()}>
           Add Book
         </button>
