@@ -18,22 +18,19 @@ const bookSlice = createSlice({
   reducers: {
     addBook(state, action) {
       const book: Book = action.payload
+      console.log("book before pushing", book.title, book.authorId)
       state.items = [book, ...state.items]
+      console.log(
+        "book after pushing",
+        state.items.map((b) => b.authorId)
+      )
       toast.success("Book Added", {
         position: "bottom-right"
       })
     },
     updateBook(state, action) {
-      const {
-        id,
-        isbn,
-        title,
-        cover,
-        authors,
-        description,
-        publisher,
-        publishedDate
-      } = action.payload
+      const { id, isbn, title, cover, description, publisher, publishedDate } =
+        action.payload
       return {
         ...state,
         items: [...state.items].map((book) => {
@@ -43,19 +40,16 @@ const bookSlice = createSlice({
           toast.info("Book Updated", {
             position: "bottom-right"
           })
-          return {
+          const updatedBook = {
             ...book,
             isbn: isbn,
             title: title,
             cover: cover,
             description: description,
             publisher: publisher,
-            authors: {
-              id: book.authors.id,
-              name: authors.name
-            },
             publishedDate: publishedDate
           }
+          return updatedBook
         })
       }
     },

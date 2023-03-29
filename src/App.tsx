@@ -58,10 +58,11 @@ function App() {
             path="/profile"
             element={isLoggedIn ? <Profile /> : <Navigate to="/" />}
           />
-          <Route
+          {/*  <Route
             path="/addBook"
             element={isAdmin ? <AddBook /> : <Navigate to="/" />}
-          />
+          /> */}
+          <Route path="/addBook" element={<AddBook />} />
           <Route
             path={":bookId/updateBook/"}
             element={isAdmin ? <UpdateBook /> : <Navigate to="/" />}

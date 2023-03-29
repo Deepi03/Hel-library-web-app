@@ -5,12 +5,10 @@ import UpdateIcon from "@mui/icons-material/Update"
 import DeleteIcon from "@mui/icons-material/Delete"
 import BlockIcon from "@mui/icons-material/Block"
 import AutoStoriesIcon from "@mui/icons-material/AutoStories"
-import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 import { useAdmin } from "../../hook/useAdmin"
-import { fetchBooks } from "../../redux/middlewares/fetchBooks"
 import {
   borrowBook,
   deleteBook,
@@ -29,14 +27,12 @@ import {
 export const Books = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const books = useSelector((state: RootState) => state.book.items)
+  const { items: books } = useSelector((state: RootState) => state.book)
+  const { items: authors } = useSelector((state: RootState) => state.author)
 
   const isAdmin = useAdmin()
   const { isLoggedIn, item } = useSelector((state: RootState) => state.user)
   const userEmail = item?.email
-  /*  useEffect(() => {
-    dispatch(fetchBooks())
-  }, []) */
   const handleUpdate = (id: string) => {
     navigate(`/${id}/updateBook`)
   }
@@ -61,7 +57,7 @@ export const Books = () => {
     <div className="books-table">
       {" "}
       <Search></Search>
-      {isAdmin && (
+      {!isAdmin && (
         <button className="add-btn" onClick={() => handleAddBook()}>
           Add Book
         </button>
@@ -73,6 +69,7 @@ export const Books = () => {
             <th>Cover</th>
             <th>ISBN</th>
             <th>Title</th>
+            <th>Author</th>
             <th>Available</th>
             <th>Borrow</th>
             <th>Detail</th>
@@ -92,7 +89,9 @@ export const Books = () => {
               </td>
               <td>{book.isbn}</td>
               <td>{book.title}</td>
-
+              <td>
+                {authors.find((author) => author.id === book.authorId)?.name}
+              </td>
               <td>{book.status ? "Yes" : "No"}</td>
               {isLoggedIn ? (
                 <td>

@@ -63,7 +63,6 @@ export const Authors = () => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Books</th>
             <th>Info</th>
             {isAdmin && <th>Update</th>}
             {isAdmin && <th>Delete</th>}
@@ -74,12 +73,6 @@ export const Authors = () => {
             <tr key={author.id}>
               <td>{author.name}</td>
               <td>
-                {author?.books?.map((book) => (
-                  <li key={book}>{book}</li>
-                ))}
-              </td>
-
-              <td>
                 <IconButton>
                   <ReadMoreIcon
                     sx={{ color: "#323232" }}
@@ -87,7 +80,6 @@ export const Authors = () => {
                   ></ReadMoreIcon>
                 </IconButton>
               </td>
-
               <td>
                 {isAdmin && (
                   <IconButton

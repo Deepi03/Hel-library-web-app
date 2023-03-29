@@ -18,33 +18,6 @@ export const AddAuthor = () => {
   }
   return (
     <div>
-      {/* <form onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          name="name"
-          value={author.name}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setAuthor({ ...author, name: e.target.value })
-          }}
-          required
-        />
-        <label htmlFor="info">Info</label>
-        <input
-          type="text"
-          name="info"
-          required
-          value={author.info}
-          onChange={(e) =>
-            setAuthor({
-              ...author,
-              info: e.target.value
-            })
-          }
-        />
-
-        <input type="submit" value={"submit"} />
-      </form> */}
       <Box sx={{ paddingBottom: "20em", color: "#323232" }}>
         <Typography
           variant="h4"
@@ -100,7 +73,7 @@ export const AddAuthor = () => {
             }}
             sx={{ bgcolor: "#DDD0C8", color: "btn.text" }}
           >
-            Create Book
+            Create Author
           </Button>
         </Card>
       </Box>

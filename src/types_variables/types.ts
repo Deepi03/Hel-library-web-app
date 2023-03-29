@@ -2,9 +2,9 @@ export type Book = {
   id: string
   isbn: string
   title: string
+  authorId: string
   description: string
   publisher: string
-  authors: Author
   status: boolean
   borrowId: null | string
   publishedDate: string
@@ -20,8 +20,7 @@ export type PartialAuthor = Partial<Author>
 export type Author = {
   id: string
   name: string
-  books?: never[]
-  info?: string
+  info: string
 }
 
 export type AuthorState = {

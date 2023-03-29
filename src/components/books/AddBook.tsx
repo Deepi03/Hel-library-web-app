@@ -1,10 +1,18 @@
 /* eslint-disable prettier/prettier */
-import { Box, Button, Card, TextField, Typography } from "@mui/material"
+import {
+  Box,
+  Button,
+  Card,
+  MenuItem,
+  Select,
+  TextField,
+  Typography
+} from "@mui/material"
 import React, { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import { addBook } from "../../redux/reducers/booksReducer"
-import { AppDispatch } from "../../redux/store"
+import { AppDispatch, RootState } from "../../redux/store"
 /* import { makeStyles } from "@mui/styles" */
 import { styled } from "@mui/material/styles"
 import { PartialBook } from "../../types_variables/types"
@@ -12,27 +20,11 @@ import { initialBookstate, unique_id } from "../../types_variables/constants"
 import "./UpdateBook.css"
 
 export const AddBook = () => {
-  /* const useStyles = makeStyles({
-    root: {
-      "& .MuiFilledInput-underline:after": {
-        borderBottomColor: "#323232"
-      },
-      // focused color for input with variant='outlined'
-      "& .MuiOutlinedInput-root": {
-        "&.Mui-focused fieldset": {
-          borderColor: "#323232"
-        }
-      }
-    },
-    typography: {
-      fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"].join(",")
-    }
-  }) */
-
-  /* const classes = useStyles() */
   const dispatch = useDispatch<AppDispatch>()
   const [book, setBook] = useState<PartialBook>(initialBookstate)
-
+  const { items: authors } = useSelector((state: RootState) => state.author)
+  const authorId = authors.map((author) => author.id)
+  console.log(authorId)
   const handleSubmit = () => {
     book.id = unique_id
     dispatch(addBook(book))
@@ -84,28 +76,33 @@ export const AddBook = () => {
             />
           </Box>
           <Box mb={2}>
-            <TextField
-              variant="outlined"
-              /* className={classes.root} */
-              placeholder="author"
-              fullWidth
-              type="text"
-              autoComplete="author"
-              autoFocus
-              required
-              value={book.authors?.name}
-              onChange={(e) =>
-                setBook({
-                  ...book,
-                  authors: { id: unique_id, name: e.target.value }
-                })
-              }
-            />
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={book.authorId}
+              label="author"
+              onChange={(e) => {
+                setBook({ ...book, authorId: e.target.value })
+              }}
+              sx={{
+                pb: 0.15,
+                pl: 10,
+                width: "100%",
+                color: "#323232",
+                textAlign: "center",
+                fontWeight: "300"
+              }}
+            >
+              {authors.map((author) => (
+                <MenuItem value={author.id} key={author.id}>
+                  {author.name}
+                </MenuItem>
+              ))}
+            </Select>
           </Box>
           <Box mb={2}>
             <TextField
               variant="outlined"
-              /* className={classes.root} */
               placeholder="publisher"
               fullWidth
               autoComplete="publisher"
