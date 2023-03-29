@@ -113,6 +113,20 @@ const bookSlice = createSlice({
         return book.title.toLowerCase().includes(action.payload)
       })
     },
+    sortBookByTitle(state) {
+      state.items = state.items.slice().sort((a, b) => {
+        const bookA = a.title.toLowerCase()
+        const bookB = b.title.toLowerCase()
+        if (bookA < bookB) {
+          return -1
+        }
+        if (bookA > bookB) {
+          return 1
+        }
+        return 0
+      })
+      console.log(state.items)
+    },
     deleteBook(state, action) {
       state.items = state.items.filter((book) => {
         return book.id !== action.payload.id
@@ -146,5 +160,6 @@ export const {
   searchBook,
   returnBook,
   deleteBook,
-  singleBookFilter
+  singleBookFilter,
+  sortBookByTitle
 } = bookSlice.actions

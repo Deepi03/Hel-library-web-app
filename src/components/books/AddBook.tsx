@@ -48,7 +48,7 @@ export const AddBook = () => {
               placeholder="isbn"
               fullWidth
               autoComplete="isbn"
-              required
+              required={true}
               value={book.isbn}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setBook({ ...book, isbn: e.target.value })

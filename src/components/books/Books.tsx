@@ -5,6 +5,7 @@ import UpdateIcon from "@mui/icons-material/Update"
 import DeleteIcon from "@mui/icons-material/Delete"
 import BlockIcon from "@mui/icons-material/Block"
 import AutoStoriesIcon from "@mui/icons-material/AutoStories"
+import SortIcon from "@mui/icons-material/Sort"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
@@ -12,7 +13,8 @@ import { useAdmin } from "../../hook/useAdmin"
 import {
   borrowBook,
   deleteBook,
-  singleBookFilter
+  singleBookFilter,
+  sortBookByTitle
 } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Book } from "../../types_variables/types"
@@ -53,9 +55,12 @@ export const Books = () => {
     navigate("/addBook")
   }
 
+  const handleSort = () => {
+    dispatch(sortBookByTitle())
+  }
+
   return (
     <div className="books-table">
-      {" "}
       <Search></Search>
       {isAdmin && (
         <button className="add-btn" onClick={() => handleAddBook()}>
@@ -68,7 +73,10 @@ export const Books = () => {
           <tr>
             <th>Cover</th>
             <th>ISBN</th>
-            <th>Title</th>
+
+            <th onClick={() => handleSort()}>
+              Title <SortIcon />
+            </th>
             <th>Author</th>
             <th>Available</th>
             <th>Borrow</th>
@@ -148,6 +156,7 @@ export const Books = () => {
           ))}
         </tbody>
       </table>
+      {/*  <button onClick={() => handleSort()}>sort</button> */}
     </div>
   )
 }

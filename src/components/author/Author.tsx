@@ -3,11 +3,15 @@ import { Box, IconButton, Modal, Typography } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import UpdateIcon from "@mui/icons-material/Update"
 import ReadMoreIcon from "@mui/icons-material/ReadMore"
+import SortIcon from "@mui/icons-material/Sort"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { useAdmin } from "../../hook/useAdmin"
-import { deleteAuthor } from "../../redux/reducers/authorReducer"
+import {
+  deleteAuthor,
+  sortAuthorByName
+} from "../../redux/reducers/authorReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Author } from "../../types_variables/types"
 import "../books/Books.css"
@@ -26,7 +30,8 @@ const style = {
 
 export const Authors = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const authors = useSelector((state: RootState) => state.author.items)
+  const { items: authors } = useSelector((state: RootState) => state.author)
+  const { items: books } = useSelector((state: RootState) => state.book)
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [info, setInfo] = useState("")
@@ -50,6 +55,9 @@ export const Authors = () => {
   const handleAddAuthor = () => {
     navigate("/addAuthor")
   }
+  const handleSort = () => {
+    dispatch(sortAuthorByName())
+  }
 
   return (
     <Box sx={{ m: "5rem" }}>
@@ -62,7 +70,10 @@ export const Authors = () => {
       <table id="books">
         <thead>
           <tr>
-            <th>Name</th>
+            <th onClick={() => handleSort()}>
+              Title <SortIcon />
+            </th>
+            <th>Books</th>
             <th>Info</th>
             {isAdmin && <th>Update</th>}
             {isAdmin && <th>Delete</th>}
@@ -72,6 +83,11 @@ export const Authors = () => {
           {authors.map((author) => (
             <tr key={author.id}>
               <td>{author.name}</td>
+              <td>
+                {books.map((book) => {
+                  if (book.authorId === author.id) return <li>{book.title}</li>
+                })}
+              </td>
               <td>
                 <IconButton>
                   <ReadMoreIcon

@@ -40,6 +40,20 @@ const authorSlice = createSlice({
         })
       }
     },
+    sortAuthorByName(state) {
+      state.items = state.items.slice().sort((a, b) => {
+        const bookA = a.name.toLowerCase()
+        const bookB = b.name.toLowerCase()
+        if (bookA < bookB) {
+          return -1
+        }
+        if (bookA > bookB) {
+          return 1
+        }
+        return 0
+      })
+      console.log(state.items)
+    },
     deleteAuthor(state, action) {
       state.items = state.items.filter((author) => {
         return author.id !== action.payload.id
@@ -64,4 +78,5 @@ const authorSlice = createSlice({
 })
 
 export const authorReducer = authorSlice.reducer
-export const { addAuthor, updateAuthor, deleteAuthor } = authorSlice.actions
+export const { addAuthor, updateAuthor, deleteAuthor, sortAuthorByName } =
+  authorSlice.actions

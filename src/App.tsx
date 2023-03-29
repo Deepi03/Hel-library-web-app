@@ -21,6 +21,7 @@ import { useDispatch } from "react-redux"
 import { fetchBooks } from "./redux/middlewares/fetchBooks"
 import { useAdmin } from "./hook/useAdmin"
 import { fetchAuthors } from "./redux/middlewares/fetchAuthors"
+import { Footer } from "./footer/Footer"
 
 function App() {
   const { isLoggedIn } = useSelector((state: RootState) => {
