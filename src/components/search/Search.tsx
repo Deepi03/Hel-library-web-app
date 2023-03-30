@@ -3,18 +3,15 @@ import { InputBase, Paper } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 
 import { AppDispatch } from "../../redux/store"
+import { useEffect, useState } from "react"
 import { searchByBookTitle } from "../../redux/reducers/booksReducer"
-import { fetchBooks } from "../../redux/middlewares/fetchBooks"
 
 export const Search = () => {
+  const [searchTerm, setSearchTerm] = useState("")
   const dispatch = useDispatch<AppDispatch>()
-  const handleSearch = (e: any) => {
-    if (e.target.value.length > 0) {
-      dispatch(searchByBookTitle(e.target.value))
-    } else {
-      dispatch(fetchBooks())
-    }
-  }
+  useEffect(() => {
+    dispatch(searchByBookTitle(searchTerm))
+  }, [searchTerm])
   return (
     <div>
       <Paper
@@ -33,7 +30,7 @@ export const Search = () => {
           sx={{ flex: 1 }}
           placeholder="Search"
           inputProps={{ "aria-label": "Search" }}
-          onChange={handleSearch}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
         <SearchIcon sx={{ p: "10px" }} />
       </Paper>

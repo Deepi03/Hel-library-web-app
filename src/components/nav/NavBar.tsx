@@ -184,6 +184,7 @@ export const NavBar = () => {
                   <Avatar alt="Remy Sharp" src={user?.picture} />
                 </IconButton>
               ) : (
+                /* (
                 <IconButton
                   onClick={handleOpenUserMenu}
                   sx={{
@@ -197,6 +198,8 @@ export const NavBar = () => {
                 >
                   Login
                 </IconButton>
+              )} */
+                <Login></Login>
               )}
             </Tooltip>
             {/* Drop down menu if authenticated user can see profile and logout */}

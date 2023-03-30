@@ -113,9 +113,20 @@ const bookSlice = createSlice({
       }
     },
     searchByBookTitle(state, action) {
-      state.items = state.items.filter((book) => {
-        return book.title.toLowerCase().includes(action.payload)
-      })
+      /*  if (action.payload.length < 0) {
+        return {...state, ...state.items}
+      } else {
+        state.items = state.items.filter((book) => {
+          return book.title.toLowerCase().includes(action.payload)
+        })
+      } */
+      if (action.payload.length === 0) {
+        return state
+      } else {
+        state.items = state.items.filter((book) => {
+          return book.title.toLowerCase().includes(action.payload.toLowerCase())
+        })
+      }
     },
     sortBookByTitle(state) {
       state.items = state.items.slice().sort((a, b) => {

@@ -1,4 +1,5 @@
-import { List, ListItem, ListItemButton } from "@mui/material"
+/* eslint-disable prettier/prettier */
+import { Button, List, ListItem, ListItemButton } from "@mui/material"
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
@@ -25,7 +26,17 @@ export const Login = () => {
   return (
     <List sx={{ textDecoration: "none" }}>
       <ListItem disablePadding>
-        <ListItemButton onClick={() => login()}>Login</ListItemButton>
+        <Button
+          onClick={() => login()}
+          sx={{
+            color: "#323232",
+            fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"],
+            fontWeight: "400",
+            fontSize: "1rem"
+          }}
+        >
+          Login
+        </Button>
       </ListItem>
     </List>
   )

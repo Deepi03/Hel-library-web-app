@@ -30,7 +30,9 @@ import { Login } from "@mui/icons-material"
 export const Books = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const { items: books } = useSelector((state: RootState) => state.book)
+  const { items: books, filteredBooks } = useSelector(
+    (state: RootState) => state.book
+  )
   const { items: authors } = useSelector((state: RootState) => state.author)
 
   const isAdmin = useAdmin()
