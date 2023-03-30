@@ -1,5 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Box, Container, IconButton, Modal, Typography } from "@mui/material"
+import {
+  Avatar,
+  Box,
+  Container,
+  IconButton,
+  Modal,
+  Typography
+} from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import UpdateIcon from "@mui/icons-material/Update"
 import ReadMoreIcon from "@mui/icons-material/ReadMore"
@@ -69,6 +76,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
       <table id="books">
         <thead>
           <tr>
+            <th>Picture</th>
             <th onClick={() => handleSort()}>
               Name <SortIcon />
             </th>
@@ -81,6 +89,13 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
         <tbody>
           {authors.map((author) => (
             <tr key={author.id}>
+              <td>
+                <Avatar
+                  src={author.image}
+                  variant="round"
+                  sx={{ width: 70, height: 70 }}
+                />
+              </td>
               <td>{author.name}</td>
               <td>
                 {books.map((book) => {
@@ -125,6 +140,8 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
           ))}
         </tbody>
       </table>
+
+      {/* Modal container */}
       <Container>
         <Modal
           open={open}

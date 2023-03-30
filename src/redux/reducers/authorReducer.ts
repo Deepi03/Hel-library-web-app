@@ -22,7 +22,7 @@ const authorSlice = createSlice({
       })
     },
     updateAuthor(state, action) {
-      const { id, name, info } = action.payload
+      const { id, name, info, image } = action.payload
       return {
         ...state,
         items: [...state.items].map((author) => {
@@ -35,7 +35,8 @@ const authorSlice = createSlice({
           return {
             ...author,
             name: name,
-            info: info
+            info: info,
+            image: image
           }
         })
       }

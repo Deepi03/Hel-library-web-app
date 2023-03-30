@@ -69,8 +69,7 @@ export const GenreCards = ({ genres }: { genres: Genre[] }) => {
                     // 16:9
                     pt: "20"
                   }}
-                  image="https://source.unsplash.com/random"
-                  alt="Genre cover"
+                  image={genre.cover}
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Typography
@@ -98,8 +97,12 @@ export const GenreCards = ({ genres }: { genres: Genre[] }) => {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" onClick={() => handleOpen(genre.id)}>
-                    View
+                  <Button
+                    size="large"
+                    onClick={() => handleOpen(genre.id)}
+                    sx={{ mr: "2rem" }}
+                  >
+                    View Books
                   </Button>
                   {/* <Button size="small">Edit</Button> */}
                 </CardActions>
@@ -108,6 +111,8 @@ export const GenreCards = ({ genres }: { genres: Genre[] }) => {
           ))}
         </Grid>
       </Container>
+
+      {/* Modal container */}
       <Container>
         <Modal
           open={open}

@@ -22,11 +22,13 @@ export type Author = {
   id: string
   name: string
   info: string
+  image: string
 }
 export type Genre = {
   id: string
   name: string
   description: string
+  cover: string
 }
 
 export type GenreState = {
