@@ -25,7 +25,6 @@ export const SingleBook = () => {
   )
   const { items: authors } = useSelector((state: RootState) => state.author)
 
-  console.log("single book", authors.length)
   const handleBorrowBook = (book: Book) => {
     dispatch(
       borrowBook({ book, bDateString, rDateString, unique_id, userEmail })

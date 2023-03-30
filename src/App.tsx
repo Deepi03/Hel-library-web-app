@@ -21,7 +21,7 @@ import { useDispatch } from "react-redux"
 import { fetchBooks } from "./redux/middlewares/fetchBooks"
 import { useAdmin } from "./hook/useAdmin"
 import { fetchAuthors } from "./redux/middlewares/fetchAuthors"
-import { Footer } from "./footer/Footer"
+import { Footer } from "./components/footer/Footer"
 import { fetchGenres } from "./redux/middlewares/fetchGenres"
 
 function App() {
@@ -81,6 +81,7 @@ function App() {
             element={isAdmin ? <UpdateAuthor /> : <Navigate to="/" />}
           />
         </Routes>
+        <Footer></Footer>
       </BrowserRouter>
     </div>
   )
