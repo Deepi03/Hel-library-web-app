@@ -30,9 +30,6 @@ const genreSlice = createSlice({
       const genres: Genre[] = state.items.filter((genre) =>
         genre.name.toLowerCase().includes(action.payload.toLowerCase())
       )
-      console.log(action.payload.length)
-      console.log(genres)
-
       return {
         ...state,
         filteredGenres: action.payload.length > 0 ? genres : [...state.items]

@@ -6,6 +6,7 @@ import { AppDispatch } from "../../redux/store"
 import { useEffect, useState } from "react"
 import { searchByBookTitle } from "../../redux/reducers/booksReducer"
 import { searchByGenre } from "../../redux/reducers/genresReducer"
+import { searchByAuthorName } from "../../redux/reducers/authorReducer"
 
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState("")
@@ -13,6 +14,7 @@ export const Search = () => {
   useEffect(() => {
     dispatch(searchByBookTitle(searchTerm))
     dispatch(searchByGenre(searchTerm))
+    dispatch(searchByAuthorName(searchTerm))
   }, [searchTerm])
   return (
     <div>

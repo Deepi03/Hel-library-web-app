@@ -18,7 +18,6 @@ import {
 } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Book } from "../../types_variables/types"
-import { Search } from "../search/Search"
 import "./Books.css"
 import {
   bDateString,
@@ -30,9 +29,6 @@ import { Login } from "../login/Login"
 export const BooksTable = ({ books }: { books: Book[] }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  /* const { items: books, filteredBooks } = useSelector(
-    (state: RootState) => state.book
-  ) */
   const { items: authors } = useSelector((state: RootState) => state.author)
 
   const isAdmin = useAdmin()

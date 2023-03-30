@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
-import { v4 as uuid } from "uuid"
 
 import { Author, AuthorState } from "../../types_variables/types"
 import { fetchAuthors } from "../middlewares/fetchAuthors"
 
 const initialState: AuthorState = {
   items: [],
+  filteredAuthors: [],
   isLoading: false,
   error: ""
 }
@@ -54,9 +54,14 @@ const authorSlice = createSlice({
       })
     },
     searchByAuthorName(state, action) {
-      state.items = state.items.filter((author) => {
+      const authors = state.items.filter((author) => {
         return author.name.toLowerCase().includes(action.payload)
       })
+
+      return {
+        ...state,
+        filteredAuthors: action.payload.length > 0 ? authors : [...state.items]
+      }
     },
     deleteAuthor(state, action) {
       state.items = state.items.filter((author) => {
@@ -82,5 +87,10 @@ const authorSlice = createSlice({
 })
 
 export const authorReducer = authorSlice.reducer
-export const { addAuthor, updateAuthor, deleteAuthor, sortAuthorByName } =
-  authorSlice.actions
+export const {
+  addAuthor,
+  updateAuthor,
+  deleteAuthor,
+  sortAuthorByName,
+  searchByAuthorName
+} = authorSlice.actions

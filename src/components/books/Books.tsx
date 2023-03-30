@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 
 import { useSelector } from "react-redux"
-
 import { RootState } from "../../redux/store"
 import { BooksTable } from "./BooksTable"
 
@@ -12,7 +11,6 @@ export const Books = () => {
 
   return (
     <div className="books-table">
-      {/* <Search></Search> */}
       {filteredBooks.length > 0 ? (
         <BooksTable books={filteredBooks} />
       ) : (

@@ -38,6 +38,7 @@ export type GenreState = {
 
 export type AuthorState = {
   items: Author[]
+  filteredAuthors: Author[]
   isLoading: boolean
   error: string | undefined
 }
