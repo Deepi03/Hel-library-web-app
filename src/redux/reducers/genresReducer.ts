@@ -5,6 +5,7 @@ import { fetchGenres } from "../middlewares/fetchGenres"
 
 const initialState: GenreState = {
   items: [],
+  filteredGenres: [],
   isLoading: false,
   error: ""
 }
@@ -24,6 +25,18 @@ const genreSlice = createSlice({
         }
         return 0
       })
+    },
+    searchByGenre(state, action) {
+      const genres: Genre[] = state.items.filter((genre) =>
+        genre.name.toLowerCase().includes(action.payload.toLowerCase())
+      )
+      console.log(action.payload.length)
+      console.log(genres)
+
+      return {
+        ...state,
+        filteredGenres: action.payload.length > 0 ? genres : [...state.items]
+      }
     }
   },
   extraReducers: (builder) => {
@@ -41,4 +54,4 @@ const genreSlice = createSlice({
 })
 
 export const genreReducer = genreSlice.reducer
-export const { sortGenreByName } = genreSlice.actions
+export const { sortGenreByName, searchByGenre } = genreSlice.actions

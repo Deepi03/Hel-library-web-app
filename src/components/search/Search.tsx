@@ -5,12 +5,14 @@ import SearchIcon from "@mui/icons-material/Search"
 import { AppDispatch } from "../../redux/store"
 import { useEffect, useState } from "react"
 import { searchByBookTitle } from "../../redux/reducers/booksReducer"
+import { searchByGenre } from "../../redux/reducers/genresReducer"
 
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState("")
   const dispatch = useDispatch<AppDispatch>()
   useEffect(() => {
     dispatch(searchByBookTitle(searchTerm))
+    dispatch(searchByGenre(searchTerm))
   }, [searchTerm])
   return (
     <div>

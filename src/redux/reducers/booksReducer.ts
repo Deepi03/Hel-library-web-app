@@ -113,19 +113,13 @@ const bookSlice = createSlice({
       }
     },
     searchByBookTitle(state, action) {
-      /*  if (action.payload.length < 0) {
-        return {...state, ...state.items}
-      } else {
-        state.items = state.items.filter((book) => {
-          return book.title.toLowerCase().includes(action.payload)
-        })
-      } */
-      if (action.payload.length === 0) {
-        return state
-      } else {
-        state.items = state.items.filter((book) => {
-          return book.title.toLowerCase().includes(action.payload.toLowerCase())
-        })
+      const booksFiltered = state.items.filter((item) =>
+        item.title.toLowerCase().includes(action.payload.toLowerCase())
+      )
+      return {
+        ...state,
+        filteredBooks:
+          action.payload.length > 0 ? booksFiltered : [...state.items]
       }
     },
     sortBookByTitle(state) {

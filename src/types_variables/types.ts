@@ -31,6 +31,7 @@ export type Genre = {
 
 export type GenreState = {
   items: Genre[]
+  filteredGenres: Genre[]
   isLoading: boolean
   error: string | undefined
 }

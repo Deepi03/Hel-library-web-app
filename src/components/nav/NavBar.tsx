@@ -21,6 +21,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu"
 import { BookRounded } from "@mui/icons-material"
 import { useState } from "react"
+import { Search } from "../search/Search"
 
 export const NavBar = () => {
   const navigate = useNavigate()
@@ -176,6 +177,7 @@ export const NavBar = () => {
               </Button>
             ))}
           </Box>
+          <Search></Search>
           {/* Nav bar login or avatar placer holder */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
