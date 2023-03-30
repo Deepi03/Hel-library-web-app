@@ -58,7 +58,7 @@ export const NavBar = () => {
   }
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#DDD0C8" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#DDD0C8", p: "1rem" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <BookRounded
@@ -136,13 +136,14 @@ export const NavBar = () => {
               ))}
             </Menu>
           </Box>
+          {/* Mobile - view */}
           <BookRounded
             sx={{
               display: { xs: "flex", md: "none" },
               mr: 1,
               fontSize: "3rem",
               position: "absolute",
-              left: "42%",
+              left: "20%",
               color: "#323232"
             }}
             href=""
@@ -177,7 +178,10 @@ export const NavBar = () => {
               </Button>
             ))}
           </Box>
-          <Search></Search>
+          <Box sx={{ marginTop: "-4rem", marginRight: "1rem" }}>
+            <Search></Search>
+          </Box>
+
           {/* Nav bar login or avatar placer holder */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
