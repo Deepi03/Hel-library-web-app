@@ -12,6 +12,7 @@ export type Book = {
   returnDate: null | string
   cover: string
   userMail: string
+  genreId: string
 }
 
 export type PartialBook = Partial<Book>
@@ -22,6 +23,17 @@ export type Author = {
   name: string
   info: string
 }
+export type Genre = {
+  id: string
+  name: string
+  description: string
+}
+
+export type GenreState = {
+  items: Genre[]
+  isLoading: boolean
+  error: string | undefined
+}
 
 export type AuthorState = {
   items: Author[]
@@ -31,7 +43,7 @@ export type AuthorState = {
 
 export type BookState = {
   items: Book[]
-  singleBook: Book | undefined
+  filteredBooks: Book[]
   isLoading: boolean
   error: string | undefined
   isBorrowed: boolean

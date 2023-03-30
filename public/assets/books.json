@@ -11,7 +11,8 @@
     "publishedDate": "9/29/2008",
     "borrowDate": null,
     "returnDate": null,
-    "cover": "https://fastly.picsum.photos/id/401/200/300.jpg?hmac=he-7UMMRVf8kPoCBJEkzRVnGbaQDdCwMS8APgacLgBI"
+    "cover": "https://fastly.picsum.photos/id/401/200/300.jpg?hmac=he-7UMMRVf8kPoCBJEkzRVnGbaQDdCwMS8APgacLgBI",
+    "genreId": "09"
   },
   {
     "id": "2",
@@ -25,7 +26,8 @@
     "publishedDate": "7/18/1960",
     "borrowDate": null,
     "returnDate": null,
-    "cover": "https://fastly.picsum.photos/id/571/200/300.jpg?hmac=M2JAmSQct67FkQUX0_IWCUClgxf45dexs4oYKhpFDLA"
+    "cover": "https://fastly.picsum.photos/id/571/200/300.jpg?hmac=M2JAmSQct67FkQUX0_IWCUClgxf45dexs4oYKhpFDLA",
+    "genreId": "12"
   },
   {
     "id": "3",
@@ -39,7 +41,8 @@
     "publishedDate": "9/6/2017",
     "borrowDate": null,
     "returnDate": null,
-    "cover": "https://fastly.picsum.photos/id/985/200/300.jpg?hmac=lb8fpWYv02mksKzlZbeEoz95iCF79_svqRJetHcEvnQ"
+    "cover": "https://fastly.picsum.photos/id/985/200/300.jpg?hmac=lb8fpWYv02mksKzlZbeEoz95iCF79_svqRJetHcEvnQ",
+    "genreId": "14"
   },
   {
     "id": "4",
@@ -53,7 +56,8 @@
     "publishedDate": "6/8/1966",
     "borrowDate": null,
     "returnDate": null,
-    "cover": "https://fastly.picsum.photos/id/726/200/300.jpg?hmac=9WbqvM6W7D0BwVEyvVbC2xL9ulSQpXyoTcL3O89modM"
+    "cover": "https://fastly.picsum.photos/id/726/200/300.jpg?hmac=9WbqvM6W7D0BwVEyvVbC2xL9ulSQpXyoTcL3O89modM",
+    "genreId": "10"
   },
   {
     "id": "5",
@@ -67,6 +71,22 @@
     "publishedDate": "2/9/1959",
     "borrowDate": null,
     "returnDate": null,
-    "cover": "https://fastly.picsum.photos/id/726/200/300.jpg?hmac=9WbqvM6W7D0BwVEyvVbC2xL9ulSQpXyoTcL3O89modM"
+    "cover": "https://fastly.picsum.photos/id/726/200/300.jpg?hmac=9WbqvM6W7D0BwVEyvVbC2xL9ulSQpXyoTcL3O89modM",
+    "genreId": "20"
+  },
+  {
+    "id": "99",
+    "isbn": "903663567-7",
+    "title": "Little women",
+    "description": "The Adventures of Sherlock Holmes is a collection of twelve short stories by Arthur Conan Doyle, first published on 14 October 1892. It contains the earliest short stories featuring the consulting detective Sherlock Holmes, which had been published in twelve monthly issues of The Strand Magazine from July 1891 to June 1892. The stories are collected in the same sequence, which is not supported by any fictional chronology. The only characters common to all twelve are Holmes and Dr. Watson and all are related in first-person narrative from Watson's point of view.",
+    "publisher": "Robinson",
+    "authorId": "199",
+    "status": true,
+    "borrowId": "",
+    "publishedDate": "2/9/1959",
+    "borrowDate": null,
+    "returnDate": null,
+    "cover": "https://fastly.picsum.photos/id/726/200/300.jpg?hmac=9WbqvM6W7D0BwVEyvVbC2xL9ulSQpXyoTcL3O89modM",
+    "genreId": "13"
   }
 ]

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "13",
+    "name": "fantasy",
+    "description": "Fantasy encompasses a huge part of the book world. It’s one of the most popular book genres out there—a personal favorite of mine to read and write."
+  },
+  {
+    "id": "12",
+    "name": "children fantasy",
+    "description": " Children Fantasy encompasses a huge part of the book world. It’s one of the most popular book genres out there—a personal favorite of mine to read and write."
+  },
+  {
+    "id": "14",
+    "name": "sci-fiction",
+    "description": "Sci-fi encompasses a huge part of the book world. It’s one of the most popular book genres out there—a personal favorite of mine to read and write."
+  },
+  {
+    "id": "09",
+    "name": "thriller",
+    "description": "Thriller encompasses a huge part of the book world. It’s one of the most popular book genres out there—a personal favorite of mine to read and write."
+  },
+  {
+    "id": "10",
+    "name": "historic",
+    "description": "Historic encompasses a huge part of the book world. It’s one of the most popular book genres out there—a personal favorite of mine to read and write."
+  },
+  {
+    "id": "20",
+    "name": "generic",
+    "description": "Generic encompasses a huge part of the book world. It’s one of the most popular book genres out there—a personal favorite of mine to read and write."
+  }
+]

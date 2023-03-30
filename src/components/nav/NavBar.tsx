@@ -37,7 +37,7 @@ export const NavBar = () => {
   })
 
   const handleLogout = () => {
-    navigate("/books")
+    navigate("/")
     dispatch(logout())
   }
 
@@ -176,7 +176,7 @@ export const NavBar = () => {
               </Button>
             ))}
           </Box>
-
+          {/* Nav bar login or avatar placer holder */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               {user ? (
@@ -199,6 +199,7 @@ export const NavBar = () => {
                 </IconButton>
               )}
             </Tooltip>
+            {/* Drop down menu if authenticated user can see profile and logout */}
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"

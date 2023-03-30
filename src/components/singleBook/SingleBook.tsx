@@ -11,12 +11,11 @@ import {
   rDateString,
   unique_id
 } from "../../types_variables/constants"
-import { Book } from "../../types_variables/types"
+import { Author, Book } from "../../types_variables/types"
 import "./SingleBook.css"
 
 export const SingleBook = () => {
   const { bookId } = useParams()
-  const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
   const { isLoggedIn, item } = useSelector((state: RootState) => state.user)
   const userEmail = item?.email
@@ -24,8 +23,9 @@ export const SingleBook = () => {
   const singleBook = useSelector((state: RootState) =>
     state.book.items.find((book) => book.id === bookId)
   )
+  const { items: authors } = useSelector((state: RootState) => state.author)
 
-  console.log("single book", singleBook)
+  console.log("single book", authors.length)
   const handleBorrowBook = (book: Book) => {
     dispatch(
       borrowBook({ book, bDateString, rDateString, unique_id, userEmail })
@@ -54,7 +54,12 @@ export const SingleBook = () => {
             <div className="title-author">
               <h1>
                 {singleBook.title} <small className="by">by</small>{" "}
-                <small className="author">{singleBook.authors.name}</small>
+                <small className="author">
+                  {
+                    authors.find((author) => author.id === singleBook.authorId)
+                      ?.name
+                  }
+                </small>
               </h1>
             </div>
             <div className="publisher">

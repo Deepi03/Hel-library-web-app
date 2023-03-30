@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Box, IconButton, Modal, Typography } from "@mui/material"
+import { Box, Container, IconButton, Modal, Typography } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import UpdateIcon from "@mui/icons-material/Update"
 import ReadMoreIcon from "@mui/icons-material/ReadMore"
@@ -71,7 +71,7 @@ export const Authors = () => {
         <thead>
           <tr>
             <th onClick={() => handleSort()}>
-              Title <SortIcon />
+              Name <SortIcon />
             </th>
             <th>Books</th>
             <th>Info</th>
@@ -85,7 +85,10 @@ export const Authors = () => {
               <td>{author.name}</td>
               <td>
                 {books.map((book) => {
-                  if (book.authorId === author.id) return <li>{book.title}</li>
+                  console.log(book.authorId, author.id)
+                  if (book.authorId === author.id) {
+                    return <li key={book.id}>{book.title}</li>
+                  }
                 })}
               </td>
               <td>
@@ -123,22 +126,23 @@ export const Authors = () => {
           ))}
         </tbody>
       </table>
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Author Info
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {info}
-          </Typography>
-        </Box>
-      </Modal>
+      <Container>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Author Info
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              {info}
+            </Typography>
+          </Box>
+        </Modal>
+      </Container>
     </Box>
   )
 }

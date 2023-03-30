@@ -22,6 +22,7 @@ import { fetchBooks } from "./redux/middlewares/fetchBooks"
 import { useAdmin } from "./hook/useAdmin"
 import { fetchAuthors } from "./redux/middlewares/fetchAuthors"
 import { Footer } from "./footer/Footer"
+import { fetchGenres } from "./redux/middlewares/fetchGenres"
 
 function App() {
   const { isLoggedIn } = useSelector((state: RootState) => {
@@ -35,6 +36,9 @@ function App() {
   }, [])
   useEffect(() => {
     dispatch(fetchAuthors())
+  }, [])
+  useEffect(() => {
+    dispatch(fetchGenres())
   }, [])
 
   return (

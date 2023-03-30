@@ -3,6 +3,8 @@ import {
   Box,
   Button,
   Card,
+  FormControl,
+  InputLabel,
   MenuItem,
   Select,
   TextField,
@@ -21,6 +23,7 @@ export const AddBook = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [book, setBook] = useState<PartialBook>(initialBookstate)
   const { items: authors } = useSelector((state: RootState) => state.author)
+  const { items: genres } = useSelector((state: RootState) => state.genre)
   const handleSubmit = () => {
     book.id = unique_id
     dispatch(addBook(book))
@@ -68,30 +71,64 @@ export const AddBook = () => {
               onChange={(e) => setBook({ ...book, title: e.target.value })}
             />
           </Box>
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              <InputLabel id="authors-label">Author</InputLabel>
+              <Box mb={2}>
+                <Select
+                  labelId="authors-label"
+                  id="authors-select"
+                  value={book.authorId}
+                  label="author"
+                  onChange={(e) => {
+                    setBook({ ...book, authorId: e.target.value })
+                  }}
+                  sx={{
+                    pb: 0.15,
+                    pl: 10,
+                    width: "100%",
+                    color: "#323232",
+                    textAlign: "center",
+                    fontWeight: "300"
+                  }}
+                >
+                  {authors.map((author) => (
+                    <MenuItem value={author.id} key={author.id}>
+                      {author.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </Box>
+            </FormControl>
+          </Box>
+
           <Box mb={2}>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={book.authorId}
-              label="author"
-              onChange={(e) => {
-                setBook({ ...book, authorId: e.target.value })
-              }}
-              sx={{
-                pb: 0.15,
-                pl: 10,
-                width: "100%",
-                color: "#323232",
-                textAlign: "center",
-                fontWeight: "300"
-              }}
-            >
-              {authors.map((author) => (
-                <MenuItem value={author.id} key={author.id}>
-                  {author.name}
-                </MenuItem>
-              ))}
-            </Select>
+            <FormControl fullWidth>
+              <InputLabel id="genres-label">Genre</InputLabel>
+              <Select
+                labelId="genres-label"
+                id="genres-select"
+                value={book.genreId}
+                label="Genre"
+                onChange={(e) => {
+                  setBook({ ...book, genreId: e.target.value })
+                }}
+                sx={{
+                  pb: 0.15,
+                  pl: 10,
+                  width: "100%",
+                  color: "#323232",
+                  textAlign: "center",
+                  fontWeight: "300"
+                }}
+              >
+                {genres.map((genre) => (
+                  <MenuItem value={genre.id} key={genre.id}>
+                    {genre.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Box>
           <Box mb={2}>
             <TextField

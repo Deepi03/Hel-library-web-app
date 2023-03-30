@@ -6,7 +6,7 @@ import { fetchBooks } from "../middlewares/fetchBooks"
 
 const initialState: BookState = {
   items: [],
-  singleBook: undefined,
+  filteredBooks: [],
   isLoading: false,
   error: undefined,
   isBorrowed: false
@@ -18,19 +18,22 @@ const bookSlice = createSlice({
   reducers: {
     addBook(state, action) {
       const book: Book = action.payload
-      console.log("book before pushing", book.title, book.authorId)
       state.items = [book, ...state.items]
-      console.log(
-        "book after pushing",
-        state.items.map((b) => b.authorId)
-      )
       toast.success("Book Added", {
         position: "bottom-right"
       })
     },
     updateBook(state, action) {
-      const { id, isbn, title, cover, description, publisher, authorId } =
-        action.payload
+      const {
+        id,
+        isbn,
+        title,
+        cover,
+        description,
+        publisher,
+        authorId,
+        genreId
+      } = action.payload
 
       const stateWithUpdatedBook = {
         ...state,
@@ -45,7 +48,8 @@ const bookSlice = createSlice({
             cover: cover,
             description: description,
             publisher: publisher,
-            authorId: authorId
+            authorId: authorId,
+            genreId: genreId
           }
           toast.info("Book Updated", {
             position: "bottom-right"
@@ -126,6 +130,14 @@ const bookSlice = createSlice({
         return 0
       })
     },
+    filterBooksByGenre(state, action) {
+      const genreId = action.payload
+      console.log(genreId)
+      state.filteredBooks = state.items.filter(
+        (item) => item.genreId === genreId
+      )
+      console.log("filterbygenre", state.filteredBooks)
+    },
     deleteBook(state, action) {
       state.items = state.items.filter((book) => {
         return book.id !== action.payload.id
@@ -160,5 +172,6 @@ export const {
   returnBook,
   deleteBook,
   singleBookFilter,
-  sortBookByTitle
+  sortBookByTitle,
+  filterBooksByGenre
 } = bookSlice.actions

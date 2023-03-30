@@ -1,9 +1,9 @@
-import { useSelector } from "react-redux"
-
-import { RootState } from "../../redux/store"
-import { Profile } from "../profile/Profile"
+import { Genres } from "../genres/Genres"
 
 export const Home = () => {
-  /*  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn) */
-  return <div>Home</div>
+  return (
+    <div>
+      <Genres></Genres>
+    </div>
+  )
 }

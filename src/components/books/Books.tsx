@@ -25,6 +25,7 @@ import {
   rDateString,
   unique_id
 } from "../../types_variables/constants"
+import { Login } from "@mui/icons-material"
 
 export const Books = () => {
   const navigate = useNavigate()
@@ -117,7 +118,9 @@ export const Books = () => {
                 </td>
               ) : (
                 <td>
-                  <span>Login to Borrow</span>
+                  <span>
+                    <Login></Login>
+                  </span>
                 </td>
               )}
               <td>

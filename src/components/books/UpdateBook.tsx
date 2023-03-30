@@ -2,6 +2,8 @@ import {
   Box,
   Button,
   Card,
+  FormControl,
+  InputLabel,
   MenuItem,
   Select,
   TextField,
@@ -21,6 +23,7 @@ export const UpdateBook = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { items: books } = useSelector((state: RootState) => state.book)
   const { items: authors } = useSelector((state: RootState) => state.author)
+  const { items: genres } = useSelector((state: RootState) => state.genre)
   const { bookId } = useParams()
   const [uBook, setUBook] = useState<PartialBook>(initialBookstate)
   const book = books.find((bo) => bookId === bo.id)
@@ -96,6 +99,34 @@ export const UpdateBook = () => {
             </Select>
           </Box>
           <Box mb={2}>
+            <FormControl fullWidth>
+              <InputLabel id="genres-label">Genre</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={book?.genreId}
+                label="author"
+                onChange={(e) => {
+                  setUBook({ ...book, genreId: e.target.value })
+                }}
+                sx={{
+                  pb: 0.15,
+                  pl: 10,
+                  width: "100%",
+                  color: "#323232",
+                  textAlign: "center",
+                  fontWeight: "300"
+                }}
+              >
+                {genres.map((genre) => (
+                  <MenuItem value={genre.id} key={genre.id}>
+                    {genre.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box mb={2}>
             <TextField
               variant="outlined"
               placeholder="publisher"
@@ -106,7 +137,7 @@ export const UpdateBook = () => {
               required
               defaultValue={book?.publisher}
               onChange={(e) =>
-                console.log({
+                setUBook({
                   ...book,
                   publisher: e.target.value
                 })

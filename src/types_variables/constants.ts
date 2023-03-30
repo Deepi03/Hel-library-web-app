@@ -1,5 +1,6 @@
 import { v4 as uuid } from "uuid"
 import { makeStyles } from "@mui/styles"
+import { Book } from "./types"
 
 export const googleUserInitialState = {
   email: "",
@@ -12,19 +13,21 @@ export const googleUserInitialState = {
   verified_email: ""
 }
 
-export const initialBookstate = {
+export const initialBookstate: Book = {
   id: "",
   isbn: "",
   title: "",
   description: "",
-  authors: {
-    id: "",
-    name: ""
-  },
+  authorId: "",
   publishedDate: "",
   publisher: "",
   status: true,
-  cover: ""
+  cover: "",
+  genreId: "",
+  borrowDate: "",
+  borrowId: "",
+  returnDate: "",
+  userMail: ""
 }
 
 export const initialAuthorState = {
