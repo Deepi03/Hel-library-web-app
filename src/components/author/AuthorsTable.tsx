@@ -13,7 +13,7 @@ import ReadMoreIcon from "@mui/icons-material/ReadMore"
 import SortIcon from "@mui/icons-material/Sort"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAdmin } from "../../hook/useAdmin"
 import {
   deleteAuthor,
@@ -66,99 +66,112 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
   }
 
   return (
-    <Box sx={{ m: "5rem" }}>
-      <h2>Authors</h2>
-      {isAdmin && (
-        <button className="add-btn" onClick={() => handleAddAuthor()}>
-          Add Author
-        </button>
-      )}
-      <table id="books">
-        <thead>
-          <tr>
-            <th>Picture</th>
-            <th onClick={() => handleSort()}>
-              Name <SortIcon />
-            </th>
-            <th>Books</th>
-            <th>Info</th>
-            {isAdmin && <th>Update</th>}
-            {isAdmin && <th>Delete</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {authors.map((author) => (
-            <tr key={author.id}>
-              <td>
-                <Avatar
-                  src={author.image}
-                  variant="round"
-                  sx={{ width: 70, height: 70 }}
-                />
-              </td>
-              <td>{author.name}</td>
-              <td>
-                {books.map((book) => {
-                  console.log(book.authorId, author.id)
-                  if (book.authorId === author.id) {
-                    return <li key={book.id}>{book.title}</li>
-                  }
-                })}
-              </td>
-              <td>
-                <IconButton>
-                  <ReadMoreIcon
-                    sx={{ color: "#323232" }}
-                    onClick={() => handleOpen(author)}
-                  ></ReadMoreIcon>
-                </IconButton>
-              </td>
-              <td>
-                {isAdmin && (
-                  <IconButton
-                    onClick={() => {
-                      handleUpdate(author.id)
-                    }}
-                  >
-                    <UpdateIcon sx={{ color: "#323232" }}></UpdateIcon>
-                  </IconButton>
-                )}
-              </td>
-              {isAdmin && (
+    <div className="books-table">
+      <Box sx={{ m: "5rem" }}>
+        <h2>Authors</h2>
+        {isAdmin && (
+          <button className="add-btn" onClick={() => handleAddAuthor()}>
+            Add Author
+          </button>
+        )}
+        <table id="books">
+          <thead>
+            <tr>
+              <th>Picture</th>
+              <th onClick={() => handleSort()}>
+                Name <SortIcon />
+              </th>
+              <th>Books</th>
+              <th>Info</th>
+              {isAdmin && <th>Update</th>}
+              {isAdmin && <th>Delete</th>}
+            </tr>
+          </thead>
+          <tbody>
+            {authors.map((author) => (
+              <tr key={author.id}>
+                <td>
+                  <Avatar
+                    src={author.image}
+                    variant="round"
+                    sx={{ width: 70, height: 70 }}
+                  />
+                </td>
+                <td>{author.name}</td>
+                <td>
+                  {books.map((book) => {
+                    console.log(book.authorId, author.id)
+                    if (book.authorId === author.id) {
+                      return (
+                        <Link to={`/books/${book.id}`} key={book.id}>
+                          <li
+                            key={book.id}
+                            style={{
+                              color: "#323232"
+                            }}
+                          >
+                            {book.title}
+                          </li>
+                        </Link>
+                      )
+                    }
+                  })}
+                </td>
                 <td>
                   <IconButton>
-                    <DeleteIcon
+                    <ReadMoreIcon
                       sx={{ color: "#323232" }}
-                      onClick={() => {
-                        handleDelete(author)
-                      }}
-                    ></DeleteIcon>
+                      onClick={() => handleOpen(author)}
+                    ></ReadMoreIcon>
                   </IconButton>
                 </td>
-              )}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                <td>
+                  {isAdmin && (
+                    <IconButton
+                      onClick={() => {
+                        handleUpdate(author.id)
+                      }}
+                    >
+                      <UpdateIcon sx={{ color: "#323232" }}></UpdateIcon>
+                    </IconButton>
+                  )}
+                </td>
+                {isAdmin && (
+                  <td>
+                    <IconButton>
+                      <DeleteIcon
+                        sx={{ color: "#323232" }}
+                        onClick={() => {
+                          handleDelete(author)
+                        }}
+                      ></DeleteIcon>
+                    </IconButton>
+                  </td>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-      {/* Modal container */}
-      <Container>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Author Info
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {info}
-            </Typography>
-          </Box>
-        </Modal>
-      </Container>
-    </Box>
+        {/* Modal container */}
+        <Container>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Author Info
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                {info}
+              </Typography>
+            </Box>
+          </Modal>
+        </Container>
+      </Box>
+    </div>
   )
 }
