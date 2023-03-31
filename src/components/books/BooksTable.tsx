@@ -65,7 +65,7 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
           Add Book
         </button>
       )}
-      <h2>Books</h2>
+
       <table id="books">
         <thead>
           <tr>

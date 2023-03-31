@@ -1,13 +1,10 @@
-.books-table{
-  margin-top: 8rem;
-font-family: "Roboto","Helvetica","Arial",sans-serif;
 
-}
 h2{
   text-align: center;
   font-weight: 200;
 }
-#books {
+#authors-table {
+    margin-top: 10rem;
   font-family: "Roboto","Helvetica","Arial",sans-serif;
   border-collapse: collapse;
   margin-left: auto;
@@ -15,15 +12,15 @@ h2{
   width: 80%;
 }
 
- #books td {
+ #authors-table td {
   padding: 1rem;
   font-size: 1.2rem;
   text-align: center;
   font-weight: 200;
 }
 
-#books tr:hover {background-color: #ddd;}
-#books th {
+#authors-table tr:hover {background-color: #ddd;}
+#authors-table th {
   text-align: center;
   background-color: #DDD0C8;
   color: #323232;
@@ -32,9 +29,9 @@ h2{
   font-weight: 200;
 }
 
-.add-btn{
+.add-author-btn{
       position: absolute;
-    top: 8.7rem;
+    top: 10rem;
     right: 14rem;
     padding: 0.6rem;
     background-color: #DDD0C8;

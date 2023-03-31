@@ -14,13 +14,16 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Tab,
+  Tabs,
   Toolbar,
   Tooltip,
   Typography
 } from "@mui/material"
+
 import MenuIcon from "@mui/icons-material/Menu"
 import { BookRounded } from "@mui/icons-material"
-import { useState } from "react"
+import { SyntheticEvent, useState } from "react"
 import { Search } from "../search/Search"
 
 export const NavBar = () => {
@@ -28,11 +31,7 @@ export const NavBar = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
-  const pages = [
-    { to: "/", label: "Home" },
-    { to: "/books", label: "Books" },
-    { to: "/authors", label: "Authors" }
-  ]
+
   const { isLoggedIn, item: user } = useSelector((state: RootState) => {
     return state.user
   })
@@ -57,6 +56,17 @@ export const NavBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
+  const [value, setValue] = useState("/")
+
+  const handleChange = (event: SyntheticEvent, newValue: string) => {
+    setValue(newValue)
+    navigate(newValue)
+  }
+  const pages = [
+    { to: "/", label: "Home" },
+    { to: "/books", label: "Books" },
+    { to: "/authors", label: "Authors" }
+  ]
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "#DDD0C8", p: "1rem" }}>
@@ -150,21 +160,22 @@ export const NavBar = () => {
             href=""
           />
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                href={page.to}
-                key={page.label}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "#323232", display: "block" }}
-              >
-                {page.label}
-              </Button>
-            ))}
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              textColor="secondary"
+              indicatorColor="secondary"
+              aria-label="secondary tabs example"
+            >
+              {pages.map((page) => (
+                <Tab value={page.to} label={page.label} key={page.label} />
+              ))}
+            </Tabs>
           </Box>
+
           <Box sx={{ marginTop: "-4rem", marginRight: "1rem" }}>
             <Search></Search>
           </Box>
-
           {/* Nav bar login or avatar placer holder */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

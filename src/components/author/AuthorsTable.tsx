@@ -21,7 +21,7 @@ import {
 } from "../../redux/reducers/authorReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Author } from "../../types_variables/types"
-import "../books/Books.css"
+import "./AuthorsTable.css"
 
 const style = {
   position: "absolute",
@@ -67,13 +67,12 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
 
   return (
     <Box sx={{ m: "5rem" }}>
-      <h2>Authors</h2>
       {isAdmin && (
-        <button className="add-btn" onClick={() => handleAddAuthor()}>
+        <button className="add-author-btn" onClick={() => handleAddAuthor()}>
           Add Author
         </button>
       )}
-      <table id="books">
+      <table id="authors-table">
         <thead>
           <tr>
             <th>Picture</th>
