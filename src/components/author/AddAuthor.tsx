@@ -62,6 +62,24 @@ export const AddAuthor = () => {
               onChange={(e) => setAuthor({ ...author, info: e.target.value })}
             />
           </Box>
+          <Box mb={2}>
+            <TextField
+              variant="outlined"
+              placeholder="Image"
+              fullWidth
+              autoComplete="Image"
+              autoFocus
+              type="text"
+              required
+              value={author.image}
+              onChange={(e) =>
+                setAuthor({
+                  ...author,
+                  image: e.target.value
+                })
+              }
+            />
+          </Box>
 
           <Button
             type="submit"
