@@ -20,7 +20,7 @@ import {
   sortAuthorByName
 } from "../../redux/reducers/authorReducer"
 import { AppDispatch, RootState } from "../../redux/store"
-import { Author } from "../../types_variables/types"
+import { Author, Book } from "../../types_variables/types"
 import "./AuthorsTable.css"
 
 const style = {
@@ -97,8 +97,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
               </td>
               <td>{author.name}</td>
               <td>
-                {books.map((book) => {
-                  console.log(book.authorId, author.id)
+                {books.map((book: Book) => {
                   if (book.authorId === author.id) {
                     return <li key={book.id}>{book.title}</li>
                   }

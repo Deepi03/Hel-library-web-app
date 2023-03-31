@@ -22,6 +22,18 @@ const bookSlice = createSlice({
       toast.success("Book Added", {
         position: "bottom-right"
       })
+      console.log(
+        "add book title",
+        state.items.map((item) => item.title)
+      )
+      console.log(
+        "add book authorId",
+        state.items.map((item) => item.authorId)
+      )
+      console.log(
+        "add book genreId ",
+        state.items.map((item) => item.genreId)
+      )
     },
     updateBook(state, action) {
       const {
