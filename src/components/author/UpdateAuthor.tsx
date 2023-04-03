@@ -11,23 +11,6 @@ import { PartialAuthor } from "../../types_variables/types"
 import { Box, Button, Card, TextField, Typography } from "@mui/material"
 
 export const UpdateAuthor = () => {
-  /* const useStyles = makeStyles({
-    root: {
-      "& .MuiFilledInput-underline:after": {
-        borderBottomColor: "#323232"
-      },
-      // focused color for input with variant='outlined'
-      "& .MuiOutlinedInput-root": {
-        "&.Mui-focused fieldset": {
-          borderColor: "#323232"
-        }
-      }
-    },
-    typography: {
-      fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"].join(",")
-    }
-  }) */
-  /* const classes = useStyles() */
   const dispatch = useDispatch<AppDispatch>()
   const { items: authors } = useSelector((state: RootState) => state.author)
 
@@ -50,7 +33,6 @@ export const UpdateAuthor = () => {
             color: "#323232",
             fontWeight: "200"
           }}
-          /* className={classes.typography} */
         >
           Update Author
         </Typography>
@@ -66,13 +48,11 @@ export const UpdateAuthor = () => {
               onChange={(e) => {
                 setUAuthor({ ...author, name: e.target.value })
               }}
-              /* className={classes.root} */
             />
           </Box>
           <Box mb={2}>
             <TextField
               variant="outlined"
-              /* className={classes.root} */
               placeholder="info"
               type="text"
               fullWidth

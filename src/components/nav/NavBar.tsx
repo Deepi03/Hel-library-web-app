@@ -36,12 +36,6 @@ export const NavBar = () => {
     return state.user
   })
 
-  const handleLogout = () => {
-    navigate("/")
-    setAnchorElUser(null)
-    dispatch(logout())
-  }
-
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   }
@@ -57,11 +51,20 @@ export const NavBar = () => {
     setAnchorElUser(null)
   }
   const [value, setValue] = useState("/")
+  const handleLogout = () => {
+    console.log("value", value)
+    setAnchorElUser(null)
+    dispatch(logout())
+    setValue("/")
+    navigate("/")
+  }
 
   const handleChange = (event: SyntheticEvent, newValue: string) => {
+    console.log("nav bar", newValue)
     setValue(newValue)
     navigate(newValue)
   }
+
   const pages = [
     { to: "/", label: "Home" },
     { to: "/books", label: "Books" },

@@ -144,6 +144,22 @@ export const UpdateBook = () => {
               }
             />
           </Box>
+          <Box>
+            <TextField
+              type="date"
+              name="publishDate"
+              id="publish-date-edit"
+              variant="outlined"
+              color="secondary"
+              onChange={(e) =>
+                setUBook({ ...book, publishedDate: e.target.value })
+              }
+              defaultValue={book?.publishedDate}
+              fullWidth
+              required
+              sx={{ mb: 4 }}
+            />
+          </Box>
           <Box mb={2}>
             <TextField
               variant="outlined"

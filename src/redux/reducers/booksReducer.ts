@@ -24,7 +24,7 @@ const bookSlice = createSlice({
       })
       console.log(
         "add book title",
-        state.items.map((item) => item.title)
+        state.items.map((item) => item.publishedDate)
       )
       console.log(
         "add book authorId",
@@ -44,7 +44,8 @@ const bookSlice = createSlice({
         description,
         publisher,
         authorId,
-        genreId
+        genreId,
+        publishedDate
       } = action.payload
 
       const stateWithUpdatedBook = {
@@ -61,11 +62,13 @@ const bookSlice = createSlice({
             description: description,
             publisher: publisher,
             authorId: authorId,
-            genreId: genreId
+            genreId: genreId,
+            publishedDate: publishedDate
           }
           toast.info("Book Updated", {
             position: "bottom-right"
           })
+          console.log("book update", bookToBeUpdate)
           return bookToBeUpdate
         })
       }
