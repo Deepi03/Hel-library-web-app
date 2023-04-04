@@ -22,18 +22,6 @@ const bookSlice = createSlice({
       toast.success("Book Added", {
         position: "bottom-right"
       })
-      console.log(
-        "add book title",
-        state.items.map((item) => item.publishedDate)
-      )
-      console.log(
-        "add book authorId",
-        state.items.map((item) => item.authorId)
-      )
-      console.log(
-        "add book genreId ",
-        state.items.map((item) => item.genreId)
-      )
     },
     updateBook(state, action) {
       const {
@@ -68,7 +56,7 @@ const bookSlice = createSlice({
           toast.info("Book Updated", {
             position: "bottom-right"
           })
-          console.log("book update", bookToBeUpdate)
+          console.log("update", bookToBeUpdate)
           return bookToBeUpdate
         })
       }
@@ -131,6 +119,7 @@ const bookSlice = createSlice({
       const booksFiltered = state.items.filter((item) =>
         item.title.toLowerCase().includes(action.payload.toLowerCase())
       )
+
       return {
         ...state,
         filteredBooks:

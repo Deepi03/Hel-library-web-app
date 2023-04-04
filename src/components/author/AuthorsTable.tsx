@@ -106,7 +106,13 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
               <td>
                 <IconButton>
                   <ReadMoreIcon
-                    sx={{ color: "#323232" }}
+                    sx={{
+                      color: "#323232",
+                      "&:hover": {
+                        boxShadow: "none",
+                        color: "#9C28B0"
+                      }
+                    }}
                     onClick={() => handleOpen(author)}
                   ></ReadMoreIcon>
                 </IconButton>
@@ -118,7 +124,15 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
                       handleUpdate(author.id)
                     }}
                   >
-                    <UpdateIcon sx={{ color: "#323232" }}></UpdateIcon>
+                    <UpdateIcon
+                      sx={{
+                        color: "#323232",
+                        "&:hover": {
+                          boxShadow: "none",
+                          color: "#9C28B0"
+                        }
+                      }}
+                    ></UpdateIcon>
                   </IconButton>
                 )}
               </td>
@@ -126,7 +140,13 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
                 <td>
                   <IconButton>
                     <DeleteIcon
-                      sx={{ color: "#323232" }}
+                      sx={{
+                        color: "#323232",
+                        "&:hover": {
+                          boxShadow: "none",
+                          color: "#9C28B0"
+                        }
+                      }}
                       onClick={() => {
                         handleDelete(author)
                       }}

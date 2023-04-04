@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Button, List, ListItem, ListItemButton } from "@mui/material"
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useDispatch } from "react-redux"
 import { fetchUserDetails } from "../../redux/middlewares/googleLogin"
 
@@ -32,7 +32,12 @@ export const Login = () => {
             color: "#323232",
             fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"],
             fontWeight: "400",
-            fontSize: "1rem"
+            fontSize: "1rem",
+            background: "#DDCFC8",
+            "&:hover": {
+              boxShadow: "none",
+              color: "#9C28B0"
+            }
           }}
         >
           Login

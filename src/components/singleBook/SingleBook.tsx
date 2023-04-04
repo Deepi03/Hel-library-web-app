@@ -12,6 +12,7 @@ import {
   unique_id
 } from "../../types_variables/constants"
 import { Author, Book } from "../../types_variables/types"
+import { Login } from "../login/Login"
 import "./SingleBook.css"
 
 export const SingleBook = () => {
@@ -46,7 +47,7 @@ export const SingleBook = () => {
                 Borrow
               </button>
             ) : (
-              <p>Login to Borrow</p>
+              <Login></Login>
             )}
           </aside>
           <div className="second-half">

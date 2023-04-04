@@ -148,7 +148,6 @@ export const UpdateBook = () => {
             <TextField
               type="date"
               name="publishDate"
-              id="publish-date-edit"
               variant="outlined"
               color="secondary"
               onChange={(e) =>

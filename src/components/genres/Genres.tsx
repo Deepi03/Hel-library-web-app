@@ -27,16 +27,18 @@ export const Genres = () => {
           <Typography
             component="h1"
             variant="h2"
-            align="center"
             color="text.primary"
             gutterBottom
+            sx={{ marginLeft: "-2rem", marginRight: "-10rem" }}
           >
-            Hel Library
+            Welcome to Hel Library
           </Typography>
+          <hr />
+          <hr style={{ marginBottom: "2rem" }} />
           {isAdmin ? (
             <Typography
               variant="h5"
-              align="center"
+              sx={{ marginLeft: "-20rem", marginRight: "-20rem" }}
               color="text.secondary"
               paragraph
             >
@@ -51,7 +53,7 @@ export const Genres = () => {
           ) : (
             <Typography
               variant="h5"
-              align="center"
+              sx={{ marginLeft: "-20rem", marginRight: "-20rem" }}
               color="text.secondary"
               paragraph
             >

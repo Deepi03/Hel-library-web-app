@@ -23,6 +23,8 @@ import { useAdmin } from "./hook/useAdmin"
 import { fetchAuthors } from "./redux/middlewares/fetchAuthors"
 import { Footer } from "./components/footer/Footer"
 import { fetchGenres } from "./redux/middlewares/fetchGenres"
+import { Box } from "@mui/material"
+import { Search } from "./components/search/Search"
 
 function App() {
   const { isLoggedIn } = useSelector((state: RootState) => {
@@ -45,6 +47,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <NavBar />
+        <Box sx={{ marginTop: "4rem", marginRight: "1rem" }}>
+          <Search></Search>
+        </Box>
         <ToastContainer />
         <Routes>
           <Route path="" element={<Home />} />

@@ -40,3 +40,7 @@ h2{
     font-weight: 300;
     font-size: 1rem;
 }
+
+td,th{
+   padding: 2px;
+}

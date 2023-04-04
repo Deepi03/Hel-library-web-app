@@ -23,19 +23,21 @@ export const Search = () => {
         p: "2px 4px",
         display: "flex",
         alignItems: "center",
-        width: 400,
+        width: 900,
         mt: "4rem",
         ml: "auto",
-        mr: "auto"
+        mr: "auto",
+        borderRadius: "0.9rem",
+        border: "1px solid #323232"
       }}
     >
       <InputBase
-        sx={{ flex: 1 }}
-        placeholder="Search"
+        sx={{ flex: 1, textAlign: "center" }}
+        placeholder="Search genres,books and authors"
         inputProps={{ "aria-label": "Search" }}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <SearchIcon sx={{ p: "10px" }} />
+      <SearchIcon sx={{ p: "10px", fontSize: "32px" }} />
     </Paper>
   )
 }

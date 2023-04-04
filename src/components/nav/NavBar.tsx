@@ -50,7 +50,14 @@ export const NavBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
-  const [value, setValue] = useState("/")
+  const currentTab = () => {
+    const path = window.location.pathname
+    if (path === "/") return "/"
+    else if (path === "/books") return "/books"
+    else if (path === "/authors") return "/authors"
+  }
+
+  const [value, setValue] = useState(currentTab)
   const handleLogout = () => {
     console.log("value", value)
     setAnchorElUser(null)
@@ -72,7 +79,7 @@ export const NavBar = () => {
   ]
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#DDD0C8", p: "1rem" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#fff;", p: "1rem" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <BookRounded
@@ -100,6 +107,7 @@ export const NavBar = () => {
           >
             Hel Library
           </Typography>
+          {/* Mobile - view */}
           <Box
             sx={{
               flexGrow: 1,
@@ -134,7 +142,7 @@ export const NavBar = () => {
                 display: { xs: "block", md: "none" }
               }}
             >
-              {pages.map((page) => (
+              {/* {pages.map((page) => (
                 <MenuItem key={page.label} onClick={handleCloseNavMenu}>
                   <Button
                     sx={{
@@ -146,11 +154,23 @@ export const NavBar = () => {
                   >
                     {page.label}
                   </Button>
+                  
                 </MenuItem>
-              ))}
+              ))} */}
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                textColor="secondary"
+                indicatorColor="secondary"
+                aria-label="secondary tabs example"
+              >
+                {pages.map((page) => (
+                  <Tab value={page.to} label={page.label} key={page.label} />
+                ))}
+              </Tabs>
             </Menu>
           </Box>
-          {/* Mobile - view */}
+
           <BookRounded
             sx={{
               display: { xs: "flex", md: "none" },
@@ -176,9 +196,6 @@ export const NavBar = () => {
             </Tabs>
           </Box>
 
-          <Box sx={{ marginTop: "-4rem", marginRight: "1rem" }}>
-            <Search></Search>
-          </Box>
           {/* Nav bar login or avatar placer holder */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
