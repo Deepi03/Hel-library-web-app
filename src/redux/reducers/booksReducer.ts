@@ -76,7 +76,7 @@ const bookSlice = createSlice({
     },
     borrowBook(state, action): BookState {
       const { id } = action.payload.book
-      const { bDateString, rDateString, unique_id, userId } = action.payload
+      const { bDateString, rDateString, userId } = action.payload
       return {
         ...state,
         items: [...state.items].map((book) => {

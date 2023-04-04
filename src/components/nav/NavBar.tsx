@@ -50,6 +50,8 @@ export const NavBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
+
+  //when path being called directly
   const currentTab = () => {
     const path = window.location.pathname
     if (path === "/") return "/"
@@ -57,9 +59,14 @@ export const NavBar = () => {
     else if (path === "/authors") return "/authors"
   }
 
+  const pages = [
+    { to: "/", label: "Home" },
+    { to: "/books", label: "Books" },
+    { to: "/authors", label: "Authors" }
+  ]
+
   const [value, setValue] = useState(currentTab)
   const handleLogout = () => {
-    console.log("value", value)
     setAnchorElUser(null)
     dispatch(logout())
     setValue("/")
@@ -67,16 +74,9 @@ export const NavBar = () => {
   }
 
   const handleChange = (event: SyntheticEvent, newValue: string) => {
-    console.log("nav bar", newValue)
     setValue(newValue)
     navigate(newValue)
   }
-
-  const pages = [
-    { to: "/", label: "Home" },
-    { to: "/books", label: "Books" },
-    { to: "/authors", label: "Authors" }
-  ]
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "#fff;", p: "1rem" }}>
@@ -108,68 +108,6 @@ export const NavBar = () => {
             Hel Library
           </Typography>
           {/* Mobile - view */}
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "flex", md: "none" }
-            }}
-          >
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon sx={{ color: "#323232", fontSize: "2.2rem" }} />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left"
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left"
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" }
-              }}
-            >
-              {/* {pages.map((page) => (
-                <MenuItem key={page.label} onClick={handleCloseNavMenu}>
-                  <Button
-                    sx={{
-                      textDecoration: "none",
-                      color: "#323232",
-                      textAlign: "center"
-                    }}
-                    href={page.to}
-                  >
-                    {page.label}
-                  </Button>
-                  
-                </MenuItem>
-              ))} */}
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                textColor="secondary"
-                indicatorColor="secondary"
-                aria-label="secondary tabs example"
-              >
-                {pages.map((page) => (
-                  <Tab value={page.to} label={page.label} key={page.label} />
-                ))}
-              </Tabs>
-            </Menu>
-          </Box>
 
           <BookRounded
             sx={{
@@ -198,64 +136,63 @@ export const NavBar = () => {
 
           {/* Nav bar login or avatar placer holder */}
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              {isLoggedIn ? (
-                <>
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src={user?.picture} />
-                  </IconButton>
-                  <Menu
-                    sx={{ mt: "45px" }}
-                    id="menu-appbar"
-                    anchorEl={anchorElUser}
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "right"
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "right"
-                    }}
-                    open={Boolean(anchorElUser)}
-                    onClose={handleCloseUserMenu}
-                  >
-                    <MenuItem>
-                      <Link
-                        sx={{
-                          color: "#323232",
-                          fontSize: "1rem",
-                          textDecoration: "none"
-                        }}
-                        to={"/"}
-                        onClick={() => handleLogout()}
-                      >
-                        {"Logout"}
-                      </Link>
-                    </MenuItem>
+            {isLoggedIn ? (
+              <>
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src={user?.picture} />
+                </IconButton>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right"
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right"
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem>
+                    <Link
+                      sx={{
+                        color: "#323232",
+                        fontSize: "1rem",
+                        textDecoration: "none"
+                      }}
+                      to={"/"}
+                      onClick={() => handleLogout()}
+                    >
+                      {"Logout"}
+                    </Link>
+                  </MenuItem>
 
-                    <MenuItem>
-                      <Link
-                        sx={{
-                          color: "#323232",
-                          fontSize: "1rem",
-                          textDecoration: "none"
-                        }}
-                        onClick={(e) => {
-                          e.preventDefault()
-                          setAnchorElUser(null)
-                          navigate("profile")
-                        }}
-                      >
-                        Profile
-                      </Link>
-                    </MenuItem>
-                  </Menu>
-                </>
-              ) : (
-                <Login></Login>
-              )}
-            </Tooltip>
+                  <MenuItem>
+                    <Link
+                      sx={{
+                        color: "#323232",
+                        fontSize: "1rem",
+                        textDecoration: "none"
+                      }}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        setAnchorElUser(null)
+                        navigate("profile")
+                        setValue("")
+                      }}
+                    >
+                      Profile
+                    </Link>
+                  </MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <Login></Login>
+            )}
           </Box>
         </Toolbar>
       </Container>

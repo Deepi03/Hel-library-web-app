@@ -25,7 +25,6 @@ import {
   unique_id
 } from "../../types_variables/constants"
 import { Login } from "../login/Login"
-import { Search } from "../search/Search"
 
 export const BooksTable = ({ books }: { books: Book[] }) => {
   const navigate = useNavigate()

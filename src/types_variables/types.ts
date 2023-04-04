@@ -6,12 +6,11 @@ export type Book = {
   description: string
   publisher: string
   status: boolean
-  borrowId: null | string
+  borrowerId: null | string
   publishedDate: string
   borrowDate: null | string
   returnDate: null | string
   cover: string
-  userMail: string
   genreId: string
 }
 
