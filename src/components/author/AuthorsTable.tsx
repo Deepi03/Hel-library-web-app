@@ -129,7 +129,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
                         color: "#323232",
                         "&:hover": {
                           boxShadow: "none",
-                          color: "#9C28B0"
+                          color: "green"
                         }
                       }}
                     ></UpdateIcon>
@@ -144,7 +144,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
                         color: "#323232",
                         "&:hover": {
                           boxShadow: "none",
-                          color: "#9C28B0"
+                          color: "red"
                         }
                       }}
                       onClick={() => {

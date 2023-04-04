@@ -32,7 +32,9 @@ export const Search = () => {
       }}
     >
       <InputBase
-        sx={{ flex: 1, textAlign: "center" }}
+        sx={{
+          flex: 1
+        }}
         placeholder="Search genres,books and authors"
         inputProps={{ "aria-label": "Search" }}
         onChange={(e) => setSearchTerm(e.target.value)}

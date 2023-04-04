@@ -25,6 +25,7 @@ import {
   unique_id
 } from "../../types_variables/constants"
 import { Login } from "../login/Login"
+import { Search } from "../search/Search"
 
 export const BooksTable = ({ books }: { books: Book[] }) => {
   const navigate = useNavigate()
@@ -104,7 +105,13 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
                   {book.status ? (
                     <IconButton onClick={() => handleBorrowBook(book)}>
                       <AutoStoriesIcon
-                        sx={{ color: "#323232" }}
+                        sx={{
+                          color: "#323232",
+                          "&:hover": {
+                            boxShadow: "none",
+                            color: "blue"
+                          }
+                        }}
                       ></AutoStoriesIcon>
                     </IconButton>
                   ) : (
@@ -123,7 +130,13 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
               <td>
                 <IconButton>
                   <ReadMoreIcon
-                    sx={{ color: "#323232" }}
+                    sx={{
+                      color: "#323232",
+                      "&:hover": {
+                        boxShadow: "none",
+                        color: "#9C28B0"
+                      }
+                    }}
                     onClick={() => handleDisplaySingleBook(book)}
                   ></ReadMoreIcon>
                 </IconButton>
@@ -132,7 +145,13 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
                 <td>
                   <IconButton>
                     <UpdateIcon
-                      sx={{ color: "#323232" }}
+                      sx={{
+                        color: "#323232",
+                        "&:hover": {
+                          boxShadow: "none",
+                          color: "green"
+                        }
+                      }}
                       onClick={() => {
                         handleUpdate(book.id)
                       }}
@@ -144,7 +163,13 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
                 <td>
                   <IconButton>
                     <DeleteIcon
-                      sx={{ color: "#323232" }}
+                      sx={{
+                        color: "#323232",
+                        "&:hover": {
+                          boxShadow: "none",
+                          color: "red"
+                        }
+                      }}
                       onClick={() => {
                         handleDelete(book)
                       }}

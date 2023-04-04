@@ -33,7 +33,7 @@ h2{
 }
 
 .add-btn{
-      position: absolute;
+    position: absolute;
     top: 8.7rem;
     right: 14rem;
     padding: 0.6rem;
@@ -42,4 +42,10 @@ h2{
     font-family: "Roboto","Helvetica","Arial",sans-serif;
     font-weight: 300;
     font-size: 1rem;
+    cursor:pointer;
+    
+}
+.add-btn:hover{
+  box-shadow: "none";
+  color : "#9C28B0"
 }

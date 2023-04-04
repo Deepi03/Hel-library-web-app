@@ -100,7 +100,13 @@ export const GenreCards = ({ genres }: { genres: Genre[] }) => {
                   <Button
                     size="large"
                     onClick={() => handleOpen(genre.id)}
-                    sx={{ mr: "2rem", color: "#9C28B0" }}
+                    sx={{
+                      mr: "2rem",
+                      color: "#323232",
+                      backgroundColor: "#DDCFC8",
+                      boxShadow:
+                        "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)"
+                    }}
                   >
                     View Books
                   </Button>
