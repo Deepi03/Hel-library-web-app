@@ -25,9 +25,8 @@ export const initialBookstate: Book = {
   cover: "",
   genreId: "",
   borrowDate: "",
-  borrowId: "",
-  returnDate: "",
-  userMail: ""
+  borrowerId: "",
+  returnDate: ""
 }
 
 export const initialAuthorState = {

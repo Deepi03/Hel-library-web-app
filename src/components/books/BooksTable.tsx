@@ -34,7 +34,7 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
 
   const isAdmin = useAdmin()
   const { isLoggedIn, item } = useSelector((state: RootState) => state.user)
-  const userEmail = item?.email
+  const userId = item?.id
   const handleUpdate = (id: string) => {
     navigate(`/${id}/updateBook`)
   }
@@ -42,9 +42,7 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
     dispatch(deleteBook(book))
   }
   const handleBorrowBook = (book: Book) => {
-    dispatch(
-      borrowBook({ book, bDateString, rDateString, unique_id, userEmail })
-    )
+    dispatch(borrowBook({ book, bDateString, rDateString, unique_id, userId }))
   }
 
   const handleDisplaySingleBook = (book: Book) => {

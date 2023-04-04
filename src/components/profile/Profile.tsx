@@ -15,7 +15,7 @@ export const Profile = () => {
   const isAdmin = useAdmin()
   const dispatch = useDispatch<AppDispatch>()
   const borrowedBooks: Book[] = books.filter(
-    (book) => book.userMail === user?.email
+    (book) => book.borrowerId === user?.id
   )
   const handleReturn = (book: Book) => {
     dispatch(returnBook(book))
@@ -95,7 +95,7 @@ export const Profile = () => {
                   <td>{book.title}</td>
                   <td>{book.borrowDate}</td>
                   <td>{book.returnDate}</td>
-                  <td>{book.userMail}</td>
+                  <td>{user?.email}</td>
                 </tr>
               ))}
             </tbody>

@@ -19,7 +19,7 @@ export const SingleBook = () => {
   const { bookId } = useParams()
   const dispatch = useDispatch<AppDispatch>()
   const { isLoggedIn, item } = useSelector((state: RootState) => state.user)
-  const userEmail = item?.email
+  const userId = item?.id
 
   const singleBook = useSelector((state: RootState) =>
     state.book.items.find((book) => book.id === bookId)
@@ -27,9 +27,7 @@ export const SingleBook = () => {
   const { items: authors } = useSelector((state: RootState) => state.author)
 
   const handleBorrowBook = (book: Book) => {
-    dispatch(
-      borrowBook({ book, bDateString, rDateString, unique_id, userEmail })
-    )
+    dispatch(borrowBook({ book, bDateString, rDateString, unique_id, userId }))
   }
 
   return (
