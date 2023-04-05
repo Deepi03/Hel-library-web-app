@@ -6,7 +6,6 @@ import { fetchAuthors } from "../middlewares/fetchAuthors"
 
 const initialState: AuthorState = {
   items: [],
-  filteredAuthors: [],
   isLoading: false,
   error: ""
 }
@@ -54,16 +53,6 @@ const authorSlice = createSlice({
         return 0
       })
     },
-    searchByAuthorName(state, action) {
-      const authors = state.items.filter((author) => {
-        return author.name.toLowerCase().includes(action.payload)
-      })
-
-      return {
-        ...state,
-        filteredAuthors: action.payload.length > 0 ? authors : [...state.items]
-      }
-    },
     deleteAuthor(state, action) {
       state.items = state.items.filter((author) => {
         return author.id !== action.payload.id
@@ -88,10 +77,5 @@ const authorSlice = createSlice({
 })
 
 export const authorReducer = authorSlice.reducer
-export const {
-  addAuthor,
-  updateAuthor,
-  deleteAuthor,
-  sortAuthorByName,
-  searchByAuthorName
-} = authorSlice.actions
+export const { addAuthor, updateAuthor, deleteAuthor, sortAuthorByName } =
+  authorSlice.actions

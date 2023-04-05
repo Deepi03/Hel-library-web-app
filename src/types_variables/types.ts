@@ -32,14 +32,12 @@ export type Genre = {
 
 export type GenreState = {
   items: Genre[]
-  filteredGenres: Genre[]
   isLoading: boolean
   error: string | undefined
 }
 
 export type AuthorState = {
   items: Author[]
-  filteredAuthors: Author[]
   isLoading: boolean
   error: string | undefined
 }
@@ -47,6 +45,8 @@ export type AuthorState = {
 export type BookState = {
   items: Book[]
   filteredBooks: Book[]
+  filteredGenres: Genre[]
+  filteredAuthors: Author[]
   isLoading: boolean
   error: string | undefined
   isBorrowed: boolean

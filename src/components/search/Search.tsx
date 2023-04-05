@@ -1,21 +1,21 @@
-import { useDispatch } from "react-redux"
-import { InputBase, Paper, styled } from "@mui/material"
+import { useDispatch, useSelector } from "react-redux"
+import { InputBase, Paper } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 
-import { AppDispatch } from "../../redux/store"
+import { AppDispatch, RootState } from "../../redux/store"
 import { useEffect, useState } from "react"
-import { searchByBookTitle } from "../../redux/reducers/booksReducer"
-import { searchByGenre } from "../../redux/reducers/genresReducer"
-import { searchByAuthorName } from "../../redux/reducers/authorReducer"
+import { search } from "../../redux/reducers/booksReducer"
 
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState("")
+  const { author, genre } = useSelector((state: RootState) => state)
+  const authors = author.items
+  const genres = genre.items
   const dispatch = useDispatch<AppDispatch>()
   useEffect(() => {
-    dispatch(searchByBookTitle(searchTerm))
-    dispatch(searchByGenre(searchTerm))
-    dispatch(searchByAuthorName(searchTerm))
+    dispatch(search({ searchTerm, authors, genres }))
   }, [searchTerm])
+
   return (
     <Paper
       component="form"

@@ -1,12 +1,14 @@
 /* eslint-disable prettier/prettier */
 import { createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
-import { Book, BookState } from "../../types_variables/types"
+import { Author, Book, BookState, Genre } from "../../types_variables/types"
 import { fetchBooks } from "../middlewares/fetchBooks"
 
 const initialState: BookState = {
   items: [],
   filteredBooks: [],
+  filteredGenres: [],
+  filteredAuthors: [],
   isLoading: false,
   error: undefined,
   isBorrowed: false
@@ -56,11 +58,9 @@ const bookSlice = createSlice({
           toast.info("Book Updated", {
             position: "bottom-right"
           })
-          console.log("update", bookToBeUpdate)
           return bookToBeUpdate
         })
       }
-      console.log(stateWithUpdatedBook.items.map((b) => b.authorId))
       return stateWithUpdatedBook
     },
 
@@ -116,15 +116,36 @@ const bookSlice = createSlice({
         })
       }
     },
-    searchByBookTitle(state, action) {
+    search(state, action) {
+      const genres: Genre[] = action.payload.genres
+      const authors: Author[] = action.payload.authors
+
+      const genresFiltered: Genre[] = genres.filter((genre) =>
+        genre.name
+          .toLowerCase()
+          .includes(action.payload.searchTerm.toLowerCase())
+      )
       const booksFiltered = state.items.filter((item) =>
-        item.title.toLowerCase().includes(action.payload.toLowerCase())
+        item.title
+          .toLowerCase()
+          .includes(action.payload.searchTerm.toLowerCase())
       )
 
+      const authorsFiltered = authors.filter((author) => {
+        return author.name
+          .toLowerCase()
+          .includes(action.payload.searchTerm.toLowerCase())
+      })
       return {
         ...state,
         filteredBooks:
-          action.payload.length > 0 ? booksFiltered : [...state.items]
+          action.payload.searchTerm.length > 0
+            ? booksFiltered
+            : [...state.items],
+        filteredGenres:
+          action.payload.searchTerm.length > 0 ? genresFiltered : [...genres],
+        filteredAuthors:
+          action.payload.searchTerm.length > 0 ? authorsFiltered : [...authors]
       }
     },
     sortBookByTitle(state) {
@@ -142,11 +163,9 @@ const bookSlice = createSlice({
     },
     filterBooksByGenre(state, action) {
       const genreId = action.payload
-      console.log(genreId)
       state.filteredBooks = state.items.filter(
         (item) => item.genreId === genreId
       )
-      console.log("filterbygenre", state.filteredBooks)
     },
     deleteBook(state, action) {
       state.items = state.items.filter((book) => {
@@ -178,7 +197,7 @@ export const {
   addBook,
   updateBook,
   borrowBook,
-  searchByBookTitle,
+  search,
   returnBook,
   deleteBook,
   singleBookFilter,

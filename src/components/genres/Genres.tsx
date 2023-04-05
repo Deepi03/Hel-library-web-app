@@ -8,9 +8,8 @@ import { RootState } from "../../redux/store"
 import { GenreCards } from "./GenreCards"
 
 export const Genres = () => {
-  const { items: genres, filteredGenres } = useSelector(
-    (state: RootState) => state.genre
-  )
+  const { items: genres } = useSelector((state: RootState) => state.genre)
+  const { filteredGenres } = useSelector((state: RootState) => state.book)
 
   const isAdmin = useAdmin()
 

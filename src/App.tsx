@@ -12,7 +12,7 @@ import { Login } from "./components/login/Login"
 import { NavBar } from "./components/nav/NavBar"
 import { AppDispatch, RootState } from "./redux/store"
 import { SingleBook } from "./components/singleBook/SingleBook"
-import { Authors } from "./components/author/Author"
+import { Authors } from "./components/author/Authors"
 import { AddAuthor } from "./components/author/AddAuthor"
 import { UpdateAuthor } from "./components/author/UpdateAuthor"
 import { Profile } from "./components/profile/Profile"
@@ -47,9 +47,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <NavBar />
-        <Box sx={{ marginTop: "4rem", marginRight: "1rem" }}>
-          <Search></Search>
-        </Box>
+
         <ToastContainer />
         <Routes>
           <Route path="" element={<Home />} />
