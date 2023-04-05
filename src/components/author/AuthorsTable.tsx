@@ -91,7 +91,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
               <td>
                 <Avatar
                   src={author.image}
-                  variant="round"
+                  variant="circular"
                   sx={{ width: 70, height: 70 }}
                 />
               </td>

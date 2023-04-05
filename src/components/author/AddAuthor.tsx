@@ -83,7 +83,7 @@ export const AddAuthor = () => {
 
           <Button
             type="submit"
-            variant="filled"
+            variant="contained"
             color="primary"
             fullWidth
             onClick={() => {

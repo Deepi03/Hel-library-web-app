@@ -179,7 +179,7 @@ export const UpdateBook = () => {
           </Box>
           <Button
             type="submit"
-            variant="filled"
+            variant="contained"
             color="primary"
             fullWidth
             onClick={() => {

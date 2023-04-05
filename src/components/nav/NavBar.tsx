@@ -9,7 +9,6 @@ import {
   AppBar,
   Avatar,
   Box,
-  Button,
   Container,
   IconButton,
   Menu,
@@ -17,14 +16,11 @@ import {
   Tab,
   Tabs,
   Toolbar,
-  Tooltip,
   Typography
 } from "@mui/material"
 
-import MenuIcon from "@mui/icons-material/Menu"
 import { BookRounded } from "@mui/icons-material"
 import { SyntheticEvent, useState } from "react"
-import { Search } from "../search/Search"
 
 export const NavBar = () => {
   const navigate = useNavigate()
@@ -178,7 +174,7 @@ export const NavBar = () => {
                         fontSize: "1rem",
                         textDecoration: "none"
                       }}
-                      onClick={(e) => {
+                      onClick={(e: React.MouseEvent<HTMLElement>) => {
                         e.preventDefault()
                         setAnchorElUser(null)
                         setValue("")
