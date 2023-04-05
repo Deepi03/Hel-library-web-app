@@ -81,9 +81,12 @@ const bookSlice = createSlice({
         ...state,
         items: [...state.items].map((book) => {
           if (book.id !== id) return book
-          toast.info("Book Borrowed", {
-            position: "bottom-right"
-          })
+          if (userId !== undefined) {
+            toast.info("Book Borrowed", {
+              position: "bottom-right"
+            })
+          }
+
           return {
             ...book,
             status: false,

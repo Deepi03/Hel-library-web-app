@@ -1,17 +1,24 @@
 /* eslint-disable prettier/prettier */
-import { Box, Typography } from "@mui/material"
-import { useEffect } from "react"
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography
+} from "@mui/material"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate, useParams } from "react-router-dom"
-import { fetchBooks } from "../../redux/middlewares/fetchBooks"
+import { useParams } from "react-router-dom"
 import { borrowBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import {
+  bDate,
   bDateString,
-  rDateString,
+  rDate,
   unique_id
 } from "../../types_variables/constants"
-import { Author, Book } from "../../types_variables/types"
+import { Book } from "../../types_variables/types"
 import { Login } from "../login/Login"
 import "./SingleBook.css"
 
@@ -26,7 +33,18 @@ export const SingleBook = () => {
   )
   const { items: authors } = useSelector((state: RootState) => state.author)
 
+  const [days, setDays] = useState(30)
+
   const handleBorrowBook = (book: Book) => {
+    console.log("days", days)
+    if (days === 10) {
+      rDate.setDate(bDate.getDate() + 10)
+    } else if (days === 20) {
+      rDate.setDate(bDate.getDate() + 20)
+    } else {
+      rDate.setDate(bDate.getDate() + 30)
+    }
+    const rDateString = rDate.toDateString()
     dispatch(borrowBook({ book, bDateString, rDateString, unique_id, userId }))
   }
 
@@ -37,13 +55,43 @@ export const SingleBook = () => {
           <aside className="cover-borrow">
             <img src={singleBook.cover} alt="book cover" />
             {isLoggedIn ? (
-              <button
-                className="borrow-book-btn"
-                onClick={() => handleBorrowBook(singleBook)}
-                disabled={!singleBook.status}
-              >
-                Borrow
-              </button>
+              <div style={{ display: "flex" }}>
+                <button
+                  className="borrow-book-btn"
+                  onClick={() => handleBorrowBook(singleBook)}
+                  disabled={!singleBook.status}
+                >
+                  Borrow
+                </button>
+                {singleBook.status && (
+                  <Box mb={2} sx={{ mt: "2rem", ml: "2rem" }}>
+                    <FormControl fullWidth>
+                      <InputLabel id="days">No. of days</InputLabel>
+                      <Select
+                        labelId="days"
+                        id="days-select"
+                        value={days}
+                        label="Genre"
+                        onChange={(e) => {
+                          setDays(e.target.value as number)
+                        }}
+                        sx={{
+                          pb: 0.15,
+                          pl: 10,
+                          width: "100%",
+                          color: "#323232",
+                          textAlign: "center",
+                          fontWeight: "300"
+                        }}
+                      >
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                )}
+              </div>
             ) : (
               <Login></Login>
             )}

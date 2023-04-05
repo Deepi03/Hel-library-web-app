@@ -181,8 +181,8 @@ export const NavBar = () => {
                       onClick={(e) => {
                         e.preventDefault()
                         setAnchorElUser(null)
-                        navigate("profile")
                         setValue("")
+                        navigate("profile")
                       }}
                     >
                       Profile

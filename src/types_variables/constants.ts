@@ -42,8 +42,6 @@ export const borrowInitialState = {
 }
 
 export const unique_id = uuid()
-const bDate = new Date()
-const rDate = new Date()
-rDate.setDate(bDate.getDate() + 30)
+export const bDate = new Date()
+export const rDate = new Date()
 export const bDateString = bDate.toDateString()
-export const rDateString = rDate.toDateString()

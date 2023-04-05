@@ -11,9 +11,6 @@ export const fetchUserDetails = createAsyncThunk(
     > | null
   ) => {
     if (user?.access_token) {
-      /* localStorage.setItem("access_token", JSON.stringify(user.access_token)) */
-      /* const token = localStorage.getItem("access_token") */
-      /*  console.log(token) */
       const res = await fetch(
         `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user?.access_token}`,
         {
