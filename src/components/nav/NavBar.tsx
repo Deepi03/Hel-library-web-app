@@ -177,7 +177,6 @@ export const NavBar = () => {
                       onClick={(e: React.MouseEvent<HTMLElement>) => {
                         e.preventDefault()
                         setAnchorElUser(null)
-                        setValue("")
                         navigate("profile")
                       }}
                     >

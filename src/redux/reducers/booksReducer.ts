@@ -171,9 +171,6 @@ const bookSlice = createSlice({
       state.items = state.items.filter((book) => {
         return book.id !== action.payload.id
       })
-      toast.warning("Book Deleted", {
-        position: "bottom-right"
-      })
     }
   },
   extraReducers: (builder) => {
