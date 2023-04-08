@@ -57,6 +57,9 @@ const authorSlice = createSlice({
       state.items = state.items.filter((author) => {
         return author.id !== action.payload.id
       })
+      toast.warning("Author Deleted", {
+        position: "bottom-right"
+      })
     }
   },
   extraReducers: (builder) => {

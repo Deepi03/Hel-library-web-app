@@ -14,7 +14,7 @@ export const Authors = () => {
   return (
     <div>
       <Box sx={{ marginTop: "4rem", marginRight: "1rem" }}>
-        <Search></Search>
+        {/*    <Search></Search> */}
       </Box>
       {filteredAuthors.length > 0 ? (
         <AuthorsTable authors={filteredAuthors} />

@@ -21,6 +21,7 @@ import {
 
 import { BookRounded } from "@mui/icons-material"
 import { SyntheticEvent, useState } from "react"
+import { Search } from "../search/Search"
 
 export const NavBar = () => {
   const navigate = useNavigate()
@@ -128,6 +129,9 @@ export const NavBar = () => {
                 <Tab value={page.to} label={page.label} key={page.label} />
               ))}
             </Tabs>
+          </Box>
+          <Box>
+            <Search></Search>
           </Box>
 
           {/* Nav bar login or avatar placer holder */}

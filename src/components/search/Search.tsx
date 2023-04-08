@@ -20,15 +20,12 @@ export const Search = () => {
     <Paper
       component="form"
       sx={{
-        p: "2px 4px",
         display: "flex",
-        alignItems: "center",
-        width: 900,
-        mt: "4rem",
+        width: 400,
         ml: "auto",
-        mr: "auto",
-        borderRadius: "0.9rem",
-        border: "1px solid #323232"
+        mr: "2rem",
+        borderRadius: "0.5rem",
+        border: "0.5px solid #323232"
       }}
     >
       <InputBase
@@ -39,7 +36,7 @@ export const Search = () => {
         inputProps={{ "aria-label": "Search" }}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <SearchIcon sx={{ p: "10px", fontSize: "32px" }} />
+      <SearchIcon sx={{ p: "10px", fontSize: "20px" }} />
     </Paper>
   )
 }

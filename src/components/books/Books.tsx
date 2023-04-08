@@ -14,7 +14,7 @@ export const Books = () => {
   return (
     <div className="books-table">
       <Box sx={{ marginTop: "4rem", marginRight: "1rem" }}>
-        <Search></Search>
+        {/* <Search></Search> */}
       </Box>
       {filteredBooks.length > 0 ? (
         <BooksTable books={filteredBooks} />
