@@ -9,7 +9,6 @@ import {
   AppBar,
   Avatar,
   Box,
-  Button,
   Container,
   IconButton,
   Menu,
@@ -17,7 +16,6 @@ import {
   Tab,
   Tabs,
   Toolbar,
-  Tooltip,
   Typography
 } from "@mui/material"
 
@@ -132,6 +130,9 @@ export const NavBar = () => {
                 <Tab value={page.to} label={page.label} key={page.label} />
               ))}
             </Tabs>
+          </Box>
+          <Box>
+            <Search></Search>
           </Box>
 
           {/* Nav bar login or avatar placer holder */}

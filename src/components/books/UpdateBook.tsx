@@ -30,6 +30,7 @@ export const UpdateBook = () => {
   const handleSubmit = () => {
     dispatch(updateBook(uBook))
   }
+  console.log("up", window.location.pathname)
 
   return (
     <div>

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { useMatch } from "react-router-dom"
 
 import { AddBook } from "./components/books/AddBook"
 import { Books } from "./components/books/Books"
@@ -23,7 +24,6 @@ import { useAdmin } from "./hook/useAdmin"
 import { fetchAuthors } from "./redux/middlewares/fetchAuthors"
 import { Footer } from "./components/footer/Footer"
 import { fetchGenres } from "./redux/middlewares/fetchGenres"
-import { Box } from "@mui/material"
 import { Search } from "./components/search/Search"
 
 function App() {
@@ -47,7 +47,6 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <NavBar />
-
         <ToastContainer />
         <Routes>
           <Route path="" element={<Home />} />
@@ -70,7 +69,6 @@ function App() {
             path="/addBook"
             element={isAdmin ? <AddBook /> : <Navigate to="/" />}
           />
-          {/* <Route path="/addBook" element={<AddBook />} /> */}
           <Route
             path={":bookId/updateBook/"}
             element={isAdmin ? <UpdateBook /> : <Navigate to="/" />}

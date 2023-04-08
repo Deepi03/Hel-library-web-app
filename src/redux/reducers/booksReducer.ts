@@ -117,6 +117,7 @@ const bookSlice = createSlice({
       }
     },
     search(state, action) {
+      console.log("book reducer search", action.payload)
       const genres: Genre[] = action.payload.genres
       const authors: Author[] = action.payload.authors
 
