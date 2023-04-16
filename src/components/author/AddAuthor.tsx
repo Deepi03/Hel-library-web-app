@@ -2,6 +2,7 @@
 import { Box, Button, Card, TextField, Typography } from "@mui/material"
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 import { addAuthor } from "../../redux/reducers/authorReducer"
 import { AppDispatch } from "../../redux/store"
@@ -11,11 +12,15 @@ import { PartialAuthor } from "../../types_variables/types"
 export const AddAuthor = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [author, setAuthor] = useState<PartialAuthor>(initialAuthorState)
+  const navigate = useNavigate()
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
     author.id = unique_id
     dispatch(addAuthor(author))
+    setTimeout(() => {
+      navigate("/authors")
+    }, 6000)
   }
   return (
     <div>
@@ -71,7 +76,6 @@ export const AddAuthor = () => {
                 fullWidth
                 autoComplete="Image"
                 autoFocus
-                type="text"
                 required
                 value={author.image}
                 onChange={(e) =>

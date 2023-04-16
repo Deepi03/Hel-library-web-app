@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
+import MenuIcon from "@mui/icons-material/Menu"
 
 import { logout } from "../../redux/reducers/userReducer"
 import { AppDispatch, RootState } from "../../redux/store"
@@ -79,6 +80,56 @@ export const NavBar = () => {
     <AppBar position="static" sx={{ backgroundColor: "#fff;", p: "1rem" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" }
+            }}
+          >
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon sx={{ color: "#323232", fontSize: "2.2rem" }} />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left"
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left"
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: "block", md: "none" }
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page.label} onClick={handleCloseNavMenu}>
+                  <Link
+                    sx={{
+                      textDecoration: "none",
+                      color: "#323232",
+                      textAlign: "center"
+                    }}
+                    href={page.to}
+                  >
+                    {page.label}
+                  </Link>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
           <BookRounded
             sx={{
               display: { xs: "none", md: "flex" },

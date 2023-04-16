@@ -12,6 +12,7 @@ import {
 } from "@mui/material"
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 import { addBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
@@ -24,10 +25,14 @@ export const AddBook = () => {
   const [book, setBook] = useState<PartialBook>(initialBookstate)
   const { items: authors } = useSelector((state: RootState) => state.author)
   const { items: genres } = useSelector((state: RootState) => state.genre)
+  const navigate = useNavigate()
   const handleSubmit = (e: any) => {
     e.preventDefault()
     book.id = unique_id
     dispatch(addBook(book))
+    setTimeout(() => {
+      navigate("/books")
+    }, 6000)
   }
   return (
     <div>

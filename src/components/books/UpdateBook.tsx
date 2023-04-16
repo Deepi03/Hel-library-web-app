@@ -10,10 +10,10 @@ import {
   TextField,
   Typography
 } from "@mui/material"
-/* import { makeStyles } from "@mui/styles" */
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+
 import { updateBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { initialBookstate } from "../../types_variables/constants"
@@ -28,9 +28,13 @@ export const UpdateBook = () => {
   const { bookId } = useParams()
   const [uBook, setUBook] = useState<PartialBook>(initialBookstate)
   const book = books.find((bo) => bookId === bo.id)
+  const navigate = useNavigate()
   const handleSubmit = (e: any) => {
     e.preventDefault()
     dispatch(updateBook(uBook))
+    setTimeout(() => {
+      navigate("/books")
+    }, 6000)
   }
 
   return (

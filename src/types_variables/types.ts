@@ -45,6 +45,7 @@ export type AuthorState = {
 export type BookState = {
   items: Book[]
   filteredBooks: Book[]
+  filterBooksByGenre: Book[]
   filteredGenres: Genre[]
   filteredAuthors: Author[]
   isLoading: boolean

@@ -30,7 +30,8 @@ export const Search = () => {
     >
       <InputBase
         sx={{
-          flex: 1
+          flex: 1,
+          padding: "4px 10px 5px"
         }}
         placeholder="Search genres,books and authors"
         inputProps={{ "aria-label": "Search" }}

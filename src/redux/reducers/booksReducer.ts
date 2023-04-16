@@ -7,6 +7,7 @@ import { fetchBooks } from "../middlewares/fetchBooks"
 const initialState: BookState = {
   items: [],
   filteredBooks: [],
+  filterBooksByGenre: [],
   filteredGenres: [],
   filteredAuthors: [],
   isLoading: false,
@@ -163,7 +164,7 @@ const bookSlice = createSlice({
     },
     filterBooksByGenre(state, action) {
       const genreId = action.payload
-      state.filteredBooks = state.items.filter(
+      state.filterBooksByGenre = state.items.filter(
         (item) => item.genreId === genreId
       )
     },

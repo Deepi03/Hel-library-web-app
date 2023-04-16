@@ -36,7 +36,9 @@ const style = {
 export const GenreCards = ({ genres }: { genres: Genre[] }) => {
   const dispatch = useDispatch<AppDispatch>()
 
-  const { filteredBooks: books } = useSelector((state: RootState) => state.book)
+  const { filterBooksByGenre: books } = useSelector(
+    (state: RootState) => state.book
+  )
   const [open, setOpen] = useState(false)
 
   const handleOpen = (genreId: string) => {

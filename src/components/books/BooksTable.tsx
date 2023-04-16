@@ -59,6 +59,10 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
     dispatch(sortBookByTitle())
   }
 
+  const getAuthorByBook = (book: Book) => {
+    return authors.find((author) => author.id === book.authorId)
+  }
+
   return (
     <div className="books-table">
       {isAdmin && (
@@ -85,100 +89,102 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
           </tr>
         </thead>
         <tbody>
-          {books.map((book) => (
-            <tr key={book.id}>
-              <td>
-                <Avatar
-                  src={book.cover}
-                  variant="square"
-                  sx={{ width: 70, height: 70 }}
-                />
-              </td>
-              <td>{book.isbn}</td>
-              <td>{book.title}</td>
-              <td>
-                {authors.find((author) => author.id === book.authorId)?.name}
-              </td>
-              <td>{book.status ? "Yes" : "No"}</td>
-              {isLoggedIn ? (
+          {books
+            .filter((book) => {
+              return getAuthorByBook(book)?.id
+            })
+            .map((book) => (
+              <tr key={book.id}>
                 <td>
-                  {book.status ? (
-                    <IconButton onClick={() => handleBorrowBook(book)}>
-                      <AutoStoriesIcon
+                  <Avatar
+                    src={book.cover}
+                    variant="square"
+                    sx={{ width: 70, height: 70 }}
+                  />
+                </td>
+                <td>{book.isbn}</td>
+                <td>{book.title}</td>
+                <td>{getAuthorByBook(book)?.name}</td>
+                <td>{book.status ? "Yes" : "No"}</td>
+                {isLoggedIn ? (
+                  <td>
+                    {book.status ? (
+                      <IconButton onClick={() => handleBorrowBook(book)}>
+                        <AutoStoriesIcon
+                          sx={{
+                            color: "#323232",
+                            "&:hover": {
+                              boxShadow: "none",
+                              color: "blue"
+                            }
+                          }}
+                        ></AutoStoriesIcon>
+                      </IconButton>
+                    ) : (
+                      <BlockIcon
+                        sx={{ color: "#323232", textAlign: "center" }}
+                      ></BlockIcon>
+                    )}
+                  </td>
+                ) : (
+                  <td>
+                    <span>
+                      <Login></Login>
+                    </span>
+                  </td>
+                )}
+                <td>
+                  <IconButton>
+                    <ReadMoreIcon
+                      sx={{
+                        color: "#323232",
+                        "&:hover": {
+                          boxShadow: "none",
+                          color: "#9C28B0"
+                        }
+                      }}
+                      onClick={() => handleDisplaySingleBook(book)}
+                    ></ReadMoreIcon>
+                  </IconButton>
+                </td>
+                {isAdmin && (
+                  <td>
+                    <IconButton>
+                      <UpdateIcon
                         sx={{
                           color: "#323232",
                           "&:hover": {
                             boxShadow: "none",
-                            color: "blue"
+                            color: "green"
                           }
                         }}
-                      ></AutoStoriesIcon>
+                        onClick={() => {
+                          handleUpdate(book.id)
+                        }}
+                      ></UpdateIcon>
                     </IconButton>
-                  ) : (
-                    <BlockIcon
-                      sx={{ color: "#323232", textAlign: "center" }}
-                    ></BlockIcon>
-                  )}
-                </td>
-              ) : (
-                <td>
-                  <span>
-                    <Login></Login>
-                  </span>
-                </td>
-              )}
-              <td>
-                <IconButton>
-                  <ReadMoreIcon
-                    sx={{
-                      color: "#323232",
-                      "&:hover": {
-                        boxShadow: "none",
-                        color: "#9C28B0"
-                      }
-                    }}
-                    onClick={() => handleDisplaySingleBook(book)}
-                  ></ReadMoreIcon>
-                </IconButton>
-              </td>
-              {isAdmin && (
-                <td>
-                  <IconButton>
-                    <UpdateIcon
-                      sx={{
-                        color: "#323232",
-                        "&:hover": {
-                          boxShadow: "none",
-                          color: "green"
-                        }
-                      }}
-                      onClick={() => {
-                        handleUpdate(book.id)
-                      }}
-                    ></UpdateIcon>
-                  </IconButton>
-                </td>
-              )}
-              {isAdmin && (
-                <td>
-                  <IconButton>
-                    <DeleteIcon
-                      sx={{
-                        color: "#323232",
-                        "&:hover": {
-                          boxShadow: "none",
-                          color: "red"
-                        }
-                      }}
-                      onClick={() => {
-                        handleDelete(book)
-                      }}
-                    ></DeleteIcon>
-                  </IconButton>
-                </td>
-              )}
-            </tr>
-          ))}
+                  </td>
+                )}
+                {isAdmin && (
+                  <td>
+                    <IconButton>
+                      <DeleteIcon
+                        sx={{
+                          color: "#323232",
+                          "&:hover": {
+                            boxShadow: "none",
+                            color: "red"
+                          }
+                        }}
+                        onClick={() => {
+                          handleDelete(book)
+                        }}
+                      ></DeleteIcon>
+                    </IconButton>
+                  </td>
+                )}
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

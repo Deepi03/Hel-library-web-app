@@ -2,7 +2,7 @@
 import React, { useState } from "react"
 /* import { makeStyles } from "@mui/styles" */
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 import { updateAuthor } from "../../redux/reducers/authorReducer"
 import { AppDispatch, RootState } from "../../redux/store"
@@ -17,10 +17,14 @@ export const UpdateAuthor = () => {
   const { authorId } = useParams()
   const [uAuthor, setUAuthor] = useState<PartialAuthor>(initialAuthorState)
   const author = authors.find((au) => authorId === au.id)
+  const navigate = useNavigate()
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
     dispatch(updateAuthor(uAuthor))
+    setTimeout(() => {
+      navigate("/authors")
+    }, 6000)
   }
   return (
     <div>
