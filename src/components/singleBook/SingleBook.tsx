@@ -2,25 +2,18 @@
 import {
   Box,
   FormControl,
-  IconButton,
   InputLabel,
   MenuItem,
   Select,
   Typography
 } from "@mui/material"
-import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 
 import { borrowBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
-import {
-  bDate,
-  bDateString,
-  rDate,
-  unique_id
-} from "../../types_variables/constants"
+import { unique_id } from "../../types_variables/constants"
 import { Book } from "../../types_variables/types"
 import { Login } from "../login/Login"
 import "./SingleBook.css"

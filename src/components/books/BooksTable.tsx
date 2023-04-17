@@ -14,6 +14,7 @@ import {
   borrowBook,
   deleteBook,
   singleBookFilter,
+  sortBookByAvailable,
   sortBookByTitle
 } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
@@ -48,8 +49,11 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
     navigate("/addBook")
   }
 
-  const handleSort = () => {
+  const handleSortByTitle = () => {
     dispatch(sortBookByTitle())
+  }
+  const handleSortByAvailable = () => {
+    dispatch(sortBookByAvailable())
   }
 
   const getAuthorByBook = (book: Book) => {
@@ -70,11 +74,13 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
             <th>Cover</th>
             <th>ISBN</th>
 
-            <th onClick={() => handleSort()}>
+            <th onClick={() => handleSortByTitle()}>
               Title <SortIcon />
             </th>
             <th>Author</th>
-            <th>Available</th>
+            <th onClick={() => handleSortByAvailable()}>
+              Available <SortIcon />
+            </th>
             <th>Borrow</th>
             <th>Detail</th>
             {isAdmin && <th>Update</th>}
