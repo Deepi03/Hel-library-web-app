@@ -28,6 +28,20 @@
     "genreId": "12"
   },
   {
+    "id": "100",
+    "isbn": "403915692-10",
+    "title": "Pride and Prejuidce",
+    "description": "The Adventures of Sherlock Holmes is a collection of twelve short stories by Arthur Conan Doyle, first published on 14 October 1892. It contains the earliest short stories featuring the consulting detective Sherlock Holmes, which had been published in twelve monthly issues of The Strand Magazine from July 1891 to June 1892. The stories are collected in the same sequence, which is not supported by any fictional chronology. The only characters common to all twelve are Holmes and Dr. Watson and all are related in first-person narrative from Watson's point of view.",
+    "publisher": "Conn Domerque",
+    "authorId": "200",
+    "status": false,
+    "publishedDate": "1960-07-18",
+    "borrowDate": null,
+    "returnDate": null,
+    "cover": "https://fastly.picsum.photos/id/571/200/300.jpg?hmac=M2JAmSQct67FkQUX0_IWCUClgxf45dexs4oYKhpFDLA",
+    "genreId": "10"
+  },
+  {
     "id": "3",
     "isbn": "560515519-9",
     "title": "Trouble Every Day",

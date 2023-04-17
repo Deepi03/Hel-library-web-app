@@ -215,20 +215,6 @@ export const NavBar = () => {
                         fontSize: "1rem",
                         textDecoration: "none"
                       }}
-                      to={"/"}
-                      onClick={() => handleLogout()}
-                    >
-                      {"Logout"}
-                    </Link>
-                  </MenuItem>
-
-                  <MenuItem>
-                    <Link
-                      sx={{
-                        color: "#323232",
-                        fontSize: "1rem",
-                        textDecoration: "none"
-                      }}
                       onClick={(e: React.MouseEvent<HTMLElement>) => {
                         e.preventDefault()
                         setAnchorElUser(null)
@@ -236,6 +222,19 @@ export const NavBar = () => {
                       }}
                     >
                       Profile
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link
+                      sx={{
+                        color: "#323232",
+                        fontSize: "1rem",
+                        textDecoration: "none"
+                      }}
+                      to={"/"}
+                      onClick={() => handleLogout()}
+                    >
+                      {"Logout"}
                     </Link>
                   </MenuItem>
                 </Menu>

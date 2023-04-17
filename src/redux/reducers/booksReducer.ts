@@ -77,7 +77,8 @@ const bookSlice = createSlice({
     },
     borrowBook(state, action): BookState {
       const { id } = action.payload.book
-      const { bDateString, rDateString, userId } = action.payload
+      const { userId, days } = action.payload
+      const rDate = new Date()
       return {
         ...state,
         items: [...state.items].map((book) => {
@@ -87,11 +88,19 @@ const bookSlice = createSlice({
               position: "bottom-right"
             })
           }
+          if (days === 10) {
+            rDate.setDate(new Date().getDate() + 10)
+          } else if (days === 20) {
+            rDate.setDate(new Date().getDate() + 20)
+          } else {
+            rDate.setDate(new Date().getDate() + 30)
+          }
+          const rDateString = rDate.toDateString()
 
           return {
             ...book,
             status: false,
-            borrowDate: bDateString,
+            borrowDate: new Date().toDateString(),
             returnDate: rDateString,
             borrowerId: userId
           }

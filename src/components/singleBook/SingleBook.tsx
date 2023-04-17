@@ -39,16 +39,7 @@ export const SingleBook = () => {
   const [days, setDays] = useState(30)
 
   const handleBorrowBook = (book: Book) => {
-    console.log("days", days)
-    if (days === 10) {
-      rDate.setDate(bDate.getDate() + 10)
-    } else if (days === 20) {
-      rDate.setDate(bDate.getDate() + 20)
-    } else {
-      rDate.setDate(bDate.getDate() + 30)
-    }
-    const rDateString = rDate.toDateString()
-    dispatch(borrowBook({ book, bDateString, rDateString, unique_id, userId }))
+    dispatch(borrowBook({ book, unique_id, userId, days }))
   }
 
   return (
@@ -57,47 +48,6 @@ export const SingleBook = () => {
         <section className="single-book-container">
           <aside className="cover-borrow">
             <img src={singleBook.cover} alt="book cover" />
-            {isLoggedIn ? (
-              <div style={{ display: "flex" }}>
-                <button
-                  className="borrow-book-btn"
-                  onClick={() => handleBorrowBook(singleBook)}
-                  disabled={!singleBook.status}
-                >
-                  Borrow
-                </button>
-                {singleBook.status && (
-                  <Box mb={2} sx={{ mt: "2rem", ml: "2rem" }}>
-                    <FormControl fullWidth>
-                      <InputLabel id="days">No. of days</InputLabel>
-                      <Select
-                        labelId="days"
-                        id="days-select"
-                        value={days}
-                        label="Genre"
-                        onChange={(e) => {
-                          setDays(e.target.value as number)
-                        }}
-                        sx={{
-                          pb: 0.15,
-                          pl: 10,
-                          width: "100%",
-                          color: "#323232",
-                          textAlign: "center",
-                          fontWeight: "300"
-                        }}
-                      >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Box>
-                )}
-              </div>
-            ) : (
-              <Login></Login>
-            )}
           </aside>
           <div className="second-half">
             <div className="title-author">
@@ -128,6 +78,47 @@ export const SingleBook = () => {
             <div className="description">
               <p className="description-p">{singleBook.description}</p>
             </div>
+            {isLoggedIn ? (
+              <div style={{ display: "flex", gap: "2rem" }}>
+                {singleBook.status && (
+                  <Box mb={2} sx={{ mt: "2rem", ml: "2rem" }}>
+                    <FormControl fullWidth>
+                      <InputLabel id="days">No. of days</InputLabel>
+                      <Select
+                        labelId="days"
+                        id="days-select"
+                        value={days}
+                        label="Genre"
+                        onChange={(e) => {
+                          setDays(e.target.value as number)
+                        }}
+                        sx={{
+                          pb: 0.15,
+                          pl: 10,
+                          width: "100%",
+                          color: "#323232",
+                          textAlign: "center",
+                          fontWeight: "300"
+                        }}
+                      >
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                )}
+                <button
+                  className="borrow-book-btn"
+                  onClick={() => handleBorrowBook(singleBook)}
+                  disabled={!singleBook.status}
+                >
+                  Borrow
+                </button>
+              </div>
+            ) : (
+              <Login></Login>
+            )}
           </div>
         </section>
       ) : (

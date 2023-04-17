@@ -19,12 +19,7 @@ import {
 import { AppDispatch, RootState } from "../../redux/store"
 import { Book } from "../../types_variables/types"
 import "./Books.css"
-import {
-  bDate,
-  bDateString,
-  rDate,
-  unique_id
-} from "../../types_variables/constants"
+import { unique_id } from "../../types_variables/constants"
 import { Login } from "../login/Login"
 
 export const BooksTable = ({ books }: { books: Book[] }) => {
@@ -42,9 +37,7 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
     dispatch(deleteBook(book))
   }
   const handleBorrowBook = (book: Book) => {
-    rDate.setDate(bDate.getDate() + 30)
-    const rDateString = rDate.toDateString()
-    dispatch(borrowBook({ book, bDateString, rDateString, unique_id, userId }))
+    dispatch(borrowBook({ book, unique_id, userId }))
   }
 
   const handleDisplaySingleBook = (book: Book) => {
