@@ -33,7 +33,7 @@ export const Search = () => {
           flex: 1,
           padding: "4px 10px 5px"
         }}
-        placeholder="Search genres,books and authors"
+        placeholder="Search by Genre"
         inputProps={{ "aria-label": "Search" }}
         onChange={(e) => setSearchTerm(e.target.value)}
       />

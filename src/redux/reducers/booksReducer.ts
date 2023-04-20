@@ -41,7 +41,7 @@ const bookSlice = createSlice({
 
       const stateWithUpdatedBook = {
         ...state,
-        items: [...state.items].map((book) => {
+        items: state.items.map((book) => {
           if (id !== book.id) {
             return book
           }
@@ -67,7 +67,7 @@ const bookSlice = createSlice({
 
     singleBookFilter(state, action) {
       const id = action.payload
-      const filteredBook = [...state.items].find((item) => {
+      const filteredBook = state.items.find((item) => {
         if (item.id === id) return item
       })
       return {
@@ -76,12 +76,12 @@ const bookSlice = createSlice({
       }
     },
     borrowBook(state, action): BookState {
-      const { id } = action.payload.book
-      const { userId, days } = action.payload
+      /*   const { id } = action.payload.book */
+      const { id, userId, days } = action.payload
       const rDate = new Date()
       return {
         ...state,
-        items: [...state.items].map((book) => {
+        items: state.items.map((book) => {
           if (book.id !== id) return book
           if (userId !== undefined) {
             toast.info("Book Borrowed", {
@@ -111,7 +111,7 @@ const bookSlice = createSlice({
       const { id } = action.payload
       return {
         ...state,
-        items: [...state.items].map((book) => {
+        items: state.items.map((book) => {
           if (book.id !== id) return book
           toast.info("Book Returned", {
             position: "bottom-right"
@@ -149,18 +149,17 @@ const bookSlice = createSlice({
       return {
         ...state,
         filteredBooks:
-          action.payload.searchTerm.length > 0
-            ? booksFiltered
-            : [...state.items],
+          action.payload.searchTerm.length > 0 ? booksFiltered : state.items,
         filteredGenres:
-          action.payload.searchTerm.length > 0 ? genresFiltered : [...genres],
+          action.payload.searchTerm.length > 0 ? genresFiltered : genres,
         filteredAuthors:
-          action.payload.searchTerm.length > 0 ? authorsFiltered : [...authors]
+          action.payload.searchTerm.length > 0 ? authorsFiltered : authors
       }
     },
     sortBookByTitle(state) {
-      state.items = state.items.sort((a, b) => {
+      state.items = state.items.slice().sort((a, b) => {
         const bookA = a.title.toLowerCase()
+        console.log("sort by title", bookA)
         const bookB = b.title.toLowerCase()
         if (bookA < bookB) {
           return -1
@@ -172,17 +171,19 @@ const bookSlice = createSlice({
       })
     },
     sortBookByAvailable(state) {
-      state.items = state.items.sort((a, b) => {
-        const bookA = a.status
-        const bookB = b.status
-        if (bookA < bookB) {
-          return 1
-        }
-        if (bookA > bookB) {
-          return -1
-        }
-        return 0
-      })
+      if (state.items) {
+        state.items = state.items.sort((a, b) => {
+          const bookA = a.status
+          const bookB = b.status
+          if (bookA < bookB) {
+            return 1
+          }
+          if (bookA > bookB) {
+            return -1
+          }
+          return 0
+        })
+      }
     },
     filterBooksByGenre(state, action) {
       const genreId = action.payload

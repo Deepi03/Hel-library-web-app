@@ -1,16 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit"
 
-import { authorReducer } from "./reducers/authorReducer"
+import { authorsReducer } from "./reducers/authorsReducer"
 import { booksReducer } from "./reducers/booksReducer"
-import { genreReducer } from "./reducers/genresReducer"
-import { userReducer } from "./reducers/userReducer"
+import { genresReducer } from "./reducers/genresReducer"
+import { usersReducer } from "./reducers/usersReducer"
 
 export const store = configureStore({
   reducer: {
     book: booksReducer,
-    author: authorReducer,
-    user: userReducer,
-    genre: genreReducer
+    author: authorsReducer,
+    user: usersReducer,
+    genre: genresReducer
   }
 })
 

@@ -10,7 +10,7 @@ const initialState: AuthorState = {
   error: ""
 }
 const authorSlice = createSlice({
-  name: "authorReducer",
+  name: "authorsReducer",
   initialState: initialState,
   reducers: {
     addAuthor(state, action) {
@@ -24,7 +24,7 @@ const authorSlice = createSlice({
       const { id, name, info, image } = action.payload
       return {
         ...state,
-        items: [...state.items].map((author) => {
+        items: state.items.map((author) => {
           if (id !== author.id) {
             return author
           }
@@ -76,6 +76,6 @@ const authorSlice = createSlice({
   }
 })
 
-export const authorReducer = authorSlice.reducer
+export const authorsReducer = authorSlice.reducer
 export const { addAuthor, updateAuthor, deleteAuthor, sortAuthorByName } =
   authorSlice.actions

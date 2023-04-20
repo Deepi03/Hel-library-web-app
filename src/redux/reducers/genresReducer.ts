@@ -9,7 +9,7 @@ const initialState: GenreState = {
   error: ""
 }
 const genreSlice = createSlice({
-  name: "genreReducer",
+  name: "genresReducer",
   initialState: initialState,
   reducers: {
     sortGenreByName(state) {
@@ -40,5 +40,5 @@ const genreSlice = createSlice({
   }
 })
 
-export const genreReducer = genreSlice.reducer
+export const genresReducer = genreSlice.reducer
 export const { sortGenreByName } = genreSlice.actions

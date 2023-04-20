@@ -32,7 +32,7 @@ export const AddBook = () => {
     dispatch(addBook(book))
     setTimeout(() => {
       navigate("/books")
-    }, 6000)
+    }, 300)
   }
   return (
     <div>

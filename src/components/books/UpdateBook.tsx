@@ -34,7 +34,7 @@ export const UpdateBook = () => {
     dispatch(updateBook(uBook))
     setTimeout(() => {
       navigate("/books")
-    }, 6000)
+    }, 300)
   }
 
   return (

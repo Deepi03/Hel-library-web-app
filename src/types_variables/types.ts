@@ -6,7 +6,7 @@ export type Book = {
   description: string
   publisher: string
   status: boolean
-  borrowerId: null | string
+  borrowerId?: null | string
   publishedDate: string
   borrowDate: null | string
   returnDate: null | string

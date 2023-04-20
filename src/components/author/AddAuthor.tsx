@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { addAuthor } from "../../redux/reducers/authorReducer"
+import { addAuthor } from "../../redux/reducers/authorsReducer"
 import { AppDispatch } from "../../redux/store"
 import { initialAuthorState, unique_id } from "../../types_variables/constants"
 import { PartialAuthor } from "../../types_variables/types"
@@ -20,7 +20,7 @@ export const AddAuthor = () => {
     dispatch(addAuthor(author))
     setTimeout(() => {
       navigate("/authors")
-    }, 6000)
+    }, 300)
   }
   return (
     <div>

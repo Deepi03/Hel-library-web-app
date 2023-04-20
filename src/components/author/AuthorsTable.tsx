@@ -18,7 +18,7 @@ import { useAdmin } from "../../hook/useAdmin"
 import {
   deleteAuthor,
   sortAuthorByName
-} from "../../redux/reducers/authorReducer"
+} from "../../redux/reducers/authorsReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Author, Book } from "../../types_variables/types"
 import "./AuthorsTable.css"
