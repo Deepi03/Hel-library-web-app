@@ -27,6 +27,7 @@ const bookSlice = createSlice({
       })
     },
     updateBook(state, action) {
+      console.log("book reducer", action)
       const {
         id,
         isbn,
@@ -59,9 +60,11 @@ const bookSlice = createSlice({
           toast.info("Book Updated", {
             position: "bottom-right"
           })
+          console.log("bookToBeUpdate", bookToBeUpdate)
           return bookToBeUpdate
         })
       }
+
       return stateWithUpdatedBook
     },
 
