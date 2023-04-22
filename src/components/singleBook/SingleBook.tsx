@@ -32,7 +32,7 @@ export const SingleBook = () => {
   const [days, setDays] = useState(30)
 
   const handleBorrowBook = (book: Book) => {
-    dispatch(borrowBook({ book, unique_id, userId, days }))
+    dispatch(borrowBook({ book, userId, days }))
   }
 
   return (

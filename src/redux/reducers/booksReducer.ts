@@ -79,33 +79,35 @@ const bookSlice = createSlice({
       }
     },
     borrowBook(state, action): BookState {
-      /*   const { id } = action.payload.book */
-      const { id, userId, days } = action.payload
+      const { book, userId, days } = action.payload
       const rDate = new Date()
       return {
         ...state,
-        items: state.items.map((book) => {
-          if (book.id !== id) return book
-          if (userId !== undefined) {
-            toast.info("Book Borrowed", {
-              position: "bottom-right"
-            })
-          }
-          if (days === 10) {
-            rDate.setDate(new Date().getDate() + 10)
-          } else if (days === 20) {
-            rDate.setDate(new Date().getDate() + 20)
+        items: state.items.map((b) => {
+          if (b.id !== book.id) {
+            return b
           } else {
-            rDate.setDate(new Date().getDate() + 30)
-          }
-          const rDateString = rDate.toDateString()
+            if (userId !== undefined) {
+              toast.info("Book Borrowed", {
+                position: "bottom-right"
+              })
+            }
+            if (days === 10) {
+              rDate.setDate(new Date().getDate() + 10)
+            } else if (days === 20) {
+              rDate.setDate(new Date().getDate() + 20)
+            } else {
+              rDate.setDate(new Date().getDate() + 30)
+            }
+            const rDateString = rDate.toDateString()
 
-          return {
-            ...book,
-            status: false,
-            borrowDate: new Date().toDateString(),
-            returnDate: rDateString,
-            borrowerId: userId
+            return {
+              ...b,
+              status: false,
+              borrowDate: new Date().toDateString(),
+              returnDate: rDateString,
+              borrowerId: userId
+            }
           }
         })
       }

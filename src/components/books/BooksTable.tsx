@@ -38,7 +38,7 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
     dispatch(deleteBook(book))
   }
   const handleBorrowBook = (book: Book) => {
-    dispatch(borrowBook({ book, unique_id, userId }))
+    dispatch(borrowBook({ book, userId }))
   }
 
   const handleDisplaySingleBook = (book: Book) => {
@@ -104,7 +104,7 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
               {isLoggedIn ? (
                 <td>
                   {book.status ? (
-                    <IconButton onClick={() => handleBorrowBook(book)}>
+                    <IconButton>
                       <AutoStoriesIcon
                         sx={{
                           color: "#323232",
@@ -113,6 +113,7 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
                             color: "blue"
                           }
                         }}
+                        onClick={() => handleBorrowBook(book)}
                       ></AutoStoriesIcon>
                     </IconButton>
                   ) : (
