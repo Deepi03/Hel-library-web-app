@@ -5,6 +5,7 @@ import { toast } from "react-toastify"
 import { Author, AuthorState } from "../../types_variables/types"
 import {
   booksByAuthor,
+  createAuthor,
   fetchAuthorById,
   fetchAuthors,
   updateAuthorById
@@ -21,13 +22,6 @@ const authorSlice = createSlice({
   name: "authorsReducer",
   initialState: initialState,
   reducers: {
-    addAuthor(state, action) {
-      const author: Author = action.payload
-      state.items.push(author)
-      toast.success(" Author Added ", {
-        position: "bottom-right"
-      })
-    },
     sortAuthorByName(state) {
       state.items = state.items.slice().sort((a, b) => {
         const bookA = a.name.toLowerCase()
@@ -71,6 +65,9 @@ const authorSlice = createSlice({
       state.isLoading = false
       state.error = action.error.message
     })
+    builder.addCase(createAuthor.fulfilled, (state, action) => {
+      state.items = [...state.items, action.payload]
+    })
     builder.addCase(updateAuthorById.fulfilled, (state, action) => {
       const updatedAuthor = state.items.map((item) => {
         if (item.id === action.payload.id) {
@@ -87,4 +84,4 @@ const authorSlice = createSlice({
 })
 
 export const authorsReducer = authorSlice.reducer
-export const { addAuthor, deleteAuthor, sortAuthorByName } = authorSlice.actions
+export const { deleteAuthor, sortAuthorByName } = authorSlice.actions

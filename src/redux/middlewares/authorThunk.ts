@@ -37,6 +37,28 @@ export const fetchAuthorById = createAsyncThunk(
   }
 )
 
+export const createAuthor = createAsyncThunk(
+  "createAuthor",
+  async (author: Author) => {
+    try {
+      const res = await fetch(`http://localhost:8080/api/v1/authors`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(author)
+      })
+      const createdAuthor = await res.json()
+      if (!res.ok) {
+        throw new Error("Something went wrong")
+      }
+      return createdAuthor
+    } catch (error) {
+      return error
+    }
+  }
+)
+
 export const updateAuthorById = createAsyncThunk(
   "updateAuthorById",
   async (author: Partial<Author>) => {

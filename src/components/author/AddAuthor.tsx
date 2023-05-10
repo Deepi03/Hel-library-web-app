@@ -3,23 +3,23 @@ import { Box, Typography } from "@mui/material"
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { createAuthor } from "../../redux/middlewares/authorThunk"
 
-import { addAuthor } from "../../redux/reducers/authorsReducer"
 import { AppDispatch } from "../../redux/store"
 import { initialAuthorState, unique_id } from "../../types_variables/constants"
-import { PartialAuthor } from "../../types_variables/types"
+import { Author } from "../../types_variables/types"
 import { FormAuthor } from "./FormAuthor"
 
 export const AddAuthor = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const [author, setAuthor] = useState<PartialAuthor>(initialAuthorState)
+  const [author, setAuthor] = useState<Author>(initialAuthorState)
   const navigate = useNavigate()
   const label = "Create Author"
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
     author.id = unique_id
-    dispatch(addAuthor(author))
+    dispatch(createAuthor(author))
     setTimeout(() => {
       navigate("/authors")
     }, 300)
