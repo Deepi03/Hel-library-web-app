@@ -3,7 +3,6 @@ import { useSelector } from "react-redux"
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import { useMatch } from "react-router-dom"
 
 import { AddBook } from "./components/books/AddBook"
 import { Books } from "./components/books/Books"
@@ -21,10 +20,9 @@ import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { fetchBooks } from "./redux/middlewares/fetchBooks"
 import { useAdmin } from "./hook/useAdmin"
-import { fetchAuthors } from "./redux/middlewares/fetchAuthors"
+import { fetchAuthors } from "./redux/middlewares/authorThunk"
 import { Footer } from "./components/footer/Footer"
 import { fetchGenres } from "./redux/middlewares/fetchGenres"
-import { Search } from "./components/search/Search"
 
 function App() {
   const { isLoggedIn } = useSelector((state: RootState) => {
@@ -35,11 +33,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchBooks())
-  }, [])
-  useEffect(() => {
     dispatch(fetchAuthors())
-  }, [])
-  useEffect(() => {
     dispatch(fetchGenres())
   }, [])
 

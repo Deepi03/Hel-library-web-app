@@ -1,13 +1,21 @@
+/* eslint-disable prettier/prettier */
 import { createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
 
 import { Author, AuthorState } from "../../types_variables/types"
-import { fetchAuthors } from "../middlewares/fetchAuthors"
+import {
+  booksByAuthor,
+  fetchAuthorById,
+  fetchAuthors,
+  updateAuthorById
+} from "../middlewares/authorThunk"
 
 const initialState: AuthorState = {
   items: [],
+  books: [],
   isLoading: false,
-  error: ""
+  error: "",
+  item: null
 }
 const authorSlice = createSlice({
   name: "authorsReducer",
@@ -19,26 +27,6 @@ const authorSlice = createSlice({
       toast.success(" Author Added ", {
         position: "bottom-right"
       })
-    },
-    updateAuthor(state, action) {
-      const { id, name, info, image } = action.payload
-      return {
-        ...state,
-        items: state.items.map((author) => {
-          if (id !== author.id) {
-            return author
-          }
-          toast.success("Author Updated", {
-            position: "bottom-right"
-          })
-          return {
-            ...author,
-            name: name,
-            info: info,
-            image: image
-          }
-        })
-      }
     },
     sortAuthorByName(state) {
       state.items = state.items.slice().sort((a, b) => {
@@ -73,9 +61,30 @@ const authorSlice = createSlice({
       state.isLoading = false
       state.error = action.error.message
     })
+    builder.addCase(fetchAuthorById.pending, (state) => {
+      state.isLoading = true
+    })
+    builder.addCase(fetchAuthorById.fulfilled, (state, action) => {
+      state.item = action.payload
+    })
+    builder.addCase(fetchAuthorById.rejected, (state, action) => {
+      state.isLoading = false
+      state.error = action.error.message
+    })
+    builder.addCase(updateAuthorById.fulfilled, (state, action) => {
+      const updatedAuthor = state.items.map((item) => {
+        if (item.id === action.payload.id) {
+          return action.payload
+        }
+        return item
+      })
+      state.items = updatedAuthor
+    })
+    builder.addCase(booksByAuthor.fulfilled, (state, action) => {
+      state.books = action.payload
+    })
   }
 })
 
 export const authorsReducer = authorSlice.reducer
-export const { addAuthor, updateAuthor, deleteAuthor, sortAuthorByName } =
-  authorSlice.actions
+export const { addAuthor, deleteAuthor, sortAuthorByName } = authorSlice.actions

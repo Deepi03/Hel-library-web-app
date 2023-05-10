@@ -4,7 +4,6 @@ import { Box } from "@mui/material"
 import { useSelector } from "react-redux"
 
 import { RootState } from "../../redux/store"
-import { Search } from "../search/Search"
 import { AuthorsTable } from "./AuthorsTable"
 
 export const Authors = () => {

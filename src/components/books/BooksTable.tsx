@@ -20,7 +20,6 @@ import {
 import { AppDispatch, RootState } from "../../redux/store"
 import { Book } from "../../types_variables/types"
 import "./Books.css"
-import { unique_id } from "../../types_variables/constants"
 import { Login } from "../login/Login"
 
 export const BooksTable = ({ books }: { books: Book[] }) => {

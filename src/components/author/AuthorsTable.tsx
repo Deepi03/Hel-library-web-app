@@ -22,6 +22,7 @@ import {
 import { AppDispatch, RootState } from "../../redux/store"
 import { Author, Book } from "../../types_variables/types"
 import "./AuthorsTable.css"
+import { fetchAuthorById } from "../../redux/middlewares/authorThunk"
 
 const style = {
   position: "absolute",
@@ -64,6 +65,10 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
   const handleSort = () => {
     dispatch(sortAuthorByName())
   }
+
+  /* const handleAuthorsingle = (id: string) => {
+    dispatch(fetchAuthorById(id))
+  } */
 
   return (
     <Box sx={{ m: "5rem" }}>
@@ -154,6 +159,13 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
                   </IconButton>
                 </td>
               )}
+              {/*  <td>
+                <button
+                  onClick={() => {
+                    handleAuthorsingle(author.id)
+                  }}
+                ></button>
+              </td> */}
             </tr>
           ))}
         </tbody>

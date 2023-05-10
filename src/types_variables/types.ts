@@ -38,8 +38,10 @@ export type GenreState = {
 
 export type AuthorState = {
   items: Author[]
+  books: Book[]
   isLoading: boolean
   error: string | undefined
+  item: Author | null
 }
 
 export type BookState = {

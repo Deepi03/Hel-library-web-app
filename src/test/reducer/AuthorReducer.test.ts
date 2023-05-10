@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import createTestStore from "../utils/testStore"
 import { authors } from "../fixtures/testAuthors"
-import { fetchAuthors } from "../../redux/middlewares/fetchAuthors"
+import { fetchAuthors } from "../../redux/middlewares/authorThunk"
 import {
   addAuthor,
   updateAuthor,

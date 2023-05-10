@@ -4,8 +4,8 @@ import { useState } from "react"
 /* import { makeStyles } from "@mui/styles" */
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
+import { updateAuthorById } from "../../redux/middlewares/authorThunk"
 
-import { updateAuthor } from "../../redux/reducers/authorsReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { initialAuthorState } from "../../types_variables/constants"
 import { PartialAuthor } from "../../types_variables/types"
@@ -22,10 +22,12 @@ export const UpdateAuthor = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    dispatch(updateAuthor(uAuthor))
-    setTimeout(() => {
-      navigate("/authors")
-    }, 300)
+    if (uAuthor.id) {
+      dispatch(updateAuthorById(uAuthor))
+      setTimeout(() => {
+        navigate("/authors")
+      }, 300)
+    }
   }
   return (
     <div>

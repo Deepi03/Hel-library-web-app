@@ -31,7 +31,6 @@ export const initialBookstate: Book = {
 export const initialAuthorState = {
   id: "",
   name: "",
-  books: [],
   info: ""
 }
 export const borrowInitialState = {

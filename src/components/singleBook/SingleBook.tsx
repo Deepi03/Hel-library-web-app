@@ -13,7 +13,6 @@ import { useParams } from "react-router-dom"
 
 import { borrowBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
-import { unique_id } from "../../types_variables/constants"
 import { Book } from "../../types_variables/types"
 import { Login } from "../login/Login"
 import "./SingleBook.css"
