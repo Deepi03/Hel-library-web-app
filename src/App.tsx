@@ -22,7 +22,7 @@ import { fetchBooks } from "./redux/middlewares/fetchBooks"
 import { useAdmin } from "./hook/useAdmin"
 import { fetchAuthors } from "./redux/middlewares/authorThunk"
 import { Footer } from "./components/footer/Footer"
-import { fetchGenres } from "./redux/middlewares/fetchGenres"
+import { fetchGenres } from "./redux/middlewares/genreThunk"
 
 function App() {
   const { isLoggedIn } = useSelector((state: RootState) => {

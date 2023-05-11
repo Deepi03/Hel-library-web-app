@@ -85,7 +85,10 @@ const authorSlice = createSlice({
       state.error = action.error.message
     })
     builder.addCase(deleteAuthorById.fulfilled, (state, action) => {
-      // state.items = state.items.filter((author) => author.id !== action.payload)
+      console.log("author delete", action.payload)
+      state.items = state.items.filter(
+        (author) => author.id !== action.payload.id
+      )
     })
   }
 })

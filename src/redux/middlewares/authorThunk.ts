@@ -1,8 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { useDispatch } from "react-redux"
 import { Author } from "../../types_variables/types"
-import { AppDispatch } from "../store"
 
 export const fetchAuthors = createAsyncThunk("fetchAuthors", async () => {
   try {

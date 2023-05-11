@@ -71,7 +71,7 @@ export const GenreCards = ({ genres }: { genres: Genre[] }) => {
                     // 16:9
                     pt: "20"
                   }}
-                  image={genre.cover}
+                  image={genre.coverImage}
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Typography

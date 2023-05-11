@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 import { GenreState } from "../../types_variables/types"
-import { fetchGenres } from "../middlewares/fetchGenres"
+import { fetchGenres } from "../middlewares/genreThunk"
 
 const initialState: GenreState = {
   items: [],

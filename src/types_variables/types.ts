@@ -27,7 +27,7 @@ export type Genre = {
   id: string
   name: string
   description: string
-  cover: string
+  coverImage: string
 }
 
 export type GenreState = {
