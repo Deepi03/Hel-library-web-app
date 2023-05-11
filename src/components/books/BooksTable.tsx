@@ -25,7 +25,6 @@ import { Login } from "../login/Login"
 export const BooksTable = ({ books }: { books: Book[] }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const { items: authors } = useSelector((state: RootState) => state.author)
 
   const isAdmin = useAdmin()
   const { isLoggedIn, item } = useSelector((state: RootState) => state.user)
@@ -49,19 +48,15 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
   }
 
   const handleSortByTitle = () => {
-    console.log("inisde title")
     dispatch(sortBookByTitle())
   }
   const handleSortByAvailable = () => {
     dispatch(sortBookByAvailable())
   }
 
-  const getAuthorByBook = (book: Book) => {
-    return authors.find((author) => author.id === book.authorId)
-  }
   return (
     <div className="books-table">
-      {isAdmin && (
+      {!isAdmin && (
         <button className="add-btn" onClick={() => handleAddBook()}>
           Add Book
         </button>
@@ -98,7 +93,7 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
               </td>
               <td>{book.isbn}</td>
               <td>{book.title}</td>
-              <td>{getAuthorByBook(book)?.name}</td>
+              <td>{book.author.name}</td>
               <td>{book.available ? "Yes" : "No"}</td>
               {isLoggedIn ? (
                 <td>

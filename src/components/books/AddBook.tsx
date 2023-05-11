@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 import { AppDispatch, RootState } from "../../redux/store"
-import { Book } from "../../types_variables/types"
-import { initialBookstate, unique_id } from "../../types_variables/constants"
+import { BookDto } from "../../types_variables/types"
+import { initialBookstate } from "../../types_variables/constants"
 import "./UpdateBook.css"
 import { BookForm } from "./BookForm"
 import { Typography } from "@mui/material"
@@ -14,14 +14,14 @@ import { createBook } from "../../redux/middlewares/bookThunk"
 
 export const AddBook = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const [book, setBook] = useState<Book>(initialBookstate)
+  const [book, setBook] = useState<BookDto>(initialBookstate)
   const { items: authors } = useSelector((state: RootState) => state.author)
   const { items: genres } = useSelector((state: RootState) => state.genre)
   const label = "Create Book"
   const navigate = useNavigate()
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    book.id = unique_id
+
     if (book) {
       dispatch(createBook(book))
     }

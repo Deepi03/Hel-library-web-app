@@ -27,7 +27,6 @@ const bookSlice = createSlice({
       })
     },
     updateBook(state, action) {
-      console.log("book reducer", action)
       const {
         id,
         isbn,
@@ -60,7 +59,6 @@ const bookSlice = createSlice({
           toast.info("Book Updated", {
             position: "bottom-right"
           })
-          console.log("bookToBeUpdate", bookToBeUpdate)
           return bookToBeUpdate
         })
       }
@@ -164,7 +162,6 @@ const bookSlice = createSlice({
     sortBookByTitle(state) {
       state.items = state.items.slice().sort((a, b) => {
         const bookA = a.title.toLowerCase()
-        console.log("sort by title", bookA)
         const bookB = b.title.toLowerCase()
         if (bookA < bookB) {
           return -1

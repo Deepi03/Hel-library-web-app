@@ -8,14 +8,13 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
-  TextField,
-  Typography
+  TextField
 } from "@mui/material"
 import { FormEventHandler } from "react"
-import { Author, Book, Genre, PartialBook } from "../../types_variables/types"
+import { Author, Book, Genre } from "../../types_variables/types"
 
 type Props = {
-  book: Book
+  book: BookDto
   authors: Author[]
   genres: Genre[]
   handleSubmit: FormEventHandler<HTMLFormElement>
@@ -77,7 +76,10 @@ export const BookForm = ({
                   defaultValue={book?.authorId}
                   label="author"
                   onChange={(e) => {
-                    setBook({ ...book, authorId: e.target.value })
+                    setBook({
+                      ...book,
+                      authorId: e.target.value
+                    })
                   }}
                   sx={{
                     pb: 0.15,

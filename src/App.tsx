@@ -61,7 +61,7 @@ function App() {
           />
           <Route
             path="/addBook"
-            element={isAdmin ? <AddBook /> : <Navigate to="/" />}
+            element={!isAdmin ? <AddBook /> : <Navigate to="/" />}
           />
           <Route
             path={":bookId/updateBook/"}

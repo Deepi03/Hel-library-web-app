@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid"
-import { Book } from "./types"
+import { Book, BookDto } from "./types"
 
 export const googleUserInitialState = {
   email: "",
@@ -12,20 +12,16 @@ export const googleUserInitialState = {
   verified_email: ""
 }
 
-export const initialBookstate: Book = {
-  id: "",
+export const initialBookstate: BookDto = {
   isbn: "",
   title: "",
   description: "",
   authorId: "",
   publishedDate: "",
   publisher: "",
-  status: true,
+  isAvailable: true,
   cover: "",
-  genreId: "",
-  borrowDate: "",
-  borrowerId: "",
-  returnDate: ""
+  genreId: ""
 }
 
 export const initialAuthorState = {

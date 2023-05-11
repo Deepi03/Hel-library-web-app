@@ -18,9 +18,7 @@ export const Profile = () => {
     (book) => book.borrowerId === user?.id
   )
   const handleReturn = (book: Book) => {
-    console.log("return date", book.returnDate)
     dispatch(returnBook(book))
-    console.log("return date after dispatch", book.returnDate)
   }
 
   return (

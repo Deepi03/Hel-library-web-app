@@ -1,8 +1,9 @@
+/* eslint-disable prettier/prettier */
 export type Book = {
   id?: string
   isbn: string
   title: string
-  authorId: string
+  author: Author
   description: string
   publisher: string
   available: boolean
@@ -11,9 +12,19 @@ export type Book = {
   borrowDate: null | string
   returnDate: null | string
   cover: string
-  genreId: string
+  genre: Genre
 }
-
+export type BookDto = {
+  genreId: string
+  authorId: string
+  title: string
+  isbn: string
+  publishedDate: string
+  publisher: string
+  cover: string
+  description: string
+  isAvailable: boolean
+}
 export type PartialBook = Partial<Book>
 export type PartialAuthor = Partial<Author>
 

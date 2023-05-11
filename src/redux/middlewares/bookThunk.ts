@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { Book } from "../../types_variables/types"
+import { Book, BookDto } from "../../types_variables/types"
 
 export const fetchBooks = createAsyncThunk("fetchBooks", async () => {
   try {
@@ -35,21 +35,25 @@ export const booksByAuthor = createAsyncThunk(
     }
   }
 )
-export const createBook = createAsyncThunk("createBook", async (book: Book) => {
-  try {
-    const res = await fetch(`http://localhost:8080/api/v1/books`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(book)
-    })
-    const createdBook = await res.json()
-    if (!res.ok) {
-      throw new Error("Something went wrong")
+export const createBook = createAsyncThunk(
+  "createBook",
+  async (book: BookDto) => {
+    try {
+      const res = await fetch(`http://localhost:8080/api/v1/books`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(book)
+      })
+      const createdBook = await res.json()
+      if (!res.ok) {
+        throw new Error("Something went wrong")
+      }
+      console.log("res", res.json())
+      return createdBook
+    } catch (error) {
+      return error
     }
-    return createdBook
-  } catch (error) {
-    return error
   }
-})
+)

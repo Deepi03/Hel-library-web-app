@@ -24,7 +24,6 @@ export const UpdateBook = () => {
   const navigate = useNavigate()
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    console.log("u book", uBook)
     dispatch(updateBook(uBook))
     setTimeout(() => {
       navigate("/books")
