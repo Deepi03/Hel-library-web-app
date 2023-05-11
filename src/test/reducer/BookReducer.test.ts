@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import createTestStore from "../utils/testStore"
 import { books } from "../fixtures/testBooks"
-import { fetchBooks } from "../../redux/middlewares/fetchBooks"
+import { fetchBooks } from "../../redux/middlewares/bookThunk"
 import {
   addBook,
   sortBookByAvailable,

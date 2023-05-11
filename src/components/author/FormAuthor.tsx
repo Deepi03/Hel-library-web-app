@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { Box, Button, Card, TextField } from "@mui/material"
-import { Author, PartialAuthor } from "../../types_variables/types"
+import { Author } from "../../types_variables/types"
 
 type Props = {
-  author: Author | PartialAuthor | undefined
-  setAuthor: React.Dispatch<React.SetStateAction<Partial<Author>>>
+  author: Author
+  setAuthor: React.Dispatch<React.SetStateAction<Author>>
   handleSubmit: React.FormEventHandler<HTMLFormElement>
   label: string
 }

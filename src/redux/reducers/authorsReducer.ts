@@ -2,9 +2,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
 
-import { Author, AuthorState } from "../../types_variables/types"
+import { AuthorState } from "../../types_variables/types"
 import {
-  booksByAuthor,
   createAuthor,
   deleteAuthorById,
   fetchAuthorById,
@@ -14,7 +13,6 @@ import {
 
 const initialState: AuthorState = {
   items: [],
-  books: [],
   isLoading: false,
   error: "",
   item: null
@@ -35,14 +33,6 @@ const authorSlice = createSlice({
         }
         return 0
       })
-    },
-    deleteAuthor(state, action) {
-      state.items = state.items.filter((author) => {
-        return author.id !== action.payload.id
-      })
-      toast.warning("Author Deleted", {
-        position: "bottom-right"
-      })
     }
   },
   extraReducers: (builder) => {
@@ -50,6 +40,7 @@ const authorSlice = createSlice({
       state.isLoading = true
     })
     builder.addCase(fetchAuthors.fulfilled, (state, action) => {
+      state.isLoading = false
       state.items = action.payload
     })
     builder.addCase(fetchAuthors.rejected, (state, action) => {
@@ -60,6 +51,7 @@ const authorSlice = createSlice({
       state.isLoading = true
     })
     builder.addCase(fetchAuthorById.fulfilled, (state, action) => {
+      state.isLoading = false
       state.item = action.payload
     })
     builder.addCase(fetchAuthorById.rejected, (state, action) => {
@@ -67,9 +59,11 @@ const authorSlice = createSlice({
       state.error = action.error.message
     })
     builder.addCase(createAuthor.fulfilled, (state, action) => {
+      state.isLoading = false
       state.items = [...state.items, action.payload]
     })
     builder.addCase(updateAuthorById.fulfilled, (state, action) => {
+      state.isLoading = false
       const updatedAuthor = state.items.map((item) => {
         if (item.id === action.payload.id) {
           return action.payload
@@ -78,20 +72,18 @@ const authorSlice = createSlice({
       })
       state.items = updatedAuthor
     })
-    builder.addCase(booksByAuthor.fulfilled, (state, action) => {
-      state.books = action.payload
-    })
+
     builder.addCase(deleteAuthorById.rejected, (state, action) => {
+      state.isLoading = false
       state.error = action.error.message
     })
-    builder.addCase(deleteAuthorById.fulfilled, (state, action) => {
-      console.log("author delete", action.payload)
-      state.items = state.items.filter(
-        (author) => author.id !== action.payload.id
-      )
+    builder.addCase(deleteAuthorById.fulfilled, (state, action: any) => {
+      state.isLoading = false
+      const { id } = action.payload
+      state.items = state.items.filter((author) => author.id !== id)
     })
   }
 })
 
 export const authorsReducer = authorSlice.reducer
-export const { deleteAuthor, sortAuthorByName } = authorSlice.actions
+export const { sortAuthorByName } = authorSlice.actions

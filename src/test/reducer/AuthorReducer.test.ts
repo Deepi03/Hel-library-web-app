@@ -2,12 +2,7 @@
 import createTestStore from "../utils/testStore"
 import { authors } from "../fixtures/testAuthors"
 import { fetchAuthors } from "../../redux/middlewares/authorThunk"
-import {
-  addAuthor,
-  updateAuthor,
-  deleteAuthor,
-  sortAuthorByName
-} from "../../redux/reducers/authorsReducer"
+import { sortAuthorByName } from "../../redux/reducers/authorsReducer"
 
 let store = createTestStore()
 
@@ -20,7 +15,7 @@ describe("test author reducer", () => {
     await store.dispatch(fetchAuthors())
     expect(store.getState().authorsReducer.items.length).toBeGreaterThan(0)
   })
-  test("should add", () => {
+  /* test("should add", () => {
     authors.map((author) => store.dispatch(addAuthor(author)))
     expect(store.getState().authorsReducer.items.length).toBe(2)
   })
@@ -42,5 +37,5 @@ describe("test author reducer", () => {
     authors.map((author) => store.dispatch(addAuthor(author)))
     store.dispatch(deleteAuthor({ id: "101" }))
     expect(store.getState().authorsReducer.items.length).toBe(1)
-  })
+  }) */
 })

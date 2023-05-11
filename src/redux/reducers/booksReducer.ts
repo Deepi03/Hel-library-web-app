@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
 import { Author, Book, BookState, Genre } from "../../types_variables/types"
-import { fetchBooks } from "../middlewares/fetchBooks"
+import { booksByAuthor, createBook, fetchBooks } from "../middlewares/bookThunk"
 
 const initialState: BookState = {
   items: [],
@@ -217,6 +217,14 @@ const bookSlice = createSlice({
     builder.addCase(fetchBooks.rejected, (state, action) => {
       state.isLoading = false
       state.error = action.error.message
+    })
+    builder.addCase(createBook.fulfilled, (state, action) => {
+      state.isLoading = false
+      state.items = [...state.items, action.payload]
+    })
+    builder.addCase(booksByAuthor.fulfilled, (state, action) => {
+      state.isLoading = false
+      state.items = action.payload
     })
   }
 })

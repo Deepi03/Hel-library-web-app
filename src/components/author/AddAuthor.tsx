@@ -12,7 +12,7 @@ import { FormAuthor } from "./FormAuthor"
 
 export const AddAuthor = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const [author, setAuthor] = useState<Partial<Author>>(initialAuthorState)
+  const [author, setAuthor] = useState<Author>(initialAuthorState)
   const navigate = useNavigate()
   const label = "Create Author"
 

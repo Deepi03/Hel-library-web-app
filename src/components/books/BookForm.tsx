@@ -7,6 +7,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  SelectChangeEvent,
   TextField,
   Typography
 } from "@mui/material"
@@ -14,11 +15,11 @@ import { FormEventHandler } from "react"
 import { Author, Book, Genre, PartialBook } from "../../types_variables/types"
 
 type Props = {
-  book: PartialBook | Book | undefined
+  book: Book
   authors: Author[]
   genres: Genre[]
   handleSubmit: FormEventHandler<HTMLFormElement>
-  setBook: React.Dispatch<React.SetStateAction<Partial<Book>>>
+  setBook: React.Dispatch<React.SetStateAction<Book>>
   label: string
 }
 
@@ -30,6 +31,10 @@ export const BookForm = ({
   setBook,
   label
 }: Props) => {
+  const menuItems = [
+    { id: "0", label: "Yes", value: "true" },
+    { id: "2", label: "No", value: "false" }
+  ]
   return (
     <form onSubmit={handleSubmit}>
       <Box sx={{ paddingBottom: "20em", color: "#323232" }}>
@@ -191,6 +196,37 @@ export const BookForm = ({
                 })
               }
             />
+          </Box>
+          <Box mb={2}>
+            <FormControl fullWidth>
+              <InputLabel id="available-label">Available</InputLabel>
+              <Select
+                required
+                labelId="available-label"
+                id="available-select"
+                label="Available"
+                onChange={(e: SelectChangeEvent<string>) => {
+                  setBook({
+                    ...book,
+                    available: e.target.value === "true" ? true : false
+                  })
+                }}
+                sx={{
+                  pb: 0.15,
+                  pl: 10,
+                  width: "100%",
+                  color: "#323232",
+                  textAlign: "center",
+                  fontWeight: "300"
+                }}
+              >
+                {menuItems.map((menu) => (
+                  <MenuItem value={menu.value} key={menu.id}>
+                    {menu.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Box>
           <Button
             type="submit"

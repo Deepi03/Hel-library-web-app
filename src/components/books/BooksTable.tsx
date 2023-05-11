@@ -99,10 +99,10 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
               <td>{book.isbn}</td>
               <td>{book.title}</td>
               <td>{getAuthorByBook(book)?.name}</td>
-              <td>{book.status ? "Yes" : "No"}</td>
+              <td>{book.available ? "Yes" : "No"}</td>
               {isLoggedIn ? (
                 <td>
-                  {book.status ? (
+                  {book.available ? (
                     <IconButton>
                       <AutoStoriesIcon
                         sx={{
@@ -154,7 +154,9 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
                         }
                       }}
                       onClick={() => {
-                        handleUpdate(book.id)
+                        if (book.id) {
+                          handleUpdate(book.id)
+                        }
                       }}
                     ></UpdateIcon>
                   </IconButton>

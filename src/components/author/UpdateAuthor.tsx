@@ -8,7 +8,7 @@ import { updateAuthorById } from "../../redux/middlewares/authorThunk"
 
 import { AppDispatch, RootState } from "../../redux/store"
 import { initialAuthorState } from "../../types_variables/constants"
-import { PartialAuthor } from "../../types_variables/types"
+import { Author } from "../../types_variables/types"
 import { FormAuthor } from "./FormAuthor"
 
 export const UpdateAuthor = () => {
@@ -16,7 +16,7 @@ export const UpdateAuthor = () => {
   const { items: authors } = useSelector((state: RootState) => state.author)
   const label = "Update Author"
   const { authorId } = useParams()
-  const [uAuthor, setUAuthor] = useState<PartialAuthor>(initialAuthorState)
+  const [uAuthor, setUAuthor] = useState<Author>(initialAuthorState)
   const author = authors.find((au) => authorId === au.id)
   const navigate = useNavigate()
 

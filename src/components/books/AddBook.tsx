@@ -4,17 +4,17 @@ import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { addBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
-import { PartialBook } from "../../types_variables/types"
+import { Book } from "../../types_variables/types"
 import { initialBookstate, unique_id } from "../../types_variables/constants"
 import "./UpdateBook.css"
 import { BookForm } from "./BookForm"
 import { Typography } from "@mui/material"
+import { createBook } from "../../redux/middlewares/bookThunk"
 
 export const AddBook = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const [book, setBook] = useState<PartialBook>(initialBookstate)
+  const [book, setBook] = useState<Book>(initialBookstate)
   const { items: authors } = useSelector((state: RootState) => state.author)
   const { items: genres } = useSelector((state: RootState) => state.genre)
   const label = "Create Book"
@@ -22,7 +22,9 @@ export const AddBook = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault()
     book.id = unique_id
-    dispatch(addBook(book))
+    if (book) {
+      dispatch(createBook(book))
+    }
     setTimeout(() => {
       navigate("/books")
     }, 300)

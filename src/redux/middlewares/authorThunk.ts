@@ -5,9 +5,6 @@ import { Author } from "../../types_variables/types"
 export const fetchAuthors = createAsyncThunk("fetchAuthors", async () => {
   try {
     const res = await fetch("http://localhost:8080/api/v1/authors")
-    /*  const res = await fetch(
-      "https://hel-library-web-app.netlify.app/assets/authors.json"
-    ) */
     const authors = await res.json()
     console.log("authors", res)
     if (!res.ok) {
@@ -39,7 +36,7 @@ export const fetchAuthorById = createAsyncThunk(
 
 export const createAuthor = createAsyncThunk(
   "createAuthor",
-  async (author: Author) => {
+  async (author: Partial<Author>) => {
     try {
       const res = await fetch(`http://localhost:8080/api/v1/authors`, {
         method: "POST",
@@ -61,7 +58,7 @@ export const createAuthor = createAsyncThunk(
 
 export const updateAuthorById = createAsyncThunk(
   "updateAuthorById",
-  async (author: Partial<Author>) => {
+  async (author: Author) => {
     try {
       const res = await fetch(
         `http://localhost:8080/api/v1/authors/${author.id}`,
@@ -84,23 +81,6 @@ export const updateAuthorById = createAsyncThunk(
   }
 )
 
-export const booksByAuthor = createAsyncThunk(
-  "booksByAuthor",
-  async (id: string) => {
-    try {
-      const res = await fetch(
-        `http://localhost:8080/api/v1/books/authors/${id}`
-      )
-      const books = await res.json()
-      if (!res.ok) {
-        throw new Error("something went wrong")
-      }
-      return books
-    } catch (error) {
-      return error
-    }
-  }
-)
 export const deleteAuthorById = createAsyncThunk(
   "deleteAuthorById",
   async (id: string) => {

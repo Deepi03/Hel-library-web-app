@@ -8,7 +8,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { updateBook } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { initialBookstate } from "../../types_variables/constants"
-import { PartialBook } from "../../types_variables/types"
+import { Book, PartialBook } from "../../types_variables/types"
 import { BookForm } from "./BookForm"
 import "./UpdateBook.css"
 
@@ -18,7 +18,7 @@ export const UpdateBook = () => {
   const { items: authors } = useSelector((state: RootState) => state.author)
   const { items: genres } = useSelector((state: RootState) => state.genre)
   const { bookId } = useParams()
-  const [uBook, setUBook] = useState<PartialBook>(initialBookstate)
+  const [uBook, setUBook] = useState<Book>(initialBookstate)
   const book = books.find((bo) => bookId === bo.id)
   const label = "Update Book"
   const navigate = useNavigate()
@@ -46,14 +46,16 @@ export const UpdateBook = () => {
       >
         Update Book
       </Typography>
-      <BookForm
-        book={book}
-        authors={authors}
-        genres={genres}
-        handleSubmit={handleSubmit}
-        setBook={setUBook}
-        label={label}
-      ></BookForm>
+      {book && (
+        <BookForm
+          book={book}
+          authors={authors}
+          genres={genres}
+          handleSubmit={handleSubmit}
+          setBook={setUBook}
+          label={label}
+        ></BookForm>
+      )}
     </div>
   )
 }
