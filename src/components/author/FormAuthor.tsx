@@ -4,7 +4,7 @@ import { Author, PartialAuthor } from "../../types_variables/types"
 
 type Props = {
   author: Author | PartialAuthor | undefined
-  setAuthor: React.Dispatch<React.SetStateAction<Author>>
+  setAuthor: React.Dispatch<React.SetStateAction<Partial<Author>>>
   handleSubmit: React.FormEventHandler<HTMLFormElement>
   label: string
 }

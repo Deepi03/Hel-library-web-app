@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { createAsyncThunk } from "@reduxjs/toolkit"
+import { useDispatch } from "react-redux"
 import { Author } from "../../types_variables/types"
+import { AppDispatch } from "../store"
 
 export const fetchAuthors = createAsyncThunk("fetchAuthors", async () => {
   try {
@@ -96,6 +98,27 @@ export const booksByAuthor = createAsyncThunk(
         throw new Error("something went wrong")
       }
       return books
+    } catch (error) {
+      return error
+    }
+  }
+)
+export const deleteAuthorById = createAsyncThunk(
+  "deleteAuthorById",
+  async (id: string) => {
+    console.log("async thunk", id)
+
+    try {
+      const res = await fetch(`http://localhost:8080/api/v1/authors/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      if (!res.ok) {
+        throw new Error("something went wrong")
+      }
+      return { id }
     } catch (error) {
       return error
     }

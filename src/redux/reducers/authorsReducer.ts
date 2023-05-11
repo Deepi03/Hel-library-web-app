@@ -6,6 +6,7 @@ import { Author, AuthorState } from "../../types_variables/types"
 import {
   booksByAuthor,
   createAuthor,
+  deleteAuthorById,
   fetchAuthorById,
   fetchAuthors,
   updateAuthorById
@@ -79,6 +80,12 @@ const authorSlice = createSlice({
     })
     builder.addCase(booksByAuthor.fulfilled, (state, action) => {
       state.books = action.payload
+    })
+    builder.addCase(deleteAuthorById.rejected, (state, action) => {
+      state.error = action.error.message
+    })
+    builder.addCase(deleteAuthorById.fulfilled, (state, action) => {
+      // state.items = state.items.filter((author) => author.id !== action.payload)
     })
   }
 })

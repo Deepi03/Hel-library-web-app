@@ -15,14 +15,11 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { useAdmin } from "../../hook/useAdmin"
-import {
-  deleteAuthor,
-  sortAuthorByName
-} from "../../redux/reducers/authorsReducer"
+import { sortAuthorByName } from "../../redux/reducers/authorsReducer"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Author, Book } from "../../types_variables/types"
 import "./AuthorsTable.css"
-import { fetchAuthorById } from "../../redux/middlewares/authorThunk"
+import { deleteAuthorById } from "../../redux/middlewares/authorThunk"
 
 const style = {
   position: "absolute",
@@ -57,7 +54,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
   const handleClose = () => setOpen(false)
 
   const handleDelete = (author: Author) => {
-    dispatch(deleteAuthor(author))
+    dispatch(deleteAuthorById(author.id))
   }
   const handleAddAuthor = () => {
     navigate("/addAuthor")
@@ -141,7 +138,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
                   </IconButton>
                 )}
               </td>
-              {isAdmin && (
+              {!isAdmin && (
                 <td>
                   <IconButton>
                     <DeleteIcon

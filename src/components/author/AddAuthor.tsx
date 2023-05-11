@@ -12,17 +12,19 @@ import { FormAuthor } from "./FormAuthor"
 
 export const AddAuthor = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const [author, setAuthor] = useState<Author>(initialAuthorState)
+  const [author, setAuthor] = useState<Partial<Author>>(initialAuthorState)
   const navigate = useNavigate()
   const label = "Create Author"
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
     author.id = unique_id
-    dispatch(createAuthor(author))
-    setTimeout(() => {
-      navigate("/authors")
-    }, 300)
+    if (author) {
+      dispatch(createAuthor(author))
+      setTimeout(() => {
+        navigate("/authors")
+      }, 300)
+    }
   }
   return (
     <div>
