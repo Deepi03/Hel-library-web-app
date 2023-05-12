@@ -22,7 +22,6 @@ export const AddBook = () => {
   const label = "Create Book"
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    console.log("added book tsx", book)
     if (book) {
       dispatch(createBook(book))
     }

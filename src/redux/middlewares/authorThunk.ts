@@ -6,7 +6,6 @@ export const fetchAuthors = createAsyncThunk("fetchAuthors", async () => {
   try {
     const res = await fetch("http://localhost:8080/api/v1/authors")
     const authors = await res.json()
-    console.log("authors", res)
     if (!res.ok) {
       throw new Error("Something went wrong")
     }
@@ -84,7 +83,6 @@ export const updateAuthorById = createAsyncThunk(
 export const deleteAuthorById = createAsyncThunk(
   "deleteAuthorById",
   async (id: string) => {
-    console.log("async thunk", id)
 
     try {
       const res = await fetch(`http://localhost:8080/api/v1/authors/${id}`, {

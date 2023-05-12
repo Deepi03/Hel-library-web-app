@@ -231,7 +231,6 @@ const bookSlice = createSlice({
       state.items = action.payload
     })
     builder.addCase(updateBookById.fulfilled, (state, action) => {
-      //console.log("update reducer", action.payload)
       state.isLoading = false
       const updatedBook = state.items.map((item) => {
         if (item.id === action.payload.id) {
@@ -240,7 +239,6 @@ const bookSlice = createSlice({
         return item
       })
       state.items = updatedBook
-      console.log("updated book", updatedBook)
       toast.success("Book Updated", {
         position: "bottom-right"
       })
