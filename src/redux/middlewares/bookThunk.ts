@@ -38,6 +38,7 @@ export const booksByAuthor = createAsyncThunk(
 export const createBook = createAsyncThunk(
   "createBook",
   async (book: BookDto) => {
+    console.log("Async thubk", book)
     try {
       const res = await fetch(`http://localhost:8080/api/v1/books`, {
         method: "POST",
