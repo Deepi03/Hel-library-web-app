@@ -18,22 +18,26 @@ import {
   sortBookByTitle
 } from "../../redux/reducers/booksReducer"
 import { AppDispatch, RootState } from "../../redux/store"
-import { Book } from "../../types_variables/types"
+import { Book, BookDto } from "../../types_variables/types"
 import "./Books.css"
 import { Login } from "../login/Login"
+import { deleteBookById } from "../../redux/middlewares/bookThunk"
 
-export const BooksTable = ({ books }: { books: Book[] }) => {
+export const BooksTable = ({ books }: { books: BookDto[] }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
 
   const isAdmin = useAdmin()
+  const { items: authors } = useSelector((state: RootState) => state.author)
   const { isLoggedIn, item } = useSelector((state: RootState) => state.user)
   const userId = item?.id
   const handleUpdate = (id: string) => {
     navigate(`/${id}/updateBook`)
   }
   const handleDelete = (book: Book) => {
-    dispatch(deleteBook(book))
+    if (book.id) {
+      dispatch(deleteBookById(book.id))
+    }
   }
   const handleBorrowBook = (book: Book) => {
     dispatch(borrowBook({ book, userId }))
@@ -46,14 +50,12 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
   const handleAddBook = () => {
     navigate("/addBook")
   }
-
   const handleSortByTitle = () => {
-    dispatch(sortBookByTitle())
+    dispatch(sortBookByTitle(books))
   }
   const handleSortByAvailable = () => {
-    dispatch(sortBookByAvailable())
+    dispatch(sortBookByAvailable(books))
   }
-
   return (
     <div className="books-table">
       {!isAdmin && (
@@ -77,8 +79,8 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
             </th>
             <th>Borrow</th>
             <th>Detail</th>
-            {isAdmin && <th>Update</th>}
-            {isAdmin && <th>Delete</th>}
+            {!isAdmin && <th>Update</th>}
+            {!isAdmin && <th>Delete</th>}
           </tr>
         </thead>
         <tbody>
@@ -93,7 +95,9 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
               </td>
               <td>{book.isbn}</td>
               <td>{book.title}</td>
-              <td>{book.author.name}</td>
+              <td>
+                {authors.find((author) => author.id === book.author)?.name}
+              </td>
               <td>{book.available ? "Yes" : "No"}</td>
               {isLoggedIn ? (
                 <td>
@@ -137,7 +141,7 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
                   ></ReadMoreIcon>
                 </IconButton>
               </td>
-              {isAdmin && (
+              {!isAdmin && (
                 <td>
                   <IconButton>
                     <UpdateIcon
@@ -157,7 +161,7 @@ export const BooksTable = ({ books }: { books: Book[] }) => {
                   </IconButton>
                 </td>
               )}
-              {isAdmin && (
+              {!isAdmin && (
                 <td>
                   <IconButton>
                     <DeleteIcon

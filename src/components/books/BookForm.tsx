@@ -11,14 +11,14 @@ import {
   TextField
 } from "@mui/material"
 import { FormEventHandler } from "react"
-import { Author, Book, Genre } from "../../types_variables/types"
+import { Author, BookDto, Genre } from "../../types_variables/types"
 
 type Props = {
   book: BookDto
   authors: Author[]
   genres: Genre[]
   handleSubmit: FormEventHandler<HTMLFormElement>
-  setBook: React.Dispatch<React.SetStateAction<Book>>
+  setBook: React.Dispatch<React.SetStateAction<BookDto>>
   label: string
 }
 
@@ -34,8 +34,10 @@ export const BookForm = ({
     { id: "0", label: "Yes", value: "true" },
     { id: "2", label: "No", value: "false" }
   ]
+
   return (
     <form onSubmit={handleSubmit}>
+      (
       <Box sx={{ paddingBottom: "20em", color: "#323232" }}>
         (
         <Card className="main-card-login">
@@ -73,12 +75,12 @@ export const BookForm = ({
                   required
                   labelId="authors-label"
                   id="authors-select"
-                  defaultValue={book?.authorId}
+                  defaultValue={book.author}
                   label="author"
                   onChange={(e) => {
                     setBook({
                       ...book,
-                      authorId: e.target.value
+                      author: e.target.value
                     })
                   }}
                   sx={{
@@ -107,10 +109,10 @@ export const BookForm = ({
                 required
                 labelId="genres-label"
                 id="genres-select"
-                defaultValue={book?.genreId}
+                defaultValue={book?.genre}
                 label="Genre"
                 onChange={(e) => {
-                  setBook({ ...book, genreId: e.target.value })
+                  setBook({ ...book, genre: e.target.value })
                 }}
                 sx={{
                   pb: 0.15,
@@ -174,7 +176,10 @@ export const BookForm = ({
               variant="outlined"
               color="secondary"
               onChange={(e) =>
-                setBook({ ...book, publishedDate: e.target.value })
+                setBook({
+                  ...book,
+                  publishedDate: e.target.value.format("yyyy-mm-dd")
+                })
               }
               defaultValue={book?.publishedDate}
               fullWidth
@@ -206,6 +211,7 @@ export const BookForm = ({
                 required
                 labelId="available-label"
                 id="available-select"
+                defaultValue={book?.available ? "true" : "false"}
                 label="Available"
                 onChange={(e: SelectChangeEvent<string>) => {
                   setBook({
@@ -247,6 +253,7 @@ export const BookForm = ({
         </Card>
         )
       </Box>
+      )
     </form>
   )
 }

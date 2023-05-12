@@ -13,13 +13,14 @@ export const googleUserInitialState = {
 }
 
 export const initialBookstate: BookDto = {
+  id: "",
   isbn: "",
   title: "",
   description: "",
   authorId: "",
   publishedDate: "",
   publisher: "",
-  isAvailable: true,
+  available: true,
   cover: "",
   genreId: ""
 }

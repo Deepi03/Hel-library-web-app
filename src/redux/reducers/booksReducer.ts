@@ -2,7 +2,13 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
 import { Author, Book, BookState, Genre } from "../../types_variables/types"
-import { booksByAuthor, createBook, fetchBooks } from "../middlewares/bookThunk"
+import {
+  booksByAuthor,
+  createBook,
+  deleteBookById,
+  fetchBooks,
+  updateBookById
+} from "../middlewares/bookThunk"
 
 const initialState: BookState = {
   items: [],
@@ -19,13 +25,11 @@ const bookSlice = createSlice({
   name: "booksReducer",
   initialState: initialState,
   reducers: {
-    addBook(state, action) {
+    /* addBook(state, action) {
       const book: Book = action.payload
       state.items = [book, ...state.items]
-      toast.success("Book Added", {
-        position: "bottom-right"
-      })
-    },
+      
+    }, */
     updateBook(state, action) {
       const {
         id,
@@ -175,8 +179,8 @@ const bookSlice = createSlice({
     sortBookByAvailable(state) {
       if (state.items) {
         state.items = state.items.sort((a, b) => {
-          const bookA = a.status
-          const bookB = b.status
+          const bookA = a.available
+          const bookB = b.available
           if (bookA < bookB) {
             return 1
           }
@@ -187,12 +191,12 @@ const bookSlice = createSlice({
         })
       }
     },
-    filterBooksByGenre(state, action) {
+    /*  filterBooksByGenre(state, action) {
       const genreId = action.payload
       state.filterBooksByGenre = state.items.filter(
         (item) => item.genreId === genreId
       )
-    },
+    }, */
     deleteBook(state, action) {
       state.items = state.items.filter((book) => {
         return book.id !== action.payload.id
@@ -206,7 +210,7 @@ const bookSlice = createSlice({
     builder.addCase(fetchBooks.pending, (state) => {
       state.isLoading = true
     })
-    builder.addCase(fetchBooks.fulfilled, (state, action) => {
+    builder.addCase(fetchBooks.fulfilled, (state, action: any) => {
       state.items = action.payload
       state.isLoading = false
     })
@@ -218,17 +222,39 @@ const bookSlice = createSlice({
     builder.addCase(createBook.fulfilled, (state, action) => {
       state.isLoading = false
       state.items = [...state.items, action.payload]
+      toast.success("Book Created", {
+        position: "bottom-right"
+      })
     })
     builder.addCase(booksByAuthor.fulfilled, (state, action) => {
       state.isLoading = false
       state.items = action.payload
+    })
+    builder.addCase(updateBookById.fulfilled, (state, action) => {
+      //console.log("update reducer", action.payload)
+      state.isLoading = false
+      const updatedBook = state.items.map((item) => {
+        if (item.id === action.payload.id) {
+          return action.payload
+        }
+        return item
+      })
+      state.items = updatedBook
+      console.log("updated book", updatedBook)
+      toast.success("Book Updated", {
+        position: "bottom-right"
+      })
+    })
+    builder.addCase(deleteBookById.fulfilled, (state, action: any) => {
+      state.isLoading = false
+      const { id } = action.payload
+      state.items = state.items.filter((book) => book.id !== id)
     })
   }
 })
 
 export const booksReducer = bookSlice.reducer
 export const {
-  addBook,
   updateBook,
   borrowBook,
   search,
@@ -236,6 +262,6 @@ export const {
   deleteBook,
   singleBookFilter,
   sortBookByTitle,
-  filterBooksByGenre,
+  //filterBooksByGenre,
   sortBookByAvailable
 } = bookSlice.actions

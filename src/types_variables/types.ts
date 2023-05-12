@@ -15,15 +15,16 @@ export type Book = {
   genre: Genre
 }
 export type BookDto = {
-  genreId: string
-  authorId: string
+  id?: string
+  genre: string
+  author: string
   title: string
   isbn: string
   publishedDate: string
   publisher: string
   cover: string
   description: string
-  isAvailable: boolean
+  available: boolean
 }
 export type PartialBook = Partial<Book>
 export type PartialAuthor = Partial<Author>
@@ -55,8 +56,8 @@ export type AuthorState = {
 }
 
 export type BookState = {
-  items: Book[]
-  filteredBooks: Book[]
+  items: BookDto[]
+  filteredBooks: BookDto[]
   filterBooksByGenre: Book[]
   filteredGenres: Genre[]
   filteredAuthors: Author[]

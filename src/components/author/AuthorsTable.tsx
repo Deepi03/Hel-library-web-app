@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom"
 import { useAdmin } from "../../hook/useAdmin"
 import { sortAuthorByName } from "../../redux/reducers/authorsReducer"
 import { AppDispatch, RootState } from "../../redux/store"
-import { Author, Book } from "../../types_variables/types"
+import { Author, Book, BookDto } from "../../types_variables/types"
 import "./AuthorsTable.css"
 import { deleteAuthorById } from "../../redux/middlewares/authorThunk"
 
@@ -48,13 +48,19 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
       setOpen(false)
     }
   }
-  const handleUpdate = (id: string) => {
-    navigate(`/${id}/updateAuthor`)
+
+  const handleUpdate = (author: Author) => {
+    if (author.id) {
+      const id = author.id
+      navigate(`/${id}/updateAuthor`)
+    }
   }
   const handleClose = () => setOpen(false)
 
   const handleDelete = (author: Author) => {
-    dispatch(deleteAuthorById(author.id))
+    if (author.id) {
+      dispatch(deleteAuthorById(author.id))
+    }
   }
   const handleAddAuthor = () => {
     navigate("/addAuthor")
@@ -63,10 +69,6 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
     dispatch(sortAuthorByName())
   }
 
-  /* const handleAuthorsingle = (id: string) => {
-    dispatch(fetchAuthorById(id))
-  } */
-
   return (
     <Box sx={{ m: "5rem" }}>
       {isAdmin && (
@@ -74,6 +76,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
           Add Author
         </button>
       )}
+
       <table id="authors-table">
         <thead>
           <tr>
@@ -99,8 +102,8 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
               </td>
               <td>{author.name}</td>
               <td>
-                {books.map((book: Book) => {
-                  if (book.authorId === author.id) {
+                {books.map((book: BookDto) => {
+                  if (book.author === author.id) {
                     return <li key={book.id}>{book.title}</li>
                   }
                 })}
@@ -123,7 +126,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
                 {isAdmin && (
                   <IconButton
                     onClick={() => {
-                      handleUpdate(author.id)
+                      handleUpdate(author)
                     }}
                   >
                     <UpdateIcon

@@ -21,7 +21,7 @@ export const AddBook = () => {
   const navigate = useNavigate()
   const handleSubmit = (e: any) => {
     e.preventDefault()
-
+    console.log("added book tsx", book)
     if (book) {
       dispatch(createBook(book))
     }

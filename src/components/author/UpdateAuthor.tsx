@@ -45,12 +45,14 @@ export const UpdateAuthor = () => {
           Update Author
         </Typography>
       </Box>
-      <FormAuthor
-        author={author}
-        setAuthor={setUAuthor}
-        handleSubmit={handleSubmit}
-        label={label}
-      ></FormAuthor>
+      {author && (
+        <FormAuthor
+          author={author}
+          setAuthor={setUAuthor}
+          handleSubmit={handleSubmit}
+          label={label}
+        ></FormAuthor>
+      )}
     </div>
   )
 }

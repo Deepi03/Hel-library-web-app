@@ -8,7 +8,7 @@ export const fetchBooks = createAsyncThunk("fetchBooks", async () => {
       "https://hel-library-web-app.netlify.app/assets/books.json"
     ) */
     const res = await fetch("http://localhost:8080/api/v1/books")
-    const books = await res.json()
+    const books: BookDto = await res.json()
     if (!res.ok) {
       throw new Error("Something went wrong")
     }
@@ -50,8 +50,49 @@ export const createBook = createAsyncThunk(
       if (!res.ok) {
         throw new Error("Something went wrong")
       }
-      console.log("res", res.json())
       return createdBook
+    } catch (error) {
+      return error
+    }
+  }
+)
+
+export const updateBookById = createAsyncThunk(
+  "updateBookById",
+  async (book: BookDto) => {
+    try {
+      const res = await fetch(`http://localhost:8080/api/v1/books/${book.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(book)
+      })
+      const updatedBook = await res.json()
+      if (!res.ok) {
+        throw new Error("Something went wromgh")
+      }
+      return updatedBook
+    } catch (error) {
+      return error
+    }
+  }
+)
+
+export const deleteBookById = createAsyncThunk(
+  "deleteBookById",
+  async (id: string) => {
+    try {
+      const res = await fetch(`http://localhost:8080/api/v1/books/${id}`, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json"
+        }
+      })
+      if (!res.ok) {
+        throw new Error("something went wrong")
+      }
+      return { id }
     } catch (error) {
       return error
     }
