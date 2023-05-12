@@ -191,12 +191,12 @@ const bookSlice = createSlice({
         })
       }
     },
-    /*  filterBooksByGenre(state, action) {
+    filterBooksByGenre(state, action) {
       const genreId = action.payload
       state.filterBooksByGenre = state.items.filter(
-        (item) => item.genreId === genreId
+        (item) => item.genre === genreId
       )
-    }, */
+    },
     deleteBook(state, action) {
       state.items = state.items.filter((book) => {
         return book.id !== action.payload.id
@@ -262,6 +262,6 @@ export const {
   deleteBook,
   singleBookFilter,
   sortBookByTitle,
-  //filterBooksByGenre,
+  filterBooksByGenre,
   sortBookByAvailable
 } = bookSlice.actions

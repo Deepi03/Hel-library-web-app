@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit"
 
-import { authorsReducer } from "./reducers/authorsReducer"
-import { booksReducer } from "./reducers/booksReducer"
-import { genresReducer } from "./reducers/genresReducer"
-import { usersReducer } from "./reducers/usersReducer"
+import { authorsReducer } from "./slices/authorSlice"
+import { booksReducer } from "./slices/bookSlice"
+import { genresReducer } from "./slices/genreSlice"
+import { usersReducer } from "./slices/userSlice"
 
 export const store = configureStore({
   reducer: {

@@ -17,12 +17,12 @@ export const initialBookstate: BookDto = {
   isbn: "",
   title: "",
   description: "",
-  authorId: "",
+  author: "",
   publishedDate: "",
   publisher: "",
   available: true,
   cover: "",
-  genreId: ""
+  genre: ""
 }
 
 export const initialAuthorState = {

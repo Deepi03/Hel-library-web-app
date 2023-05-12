@@ -12,7 +12,7 @@ import {
 } from "@mui/material"
 import { LocalizationProvider } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
-import dayjs, { Dayjs } from "dayjs"
+import dayjs from "dayjs"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { FormEventHandler } from "react"
 
@@ -172,24 +172,6 @@ export const BookForm = ({
               }
             />
           </Box>
-          {/* <Box mb={2}>
-            <TextField
-              required
-              type="date"
-              name="publishDate"
-              id="publish-date-edit"
-              variant="outlined"
-              color="secondary"
-              onChange={(e) =>
-                setBook({
-                  ...book,
-                  publishedDate: e.target.value
-                })
-              }
-              defaultValue={book?.publishedDate}
-              fullWidth
-              sx={{ mb: 4 }}
-            /> */}
           <Box mb={2}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker

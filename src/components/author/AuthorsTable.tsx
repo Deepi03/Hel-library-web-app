@@ -14,10 +14,11 @@ import SortIcon from "@mui/icons-material/Sort"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+
 import { useAdmin } from "../../hook/useAdmin"
-import { sortAuthorByName } from "../../redux/reducers/authorsReducer"
+import { sortAuthorByName } from "../../redux/slices/authorSlice"
 import { AppDispatch, RootState } from "../../redux/store"
-import { Author, Book, BookDto } from "../../types_variables/types"
+import { Author, BookDto } from "../../types_variables/types"
 import "./AuthorsTable.css"
 import { deleteAuthorById } from "../../redux/middlewares/authorThunk"
 

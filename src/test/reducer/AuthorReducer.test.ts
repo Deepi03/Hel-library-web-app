@@ -2,7 +2,7 @@
 import createTestStore from "../utils/testStore"
 import { authors } from "../fixtures/testAuthors"
 import { fetchAuthors } from "../../redux/middlewares/authorThunk"
-import { sortAuthorByName } from "../../redux/reducers/authorsReducer"
+import { sortAuthorByName } from "../../redux/slices/authorSlice"
 
 let store = createTestStore()
 

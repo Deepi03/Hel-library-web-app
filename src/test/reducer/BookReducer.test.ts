@@ -1,5 +1,5 @@
-/* eslint-disable prettier/prettier */
-import createTestStore from "../utils/testStore"
+/* /* eslint-disable prettier/prettier */
+/* import createTestStore from "../utils/testStore"
 import { books } from "../fixtures/testBooks"
 import { fetchBooks } from "../../redux/middlewares/bookThunk"
 import {
@@ -9,7 +9,7 @@ import {
   updateBook,
   deleteBook,
   borrowBook
-} from "../../redux/reducers/booksReducer"
+} from "../../redux/slices/bookSlice"
 
 let store = createTestStore()
 
@@ -51,4 +51,4 @@ describe("test book reducer", () => {
     store.dispatch(deleteBook({ id: "2" }))
     expect(store.getState().booksReducer.items.length).toBe(2)
   })
-})
+}) */

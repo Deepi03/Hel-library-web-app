@@ -8,7 +8,7 @@ import { updateBookById } from "../../redux/middlewares/bookThunk"
 
 import { AppDispatch, RootState } from "../../redux/store"
 import { initialBookstate } from "../../types_variables/constants"
-import { Book, BookDto } from "../../types_variables/types"
+import { BookDto } from "../../types_variables/types"
 import { BookForm } from "./BookForm"
 import "./UpdateBook.css"
 
@@ -18,14 +18,13 @@ export const UpdateBook = () => {
   const { items: authors } = useSelector((state: RootState) => state.author)
   const { items: genres } = useSelector((state: RootState) => state.genre)
   const { bookId } = useParams()
-  const book: BookDto | undefined = books.find((bo) => bookId === bo.id)
-  console.log("incoming book from update", book)
   const [uBook, setUBook] = useState<BookDto>(initialBookstate)
-  const label = "Update Book"
   const navigate = useNavigate()
+  const book: BookDto | undefined = books.find((bo) => bookId === bo.id)
+  const label = "Update Book"
+
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    console.log("updated book tsx", uBook)
     if (uBook) {
       dispatch(updateBookById(uBook))
     }
@@ -33,10 +32,6 @@ export const UpdateBook = () => {
       navigate("/books")
     }, 300)
   }
-
-  useEffect(() => {
-    console.log("on change", uBook)
-  }, [uBook])
 
   return (
     <div>

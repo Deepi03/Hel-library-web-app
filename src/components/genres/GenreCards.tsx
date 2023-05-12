@@ -17,8 +17,8 @@ import {
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-//import { filterBooksByGenre } from "../../redux/reducers/booksReducer"
 
+import { filterBooksByGenre } from "../../redux/slices/bookSlice"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Genre } from "../../types_variables/types"
 
@@ -35,20 +35,19 @@ const style = {
 }
 export const GenreCards = ({ genres }: { genres: Genre[] }) => {
   const dispatch = useDispatch<AppDispatch>()
-
   const { filterBooksByGenre: books } = useSelector(
     (state: RootState) => state.book
   )
   const [open, setOpen] = useState(false)
 
-  /* const handleOpen = (genreId: string) => {
+  const handleOpen = (genreId: string) => {
     if (genreId) {
       dispatch(filterBooksByGenre(genreId))
       setOpen(true)
     } else {
       setOpen(false)
     }
-  } */
+  }
   const handleClose = () => setOpen(false)
 
   return (

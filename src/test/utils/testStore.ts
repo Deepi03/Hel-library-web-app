@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit"
-import { authorsReducer } from "../../redux/reducers/authorsReducer"
-import { booksReducer } from "../../redux/reducers/booksReducer"
-import { genresReducer } from "../../redux/reducers/genresReducer"
-import { usersReducer } from "../../redux/reducers/usersReducer"
+simport { configureStore } from "@reduxjs/toolkit"
+import { authorsReducer } from "../../redux/slices/authorSlice"
+import { booksReducer } from "../../redux/slices/bookSlice"
+import { genresReducer } from "../../redux/slices/genreSlice"
+import { usersReducer } from "../../redux/slices/userSlice"
 
 const createTestStore = () => {
   const store = configureStore({

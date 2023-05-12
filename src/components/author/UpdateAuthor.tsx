@@ -14,11 +14,11 @@ import { FormAuthor } from "./FormAuthor"
 export const UpdateAuthor = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { items: authors } = useSelector((state: RootState) => state.author)
-  const label = "Update Author"
   const { authorId } = useParams()
   const [uAuthor, setUAuthor] = useState<Author>(initialAuthorState)
-  const author = authors.find((au) => authorId === au.id)
   const navigate = useNavigate()
+  const author = authors.find((au) => authorId === au.id)
+  const label = "Update Author"
 
   const handleSubmit = (e: any) => {
     e.preventDefault()

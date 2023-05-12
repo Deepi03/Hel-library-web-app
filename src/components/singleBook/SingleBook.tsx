@@ -11,7 +11,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 
-import { borrowBook } from "../../redux/reducers/booksReducer"
+import { borrowBook } from "../../redux/slices/bookSlice"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Book } from "../../types_variables/types"
 import { Login } from "../login/Login"
@@ -21,15 +21,12 @@ export const SingleBook = () => {
   const { bookId } = useParams()
   const dispatch = useDispatch<AppDispatch>()
   const { isLoggedIn, item } = useSelector((state: RootState) => state.user)
-  const userId = item?.id
-
   const singleBook = useSelector((state: RootState) =>
     state.book.items.find((book) => book.id === bookId)
   )
   const { items: authors } = useSelector((state: RootState) => state.author)
-
   const [days, setDays] = useState(30)
-
+  const userId = item?.id
   const handleBorrowBook = (book: Book) => {
     dispatch(borrowBook({ book, userId, days }))
   }
@@ -47,7 +44,7 @@ export const SingleBook = () => {
                 {singleBook.title} <small className="by">by</small>{" "}
                 <small className="author">
                   {
-                    authors.find((author) => author.id === singleBook.authorId)
+                    authors.find((author) => author.id === singleBook.author)
                       ?.name
                   }
                 </small>
@@ -64,7 +61,7 @@ export const SingleBook = () => {
               </div>
               <div className="publisher-date">
                 <i>Published Date</i>
-                <span>{singleBook.publishedDate}</span>
+                <span>{singleBook.publishedDate.substring(0, 10)}</span>
               </div>
             </div>
             <div className="description">
@@ -72,7 +69,7 @@ export const SingleBook = () => {
             </div>
             {isLoggedIn ? (
               <div style={{ display: "flex", gap: "2rem" }}>
-                {singleBook.status && (
+                {singleBook.available && (
                   <Box mb={2} sx={{ mt: "2rem", ml: "2rem" }}>
                     <FormControl fullWidth>
                       <InputLabel id="days">No. of days</InputLabel>

@@ -6,17 +6,18 @@ import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../redux/store"
 import "./Profile.css"
 import { Book } from "../../types_variables/types"
-import { returnBook } from "../../redux/reducers/booksReducer"
+import { returnBook } from "../../redux/slices/bookSlice"
 import { useAdmin } from "../../hook/useAdmin"
 
 export const Profile = () => {
   const { item: user } = useSelector((state: RootState) => state.user)
   const { items: books } = useSelector((state: RootState) => state.book)
   const isAdmin = useAdmin()
-  const dispatch = useDispatch<AppDispatch>()
   const borrowedBooks: Book[] = books.filter(
     (book) => book.borrowerId === user?.id
   )
+  const dispatch = useDispatch<AppDispatch>()
+
   const handleReturn = (book: Book) => {
     dispatch(returnBook(book))
   }

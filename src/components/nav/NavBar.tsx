@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import MenuIcon from "@mui/icons-material/Menu"
 
-import { logout } from "../../redux/reducers/usersReducer"
+import { logout } from "../../redux/slices/userSlice"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Login } from "../login/Login"
 import {
@@ -29,7 +29,6 @@ export const NavBar = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
-
   const { isLoggedIn, item: user } = useSelector((state: RootState) => {
     return state.user
   })

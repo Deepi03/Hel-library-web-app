@@ -12,11 +12,10 @@ import { useNavigate } from "react-router-dom"
 import { useAdmin } from "../../hook/useAdmin"
 import {
   borrowBook,
-  deleteBook,
   singleBookFilter,
   sortBookByAvailable,
   sortBookByTitle
-} from "../../redux/reducers/booksReducer"
+} from "../../redux/slices/bookSlice"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Book, BookDto } from "../../types_variables/types"
 import "./Books.css"
@@ -26,7 +25,6 @@ import { deleteBookById } from "../../redux/middlewares/bookThunk"
 export const BooksTable = ({ books }: { books: BookDto[] }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-
   const isAdmin = useAdmin()
   const { items: authors } = useSelector((state: RootState) => state.author)
   const { isLoggedIn, item } = useSelector((state: RootState) => state.user)
@@ -51,10 +49,10 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
     navigate("/addBook")
   }
   const handleSortByTitle = () => {
-    dispatch(sortBookByTitle(books))
+    dispatch(sortBookByTitle())
   }
   const handleSortByAvailable = () => {
-    dispatch(sortBookByAvailable(books))
+    dispatch(sortBookByAvailable())
   }
   return (
     <div className="books-table">

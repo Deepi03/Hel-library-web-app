@@ -17,8 +17,9 @@ export const AddBook = () => {
   const [book, setBook] = useState<BookDto>(initialBookstate)
   const { items: authors } = useSelector((state: RootState) => state.author)
   const { items: genres } = useSelector((state: RootState) => state.genre)
-  const label = "Create Book"
   const navigate = useNavigate()
+
+  const label = "Create Book"
   const handleSubmit = (e: any) => {
     e.preventDefault()
     console.log("added book tsx", book)

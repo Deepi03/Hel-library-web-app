@@ -4,7 +4,7 @@ import SearchIcon from "@mui/icons-material/Search"
 
 import { AppDispatch, RootState } from "../../redux/store"
 import { useEffect, useState } from "react"
-import { search } from "../../redux/reducers/booksReducer"
+import { search } from "../../redux/slices/bookSlice"
 
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState("")
