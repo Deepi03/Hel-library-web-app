@@ -1,38 +1,38 @@
 [
   {
-    "id": "13",
+    "id": "db9f9b2e-669e-4fe3-a050-748a4cc3437d",
     "name": "fantasy",
     "description": "Fantasy encompasses a huge part of the book world. It’s one of the most popular book genres out there—a personal favorite of mine to read and write.",
-    "cover": "https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U"
+    "coverImage": "https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U"
   },
   {
-    "id": "12",
+    "id": "ada0114a-f706-4d78-a2ec-1f437331f2e4",
     "name": "children fantasy",
     "description": " Children Fantasy encompasses a huge part of the book world. It’s one of the most popular book genres out there—a personal favorite of mine to read and write.",
-    "cover": "https://fastly.picsum.photos/id/287/200/300.jpg?hmac=9JSSeZMseJ8l_WTFAMmF3HXoyYmKFzQxmagpyWBefTA"
+    "coverImage": "https://fastly.picsum.photos/id/287/200/300.jpg?hmac=9JSSeZMseJ8l_WTFAMmF3HXoyYmKFzQxmagpyWBefTA"
   },
   {
-    "id": "14",
+    "id": "9b036236-c28b-400e-b1d8-8b2c64a7b0b6",
     "name": "sci-fiction",
     "description": "Sci-fi encompasses a huge part of the book world. It’s one of the most popular book genres out there—a personal favorite of mine to read and write.",
-    "cover": "https://fastly.picsum.photos/id/532/200/300.jpg?hmac=77wsdhKY-O9QmZj8Fmkuc_h3fj6nJXCxQcXCRhX4Vos"
+    "coverImage": "https://fastly.picsum.photos/id/532/200/300.jpg?hmac=77wsdhKY-O9QmZj8Fmkuc_h3fj6nJXCxQcXCRhX4Vos"
   },
   {
-    "id": "09",
+    "id": "13dda229-d10d-4fd9-a5e2-ae05c22e65da",
     "name": "thriller",
     "description": "Thriller encompasses a huge part of the book world. It’s one of the most popular book genres out there—a personal favorite of mine to read and write.",
-    "cover": "https://fastly.picsum.photos/id/173/200/300.jpg?hmac=9Ed5HxHOL3tFCOiW6UHx6a3hVksxDWc7L7p_WzN9N9Q"
+    "coverImage": "https://fastly.picsum.photos/id/173/200/300.jpg?hmac=9Ed5HxHOL3tFCOiW6UHx6a3hVksxDWc7L7p_WzN9N9Q"
   },
   {
-    "id": "10",
+    "id": "5b20fb70-71c4-4205-a7ba-aa286c3913e9",
     "name": "historic",
     "description": "Historic encompasses a huge part of the book world. It’s one of the most popular book genres out there—a personal favorite of mine to read and write.",
-    "cover": "https://fastly.picsum.photos/id/939/200/300.jpg?hmac=cj4OIUh8I6eW-hwT25m1_dCA6ZsAmSYixKCgsbZZmXk"
+    "coverImage": "https://fastly.picsum.photos/id/939/200/300.jpg?hmac=cj4OIUh8I6eW-hwT25m1_dCA6ZsAmSYixKCgsbZZmXk"
   },
   {
-    "id": "20",
+    "id": "9bc59a21-fae7-4922-aa90-051e686835b6",
     "name": "general",
     "description": "Generic encompasses a huge part of the book world. It’s one of the most popular book genres out there—a personal favorite of mine to read and write.",
-    "cover": "https://fastly.picsum.photos/id/772/200/300.jpg?hmac=jap7uDpPOJZv41ksTZ3pa9FnXwuaBUpnni4hYBjZtfM"
+    "coverImage": "https://fastly.picsum.photos/id/772/200/300.jpg?hmac=jap7uDpPOJZv41ksTZ3pa9FnXwuaBUpnni4hYBjZtfM"
   }
 ]

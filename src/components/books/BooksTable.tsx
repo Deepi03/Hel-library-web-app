@@ -97,34 +97,28 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
                 {authors.find((author) => author.id === book.author)?.name}
               </td>
               <td>{book.available ? "Yes" : "No"}</td>
-              {isLoggedIn ? (
-                <td>
-                  {book.available ? (
-                    <IconButton>
-                      <AutoStoriesIcon
-                        sx={{
-                          color: "#323232",
-                          "&:hover": {
-                            boxShadow: "none",
-                            color: "blue"
-                          }
-                        }}
-                        onClick={() => handleBorrowBook(book)}
-                      ></AutoStoriesIcon>
-                    </IconButton>
-                  ) : (
-                    <BlockIcon
-                      sx={{ color: "#323232", textAlign: "center" }}
-                    ></BlockIcon>
-                  )}
-                </td>
-              ) : (
-                <td>
-                  <span>
-                    <Login></Login>
-                  </span>
-                </td>
-              )}
+
+              <td>
+                {book.available ? (
+                  <IconButton>
+                    <AutoStoriesIcon
+                      sx={{
+                        color: "#323232",
+                        "&:hover": {
+                          boxShadow: "none",
+                          color: "blue"
+                        }
+                      }}
+                      onClick={() => handleBorrowBook(book)}
+                    ></AutoStoriesIcon>
+                  </IconButton>
+                ) : (
+                  <BlockIcon
+                    sx={{ color: "#323232", textAlign: "center" }}
+                  ></BlockIcon>
+                )}
+              </td>
+
               <td>
                 <IconButton>
                   <ReadMoreIcon

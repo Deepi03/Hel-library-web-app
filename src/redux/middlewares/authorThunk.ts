@@ -4,7 +4,7 @@ import { Author } from "../../types_variables/types"
 
 export const fetchAuthors = createAsyncThunk("fetchAuthors", async () => {
   try {
-    const res = await fetch("http://localhost:8080/api/v1/authors")
+    const res = await fetch("http://localhost:8080/api/v1/authors/")
     const authors = await res.json()
     if (!res.ok) {
       throw new Error("Something went wrong")
@@ -37,7 +37,7 @@ export const createAuthor = createAsyncThunk(
   "createAuthor",
   async (author: Partial<Author>) => {
     try {
-      const res = await fetch(`http://localhost:8080/api/v1/authors`, {
+      const res = await fetch(`http://localhost:8080/api/v1/admin/addAuthor`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -60,7 +60,7 @@ export const updateAuthorById = createAsyncThunk(
   async (author: Author) => {
     try {
       const res = await fetch(
-        `http://localhost:8080/api/v1/authors/${author.id}`,
+        `http://localhost:8080/api/v1/admin/updateAuthor/${author.id}`,
         {
           method: "PUT",
           headers: {
@@ -83,14 +83,16 @@ export const updateAuthorById = createAsyncThunk(
 export const deleteAuthorById = createAsyncThunk(
   "deleteAuthorById",
   async (id: string) => {
-
     try {
-      const res = await fetch(`http://localhost:8080/api/v1/authors/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json"
+      const res = await fetch(
+        `http://localhost:8080/api/v1/admin/deleteAuthor/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          }
         }
-      })
+      )
       if (!res.ok) {
         throw new Error("something went wrong")
       }

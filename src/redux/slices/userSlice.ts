@@ -1,14 +1,16 @@
+/* eslint-disable prettier/prettier */
 import { createSlice } from "@reduxjs/toolkit"
+import { toast } from "react-toastify"
 
-import { googleUserInitialState } from "../../types_variables/constants"
 import { UsersState } from "../../types_variables/types"
-import { fetchUserDetails } from "../middlewares/googleLogin"
+import { signin, signUp } from "../middlewares/userThunk"
 
 const initialState: UsersState = {
-  item: googleUserInitialState,
+  item: undefined,
   isLoading: false,
   isLoggedIn: false,
-  error: ""
+  error: "",
+  status: ""
 }
 
 const userSlice = createSlice({
@@ -21,17 +23,25 @@ const userSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchUserDetails.pending, (state) => {
+    builder.addCase(signUp.pending, (state) => {
       state.isLoggedIn = false
       state.isLoading = true
     })
-    builder.addCase(fetchUserDetails.fulfilled, (state, action) => {
-      state.item = action.payload
-
-      state.isLoading = false
-      if (state.item) state.isLoggedIn = true
+    builder.addCase(signUp.fulfilled, (state, action: any) => {
+      state.status = action.payload
+      toast.success("User SingUped", {
+        position: "bottom-right"
+      })
     })
-    builder.addCase(fetchUserDetails.rejected, (state, action) => {
+    builder.addCase(signin.fulfilled, (state, action: any) => {
+      console.log("login", action.payload)
+      state.item = action.payload.user
+      state.isLoggedIn = true
+      toast.success("User loggedIn", {
+        position: "bottom-right"
+      })
+    })
+    builder.addCase(signUp.rejected, (state, action) => {
       state.isLoading = false
       state.error = action.error.message
       state.isLoggedIn = false

@@ -1,13 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { Book, BookDto } from "../../types_variables/types"
+import { BookDto } from "../../types_variables/types"
 
 export const fetchBooks = createAsyncThunk("fetchBooks", async () => {
   try {
-    /* const res = await fetch(
-      "https://hel-library-web-app.netlify.app/assets/books.json"
-    ) */
-    const res = await fetch("http://localhost:8080/api/v1/books")
+    const res = await fetch("http://localhost:8080/api/v1/books/")
     const books: BookDto = await res.json()
     if (!res.ok) {
       throw new Error("Something went wrong")

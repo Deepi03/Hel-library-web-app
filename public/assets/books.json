@@ -1,114 +1,90 @@
 [
   {
-    "id": "1",
     "isbn": "413257406-7",
     "title": "Devil's Knot",
     "description": "The Adventures of Sherlock Holmes is a collection of twelve short stories by Arthur Conan Doyle, first published on 14 October 1892. It contains the earliest short stories featuring the consulting detective Sherlock Holmes, which had been published in twelve monthly issues of The Strand Magazine from July 1891 to June 1892. The stories are collected in the same sequence, which is not supported by any fictional chronology. The only characters common to all twelve are Holmes and Dr. Watson and all are related in first-person narrative from Watson's point of view.",
     "publisher": "Tobey Groocock",
-    "authorId": "19",
-    "status": true,
+    "author": "85e37ac3-66eb-47a4-89f5-b7ff7d8d3dc0",
+    "available": true,
     "publishedDate": "2008-09-29",
-    "borrowDate": null,
-    "returnDate": null,
     "cover": "https://fastly.picsum.photos/id/24/200/300.jpg?hmac=UogR0hFxP5yLDwcZpCawObw8Bzm9vnzci_7eMrbqn_s",
-    "genreId": "09"
+    "genre": "13dda229-d10d-4fd9-a5e2-ae05c22e65da"
   },
   {
-    "id": "2",
     "isbn": "001911682-9",
     "title": "Jack and Jill",
     "description": "The Adventures of Sherlock Holmes is a collection of twelve short stories by Arthur Conan Doyle, first published on 14 October 1892. It contains the earliest short stories featuring the consulting detective Sherlock Holmes, which had been published in twelve monthly issues of The Strand Magazine from July 1891 to June 1892. The stories are collected in the same sequence, which is not supported by any fictional chronology. The only characters common to all twelve are Holmes and Dr. Watson and all are related in first-person narrative from Watson's point of view.",
     "publisher": "Conn Domerque",
-    "authorId": "101",
-    "status": false,
+    "author": "f507f2cf-03b0-4538-881e-086a653df6bd",
+    "avaialable": true,
     "publishedDate": "1960-07-18",
-    "borrowDate": null,
-    "returnDate": null,
     "cover": "https://fastly.picsum.photos/id/571/200/300.jpg?hmac=M2JAmSQct67FkQUX0_IWCUClgxf45dexs4oYKhpFDLA",
-    "genreId": "12"
+    "genre": "ada0114a-f706-4d78-a2ec-1f437331f2e4"
   },
   {
-    "id": "100",
     "isbn": "403915692-10",
     "title": "Pride and Prejuidce",
     "description": "The Adventures of Sherlock Holmes is a collection of twelve short stories by Arthur Conan Doyle, first published on 14 October 1892. It contains the earliest short stories featuring the consulting detective Sherlock Holmes, which had been published in twelve monthly issues of The Strand Magazine from July 1891 to June 1892. The stories are collected in the same sequence, which is not supported by any fictional chronology. The only characters common to all twelve are Holmes and Dr. Watson and all are related in first-person narrative from Watson's point of view.",
     "publisher": "Conn Domerque",
-    "authorId": "200",
-    "status": true,
+    "author": "f507f2cf-03b0-4538-881e-086a653df6bd",
+    "available": true,
     "publishedDate": "1960-07-18",
-    "borrowDate": null,
-    "returnDate": null,
     "cover": "https://fastly.picsum.photos/id/571/200/300.jpg?hmac=M2JAmSQct67FkQUX0_IWCUClgxf45dexs4oYKhpFDLA",
-    "genreId": "10"
+    "genre": "9bc59a21-fae7-4922-aa90-051e686835b6"
   },
   {
-    "id": "3",
-    "isbn": "560515519-9",
+    "isbn": "9b036236-c28b-400e-b1d8-8b2c64a7b0b6-9",
     "title": "Trouble Every Day",
     "description": "The Adventures of Sherlock Holmes is a collection of twelve short stories by Arthur Conan Doyle, first published on 14 October 1892. It contains the earliest short stories featuring the consulting detective Sherlock Holmes, which had been published in twelve monthly issues of The Strand Magazine from July 1891 to June 1892. The stories are collected in the same sequence, which is not supported by any fictional chronology. The only characters common to all twelve are Holmes and Dr. Watson and all are related in first-person narrative from Watson's point of view.",
     "publisher": "Hence Wave",
-    "authorId": "19",
-    "status": true,
+    "author": "c3cd711a-0526-495f-9ea5-443295a315b7",
+    "available": true,
     "publishedDate": "2017-09-06",
-    "borrowDate": null,
-    "returnDate": null,
     "cover": "https://fastly.picsum.photos/id/985/200/300.jpg?hmac=lb8fpWYv02mksKzlZbeEoz95iCF79_svqRJetHcEvnQ",
-    "genreId": "14"
+    "genre": "13dda229-d10d-4fd9-a5e2-ae05c22e65da"
   },
   {
-    "id": "4",
     "isbn": "171506184-5",
     "title": "Bridget Jones's Diary",
     "description": "The Adventures of Sherlock Holmes is a collection of twelve short stories by Arthur Conan Doyle, first published on 14 October 1892. It contains the earliest short stories featuring the consulting detective Sherlock Holmes, which had been published in twelve monthly issues of The Strand Magazine from July 1891 to June 1892. The stories are collected in the same sequence, which is not supported by any fictional chronology. The only characters common to all twelve are Holmes and Dr. Watson and all are related in first-person narrative from Watson's point of view.",
     "publisher": "Tobey Groocock",
-    "authorId": "1450",
-    "status": false,
+    "author": "326c1453-d865-41cd-8b0c-00b8109dcf10",
+    "avaialable": true,
     "publishedDate": "2015-09-04",
-    "borrowDate": null,
-    "returnDate": null,
     "cover": "https://fastly.picsum.photos/id/976/200/300.jpg?hmac=s1Uz9fgJv32r8elfaIYn7pLpQXps7X9oYNwC5XirhO8",
-    "genreId": "10"
+    "genre": "5b20fb70-71c4-4205-a7ba-aa286c3913e9"
   },
   {
-    "id": "5",
     "isbn": "703663487-1",
     "title": "Living in Oblivion",
     "description": "The Adventures of Sherlock Holmes is a collection of twelve short stories by Arthur Conan Doyle, first published on 14 October 1892. It contains the earliest short stories featuring the consulting detective Sherlock Holmes, which had been published in twelve monthly issues of The Strand Magazine from July 1891 to June 1892. The stories are collected in the same sequence, which is not supported by any fictional chronology. The only characters common to all twelve are Holmes and Dr. Watson and all are related in first-person narrative from Watson's point of view.",
     "publisher": "Tobey Groocock",
-    "authorId": "1450",
-    "status": true,
+    "author": "b04ac11c-05bb-4dec-9fbc-b7c15c2dd4b4",
+    "available": true,
     "publishedDate": "1959-10-02",
-    "borrowDate": null,
-    "returnDate": null,
     "cover": "https://fastly.picsum.photos/id/175/200/300.jpg?hmac=jzS4h5cKiC2EYjpW11ejlay_4MSHkmfCWei9e7n8cE0",
-    "genreId": "20"
+    "genre": "db9f9b2e-669e-4fe3-a050-748a4cc3437d"
   },
   {
-    "id": "99",
     "isbn": "903663567-7",
     "title": "Little women",
     "description": "The Adventures of Sherlock Holmes is a collection of twelve short stories by Arthur Conan Doyle, first published on 14 October 1892. It contains the earliest short stories featuring the consulting detective Sherlock Holmes, which had been published in twelve monthly issues of The Strand Magazine from July 1891 to June 1892. The stories are collected in the same sequence, which is not supported by any fictional chronology. The only characters common to all twelve are Holmes and Dr. Watson and all are related in first-person narrative from Watson's point of view.",
     "publisher": "Robinson",
-    "authorId": "199",
-    "status": true,
-    "publishedDate": "1959-2-9",
-    "borrowDate": null,
-    "returnDate": null,
+    "author": "5bf4863a-79c7-4db1-a8db-03cac864ce0a",
+    "available": true,
+    "publishedDate": "1959-02-09",
     "cover": "https://fastly.picsum.photos/id/726/200/300.jpg?hmac=9WbqvM6W7D0BwVEyvVbC2xL9ulSQpXyoTcL3O89modM",
-    "genreId": "13"
+    "genre": "5b20fb70-71c4-4205-a7ba-aa286c3913e9"
   },
   {
-    "id": "1222",
     "isbn": "110366567-6",
     "title": "Kalevala",
     "description": "The Kalevala (Finnish: Kalevala, IPA: [ˈkɑleʋɑlɑ]) is a 19th-century work of epic poetry compiled by Elias Lönnrot from Karelian and Finnish oral folklore and mythology,[1] telling an epic story about the Creation of the Earth, describing the controversies and retaliatory voyages between the peoples of the land of Kalevala called Väinölä and the land of Pohjola and their various protagonists and antagonists, as well as the construction and robbery of the epic mythical wealth-making machine Sampo.[2]",
     "publisher": "Kukkonen",
-    "authorId": "1000",
-    "status": true,
+    "author": "85e37ac3-66eb-47a4-89f5-b7ff7d8d3dc0",
+    "available": true,
     "publishedDate": "1859-10-02",
-    "borrowDate": null,
-    "returnDate": null,
     "cover": "https://fastly.picsum.photos/id/187/200/300.jpg?hmac=RGKQU40hHnXm-pBoMbUE5TDcy26DLc6CdcqednFcmB0",
-    "genreId": "20"
+    "genre": "db9f9b2e-669e-4fe3-a050-748a4cc3437d"
   }
 ]

@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-export type Book = {
+/* export type Book = {
   id?: string
   isbn: string
   title: string
@@ -13,7 +13,7 @@ export type Book = {
   returnDate: null | string
   cover: string
   genre: Genre
-}
+} */
 export type BookDto = {
   id?: string
   genre: string
@@ -26,7 +26,7 @@ export type BookDto = {
   description: string
   available: boolean
 }
-export type PartialBook = Partial<Book>
+/* export type PartialBook = Partial<Book> */
 export type PartialAuthor = Partial<Author>
 
 export type Author = {
@@ -66,24 +66,16 @@ export type BookState = {
   isBorrowed: boolean
 }
 export type UsersState = {
-  item: GoogleLoggedInUser | undefined
+  item: User | undefined
   isLoggedIn: boolean
   isLoading: boolean
   error: string | undefined
+  status: string
 }
 
-export type GoogleLoggedInUser = {
-  email: string
-  family_name: string
-  given_name: string
-  id: string
-  locale: string
-  name: string
-  picture: string
-  verified_email: string
-}
-
-export type Borrow = {
-  user: GoogleLoggedInUser | undefined
-  books: Book[]
+export type User = {
+  id?: string
+  username: string
+  password: string
+  role?: "ADMIN" | "USER"
 }

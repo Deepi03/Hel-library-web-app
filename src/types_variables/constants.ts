@@ -1,15 +1,10 @@
+/* eslint-disable prettier/prettier */
 import { v4 as uuid } from "uuid"
-import { Book, BookDto } from "./types"
+import { BookDto } from "./types"
 
-export const googleUserInitialState = {
-  email: "",
-  family_name: "",
-  given_name: "",
-  id: "",
-  locale: "",
-  name: "",
-  picture: "",
-  verified_email: ""
+export const initialUseState = {
+  username: "",
+  password: ""
 }
 
 export const initialBookstate: BookDto = {

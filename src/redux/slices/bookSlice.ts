@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
-import { Author, Book, BookState, Genre } from "../../types_variables/types"
+import { Author, BookState, Genre } from "../../types_variables/types"
 import {
   booksByAuthor,
   createBook,
@@ -25,11 +25,6 @@ const bookSlice = createSlice({
   name: "booksReducer",
   initialState: initialState,
   reducers: {
-    /* addBook(state, action) {
-      const book: Book = action.payload
-      state.items = [book, ...state.items]
-      
-    }, */
     updateBook(state, action) {
       const {
         id,

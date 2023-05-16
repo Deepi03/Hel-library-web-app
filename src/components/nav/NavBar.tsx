@@ -10,6 +10,7 @@ import {
   AppBar,
   Avatar,
   Box,
+  Button,
   Container,
   IconButton,
   Menu,
@@ -29,10 +30,15 @@ export const NavBar = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
-  const { isLoggedIn, item: user } = useSelector((state: RootState) => {
+  const {
+    isLoggedIn,
+    item: user,
+    status
+  } = useSelector((state: RootState) => {
     return state.user
   })
 
+  alert(isLoggedIn)
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   }
@@ -189,7 +195,7 @@ export const NavBar = () => {
             {isLoggedIn ? (
               <>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src={user?.picture} />
+                  <Avatar alt="Remy Sharp" src={user?.username} />
                 </IconButton>
                 <Menu
                   sx={{ mt: "45px" }}
@@ -239,7 +245,20 @@ export const NavBar = () => {
                 </Menu>
               </>
             ) : (
-              <Login></Login>
+              <Button
+                onClick={() => navigate("/signUp")}
+                variant="contained"
+                color="primary"
+                fullWidth
+                sx={{
+                  bgcolor: "#DDD0C8",
+                  color: "btn.text",
+                  boxShadow:
+                    "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)"
+                }}
+              >
+                Login
+              </Button>
             )}
           </Box>
         </Toolbar>
