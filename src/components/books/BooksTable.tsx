@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Avatar, IconButton } from "@mui/material"
+import { Avatar, Button, IconButton } from "@mui/material"
 import ReadMoreIcon from "@mui/icons-material/ReadMore"
 import UpdateIcon from "@mui/icons-material/Update"
 import DeleteIcon from "@mui/icons-material/Delete"
@@ -9,7 +9,7 @@ import SortIcon from "@mui/icons-material/Sort"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { useAdmin } from "../../hook/useAdmin"
+import { checkAdmin } from "../../hook/checkAdmin"
 import {
   borrowBook,
   singleBookFilter,
@@ -17,22 +17,29 @@ import {
   sortBookByTitle
 } from "../../redux/slices/bookSlice"
 import { AppDispatch, RootState } from "../../redux/store"
-import { Book, BookDto } from "../../types_variables/types"
+import { Book, BookDto, User } from "../../types_variables/types"
 import "./Books.css"
-import { Login } from "../login/Login"
 import { deleteBookById } from "../../redux/middlewares/bookThunk"
+import { LoginButton } from "../LoginButton"
+import { getToken, getUserByToken } from "../../hook/getToken"
 
 export const BooksTable = ({ books }: { books: BookDto[] }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const isAdmin = useAdmin()
+  const isAdmin = checkAdmin()
   const { items: authors } = useSelector((state: RootState) => state.author)
-  const { isLoggedIn, item } = useSelector((state: RootState) => state.user)
-  const userId = item?.id
+  const { item: user } = useSelector((state: RootState) => state.user)
+  const token = getToken()
+  let loggedUser: User
+  if (token) {
+    const user = getUserByToken(token)
+    if (user) loggedUser = user
+  }
+  const userId = user?.id
   const handleUpdate = (id: string) => {
     navigate(`/${id}/updateBook`)
   }
-  const handleDelete = (book: Book) => {
+  const handleDelete = (book: BookDto) => {
     if (book.id) {
       dispatch(deleteBookById(book.id))
     }
@@ -56,7 +63,7 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
   }
   return (
     <div className="books-table">
-      {!isAdmin && (
+      {isAdmin && (
         <button className="add-btn" onClick={() => handleAddBook()}>
           Add Book
         </button>
@@ -77,8 +84,8 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
             </th>
             <th>Borrow</th>
             <th>Detail</th>
-            {!isAdmin && <th>Update</th>}
-            {!isAdmin && <th>Delete</th>}
+            {isAdmin && <th>Update</th>}
+            {isAdmin && <th>Delete</th>}
           </tr>
         </thead>
         <tbody>
@@ -97,27 +104,30 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
                 {authors.find((author) => author.id === book.author)?.name}
               </td>
               <td>{book.available ? "Yes" : "No"}</td>
-
-              <td>
-                {book.available ? (
-                  <IconButton>
-                    <AutoStoriesIcon
-                      sx={{
-                        color: "#323232",
-                        "&:hover": {
-                          boxShadow: "none",
-                          color: "blue"
-                        }
-                      }}
-                      onClick={() => handleBorrowBook(book)}
-                    ></AutoStoriesIcon>
-                  </IconButton>
-                ) : (
-                  <BlockIcon
-                    sx={{ color: "#323232", textAlign: "center" }}
-                  ></BlockIcon>
-                )}
-              </td>
+              {loggedUser ? (
+                <td>
+                  {book.available ? (
+                    <IconButton>
+                      <AutoStoriesIcon
+                        sx={{
+                          color: "#323232",
+                          "&:hover": {
+                            boxShadow: "none",
+                            color: "blue"
+                          }
+                        }}
+                        onClick={() => handleBorrowBook(book)}
+                      ></AutoStoriesIcon>
+                    </IconButton>
+                  ) : (
+                    <BlockIcon
+                      sx={{ color: "#323232", textAlign: "center" }}
+                    ></BlockIcon>
+                  )}
+                </td>
+              ) : (
+                <LoginButton />
+              )}
 
               <td>
                 <IconButton>
@@ -133,7 +143,7 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
                   ></ReadMoreIcon>
                 </IconButton>
               </td>
-              {!isAdmin && (
+              {isAdmin && (
                 <td>
                   <IconButton>
                     <UpdateIcon
@@ -153,7 +163,7 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
                   </IconButton>
                 </td>
               )}
-              {!isAdmin && (
+              {isAdmin && (
                 <td>
                   <IconButton>
                     <DeleteIcon

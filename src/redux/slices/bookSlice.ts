@@ -214,12 +214,19 @@ const bookSlice = createSlice({
       state.isLoading = false
       state.error = action.error.message
     })
+    builder.addCase(createBook.pending, (state) => {
+      state.isLoading = true
+    })
     builder.addCase(createBook.fulfilled, (state, action) => {
       state.isLoading = false
       state.items = [...state.items, action.payload]
       toast.success("Book Created", {
         position: "bottom-right"
       })
+    })
+    builder.addCase(createBook.rejected, (state, action) => {
+      state.isLoading = false
+      state.error = action.error.message
     })
     builder.addCase(booksByAuthor.fulfilled, (state, action) => {
       state.isLoading = false

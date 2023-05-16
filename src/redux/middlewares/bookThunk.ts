@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { createAsyncThunk } from "@reduxjs/toolkit"
+import { getToken } from "../../hook/getToken"
 import { BookDto } from "../../types_variables/types"
 
 export const fetchBooks = createAsyncThunk("fetchBooks", async () => {
@@ -35,12 +36,13 @@ export const booksByAuthor = createAsyncThunk(
 export const createBook = createAsyncThunk(
   "createBook",
   async (book: BookDto) => {
-    console.log("Async thubk", book)
     try {
-      const res = await fetch(`http://localhost:8080/api/v1/books`, {
+      const token = getToken()
+      const res = await fetch(`http://localhost:8080/api/v1/admin/addBook`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(book)
       })
@@ -48,6 +50,7 @@ export const createBook = createAsyncThunk(
       if (!res.ok) {
         throw new Error("Something went wrong")
       }
+      console.log("book add thunk", createdBook)
       return createdBook
     } catch (error) {
       return error
@@ -59,13 +62,18 @@ export const updateBookById = createAsyncThunk(
   "updateBookById",
   async (book: BookDto) => {
     try {
-      const res = await fetch(`http://localhost:8080/api/v1/books/${book.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(book)
-      })
+      const token = getToken()
+      const res = await fetch(
+        `http://localhost:8080/api/v1/admin/updateBook/${book.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(book)
+        }
+      )
       const updatedBook = await res.json()
       if (!res.ok) {
         throw new Error("Something went wromgh")
@@ -81,12 +89,17 @@ export const deleteBookById = createAsyncThunk(
   "deleteBookById",
   async (id: string) => {
     try {
-      const res = await fetch(`http://localhost:8080/api/v1/books/${id}`, {
-        method: "DELETE",
-        headers: {
-          "content-type": "application/json"
+      const token = getToken()
+      const res = await fetch(
+        `http://localhost:8080/api/v1/admin/deleteBook/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
         }
-      })
+      )
       if (!res.ok) {
         throw new Error("something went wrong")
       }

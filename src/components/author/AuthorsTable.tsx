@@ -15,7 +15,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { useAdmin } from "../../hook/useAdmin"
+import { checkAdmin } from "../../hook/checkAdmin"
 import { sortAuthorByName } from "../../redux/slices/authorSlice"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Author, BookDto } from "../../types_variables/types"
@@ -40,7 +40,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [info, setInfo] = useState("")
-  const isAdmin = useAdmin()
+  const isAdmin = checkAdmin()
   const handleOpen = (author: Author) => {
     if (author.info) {
       setInfo(author.info)

@@ -24,7 +24,7 @@ import {
 import { BookRounded } from "@mui/icons-material"
 import { SyntheticEvent, useState } from "react"
 import { Search } from "../search/Search"
-import { getToken, getUserByToken } from "../../hook/getToken"
+import { getToken } from "../../hook/getToken"
 import { LoginButton } from "../LoginButton"
 
 export const NavBar = () => {
@@ -37,7 +37,6 @@ export const NavBar = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
   const token = getToken()
-  const loggedUser = getUserByToken(token)
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const [value, setValue] = useState(currentTab)
@@ -189,7 +188,7 @@ export const NavBar = () => {
 
           {/* Nav bar login or avatar placer holder */}
           <Box sx={{ flexGrow: 0 }}>
-            {loggedUser ? (
+            {isLoggedIn ? (
               <>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src={user?.username} />

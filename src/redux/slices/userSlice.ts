@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
+import { getToken, getUserByToken } from "../../hook/getToken"
 
 import { UsersState } from "../../types_variables/types"
 import { signin, signUp } from "../middlewares/userThunk"
@@ -20,6 +21,7 @@ const userSlice = createSlice({
     logout(state) {
       state.isLoggedIn = false
       state.item = undefined
+      localStorage.clear()
     }
   },
   extraReducers: (builder) => {
@@ -34,9 +36,16 @@ const userSlice = createSlice({
       })
     })
     builder.addCase(signin.fulfilled, (state, action: any) => {
-      console.log("login", action.payload)
       state.item = action.payload.user
-      state.isLoggedIn = true
+      localStorage.setItem("token", action.payload.token)
+      const foundToken = getToken()
+      if (foundToken) {
+        const user = getUserByToken(foundToken)
+        if (user) {
+          state.item = user
+        }
+      }
+
       toast.success("User loggedIn", {
         position: "bottom-right"
       })

@@ -2,7 +2,7 @@
 
 import { Box, Container, Typography } from "@mui/material"
 import { useSelector } from "react-redux"
-import { useAdmin } from "../../hook/useAdmin"
+import { checkAdmin } from "../../hook/checkAdmin"
 
 import { RootState } from "../../redux/store"
 import { GenreCards } from "./GenreCards"
@@ -11,7 +11,7 @@ export const Genres = () => {
   const { items: genres } = useSelector((state: RootState) => state.genre)
   const { filteredGenres } = useSelector((state: RootState) => state.book)
 
-  const isAdmin = useAdmin()
+  const isAdmin = checkAdmin()
 
   return (
     <div>

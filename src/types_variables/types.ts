@@ -76,6 +76,16 @@ export type UsersState = {
 export type User = {
   id?: string
   username: string
-  password: string
-  role?: "ADMIN" | "USER"
+  password?: string
+  role?: Role
+}
+enum Role {
+  ADMIN = "ADMIN",
+  USER = "USER"
+}
+
+export type DecodedUser = {
+  role: Role
+  user_id: string
+  username: string
 }

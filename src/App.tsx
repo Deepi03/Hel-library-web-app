@@ -19,16 +19,25 @@ import { Profile } from "./components/profile/Profile"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { fetchBooks } from "./redux/middlewares/bookThunk"
-import { useAdmin } from "./hook/useAdmin"
+import { checkAdmin } from "./hook/checkAdmin"
 import { fetchAuthors } from "./redux/middlewares/authorThunk"
 import { Footer } from "./components/footer/Footer"
 import { fetchGenres } from "./redux/middlewares/genreThunk"
+import { getToken, getUserByToken } from "./hook/getToken"
+import { User } from "./types_variables/types"
 
 function App() {
   const { isLoggedIn } = useSelector((state: RootState) => {
     return state.user
   })
-  const isAdmin = useAdmin()
+  const isAdmin = checkAdmin()
+  const token = getToken()
+  let loggedUser: User | undefined = undefined
+  if (token) {
+    const user = getUserByToken(token)
+    if (user) loggedUser = user
+  }
+
   const dispatch = useDispatch<AppDispatch>()
 
   useEffect(() => {
@@ -50,14 +59,14 @@ function App() {
           </Route>
           <Route
             path="/signUp"
-            element={isLoggedIn ? <Navigate to="/" /> : <Login />}
+            element={loggedUser ? <Navigate to="/" /> : <Login />}
           />
           <Route path="/authors">
             <Route path="" element={<Authors />} />
           </Route>
           <Route
             path="/profile"
-            element={isLoggedIn ? <Profile /> : <Navigate to="/" />}
+            element={loggedUser ? <Profile /> : <Navigate to="/" />}
           />
           <Route
             path="/addBook"

@@ -7,12 +7,12 @@ import { AppDispatch, RootState } from "../../redux/store"
 import "./Profile.css"
 import { Book } from "../../types_variables/types"
 import { returnBook } from "../../redux/slices/bookSlice"
-import { useAdmin } from "../../hook/useAdmin"
+import { checkAdmin } from "../../hook/checkAdmin"
 
 export const Profile = () => {
   const { item: user } = useSelector((state: RootState) => state.user)
   const { items: books } = useSelector((state: RootState) => state.book)
-  const isAdmin = useAdmin()
+  const isAdmin = checkAdmin()
   const borrowedBooks: Book[] = books.filter(
     (book) => book.borrowerId === user?.id
   )
@@ -27,8 +27,8 @@ export const Profile = () => {
       {user && (
         <Card className="section" id="services" sx={{ mt: "5rem", p: "7rem" }}>
           <Avatar
-            alt={user.name}
-            src={user.picture}
+            alt={user.username}
+            src={user}
             sx={{ width: 70, height: 70, mt: "1rem" }}
           ></Avatar>
           <Typography
@@ -43,9 +43,8 @@ export const Profile = () => {
             }}
           >
             {" "}
-            {user.name}
+            {user.username}
           </Typography>
-          <i>{user.email}</i>
 
           <Box>
             {borrowedBooks.length > 0 && (
@@ -96,7 +95,6 @@ export const Profile = () => {
                   <td>{book.title}</td>
                   <td>{book.borrowDate}</td>
                   <td>{book.returnDate}</td>
-                  <td>{user?.email}</td>
                 </tr>
               ))}
             </tbody>
