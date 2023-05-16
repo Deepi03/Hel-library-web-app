@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { createAsyncThunk } from "@reduxjs/toolkit"
+import { getToken } from "../../hook/getToken"
 import { Author } from "../../types_variables/types"
 
 export const fetchAuthors = createAsyncThunk("fetchAuthors", async () => {
@@ -20,7 +21,6 @@ export const fetchAuthorById = createAsyncThunk(
   async (id: string) => {
     try {
       const res = await fetch(`http://localhost:8080/api/v1/authors/${id}`)
-
       const author = await res.json()
 
       if (!res.ok) {
@@ -37,10 +37,12 @@ export const createAuthor = createAsyncThunk(
   "createAuthor",
   async (author: Partial<Author>) => {
     try {
+      const token = getToken()
       const res = await fetch(`http://localhost:8080/api/v1/admin/addAuthor`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(author)
       })
@@ -59,12 +61,14 @@ export const updateAuthorById = createAsyncThunk(
   "updateAuthorById",
   async (author: Author) => {
     try {
+      const token = getToken()
       const res = await fetch(
         `http://localhost:8080/api/v1/admin/updateAuthor/${author.id}`,
         {
           method: "PUT",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
           },
           body: JSON.stringify(author)
         }
@@ -84,12 +88,14 @@ export const deleteAuthorById = createAsyncThunk(
   "deleteAuthorById",
   async (id: string) => {
     try {
+      const token = getToken()
       const res = await fetch(
         `http://localhost:8080/api/v1/admin/deleteAuthor/${id}`,
         {
           method: "DELETE",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
           }
         }
       )

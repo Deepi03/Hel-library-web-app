@@ -18,9 +18,10 @@ import { useNavigate } from "react-router-dom"
 import { checkAdmin } from "../../hook/checkAdmin"
 import { sortAuthorByName } from "../../redux/slices/authorSlice"
 import { AppDispatch, RootState } from "../../redux/store"
-import { Author, BookDto } from "../../types_variables/types"
+import { Author, BookDto, User } from "../../types_variables/types"
 import "./AuthorsTable.css"
 import { deleteAuthorById } from "../../redux/middlewares/authorThunk"
+import { getToken, getUserByToken } from "../../hook/getToken"
 
 const style = {
   position: "absolute",
@@ -48,6 +49,12 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
     } else {
       setOpen(false)
     }
+  }
+  const token = getToken()
+  let loggedUser: User
+  if (token) {
+    const user = getUserByToken(token)
+    if (user) loggedUser = user
   }
 
   const handleUpdate = (author: Author) => {
@@ -142,7 +149,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
                   </IconButton>
                 )}
               </td>
-              {!isAdmin && (
+              {isAdmin && (
                 <td>
                   <IconButton>
                     <DeleteIcon
