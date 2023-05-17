@@ -13,7 +13,6 @@ export const signUp = createAsyncThunk("signUp", async (user: User) => {
       body: JSON.stringify(user)
     })
     const message = await res.status
-    console.log("messages", message)
     if (message !== 201) {
       throw new Error("Something went wrong")
     }

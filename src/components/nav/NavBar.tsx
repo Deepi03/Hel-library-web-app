@@ -26,6 +26,7 @@ import { SyntheticEvent, useState } from "react"
 import { Search } from "../search/Search"
 import { getToken, getUserByToken } from "../../hook/getToken"
 import { LoginButton } from "../LoginButton"
+import { User } from "../../types_variables/types"
 
 export const NavBar = () => {
   const currentTab = () => {
@@ -37,14 +38,15 @@ export const NavBar = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
   const token = getToken()
-  const loggedUser = getUserByToken(token)
+  let loggedUser: User | undefined = undefined
+  if (token) {
+    const user = getUserByToken(token)
+    if (user) loggedUser = user
+  }
+
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const [value, setValue] = useState(currentTab)
-  const { isLoggedIn, item: user } = useSelector((state: RootState) => {
-    return state.user
-  })
-
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   }
@@ -192,7 +194,7 @@ export const NavBar = () => {
             {loggedUser ? (
               <>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src={user?.username} />
+                  <Avatar alt="Remy Sharp" />
                 </IconButton>
                 <Menu
                   sx={{ mt: "45px" }}

@@ -11,17 +11,17 @@ import { useNavigate } from "react-router-dom"
 
 import { checkAdmin } from "../../hook/checkAdmin"
 import {
-  borrowBook,
   singleBookFilter,
   sortBookByAvailable,
   sortBookByTitle
 } from "../../redux/slices/bookSlice"
 import { AppDispatch, RootState } from "../../redux/store"
-import { Book, BookDto, User } from "../../types_variables/types"
+import { BookDto, Days, User } from "../../types_variables/types"
 import "./Books.css"
-import { deleteBookById } from "../../redux/middlewares/bookThunk"
+import { deleteBookById, fetchBooks } from "../../redux/middlewares/bookThunk"
 import { LoginButton } from "../LoginButton"
 import { getToken, getUserByToken } from "../../hook/getToken"
+import { borrowBook } from "../../redux/middlewares/transactionThunk"
 
 export const BooksTable = ({ books }: { books: BookDto[] }) => {
   const navigate = useNavigate()
@@ -29,8 +29,9 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
   const isAdmin = checkAdmin()
   const { items: authors } = useSelector((state: RootState) => state.author)
   const { item: user } = useSelector((state: RootState) => state.user)
+
   const token = getToken()
-  let loggedUser: User
+  let loggedUser: User | undefined = undefined
   if (token) {
     const user = getUserByToken(token)
     if (user) loggedUser = user
@@ -44,11 +45,18 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
       dispatch(deleteBookById(book.id))
     }
   }
-  const handleBorrowBook = (book: Book) => {
-    dispatch(borrowBook({ book, userId }))
+  const handleBorrowBook = (bookId: string | undefined) => {
+    const userId = loggedUser?.id
+    const day = Days.THIRTY
+    if (userId && bookId) {
+      dispatch(borrowBook({ bookId, userId, day }))
+      setTimeout(() => {
+        dispatch(fetchBooks())
+      })
+    }
   }
 
-  const handleDisplaySingleBook = (book: Book) => {
+  const handleDisplaySingleBook = (book: BookDto) => {
     navigate(`${book.id}`)
     dispatch(singleBookFilter(book.id))
   }
@@ -116,7 +124,7 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
                             color: "blue"
                           }
                         }}
-                        onClick={() => handleBorrowBook(book)}
+                        onClick={() => handleBorrowBook(book.id)}
                       ></AutoStoriesIcon>
                     </IconButton>
                   ) : (

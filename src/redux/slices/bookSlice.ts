@@ -17,54 +17,13 @@ const initialState: BookState = {
   filteredGenres: [],
   filteredAuthors: [],
   isLoading: false,
-  error: undefined,
-  isBorrowed: false
+  error: undefined
 }
 
 const bookSlice = createSlice({
   name: "booksReducer",
   initialState: initialState,
   reducers: {
-    updateBook(state, action) {
-      const {
-        id,
-        isbn,
-        title,
-        cover,
-        description,
-        publisher,
-        authorId,
-        genreId,
-        publishedDate
-      } = action.payload
-
-      const stateWithUpdatedBook = {
-        ...state,
-        items: state.items.map((book) => {
-          if (id !== book.id) {
-            return book
-          }
-          const bookToBeUpdate = {
-            ...book,
-            isbn: isbn,
-            title: title,
-            cover: cover,
-            description: description,
-            publisher: publisher,
-            authorId: authorId,
-            genreId: genreId,
-            publishedDate: publishedDate
-          }
-          toast.info("Book Updated", {
-            position: "bottom-right"
-          })
-          return bookToBeUpdate
-        })
-      }
-
-      return stateWithUpdatedBook
-    },
-
     singleBookFilter(state, action) {
       const id = action.payload
       const filteredBook = state.items.find((item) => {
@@ -75,7 +34,7 @@ const bookSlice = createSlice({
         singleBook: filteredBook
       }
     },
-    borrowBook(state, action): BookState {
+    /* borrowBook(state, action): BookState {
       const { book, userId, days } = action.payload
       const rDate = new Date()
       return {
@@ -108,8 +67,8 @@ const bookSlice = createSlice({
           }
         })
       }
-    },
-    returnBook(state, action) {
+    }, */
+    /* returnBook(state, action) {
       const { id } = action.payload
       return {
         ...state,
@@ -127,7 +86,7 @@ const bookSlice = createSlice({
           }
         })
       }
-    },
+    }, */
     search(state, action) {
       const genres: Genre[] = action.payload.genres
       const authors: Author[] = action.payload.authors
@@ -191,14 +150,6 @@ const bookSlice = createSlice({
       state.filterBooksByGenre = state.items.filter(
         (item) => item.genre === genreId
       )
-    },
-    deleteBook(state, action) {
-      state.items = state.items.filter((book) => {
-        return book.id !== action.payload.id
-      })
-      toast.warning("Book Deleted", {
-        position: "bottom-right"
-      })
     }
   },
   extraReducers: (builder) => {
@@ -249,17 +200,16 @@ const bookSlice = createSlice({
       state.isLoading = false
       const { id } = action.payload
       state.items = state.items.filter((book) => book.id !== id)
+      toast.warning("Book Deleted", {
+        position: "bottom-right"
+      })
     })
   }
 })
 
 export const booksReducer = bookSlice.reducer
 export const {
-  updateBook,
-  borrowBook,
   search,
-  returnBook,
-  deleteBook,
   singleBookFilter,
   sortBookByTitle,
   filterBooksByGenre,

@@ -6,16 +6,16 @@ import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../redux/store"
 import "./Profile.css"
 import { Book } from "../../types_variables/types"
-import { returnBook } from "../../redux/slices/bookSlice"
+//import { returnBook } from "../../redux/slices/bookSlice"
 import { checkAdmin } from "../../hook/checkAdmin"
 
 export const Profile = () => {
   const { item: user } = useSelector((state: RootState) => state.user)
   const { items: books } = useSelector((state: RootState) => state.book)
   const isAdmin = checkAdmin()
-  const borrowedBooks: Book[] = books.filter(
+  /* const borrowedBooks: Book[] = books.filter(
     (book) => book.borrowerId === user?.id
-  )
+  ) */
   const dispatch = useDispatch<AppDispatch>()
 
   const handleReturn = (book: Book) => {
@@ -46,7 +46,7 @@ export const Profile = () => {
             {user.username}
           </Typography>
 
-          <Box>
+          {/* <Box>
             {borrowedBooks.length > 0 && (
               <table id="books-table">
                 <thead>
@@ -75,7 +75,7 @@ export const Profile = () => {
                 </tbody>
               </table>
             )}
-          </Box>
+          </Box> */}
         </Card>
       )}
       {isAdmin && (
@@ -89,7 +89,7 @@ export const Profile = () => {
                 <th>User</th>
               </tr>
             </thead>
-            <tbody>
+            {/* <tbody>
               {borrowedBooks.map((book) => (
                 <tr key={book.id}>
                   <td>{book.title}</td>
@@ -97,7 +97,7 @@ export const Profile = () => {
                   <td>{book.returnDate}</td>
                 </tr>
               ))}
-            </tbody>
+            </tbody> */}
           </table>
         </Box>
       )}

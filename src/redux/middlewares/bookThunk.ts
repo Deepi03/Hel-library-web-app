@@ -50,7 +50,6 @@ export const createBook = createAsyncThunk(
       if (!res.ok) {
         throw new Error("Something went wrong")
       }
-      console.log("book add thunk", createdBook)
       return createdBook
     } catch (error) {
       return error

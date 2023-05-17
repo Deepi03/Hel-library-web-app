@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit"
 import { authorsReducer } from "./slices/authorSlice"
 import { booksReducer } from "./slices/bookSlice"
 import { genresReducer } from "./slices/genreSlice"
+import { transactionReducer } from "./slices/transactionSlice"
 import { usersReducer } from "./slices/userSlice"
 
 export const store = configureStore({
@@ -10,7 +11,8 @@ export const store = configureStore({
     book: booksReducer,
     author: authorsReducer,
     user: usersReducer,
-    genre: genresReducer
+    genre: genresReducer,
+    transaction: transactionReducer
   }
 })
 

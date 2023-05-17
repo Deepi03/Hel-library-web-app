@@ -10,25 +10,33 @@ import {
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
+import { getToken, getUserByToken } from "../../hook/getToken"
+import { borrowBook } from "../../redux/middlewares/transactionThunk"
 
-import { borrowBook } from "../../redux/slices/bookSlice"
 import { AppDispatch, RootState } from "../../redux/store"
-import { Book } from "../../types_variables/types"
+import { Days, User } from "../../types_variables/types"
 import { Login } from "../login/Login"
 import "./SingleBook.css"
 
 export const SingleBook = () => {
   const { bookId } = useParams()
   const dispatch = useDispatch<AppDispatch>()
-  const { isLoggedIn, item } = useSelector((state: RootState) => state.user)
+  const token = getToken()
+  let loggedUser: User | undefined = undefined
+  if (token) {
+    const user = getUserByToken(token)
+    if (user) loggedUser = user
+  }
   const singleBook = useSelector((state: RootState) =>
     state.book.items.find((book) => book.id === bookId)
   )
   const { items: authors } = useSelector((state: RootState) => state.author)
-  const [days, setDays] = useState(30)
-  const userId = item?.id
-  const handleBorrowBook = (book: Book) => {
-    dispatch(borrowBook({ book, userId, days }))
+  const [day, setDays] = useState<Days>(Days.THIRTY)
+  const handleBorrowBook = (bookId: string | undefined) => {
+    const userId = loggedUser?.id
+    if (userId && bookId) {
+      dispatch(borrowBook({ bookId, userId, day }))
+    }
   }
 
   return (
@@ -67,7 +75,7 @@ export const SingleBook = () => {
             <div className="description">
               <p className="description-p">{singleBook.description}</p>
             </div>
-            {isLoggedIn ? (
+            {loggedUser ? (
               <div style={{ display: "flex", gap: "2rem" }}>
                 {singleBook.available && (
                   <Box mb={2} sx={{ mt: "2rem", ml: "2rem" }}>
@@ -76,10 +84,10 @@ export const SingleBook = () => {
                       <Select
                         labelId="days"
                         id="days-select"
-                        value={days}
+                        value={day}
                         label="Genre"
                         onChange={(e) => {
-                          setDays(e.target.value as number)
+                          setDays(e.target.value as Days)
                         }}
                         sx={{
                           pb: 0.15,
@@ -90,17 +98,17 @@ export const SingleBook = () => {
                           fontWeight: "300"
                         }}
                       >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        <MenuItem value={"TEN"}>Ten</MenuItem>
+                        <MenuItem value={"TWENTY"}>Twenty</MenuItem>
+                        <MenuItem value={"THIRTY"}>Thirty</MenuItem>
                       </Select>
                     </FormControl>
                   </Box>
                 )}
                 <button
                   className="borrow-book-btn"
-                  onClick={() => handleBorrowBook(singleBook)}
-                  disabled={!singleBook.status}
+                  onClick={() => handleBorrowBook(singleBook.id)}
+                  disabled={!singleBook.available}
                 >
                   Borrow
                 </button>

@@ -1,19 +1,4 @@
 /* eslint-disable prettier/prettier */
-/* export type Book = {
-  id?: string
-  isbn: string
-  title: string
-  author: Author
-  description: string
-  publisher: string
-  available: boolean
-  borrowerId?: null | string
-  publishedDate: string
-  borrowDate: null | string
-  returnDate: null | string
-  cover: string
-  genre: Genre
-} */
 export type BookDto = {
   id?: string
   genre: string
@@ -63,11 +48,10 @@ export type BookState = {
   filteredAuthors: Author[]
   isLoading: boolean
   error: string | undefined
-  isBorrowed: boolean
 }
+
 export type UsersState = {
   item: User | undefined
-  isLoggedIn: boolean
   isLoading: boolean
   error: string | undefined
   status: string
@@ -88,4 +72,34 @@ export type DecodedUser = {
   role: Role
   user_id: string
   username: string
+}
+
+export type Transaction = {
+  id?: string
+  user: string
+  book: string
+  borrowDate: string
+  returnDate: string
+  isReturned: boolean
+  toBeReturned: boolean
+}
+
+export type BorrowDto = {
+  id?: string
+  bookId: string
+  userId: string
+  day: Days
+}
+
+export enum Days {
+  TEN = "TEN",
+  TWENTY = "TWENTY",
+  THIRTY = "THIRTY"
+}
+
+export type TransactionState = {
+  item: Transaction | undefined
+  isLoading: boolean
+  error: string | undefined
+  message: string
 }

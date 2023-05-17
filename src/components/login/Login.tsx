@@ -7,14 +7,17 @@ import { AppDispatch } from "../../redux/store"
 import { initialUseState } from "../../types_variables/constants"
 import { User } from "../../types_variables/types"
 import { signin, signUp } from "../../redux/middlewares/userThunk"
+import { useNavigate } from "react-router-dom"
 
 export const Login = () => {
   const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate()
 
   const [user, setUser] = useState<User>(initialUseState)
   const handleSubmit = (e: any) => {
     e.preventDefault()
     dispatch(signin(user))
+    navigate("/")
   }
 
   return (

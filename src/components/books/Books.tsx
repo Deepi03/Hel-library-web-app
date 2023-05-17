@@ -8,6 +8,7 @@ export const Books = () => {
   const { items: books, filteredBooks } = useSelector(
     (state: RootState) => state.book
   )
+
   return (
     <div className="books-table">
       {filteredBooks.length > 0 ? (

@@ -9,7 +9,6 @@ import { signin, signUp } from "../middlewares/userThunk"
 const initialState: UsersState = {
   item: undefined,
   isLoading: false,
-  isLoggedIn: false,
   error: "",
   status: ""
 }
@@ -19,14 +18,12 @@ const userSlice = createSlice({
   initialState: initialState,
   reducers: {
     logout(state) {
-      state.isLoggedIn = false
       state.item = undefined
       localStorage.clear()
     }
   },
   extraReducers: (builder) => {
     builder.addCase(signUp.pending, (state) => {
-      state.isLoggedIn = false
       state.isLoading = true
     })
     builder.addCase(signUp.fulfilled, (state, action: any) => {
@@ -53,7 +50,6 @@ const userSlice = createSlice({
     builder.addCase(signUp.rejected, (state, action) => {
       state.isLoading = false
       state.error = action.error.message
-      state.isLoggedIn = false
       state.item = undefined
     })
   }

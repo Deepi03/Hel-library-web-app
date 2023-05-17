@@ -27,9 +27,6 @@ import { getToken, getUserByToken } from "./hook/getToken"
 import { User } from "./types_variables/types"
 
 function App() {
-  const { isLoggedIn } = useSelector((state: RootState) => {
-    return state.user
-  })
   const isAdmin = checkAdmin()
   const token = getToken()
   let loggedUser: User | undefined = undefined
