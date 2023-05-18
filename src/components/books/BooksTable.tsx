@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Avatar, Button, IconButton } from "@mui/material"
+import { Avatar, IconButton } from "@mui/material"
 import ReadMoreIcon from "@mui/icons-material/ReadMore"
 import UpdateIcon from "@mui/icons-material/Update"
 import DeleteIcon from "@mui/icons-material/Delete"
@@ -28,7 +28,6 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
   const dispatch = useDispatch<AppDispatch>()
   const isAdmin = checkAdmin()
   const { items: authors } = useSelector((state: RootState) => state.author)
-  const { item: user } = useSelector((state: RootState) => state.user)
 
   const token = getToken()
   let loggedUser: User | undefined = undefined
@@ -36,7 +35,6 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
     const user = getUserByToken(token)
     if (user) loggedUser = user
   }
-  const userId = user?.id
   const handleUpdate = (id: string) => {
     navigate(`/${id}/updateBook`)
   }

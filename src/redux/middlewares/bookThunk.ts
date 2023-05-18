@@ -6,7 +6,7 @@ import { BookDto } from "../../types_variables/types"
 export const fetchBooks = createAsyncThunk("fetchBooks", async () => {
   try {
     const res = await fetch("http://localhost:8080/api/v1/books/")
-    const books: BookDto = await res.json()
+    const books: BookDto[] = await res.json()
     if (!res.ok) {
       throw new Error("Something went wrong")
     }

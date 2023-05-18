@@ -5,30 +5,49 @@ import { useDispatch, useSelector } from "react-redux"
 
 import { AppDispatch, RootState } from "../../redux/store"
 import "./Profile.css"
-import { Book } from "../../types_variables/types"
+import { Book, User } from "../../types_variables/types"
 //import { returnBook } from "../../redux/slices/bookSlice"
 import { checkAdmin } from "../../hook/checkAdmin"
+import { getToken, getUserByToken } from "../../hook/getToken"
+import {
+  returnBook,
+  transactionsOfUser
+} from "../../redux/middlewares/transactionThunk"
+import { useEffect } from "react"
 
 export const Profile = () => {
-  const { item: user } = useSelector((state: RootState) => state.user)
-  const { items: books } = useSelector((state: RootState) => state.book)
   const isAdmin = checkAdmin()
-  /* const borrowedBooks: Book[] = books.filter(
-    (book) => book.borrowerId === user?.id
-  ) */
   const dispatch = useDispatch<AppDispatch>()
+  const { items: books } = useSelector((state: RootState) => state.book)
+  const token = getToken()
+  let loggedUser: User | undefined = undefined
+  if (token) {
+    const user = getUserByToken(token)
+    if (user) loggedUser = user
+  }
+  useEffect(() => {
+    if (loggedUser?.id) {
+      dispatch(transactionsOfUser(loggedUser.id))
+    }
+  }, [])
 
-  const handleReturn = (book: Book) => {
-    dispatch(returnBook(book))
+  const { items: transactions } = useSelector(
+    (state: RootState) => state.transaction
+  )
+
+  const handleReturn = (id: string | undefined) => {
+    if (id) {
+      dispatch(returnBook(id))
+    }
   }
 
   return (
     <div>
-      {user && (
-        <Card className="section" id="services" sx={{ mt: "5rem", p: "7rem" }}>
+      {loggedUser && (
+        <>
           <Avatar
-            alt={user.username}
-            src={user}
+            alt={loggedUser.username}
+            src={loggedUser}
             sx={{ width: 70, height: 70, mt: "1rem" }}
           ></Avatar>
           <Typography
@@ -43,40 +62,57 @@ export const Profile = () => {
             }}
           >
             {" "}
-            {user.username}
+            {loggedUser.username}
           </Typography>
 
-          {/* <Box>
-            {borrowedBooks.length > 0 && (
+          <Box>
+            {transactions.length > 0 && (
               <table id="books-table">
                 <thead>
                   <tr>
                     <th>Books</th>
                     <th>Borrowed Date</th>
+                    <th>Return Date</th>
                     <th>Should be Returned By</th>
+                    <th>Reuturned</th>
                     <th>Return</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {borrowedBooks.map((book) => (
-                    <tr key={book.id}>
-                      <td>{book.title}</td>
-                      <td>{book.borrowDate}</td>
-                      <td>{book.returnDate}</td>
+                  {transactions.map((transaction) => (
+                    <tr key={transaction.id}>
+                      {/* <td>{transaction.book}</td> */}
                       <td>
-                        <IconButton onClick={() => handleReturn(book)}>
-                          <KeyboardReturnIcon
-                            sx={{ color: "#323232" }}
-                          ></KeyboardReturnIcon>
-                        </IconButton>
+                        {
+                          books.find((b) => {
+                            if (b.id === transaction.book) {
+                              return b.title
+                            }
+                          })?.title
+                        }
+                      </td>
+                      <td>{transaction.borrowDate}</td>
+                      <td>{transaction.returnDate}</td>
+                      <td>{transaction.toBeReturned}</td>
+                      <td>{transaction.returned ? "Yes" : "No"}</td>
+                      <td>
+                        {!transaction.returned && (
+                          <IconButton
+                            onClick={() => handleReturn(transaction.id)}
+                          >
+                            <KeyboardReturnIcon
+                              sx={{ color: "#323232" }}
+                            ></KeyboardReturnIcon>
+                          </IconButton>
+                        )}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             )}
-          </Box> */}
-        </Card>
+          </Box>
+        </>
       )}
       {isAdmin && (
         <Box>

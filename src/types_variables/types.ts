@@ -80,7 +80,7 @@ export type Transaction = {
   book: string
   borrowDate: string
   returnDate: string
-  isReturned: boolean
+  returned: boolean
   toBeReturned: boolean
 }
 
@@ -98,7 +98,7 @@ export enum Days {
 }
 
 export type TransactionState = {
-  item: Transaction | undefined
+  items: Transaction[]
   isLoading: boolean
   error: string | undefined
   message: string
