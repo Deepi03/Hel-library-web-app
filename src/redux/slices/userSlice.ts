@@ -35,14 +35,10 @@ const userSlice = createSlice({
     builder.addCase(signin.fulfilled, (state, action: any) => {
       state.item = action.payload.user
       localStorage.setItem("token", action.payload.token)
-      const foundToken = getToken()
-      if (foundToken) {
-        const user = getUserByToken(foundToken)
-        if (user) {
-          state.item = user
-        }
+      const user = getUserByToken()
+      if (user) {
+        state.item = user
       }
-
       toast.success("User loggedIn", {
         position: "bottom-right"
       })

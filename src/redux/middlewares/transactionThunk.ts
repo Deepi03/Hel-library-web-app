@@ -9,7 +9,7 @@ export const borrowBook = createAsyncThunk(
   "borrowBook",
   async (borrow: BorrowDto) => {
     try {
-      const token = getToken()
+      const token = localStorage.getItem("token")
       console.log("borrow", borrow)
       const res = await fetch(
         `http://localhost:8080/api/v1/transactions/borrow`,
@@ -38,7 +38,7 @@ export const returnBook = createAsyncThunk(
   "returnBook",
   async (transactionId: string) => {
     try {
-      const token = getToken()
+      const token = localStorage.getItem("token")
       console.log("borrow", transactionId)
       const res = await fetch(
         `http://localhost:8080/api/v1/transactions/return/${transactionId}`,
@@ -66,7 +66,7 @@ export const transactionsOfUser = createAsyncThunk(
   "transactionsOfUser",
   async (userId: string) => {
     try {
-      const token = getToken()
+      const token = localStorage.getItem("token")
       console.log("borrow", userId)
       const res = await fetch(
         `http://localhost:8080/api/v1/transactions/user/${userId}`,
@@ -92,3 +92,30 @@ export const transactionsOfUser = createAsyncThunk(
     }
   }
 )
+
+export const allTransactions = createAsyncThunk("allTransactions", async () => {
+  try {
+    const token = localStorage.getItem("token")
+    const res = await fetch(
+      `http://localhost:8080/api/v1/admin/allTransactions`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+
+    const transactions: Transaction[] = await res.json()
+    console.log("transaction lala", transactions)
+
+    if (!res.ok) {
+      throw new Error("Something went wrong")
+    }
+
+    return transactions
+  } catch (error) {
+    return error
+  }
+})

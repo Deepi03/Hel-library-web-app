@@ -20,21 +20,14 @@ import { BookDto, Days, User } from "../../types_variables/types"
 import "./Books.css"
 import { deleteBookById, fetchBooks } from "../../redux/middlewares/bookThunk"
 import { LoginButton } from "../LoginButton"
-import { getToken, getUserByToken } from "../../hook/getToken"
+import { getUserByToken } from "../../hook/getToken"
 import { borrowBook } from "../../redux/middlewares/transactionThunk"
 
 export const BooksTable = ({ books }: { books: BookDto[] }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const isAdmin = checkAdmin()
   const { items: authors } = useSelector((state: RootState) => state.author)
-
-  const token = getToken()
-  let loggedUser: User | undefined = undefined
-  if (token) {
-    const user = getUserByToken(token)
-    if (user) loggedUser = user
-  }
+  const user = getUserByToken()
   const handleUpdate = (id: string) => {
     navigate(`/${id}/updateBook`)
   }
@@ -44,7 +37,7 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
     }
   }
   const handleBorrowBook = (bookId: string | undefined) => {
-    const userId = loggedUser?.id
+    const userId = user?.id
     const day = Days.THIRTY
     if (userId && bookId) {
       dispatch(borrowBook({ bookId, userId, day }))
@@ -69,7 +62,7 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
   }
   return (
     <div className="books-table">
-      {isAdmin && (
+      {user?.role === "ADMIN" && (
         <button className="add-btn" onClick={() => handleAddBook()}>
           Add Book
         </button>
@@ -90,8 +83,8 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
             </th>
             <th>Borrow</th>
             <th>Detail</th>
-            {isAdmin && <th>Update</th>}
-            {isAdmin && <th>Delete</th>}
+            {user?.role === "ADMIN" && <th>Update</th>}
+            {user?.role === "ADMIN" && <th>Delete</th>}
           </tr>
         </thead>
         <tbody>
@@ -110,7 +103,7 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
                 {authors.find((author) => author.id === book.author)?.name}
               </td>
               <td>{book.available ? "Yes" : "No"}</td>
-              {loggedUser ? (
+              {user ? (
                 <td>
                   {book.available ? (
                     <IconButton>
@@ -149,7 +142,7 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
                   ></ReadMoreIcon>
                 </IconButton>
               </td>
-              {isAdmin && (
+              {user?.role === "ADMIN" && (
                 <td>
                   <IconButton>
                     <UpdateIcon
@@ -169,7 +162,7 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
                   </IconButton>
                 </td>
               )}
-              {isAdmin && (
+              {user?.role === "ADMIN" && (
                 <td>
                   <IconButton>
                     <DeleteIcon

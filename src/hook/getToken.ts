@@ -3,12 +3,9 @@ import jwt_decode from "jwt-decode"
 import { DecodedUser } from "../types_variables/types"
 
 /* eslint-disable prettier/prettier */
-export const getToken = () => {
-  const token = localStorage.getItem("token")
-  return token
-}
 
-export const getUserByToken = (token: string) => {
+export const getUserByToken = () => {
+  const token = localStorage.getItem("token")
   if (token) {
     const decodedUser = jwt_decode(token) as DecodedUser
     const user = {

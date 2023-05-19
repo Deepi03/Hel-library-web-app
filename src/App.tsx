@@ -25,15 +25,11 @@ import { Footer } from "./components/footer/Footer"
 import { fetchGenres } from "./redux/middlewares/genreThunk"
 import { getToken, getUserByToken } from "./hook/getToken"
 import { User } from "./types_variables/types"
+import { AllTransactions } from "./components/transaction/AllTransactions"
+import { Transactions } from "./components/transaction/Transactions"
 
 function App() {
-  const isAdmin = checkAdmin()
-  const token = getToken()
-  let loggedUser: User | undefined = undefined
-  if (token) {
-    const user = getUserByToken(token)
-    if (user) loggedUser = user
-  }
+  const user = getUserByToken()
 
   const dispatch = useDispatch<AppDispatch>()
 
@@ -56,30 +52,46 @@ function App() {
           </Route>
           <Route
             path="/signUp"
-            element={loggedUser ? <Navigate to="/" /> : <Login />}
+            element={user ? <Navigate to="/" /> : <Login />}
           />
           <Route path="/authors">
             <Route path="" element={<Authors />} />
           </Route>
-          <Route
-            path="/profile"
-            element={loggedUser ? <Profile /> : <Navigate to="/" />}
-          />
+          <Route path="/profile">
+            <Route path="" element={user ? <Profile /> : <Navigate to="/" />} />
+            <Route path="transactions" element={<Transactions />} />
+            <Route
+              path="admin/allTransactions"
+              element={
+                user?.role === "ADMIN" ? (
+                  <AllTransactions />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+          </Route>
           <Route
             path="/addBook"
-            element={isAdmin ? <AddBook /> : <Navigate to="/" />}
+            element={user?.role === "ADMIN" ? <AddBook /> : <Navigate to="/" />}
           />
           <Route
             path={":bookId/updateBook/"}
-            element={isAdmin ? <UpdateBook /> : <Navigate to="/" />}
+            element={
+              user?.role === "ADMIN" ? <UpdateBook /> : <Navigate to="/" />
+            }
           />
           <Route
             path="/addAuthor"
-            element={isAdmin ? <AddAuthor /> : <Navigate to="/" />}
+            element={
+              user?.role === "ADMIN" ? <AddAuthor /> : <Navigate to="/" />
+            }
           />
           <Route
             path={":authorId/updateAuthor"}
-            element={isAdmin ? <UpdateAuthor /> : <Navigate to="/" />}
+            element={
+              user?.role === "ADMIN" ? <UpdateAuthor /> : <Navigate to="/" />
+            }
           />
         </Routes>
         <Footer></Footer>

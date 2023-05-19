@@ -2,8 +2,8 @@
 
 import { Box, Container, Typography } from "@mui/material"
 import { useSelector } from "react-redux"
-import { checkAdmin } from "../../hook/checkAdmin"
 
+import { getUserByToken } from "../../hook/getToken"
 import { RootState } from "../../redux/store"
 import { GenreCards } from "./GenreCards"
 
@@ -11,7 +11,7 @@ export const Genres = () => {
   const { items: genres } = useSelector((state: RootState) => state.genre)
   const { filteredGenres } = useSelector((state: RootState) => state.book)
 
-  const isAdmin = checkAdmin()
+  const user = getUserByToken()
 
   return (
     <div>
@@ -34,7 +34,7 @@ export const Genres = () => {
           </Typography>
           <hr />
           <hr style={{ marginBottom: "2rem" }} />
-          {isAdmin ? (
+          {user.role === "ADMIN" ? (
             <Typography
               variant="h5"
               sx={{ marginLeft: "-20rem", marginRight: "-20rem" }}

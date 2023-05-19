@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { getToken } from "../../hook/getToken"
 import { Author } from "../../types_variables/types"
 
 export const fetchAuthors = createAsyncThunk("fetchAuthors", async () => {
@@ -37,7 +36,7 @@ export const createAuthor = createAsyncThunk(
   "createAuthor",
   async (author: Partial<Author>) => {
     try {
-      const token = getToken()
+      const token = localStorage.getItem("token")
       const res = await fetch(`http://localhost:8080/api/v1/admin/addAuthor`, {
         method: "POST",
         headers: {
@@ -61,7 +60,7 @@ export const updateAuthorById = createAsyncThunk(
   "updateAuthorById",
   async (author: Author) => {
     try {
-      const token = getToken()
+      const token = localStorage.getItem("token")
       const res = await fetch(
         `http://localhost:8080/api/v1/admin/updateAuthor/${author.id}`,
         {
@@ -88,7 +87,7 @@ export const deleteAuthorById = createAsyncThunk(
   "deleteAuthorById",
   async (id: string) => {
     try {
-      const token = getToken()
+      const token = localStorage.getItem("token")
       const res = await fetch(
         `http://localhost:8080/api/v1/admin/deleteAuthor/${id}`,
         {

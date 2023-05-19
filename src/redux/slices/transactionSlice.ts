@@ -3,6 +3,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { TransactionState } from "../../types_variables/types"
 import {
+  allTransactions,
   borrowBook,
   returnBook,
   transactionsOfUser
@@ -24,8 +25,6 @@ const transactionSlice = createSlice({
       state.isLoading = true
     })
     builder.addCase(borrowBook.fulfilled, (state, action: any) => {
-      console.log("transaction slice", action.payload)
-      //state.item = action.payload
       state.isLoading = false
     })
 
@@ -35,13 +34,14 @@ const transactionSlice = createSlice({
     })
 
     builder.addCase(returnBook.fulfilled, (state, action: any) => {
-      console.log("transaction slice", action.payload)
       state.message = action.payload
       state.isLoading = false
     })
     builder.addCase(transactionsOfUser.fulfilled, (state, action: any) => {
-      /*  state.items = [...state.items, action.payload.] */
-      console.log("transaction slice", action.payload)
+      state.items = action.payload
+      state.isLoading = false
+    })
+    builder.addCase(allTransactions.fulfilled, (state, action: any) => {
       state.items = action.payload
       state.isLoading = false
     })

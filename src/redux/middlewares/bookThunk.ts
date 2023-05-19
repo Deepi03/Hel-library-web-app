@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { getToken } from "../../hook/getToken"
+
 import { BookDto } from "../../types_variables/types"
 
 export const fetchBooks = createAsyncThunk("fetchBooks", async () => {
@@ -37,7 +37,7 @@ export const createBook = createAsyncThunk(
   "createBook",
   async (book: BookDto) => {
     try {
-      const token = getToken()
+      const token = localStorage.getItem("token")
       const res = await fetch(`http://localhost:8080/api/v1/admin/addBook`, {
         method: "POST",
         headers: {
@@ -61,7 +61,7 @@ export const updateBookById = createAsyncThunk(
   "updateBookById",
   async (book: BookDto) => {
     try {
-      const token = getToken()
+      const token = localStorage.getItem("token")
       const res = await fetch(
         `http://localhost:8080/api/v1/admin/updateBook/${book.id}`,
         {
@@ -88,7 +88,7 @@ export const deleteBookById = createAsyncThunk(
   "deleteBookById",
   async (id: string) => {
     try {
-      const token = getToken()
+      const token = localStorage.getItem("token")
       const res = await fetch(
         `http://localhost:8080/api/v1/admin/deleteBook/${id}`,
         {

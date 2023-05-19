@@ -10,30 +10,24 @@ import {
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { getToken, getUserByToken } from "../../hook/getToken"
+import { getUserByToken } from "../../hook/getToken"
 import { borrowBook } from "../../redux/middlewares/transactionThunk"
-
 import { AppDispatch, RootState } from "../../redux/store"
-import { Days, User } from "../../types_variables/types"
+import { Days } from "../../types_variables/types"
 import { Login } from "../login/Login"
 import "./SingleBook.css"
 
 export const SingleBook = () => {
   const { bookId } = useParams()
   const dispatch = useDispatch<AppDispatch>()
-  const token = getToken()
-  let loggedUser: User | undefined = undefined
-  if (token) {
-    const user = getUserByToken(token)
-    if (user) loggedUser = user
-  }
+  const user = getUserByToken()
   const singleBook = useSelector((state: RootState) =>
     state.book.items.find((book) => book.id === bookId)
   )
   const { items: authors } = useSelector((state: RootState) => state.author)
   const [day, setDays] = useState<Days>(Days.THIRTY)
   const handleBorrowBook = (bookId: string | undefined) => {
-    const userId = loggedUser?.id
+    const userId = user?.id
     if (userId && bookId) {
       dispatch(borrowBook({ bookId, userId, day }))
     }
@@ -75,7 +69,7 @@ export const SingleBook = () => {
             <div className="description">
               <p className="description-p">{singleBook.description}</p>
             </div>
-            {loggedUser ? (
+            {user ? (
               <div style={{ display: "flex", gap: "2rem" }}>
                 {singleBook.available && (
                   <Box mb={2} sx={{ mt: "2rem", ml: "2rem" }}>

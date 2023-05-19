@@ -15,13 +15,12 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { checkAdmin } from "../../hook/checkAdmin"
 import { sortAuthorByName } from "../../redux/slices/authorSlice"
 import { AppDispatch, RootState } from "../../redux/store"
-import { Author, BookDto, User } from "../../types_variables/types"
+import { Author, BookDto } from "../../types_variables/types"
 import "./AuthorsTable.css"
 import { deleteAuthorById } from "../../redux/middlewares/authorThunk"
-import { getToken, getUserByToken } from "../../hook/getToken"
+import { getUserByToken } from "../../hook/getToken"
 
 const style = {
   position: "absolute",
@@ -41,7 +40,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [info, setInfo] = useState("")
-  const isAdmin = checkAdmin()
+  const user = getUserByToken()
   const handleOpen = (author: Author) => {
     if (author.info) {
       setInfo(author.info)
@@ -50,13 +49,6 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
       setOpen(false)
     }
   }
-  const token = getToken()
-  let loggedUser: User
-  if (token) {
-    const user = getUserByToken(token)
-    if (user) loggedUser = user
-  }
-
   const handleUpdate = (author: Author) => {
     if (author.id) {
       const id = author.id
@@ -64,7 +56,6 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
     }
   }
   const handleClose = () => setOpen(false)
-
   const handleDelete = (author: Author) => {
     if (author.id) {
       dispatch(deleteAuthorById(author.id))
@@ -79,7 +70,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
 
   return (
     <Box sx={{ m: "5rem" }}>
-      {isAdmin && (
+      {user?.role === "ADMIN" && (
         <button className="add-author-btn" onClick={() => handleAddAuthor()}>
           Add Author
         </button>
@@ -94,8 +85,8 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
             </th>
             <th>Books</th>
             <th>Info</th>
-            {isAdmin && <th>Update</th>}
-            {isAdmin && <th>Delete</th>}
+            {user?.role === "ADMIN" && <th>Update</th>}
+            {user?.role === "ADMIN" && <th>Delete</th>}
           </tr>
         </thead>
         <tbody>
@@ -131,7 +122,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
                 </IconButton>
               </td>
               <td>
-                {isAdmin && (
+                {user?.role === "ADMIN" && (
                   <IconButton
                     onClick={() => {
                       handleUpdate(author)
@@ -149,7 +140,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
                   </IconButton>
                 )}
               </td>
-              {isAdmin && (
+              {user?.role === "ADMIN" && (
                 <td>
                   <IconButton>
                     <DeleteIcon
@@ -167,13 +158,6 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
                   </IconButton>
                 </td>
               )}
-              {/*  <td>
-                <button
-                  onClick={() => {
-                    handleAuthorsingle(author.id)
-                  }}
-                ></button>
-              </td> */}
             </tr>
           ))}
         </tbody>

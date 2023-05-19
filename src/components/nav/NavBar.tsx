@@ -37,12 +37,7 @@ export const NavBar = () => {
   }
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const token = getToken()
-  let loggedUser: User | undefined = undefined
-  if (token) {
-    const user = getUserByToken(token)
-    if (user) loggedUser = user
-  }
+  const user = getUserByToken()
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
@@ -191,7 +186,7 @@ export const NavBar = () => {
 
           {/* Nav bar login or avatar placer holder */}
           <Box sx={{ flexGrow: 0 }}>
-            {loggedUser ? (
+            {user ? (
               <>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" />
