@@ -23,7 +23,6 @@ export const AddBook = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault()
     if (book) {
-      console.log("add", book)
       dispatch(createBook(book))
     }
     setTimeout(() => {

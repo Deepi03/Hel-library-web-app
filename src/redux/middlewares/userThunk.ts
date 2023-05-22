@@ -4,7 +4,6 @@ import { User } from "../../types_variables/types"
 
 export const signUp = createAsyncThunk("signUp", async (user: User) => {
   try {
-    console.log("thunk", user.username)
     const res = await fetch(`http://localhost:8080/api/v1/users/signup`, {
       method: "POST",
       headers: {
@@ -16,7 +15,6 @@ export const signUp = createAsyncThunk("signUp", async (user: User) => {
     if (message !== 201) {
       throw new Error("Something went wrong")
     }
-    console.log("response", message)
     return message
   } catch (error) {
     return error
@@ -36,8 +34,6 @@ export const signin = createAsyncThunk("signin", async (user: User) => {
       throw new Error("Something went wrong")
     }
     const response = await res.json()
-    console.log("user login", response)
-
     return response
   } catch (error) {
     return error

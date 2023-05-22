@@ -35,16 +35,21 @@ const userSlice = createSlice({
     })
     builder.addCase(signUp.fulfilled, (state, action: any) => {
       state.status = action.payload
-      toast.success("User SingUped", {
-        position: "bottom-right"
-      })
+      if (action.apyload === 201) {
+        toast.success("User SingUped", {
+          position: "bottom-right"
+        })
+      } else {
+        toast.error("Username already exist", {
+          position: "bottom-right"
+        })
+      }
     })
     builder.addCase(signin.fulfilled, (state, action: any) => {
       if (action.payload.token.length > 0) {
         localStorage.setItem("token", action.payload.token)
         const user = getUserByToken()
         state.item = user
-        console.log("log", state.item, user)
         toast.success("User loggedIn", {
           position: "bottom-right"
         })

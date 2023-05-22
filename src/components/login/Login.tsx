@@ -25,7 +25,6 @@ export const Login = () => {
   const [checked, setChecked] = useState(false)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("change", event.target.checked)
     setChecked(event.target.checked)
   }
   const handleSubmit = (e: any) => {
@@ -83,21 +82,7 @@ export const Login = () => {
                   "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)"
               }}
             >
-              Login
-            </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              fullWidth
-              sx={{
-                bgcolor: "#DDD0C8",
-                color: "btn.text",
-                boxShadow:
-                  "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)"
-              }}
-            >
-              SingUp
+              Login / Signup
             </Button>
           </Stack>
           <FormControlLabel

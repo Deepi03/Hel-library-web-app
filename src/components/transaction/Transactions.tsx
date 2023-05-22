@@ -50,7 +50,7 @@ export const Transactions = () => {
             {user.username}´s Transactions
           </Typography>
           <Box sx={{ mt: "2rem", pt: "1rem", pl: "4rem", pr: "3rem" }}>
-            {transactions.length > 0 && (
+            {transactions.length > 0 ? (
               <table id="books-table">
                 <thead>
                   <tr>
@@ -62,36 +62,6 @@ export const Transactions = () => {
                     <th>Return</th>
                   </tr>
                 </thead>
-                {/*  <tbody>
-                  {transactions.map((transaction) => (
-                    <tr key={transaction.id}>
-                      <td>
-                        {
-                          books.find((b) => {
-                            if (b.id === transaction.book) {
-                              return b.title
-                            }
-                          })?.title
-                        }
-                      </td>
-                      <td>{transaction.borrowDate}</td>
-                      <td>{transaction.returnDate}</td>
-                      <td>{transaction.toBeReturned}</td>
-                      <td>{transaction.returned ? "Yes" : "No"}</td>
-                      <td>
-                        {!transaction.returned && (
-                          <IconButton
-                            onClick={() => handleReturn(transaction.id)}
-                          >
-                            <KeyboardReturnIcon
-                              sx={{ color: "#323232" }}
-                            ></KeyboardReturnIcon>
-                          </IconButton>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody> */}
                 <tbody>
                   {transactions
                     .filter((transaction) => transaction.user === user.id)
@@ -127,6 +97,22 @@ export const Transactions = () => {
                     ))}
                 </tbody>
               </table>
+            ) : (
+              <Box sx={{ paddingBottom: "20em", color: "#323232" }}>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    paddingBottom: "1em",
+                    textAlign: "center",
+                    paddingTop: "2em",
+                    color: "#323232",
+                    fontWeight: "200",
+                    fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"]
+                  }}
+                >
+                  No Transactions Made
+                </Typography>
+              </Box>
             )}
           </Box>{" "}
         </div>
