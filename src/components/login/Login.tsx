@@ -1,5 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { Box, Button, Card, TextField } from "@mui/material"
+import {
+  Box,
+  Button,
+  Card,
+  FormControlLabel,
+  Stack,
+  Switch,
+  TextField
+} from "@mui/material"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 
@@ -14,10 +22,22 @@ export const Login = () => {
   const navigate = useNavigate()
 
   const [user, setUser] = useState<User>(initialUseState)
+  const [checked, setChecked] = useState(false)
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("change", event.target.checked)
+    setChecked(event.target.checked)
+  }
   const handleSubmit = (e: any) => {
-    e.preventDefault()
-    dispatch(signin(user))
-    navigate("/")
+    if (checked === false) {
+      e.preventDefault()
+      dispatch(signin(user))
+      navigate("/")
+    } else {
+      e.preventDefault()
+      dispatch(signUp(user))
+      navigate("/")
+    }
   }
 
   return (
@@ -50,20 +70,47 @@ export const Login = () => {
               onChange={(e) => setUser({ ...user, password: e.target.value })}
             />
           </Box>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            sx={{
-              bgcolor: "#DDD0C8",
-              color: "btn.text",
-              boxShadow:
-                "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)"
-            }}
-          >
-            Login
-          </Button>
+          <Stack direction="row" spacing={2}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{
+                bgcolor: "#DDD0C8",
+                color: "btn.text",
+                boxShadow:
+                  "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)"
+              }}
+            >
+              Login
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{
+                bgcolor: "#DDD0C8",
+                color: "btn.text",
+                boxShadow:
+                  "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)"
+              }}
+            >
+              SingUp
+            </Button>
+          </Stack>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={checked}
+                onChange={handleChange}
+                inputProps={{ "aria-label": "controlled" }}
+              />
+            }
+            label="SingUp"
+            labelPlacement="end"
+          />
         </Card>
         )
       </Box>

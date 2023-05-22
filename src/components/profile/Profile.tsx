@@ -10,7 +10,7 @@ import { getUserByToken } from "../../hook/getToken"
 import { TransactionsButtons } from "../transaction/TransactionsButtons"
 
 export const Profile = () => {
-  const user = getUserByToken()
+  const { item: user } = useSelector((state: RootState) => state.user)
   return (
     <div>
       {user && (

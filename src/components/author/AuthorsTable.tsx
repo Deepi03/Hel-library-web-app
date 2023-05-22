@@ -40,7 +40,7 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [info, setInfo] = useState("")
-  const user = getUserByToken()
+  const { item: user } = useSelector((state: RootState) => state.user)
   const handleOpen = (author: Author) => {
     if (author.info) {
       setInfo(author.info)

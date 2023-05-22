@@ -22,7 +22,7 @@ import {
 } from "@mui/material"
 
 import { BookRounded } from "@mui/icons-material"
-import { SyntheticEvent, useState } from "react"
+import { SyntheticEvent, useEffect, useState } from "react"
 import { Search } from "../search/Search"
 import { getToken, getUserByToken } from "../../hook/getToken"
 import { LoginButton } from "../LoginButton"
@@ -37,11 +37,12 @@ export const NavBar = () => {
   }
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const user = getUserByToken()
-
+  const { item: user } = useSelector((state: RootState) => state.user)
+  const userFromToken = getUserByToken()
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const [value, setValue] = useState(currentTab)
+
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   }

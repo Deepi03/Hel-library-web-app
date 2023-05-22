@@ -16,7 +16,7 @@ export const signUp = createAsyncThunk("signUp", async (user: User) => {
     if (message !== 201) {
       throw new Error("Something went wrong")
     }
-    console.log("response", res)
+    console.log("response", message)
     return message
   } catch (error) {
     return error
@@ -25,7 +25,6 @@ export const signUp = createAsyncThunk("signUp", async (user: User) => {
 
 export const signin = createAsyncThunk("signin", async (user: User) => {
   try {
-    console.log("thunk", user.username)
     const res = await fetch(`http://localhost:8080/api/v1/users/signin`, {
       method: "POST",
       headers: {
@@ -33,13 +32,33 @@ export const signin = createAsyncThunk("signin", async (user: User) => {
       },
       body: JSON.stringify(user)
     })
-    const response = await res.json()
-    console.log("messages", response)
-    /* if (message !== 201) {
+    if (!res.ok) {
       throw new Error("Something went wrong")
-    } */
-    console.log("response", response)
+    }
+    const response = await res.json()
+    console.log("user login", response)
+
     return response
+  } catch (error) {
+    return error
+  }
+})
+
+export const allUsers = createAsyncThunk("allUsers", async () => {
+  try {
+    const token = localStorage.getItem("token")
+    const res = await fetch(`http://localhost:8080/api/v1/admin/users`, {
+      method: `GET`,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    })
+    if (!res.ok) {
+      throw new Error("Something went wrong")
+    }
+    const users: User[] = await res.json()
+    return users
   } catch (error) {
     return error
   }

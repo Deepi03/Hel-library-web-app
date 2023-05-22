@@ -1,12 +1,13 @@
 /* eslint-disable prettier/prettier */
 import { createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
-import { getToken, getUserByToken } from "../../hook/getToken"
+import { getUserByToken } from "../../hook/getToken"
 
 import { UsersState } from "../../types_variables/types"
-import { signin, signUp } from "../middlewares/userThunk"
+import { allUsers, signin, signUp } from "../middlewares/userThunk"
 
 const initialState: UsersState = {
+  items: [],
   item: undefined,
   isLoading: false,
   error: "",
@@ -17,6 +18,12 @@ const userSlice = createSlice({
   name: "usersReducer",
   initialState: initialState,
   reducers: {
+    getUserFromStorage(state) {
+      const user = getUserByToken()
+      if (user) {
+        state.item = user
+      }
+    },
     logout(state) {
       state.item = undefined
       localStorage.clear()
@@ -33,23 +40,27 @@ const userSlice = createSlice({
       })
     })
     builder.addCase(signin.fulfilled, (state, action: any) => {
-      state.item = action.payload.user
-      localStorage.setItem("token", action.payload.token)
-      const user = getUserByToken()
-      if (user) {
+      if (action.payload.token.length > 0) {
+        localStorage.setItem("token", action.payload.token)
+        const user = getUserByToken()
         state.item = user
+        console.log("log", state.item, user)
+        toast.success("User loggedIn", {
+          position: "bottom-right"
+        })
       }
-      toast.success("User loggedIn", {
-        position: "bottom-right"
-      })
     })
     builder.addCase(signUp.rejected, (state, action) => {
       state.isLoading = false
       state.error = action.error.message
       state.item = undefined
     })
+    builder.addCase(allUsers.fulfilled, (state, action: any) => {
+      state.isLoading = false
+      state.items = action.payload
+    })
   }
 })
 
 export const usersReducer = userSlice.reducer
-export const { logout } = userSlice.actions
+export const { logout, getUserFromStorage } = userSlice.actions

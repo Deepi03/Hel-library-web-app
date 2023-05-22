@@ -11,7 +11,7 @@ export const Genres = () => {
   const { items: genres } = useSelector((state: RootState) => state.genre)
   const { filteredGenres } = useSelector((state: RootState) => state.book)
 
-  const user = getUserByToken()
+  const { item: user } = useSelector((state: RootState) => state.user)
 
   return (
     <div>
@@ -34,35 +34,21 @@ export const Genres = () => {
           </Typography>
           <hr />
           <hr style={{ marginBottom: "2rem" }} />
-          {user.role === "ADMIN" ? (
-            <Typography
-              variant="h5"
-              sx={{ marginLeft: "-20rem", marginRight: "-20rem" }}
-              color="text.secondary"
-              paragraph
-            >
-              Hel Library provides you very smooth and impressive journey.
-              <b>Admin</b>,you can also borrow books and return books when
-              authenticated via Google,Also User can see your borrow and return
-              date of books you borrowed in your profile.In addition to that
-              other users borrow informations also be displayed. <b>Admin</b>
-              ,you are special so you can create,update,delete books and
-              authors.
-            </Typography>
-          ) : (
-            <Typography
-              variant="h5"
-              sx={{ marginLeft: "-20rem", marginRight: "-20rem" }}
-              color="text.secondary"
-              paragraph
-            >
-              Hel Library provides you very smooth and impressive journey.One
-              can borrow books and return books when authenticated via
-              Google,Also User can see borrow and return date of borrowed books
-              in their profile.You can find plenty of books from different
-              genres and even Authors information and written books
-            </Typography>
-          )}
+
+          <Typography
+            variant="h5"
+            sx={{ marginLeft: "-20rem", marginRight: "-20rem" }}
+            color="text.secondary"
+            paragraph
+          >
+            Hel Library provides you very smooth and impressive journey.One can
+            borrow books and return books when authenticated,Also User can see
+            borrow and return date of borrowed books in their profile.You can
+            find plenty of books from different genres and even Authors
+            information and written books.In addition to that other users borrow
+            informations also be displayed. <b>Admin</b>
+            ,you are special so you can create,update,delete books and authors.
+          </Typography>
         </Container>
       </Box>
       <Typography

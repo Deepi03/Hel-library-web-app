@@ -51,6 +51,7 @@ export type BookState = {
 }
 
 export type UsersState = {
+  items: User[] | []
   item: User | undefined
   isLoading: boolean
   error: string | undefined

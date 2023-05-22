@@ -1,14 +1,16 @@
 /* eslint-disable prettier/prettier */
 
 import { Button } from "@mui/material"
+import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { getUserByToken } from "../../hook/getToken"
+
+import { RootState } from "../../redux/store"
 export const TransactionsButtons = () => {
   const navigate = useNavigate()
-  const user = getUserByToken()
+  const { item: user } = useSelector((state: RootState) => state.user)
   return (
     <>
-      {user.role === "ADMIN" && (
+      {user && user.role === "ADMIN" && (
         <Button onClick={() => navigate("admin/allTransactions")}>
           All Transactions
         </Button>

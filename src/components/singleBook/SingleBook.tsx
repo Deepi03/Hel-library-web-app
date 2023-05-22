@@ -10,7 +10,7 @@ import {
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { getUserByToken } from "../../hook/getToken"
+
 import { borrowBook } from "../../redux/middlewares/transactionThunk"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Days } from "../../types_variables/types"
@@ -20,7 +20,7 @@ import "./SingleBook.css"
 export const SingleBook = () => {
   const { bookId } = useParams()
   const dispatch = useDispatch<AppDispatch>()
-  const user = getUserByToken()
+  const { item: user } = useSelector((state: RootState) => state.user)
   const singleBook = useSelector((state: RootState) =>
     state.book.items.find((book) => book.id === bookId)
   )

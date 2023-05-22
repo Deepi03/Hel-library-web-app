@@ -106,14 +106,10 @@ export const allTransactions = createAsyncThunk("allTransactions", async () => {
         }
       }
     )
-
-    const transactions: Transaction[] = await res.json()
-    console.log("transaction lala", transactions)
-
     if (!res.ok) {
       throw new Error("Something went wrong")
     }
-
+    const transactions: Transaction[] = await res.json()
     return transactions
   } catch (error) {
     return error

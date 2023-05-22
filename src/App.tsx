@@ -19,24 +19,22 @@ import { Profile } from "./components/profile/Profile"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { fetchBooks } from "./redux/middlewares/bookThunk"
-import { checkAdmin } from "./hook/checkAdmin"
 import { fetchAuthors } from "./redux/middlewares/authorThunk"
 import { Footer } from "./components/footer/Footer"
 import { fetchGenres } from "./redux/middlewares/genreThunk"
-import { getToken, getUserByToken } from "./hook/getToken"
-import { User } from "./types_variables/types"
 import { AllTransactions } from "./components/transaction/AllTransactions"
 import { Transactions } from "./components/transaction/Transactions"
+import { getUserFromStorage } from "./redux/slices/userSlice"
 
 function App() {
-  const user = getUserByToken()
-
   const dispatch = useDispatch<AppDispatch>()
+  const { item: user } = useSelector((state: RootState) => state.user)
 
   useEffect(() => {
     dispatch(fetchBooks())
     dispatch(fetchAuthors())
     dispatch(fetchGenres())
+    dispatch(getUserFromStorage())
   }, [])
 
   return (

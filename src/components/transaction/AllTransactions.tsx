@@ -1,15 +1,29 @@
 /* eslint-disable prettier/prettier */
-import { Box, Card, IconButton, Typography } from "@mui/material"
-import { useSelector } from "react-redux"
-import { getUserByToken } from "../../hook/getToken"
-import { RootState } from "../../redux/store"
+import { Box, Card, Typography } from "@mui/material"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { allTransactions } from "../../redux/middlewares/transactionThunk"
+import { allUsers } from "../../redux/middlewares/userThunk"
+import { AppDispatch, RootState } from "../../redux/store"
 
 export const AllTransactions = () => {
+  const { item: user } = useSelector((state: RootState) => state.user)
+  const dispatch = useDispatch<AppDispatch>()
+
+  useEffect(() => {
+    if (user?.id && user.role === "ADMIN") {
+      dispatch(allTransactions())
+      dispatch(allUsers())
+    }
+  }, [])
+
   const { items: transactions } = useSelector(
     (state: RootState) => state.transaction
   )
+  const { items: users } = useSelector((state: RootState) => state.user)
+
   const { items: books } = useSelector((state: RootState) => state.book)
-  const user = getUserByToken()
+
   return (
     <>
       <Card sx={{ mt: "2rem", pt: "3rem", pl: "4rem", pr: "3rem" }}>
@@ -45,6 +59,17 @@ export const AllTransactions = () => {
                   <tbody>
                     {transactions.map((transaction) => (
                       <tr key={transaction.id}>
+                        {users.length > 0 && (
+                          <td>
+                            {
+                              users.find((u) => {
+                                if (u.id === transaction.user) {
+                                  return u.username
+                                }
+                              })?.username
+                            }
+                          </td>
+                        )}
                         <td>
                           {
                             books.find((b) => {

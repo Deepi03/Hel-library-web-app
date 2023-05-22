@@ -27,7 +27,7 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
   const { items: authors } = useSelector((state: RootState) => state.author)
-  const user = getUserByToken()
+  const { item: user } = useSelector((state: RootState) => state.user)
   const handleUpdate = (id: string) => {
     navigate(`/${id}/updateBook`)
   }
