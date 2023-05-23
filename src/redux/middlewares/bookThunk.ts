@@ -46,11 +46,11 @@ export const createBook = createAsyncThunk(
         },
         body: JSON.stringify(book)
       })
-      const createdBook = await res.json()
+      const response = await res.json()
       if (!res.ok) {
-        throw new Error("Something went wrong")
+        return response
       }
-      return createdBook
+      return response
     } catch (error) {
       return error
     }
@@ -73,11 +73,11 @@ export const updateBookById = createAsyncThunk(
           body: JSON.stringify(book)
         }
       )
-      const updatedBook = await res.json()
+      const resposne = await res.json()
       if (!res.ok) {
-        throw new Error("Something went wromgh")
+        return resposne
       }
-      return updatedBook
+      return resposne
     } catch (error) {
       return error
     }
@@ -100,7 +100,8 @@ export const deleteBookById = createAsyncThunk(
         }
       )
       if (!res.ok) {
-        throw new Error("something went wrong")
+        const resposne = await res.json()
+        return resposne
       }
       return { id }
     } catch (error) {

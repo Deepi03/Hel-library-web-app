@@ -169,11 +169,19 @@ const bookSlice = createSlice({
       state.isLoading = true
     })
     builder.addCase(createBook.fulfilled, (state, action) => {
-      state.isLoading = false
-      state.items = [...state.items, action.payload]
-      toast.success("Book Created", {
-        position: "bottom-right"
-      })
+      if (
+        action.payload.statusCode === 400 ||
+        action.payload.statusCode === 404 ||
+        action.payload.statusCode === 403
+      ) {
+        state.error = action.payload.message
+      } else {
+        state.isLoading = false
+        state.items = [...state.items, action.payload]
+        toast.success("Book Created", {
+          position: "bottom-right"
+        })
+      }
     })
     builder.addCase(createBook.rejected, (state, action) => {
       state.isLoading = false
@@ -184,25 +192,41 @@ const bookSlice = createSlice({
       state.items = action.payload
     })
     builder.addCase(updateBookById.fulfilled, (state, action) => {
-      state.isLoading = false
-      const updatedBook = state.items.map((item) => {
-        if (item.id === action.payload.id) {
-          return action.payload
-        }
-        return item
-      })
-      state.items = updatedBook
-      toast.success("Book Updated", {
-        position: "bottom-right"
-      })
+      if (
+        action.payload.statusCode === 400 ||
+        action.payload.statusCode === 404 ||
+        action.payload.statusCode === 403
+      ) {
+        state.error = action.payload.message
+      } else {
+        state.isLoading = false
+        const updatedBook = state.items.map((item) => {
+          if (item.id === action.payload.id) {
+            return action.payload
+          }
+          return item
+        })
+        state.items = updatedBook
+        toast.success("Book Updated", {
+          position: "bottom-right"
+        })
+      }
     })
     builder.addCase(deleteBookById.fulfilled, (state, action: any) => {
-      state.isLoading = false
-      const { id } = action.payload
-      state.items = state.items.filter((book) => book.id !== id)
-      toast.warning("Book Deleted", {
-        position: "bottom-right"
-      })
+      if (
+        action.payload.statusCode === 400 ||
+        action.payload.statusCode === 404 ||
+        action.payload.statusCode === 403
+      ) {
+        state.error = action.payload.message
+      } else {
+        state.isLoading = false
+        const { id } = action.payload
+        state.items = state.items.filter((book) => book.id !== id)
+        toast.warning("Book Deleted", {
+          position: "bottom-right"
+        })
+      }
     })
   }
 })

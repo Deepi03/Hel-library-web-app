@@ -4,6 +4,7 @@ import { useState } from "react"
 /* import { makeStyles } from "@mui/styles" */
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
+import { toast } from "react-toastify"
 import { updateAuthorById } from "../../redux/middlewares/authorThunk"
 
 import { AppDispatch, RootState } from "../../redux/store"
@@ -26,12 +27,12 @@ export const UpdateAuthor = () => {
       dispatch(updateAuthorById(uAuthor))
       setTimeout(() => {
         navigate("/authors")
-      }, 300)
+      }, 1000)
     }
   }
   return (
     <div>
-      <Box sx={{ paddingBottom: "20em", color: "text.primary" }}>
+      <Box sx={{ paddingBottom: "2rem", color: "text.primary" }}>
         <Typography
           variant="h4"
           sx={{

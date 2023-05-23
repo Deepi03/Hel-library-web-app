@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 import { Box, Typography } from "@mui/material"
 import React, { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 import { createAuthor } from "../../redux/middlewares/authorThunk"
 
-import { AppDispatch } from "../../redux/store"
+import { AppDispatch, RootState } from "../../redux/store"
 import { initialAuthorState, unique_id } from "../../types_variables/constants"
 import { Author } from "../../types_variables/types"
 import { FormAuthor } from "./FormAuthor"
@@ -28,7 +29,7 @@ export const AddAuthor = () => {
   }
   return (
     <div>
-      <Box sx={{ paddingBottom: "20em", color: "#323232" }}>
+      <Box sx={{ paddingBottom: "2em", color: "#323232" }}>
         <Typography
           variant="h4"
           sx={{

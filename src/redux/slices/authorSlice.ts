@@ -59,18 +59,41 @@ const authorSlice = createSlice({
       state.error = action.error.message
     })
     builder.addCase(createAuthor.fulfilled, (state, action) => {
-      state.isLoading = false
-      state.items = [...state.items, action.payload]
+      if (
+        action.payload.statusCode === 400 ||
+        action.payload.statusCode === 404 ||
+        action.payload.statusCode === 403
+      ) {
+        state.error = action.payload.message
+      } else {
+        state.isLoading = false
+        state.items = [...state.items, action.payload]
+        toast.success("Author Created", {
+          position: "bottom-right"
+        })
+      }
     })
     builder.addCase(updateAuthorById.fulfilled, (state, action) => {
       state.isLoading = false
-      const updatedAuthor = state.items.map((item) => {
-        if (item.id === action.payload.id) {
-          return action.payload
-        }
-        return item
-      })
-      state.items = updatedAuthor
+      console.log("update author", action.payload)
+      if (
+        action.payload.statusCode === 400 ||
+        action.payload.statusCode === 404 ||
+        action.payload.statusCode === 403
+      ) {
+        state.error = action.payload.message
+      } else {
+        const updatedAuthor = state.items.map((item) => {
+          if (item.id === action.payload.id) {
+            return action.payload
+          }
+          return item
+        })
+        state.items = updatedAuthor
+        toast.success("Author Updated", {
+          position: "bottom-right"
+        })
+      }
     })
 
     builder.addCase(deleteAuthorById.rejected, (state, action) => {
@@ -78,9 +101,20 @@ const authorSlice = createSlice({
       state.error = action.error.message
     })
     builder.addCase(deleteAuthorById.fulfilled, (state, action: any) => {
-      state.isLoading = false
-      const { id } = action.payload
-      state.items = state.items.filter((author) => author.id !== id)
+      if (
+        action.payload.statusCode === 400 ||
+        action.payload.statusCode === 404 ||
+        action.payload.statusCode === 403
+      ) {
+        state.error = action.payload.message
+      } else {
+        state.isLoading = false
+        const { id } = action.payload
+        state.items = state.items.filter((author) => author.id !== id)
+        toast.warning("Author Deleted", {
+          position: "bottom-right"
+        })
+      }
     })
   }
 })

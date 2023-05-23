@@ -45,11 +45,11 @@ export const createAuthor = createAsyncThunk(
         },
         body: JSON.stringify(author)
       })
-      const createdAuthor = await res.json()
+      const response = await res.json()
       if (!res.ok) {
-        throw new Error("Something went wrong")
+        return response
       }
-      return createdAuthor
+      return response
     } catch (error) {
       return error
     }
@@ -62,7 +62,7 @@ export const updateAuthorById = createAsyncThunk(
     try {
       const token = localStorage.getItem("token")
       const res = await fetch(
-        `http://localhost:8080/api/v1/admin/updateAuthor/123`,
+        `http://localhost:8080/api/v1/admin/updateAuthor/${author.id}`,
         {
           method: "PUT",
           headers: {
@@ -72,14 +72,14 @@ export const updateAuthorById = createAsyncThunk(
           body: JSON.stringify(author)
         }
       )
-      console.log("res", res)
-      const updatedAuthor = await res.json()
+
+      const response = await res.json()
       if (!res.ok) {
-        throw new Error("Something went wrong")
+        return response
       }
-      console.log("updated author", updatedAuthor)
-      return updatedAuthor
+      return response
     } catch (error) {
+      console.log("inisde catch  error ")
       return error
     }
   }
@@ -101,7 +101,8 @@ export const deleteAuthorById = createAsyncThunk(
         }
       )
       if (!res.ok) {
-        throw new Error("something went wrong")
+        const response = await res.json()
+        return response
       }
       return { id }
     } catch (error) {

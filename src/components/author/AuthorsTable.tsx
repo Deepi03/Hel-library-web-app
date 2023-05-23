@@ -20,7 +20,7 @@ import { AppDispatch, RootState } from "../../redux/store"
 import { Author, BookDto } from "../../types_variables/types"
 import "./AuthorsTable.css"
 import { deleteAuthorById } from "../../redux/middlewares/authorThunk"
-import { getUserByToken } from "../../hook/getToken"
+import { toast } from "react-toastify"
 
 const style = {
   position: "absolute",
@@ -37,10 +37,12 @@ const style = {
 export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
   const dispatch = useDispatch<AppDispatch>()
   const { items: books } = useSelector((state: RootState) => state.book)
+  const { item: user } = useSelector((state: RootState) => state.user)
+  const { error } = useSelector((state: RootState) => state.author)
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [info, setInfo] = useState("")
-  const { item: user } = useSelector((state: RootState) => state.user)
+
   const handleOpen = (author: Author) => {
     if (author.info) {
       setInfo(author.info)
@@ -181,6 +183,10 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
           </Box>
         </Modal>
       </Container>
+      {error &&
+        toast.error(<div>{error}</div>, {
+          position: "bottom-right"
+        })}
     </Box>
   )
 }

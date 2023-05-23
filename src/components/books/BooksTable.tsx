@@ -21,12 +21,14 @@ import "./Books.css"
 import { deleteBookById, fetchBooks } from "../../redux/middlewares/bookThunk"
 import { LoginButton } from "../LoginButton"
 import { borrowBook } from "../../redux/middlewares/transactionThunk"
+import { toast } from "react-toastify"
 
 export const BooksTable = ({ books }: { books: BookDto[] }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
   const { items: authors } = useSelector((state: RootState) => state.author)
   const { item: user } = useSelector((state: RootState) => state.user)
+  const { error } = useSelector((state: RootState) => state.book)
   const handleUpdate = (id: string) => {
     navigate(`/${id}/updateBook`)
   }
@@ -40,9 +42,6 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
     const day = Days.THIRTY
     if (userId && bookId) {
       dispatch(borrowBook({ bookId, userId, day }))
-      /*  setTimeout(() => {
-        dispatch(fetchBooks())
-      }) */
     }
   }
 
@@ -185,6 +184,10 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
           ))}
         </tbody>
       </table>
+      {error &&
+        toast.error(<div>{error}</div>, {
+          position: "bottom-right"
+        })}
     </div>
   )
 }
