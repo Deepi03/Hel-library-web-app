@@ -10,6 +10,7 @@ import {
   transactionsOfUser
 } from "../../redux/middlewares/transactionThunk"
 import { AppDispatch, RootState } from "../../redux/store"
+import { Transaction, User } from "../../types_variables/types"
 
 export const Transactions = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -26,9 +27,15 @@ export const Transactions = () => {
     }
   }, [])
 
-  const handleReturn = (id: string | undefined) => {
-    if (id) {
-      dispatch(returnBook(id))
+  const handleReturn = ({
+    filteredTransaction,
+    user
+  }: {
+    filteredTransaction: Transaction
+    user: User
+  }) => {
+    if (filteredTransaction.id && user.id) {
+      dispatch(returnBook({ filteredTransaction, user }))
     }
   }
   return (
@@ -84,7 +91,7 @@ export const Transactions = () => {
                           {!filteredTransaction.returned && (
                             <IconButton
                               onClick={() =>
-                                handleReturn(filteredTransaction.id)
+                                handleReturn({ filteredTransaction, user })
                               }
                             >
                               <KeyboardReturnIcon

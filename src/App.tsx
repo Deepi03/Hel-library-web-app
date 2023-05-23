@@ -49,7 +49,7 @@ function App() {
             <Route path={":bookId"} element={<SingleBook />} />
           </Route>
           <Route
-            path="/signUp"
+            path="/signup"
             element={user ? <Navigate to="/" /> : <Login />}
           />
           <Route path="/authors">

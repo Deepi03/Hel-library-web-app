@@ -8,12 +8,11 @@ export const LoginButton = () => {
   return (
     <>
       <Button
-        onClick={() => navigate("/signUp")}
+        onClick={() => navigate("/signup")}
         variant="contained"
         color="primary"
         fullWidth
         sx={{
-          mt: "25px",
           bgcolor: "#DDD0C8",
           color: "btn.text",
           boxShadow:

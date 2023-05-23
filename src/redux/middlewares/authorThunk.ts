@@ -62,7 +62,7 @@ export const updateAuthorById = createAsyncThunk(
     try {
       const token = localStorage.getItem("token")
       const res = await fetch(
-        `http://localhost:8080/api/v1/admin/updateAuthor/${author.id}`,
+        `http://localhost:8080/api/v1/admin/updateAuthor/123`,
         {
           method: "PUT",
           headers: {
@@ -72,10 +72,12 @@ export const updateAuthorById = createAsyncThunk(
           body: JSON.stringify(author)
         }
       )
+      console.log("res", res)
       const updatedAuthor = await res.json()
       if (!res.ok) {
         throw new Error("Something went wrong")
       }
+      console.log("updated author", updatedAuthor)
       return updatedAuthor
     } catch (error) {
       return error

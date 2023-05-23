@@ -2,6 +2,7 @@
 
 import { createSlice } from "@reduxjs/toolkit"
 import { TransactionState } from "../../types_variables/types"
+import { fetchBooks } from "../middlewares/bookThunk"
 import {
   allTransactions,
   borrowBook,
@@ -27,7 +28,6 @@ const transactionSlice = createSlice({
     builder.addCase(borrowBook.fulfilled, (state, action: any) => {
       state.isLoading = false
     })
-
     builder.addCase(borrowBook.rejected, (state, action) => {
       state.isLoading = false
       state.error = action.error.message

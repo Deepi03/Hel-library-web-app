@@ -5,7 +5,6 @@ import MenuIcon from "@mui/icons-material/Menu"
 
 import { logout } from "../../redux/slices/userSlice"
 import { AppDispatch, RootState } from "../../redux/store"
-import { Login } from "../login/Login"
 import {
   AppBar,
   Avatar,

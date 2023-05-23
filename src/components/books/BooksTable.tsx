@@ -16,11 +16,10 @@ import {
   sortBookByTitle
 } from "../../redux/slices/bookSlice"
 import { AppDispatch, RootState } from "../../redux/store"
-import { BookDto, Days, User } from "../../types_variables/types"
+import { BookDto, Days } from "../../types_variables/types"
 import "./Books.css"
 import { deleteBookById, fetchBooks } from "../../redux/middlewares/bookThunk"
 import { LoginButton } from "../LoginButton"
-import { getUserByToken } from "../../hook/getToken"
 import { borrowBook } from "../../redux/middlewares/transactionThunk"
 
 export const BooksTable = ({ books }: { books: BookDto[] }) => {
@@ -41,9 +40,9 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
     const day = Days.THIRTY
     if (userId && bookId) {
       dispatch(borrowBook({ bookId, userId, day }))
-      setTimeout(() => {
+      /*  setTimeout(() => {
         dispatch(fetchBooks())
-      })
+      }) */
     }
   }
 
@@ -125,7 +124,9 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
                   )}
                 </td>
               ) : (
-                <LoginButton />
+                <div style={{ marginTop: "2rem" }}>
+                  <LoginButton />
+                </div>
               )}
 
               <td>

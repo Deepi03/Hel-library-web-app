@@ -4,7 +4,7 @@ import { toast } from "react-toastify"
 import { getUserByToken } from "../../hook/getToken"
 
 import { UsersState } from "../../types_variables/types"
-import { allUsers, signin, signUp } from "../middlewares/userThunk"
+import { allUsers, signin, signup } from "../middlewares/userThunk"
 
 const initialState: UsersState = {
   items: [],
@@ -30,10 +30,10 @@ const userSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(signUp.pending, (state) => {
+    builder.addCase(signup.pending, (state) => {
       state.isLoading = true
     })
-    builder.addCase(signUp.fulfilled, (state, action: any) => {
+    builder.addCase(signup.fulfilled, (state, action: any) => {
       state.status = action.payload
       if (action.apyload === 201) {
         toast.success("User SingUped", {
@@ -46,6 +46,7 @@ const userSlice = createSlice({
       }
     })
     builder.addCase(signin.fulfilled, (state, action: any) => {
+      console.log("ac", action.payload)
       if (action.payload.token.length > 0) {
         localStorage.setItem("token", action.payload.token)
         const user = getUserByToken()
@@ -55,7 +56,8 @@ const userSlice = createSlice({
         })
       }
     })
-    builder.addCase(signUp.rejected, (state, action) => {
+    builder.addCase(signup.rejected, (state, action) => {
+      console.log("state error", action.payload)
       state.isLoading = false
       state.error = action.error.message
       state.item = undefined

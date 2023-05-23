@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux"
 import { AppDispatch } from "../../redux/store"
 import { initialUseState } from "../../types_variables/constants"
 import { User } from "../../types_variables/types"
-import { signin, signUp } from "../../redux/middlewares/userThunk"
+import { signin, signup } from "../../redux/middlewares/userThunk"
 import { useNavigate } from "react-router-dom"
 
 export const Login = () => {
@@ -34,7 +34,7 @@ export const Login = () => {
       navigate("/")
     } else {
       e.preventDefault()
-      dispatch(signUp(user))
+      dispatch(signup(user))
       navigate("/")
     }
   }

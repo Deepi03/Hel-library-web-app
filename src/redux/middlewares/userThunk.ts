@@ -2,7 +2,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { User } from "../../types_variables/types"
 
-export const signUp = createAsyncThunk("signUp", async (user: User) => {
+export const signup = createAsyncThunk("signup", async (user: User) => {
   try {
     const res = await fetch(`http://localhost:8080/api/v1/users/signup`, {
       method: "POST",
@@ -15,8 +15,10 @@ export const signUp = createAsyncThunk("signUp", async (user: User) => {
     if (message !== 201) {
       throw new Error("Something went wrong")
     }
+    console.log("message", message)
     return message
   } catch (error) {
+    console.log("signup error", error)
     return error
   }
 })
@@ -31,11 +33,13 @@ export const signin = createAsyncThunk("signin", async (user: User) => {
       body: JSON.stringify(user)
     })
     if (!res.ok) {
-      throw new Error("Something went wrong")
+      throw res.status
     }
     const response = await res.json()
+    console.log("response signin", response)
     return response
   } catch (error) {
+    console.log("response error", error)
     return error
   }
 })
