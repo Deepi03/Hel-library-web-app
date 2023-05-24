@@ -63,3 +63,23 @@ export const allUsers = createAsyncThunk("allUsers", async () => {
     return error
   }
 })
+
+export const userById = createAsyncThunk("signup", async (userId: string) => {
+  try {
+    const token = localStorage.getItem("token")
+    const res = await fetch(`http://localhost:8080/api/v1/users/${userId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    })
+    const response = await res.json()
+    if (!res.ok) {
+      throw new Error("Something went wrong")
+    }
+    return response
+  } catch (error) {
+    return error
+  }
+})

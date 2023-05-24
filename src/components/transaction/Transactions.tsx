@@ -22,10 +22,12 @@ export const Transactions = () => {
   const { item: user } = useSelector((state: RootState) => state.user)
 
   useEffect(() => {
-    if (user?.id && user.role === "USER") {
+    console.log("transactions of user transaction tsx", user)
+    if (user?.id && (user.role === "USER" || user?.role === "ADMIN")) {
+      console.log("transactions of user transaction tsx", user)
       dispatch(transactionsOfUser(user.id))
     }
-  }, [])
+  }, [user])
 
   const handleReturn = ({
     filteredTransaction,

@@ -1,28 +1,33 @@
 /* eslint-disable prettier/prettier */
-import { Box, Card, Typography } from "@mui/material"
+import { Box, Card, IconButton, Typography } from "@mui/material"
+import DeleteIcon from "@mui/icons-material/Delete"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { allTransactions } from "../../redux/middlewares/transactionThunk"
+import {
+  allTransactions,
+  deleteTransactionById
+} from "../../redux/middlewares/transactionThunk"
 import { allUsers } from "../../redux/middlewares/userThunk"
 import { AppDispatch, RootState } from "../../redux/store"
+import { Transaction } from "../../types_variables/types"
+import { toast } from "react-toastify"
 
 export const AllTransactions = () => {
-  const { item: user } = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch<AppDispatch>()
+  const { transaction, user, book } = useSelector((state: RootState) => state)
 
   useEffect(() => {
-    if (user?.id && user.role === "ADMIN") {
+    if (user.item && user.item.role === "ADMIN") {
       dispatch(allTransactions())
       dispatch(allUsers())
     }
   }, [])
 
-  const { items: transactions } = useSelector(
-    (state: RootState) => state.transaction
-  )
-  const { items: users } = useSelector((state: RootState) => state.user)
-
-  const { items: books } = useSelector((state: RootState) => state.book)
+  const handleDelete = (transaction: Transaction) => {
+    if (transaction.id) {
+      dispatch(deleteTransactionById(transaction.id))
+    }
+  }
 
   return (
     <>
@@ -44,7 +49,7 @@ export const AllTransactions = () => {
               All Transactions
             </Typography>
             <Box sx={{ mt: "2rem", pt: "1rem", pl: "4rem", pr: "3rem" }}>
-              {transactions.length > 0 && (
+              {transaction.items.length > 0 && (
                 <table id="books-table">
                   <thead>
                     <tr>
@@ -54,15 +59,16 @@ export const AllTransactions = () => {
                       <th>Return Date</th>
                       <th>Should be Returned By</th>
                       <th>Reuturned</th>
+                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {transactions.map((transaction) => (
+                    {transaction.items.map((transaction) => (
                       <tr key={transaction.id}>
-                        {users.length > 0 && (
+                        {user.items.length > 0 && (
                           <td>
                             {
-                              users.find((u) => {
+                              user.items.find((u) => {
                                 if (u.id === transaction.user) {
                                   return u.username
                                 }
@@ -72,7 +78,7 @@ export const AllTransactions = () => {
                         )}
                         <td>
                           {
-                            books.find((b) => {
+                            book.items.find((b) => {
                               if (b.id === transaction.book) {
                                 return b.title
                               }
@@ -83,6 +89,22 @@ export const AllTransactions = () => {
                         <td>{transaction.returnDate}</td>
                         <td>{transaction.toBeReturned}</td>
                         <td>{transaction.returned ? "Yes" : "No"}</td>
+                        <td>
+                          <IconButton>
+                            <DeleteIcon
+                              sx={{
+                                color: "#323232",
+                                "&:hover": {
+                                  boxShadow: "none",
+                                  color: "red"
+                                }
+                              }}
+                              onClick={() => {
+                                handleDelete(transaction)
+                              }}
+                            ></DeleteIcon>
+                          </IconButton>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -91,6 +113,10 @@ export const AllTransactions = () => {
             </Box>{" "}
           </div>
         )}
+        {transaction.error &&
+          toast.error(<div>{transaction.error}</div>, {
+            position: "bottom-right"
+          })}
       </Card>
     </>
   )

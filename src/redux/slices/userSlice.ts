@@ -4,7 +4,7 @@ import { toast } from "react-toastify"
 import { getUserByToken } from "../../hook/getToken"
 
 import { UsersState } from "../../types_variables/types"
-import { allUsers, signin, signup } from "../middlewares/userThunk"
+import { allUsers, signin, signup, userById } from "../middlewares/userThunk"
 
 const initialState: UsersState = {
   items: [],
@@ -66,6 +66,10 @@ const userSlice = createSlice({
       state.isLoading = false
       state.items = action.payload
     })
+    /* builder.addCase(userById.fulfilled, (state, action: any) => {
+      state.isLoading = false
+      state.items = action.payload
+    }) */
   }
 })
 

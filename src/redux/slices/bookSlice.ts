@@ -34,59 +34,7 @@ const bookSlice = createSlice({
         singleBook: filteredBook
       }
     },
-    /* borrowBook(state, action): BookState {
-      const { book, userId, days } = action.payload
-      const rDate = new Date()
-      return {
-        ...state,
-        items: state.items.map((b) => {
-          if (b.id !== book.id) {
-            return b
-          } else {
-            if (userId !== undefined) {
-              toast.info("Book Borrowed", {
-                position: "bottom-right"
-              })
-            }
-            if (days === 10) {
-              rDate.setDate(new Date().getDate() + 10)
-            } else if (days === 20) {
-              rDate.setDate(new Date().getDate() + 20)
-            } else {
-              rDate.setDate(new Date().getDate() + 30)
-            }
-            const rDateString = rDate.toDateString()
 
-            return {
-              ...b,
-              status: false,
-              borrowDate: new Date().toDateString(),
-              returnDate: rDateString,
-              borrowerId: userId
-            }
-          }
-        })
-      }
-    }, */
-    /* returnBook(state, action) {
-      const { id } = action.payload
-      return {
-        ...state,
-        items: state.items.map((book) => {
-          if (book.id !== id) return book
-          toast.info("Book Returned", {
-            position: "bottom-right"
-          })
-          return {
-            ...book,
-            status: true,
-            borrowDate: null,
-            returnDate: null,
-            borrowerId: null
-          }
-        })
-      }
-    }, */
     search(state, action) {
       const genres: Genre[] = action.payload.genres
       const authors: Author[] = action.payload.authors

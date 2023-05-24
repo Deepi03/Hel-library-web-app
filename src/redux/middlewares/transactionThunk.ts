@@ -89,7 +89,6 @@ export const transactionsOfUser = createAsyncThunk(
       if (!res.ok) {
         throw new Error("Something went wrong")
       }
-
       return transactions
     } catch (error) {
       return error
@@ -119,3 +118,29 @@ export const allTransactions = createAsyncThunk("allTransactions", async () => {
     return error
   }
 })
+
+export const deleteTransactionById = createAsyncThunk(
+  "deleteTransactionById",
+  async (transactionId: string) => {
+    try {
+      const token = localStorage.getItem("token")
+      const res = await fetch(
+        `http://localhost:8080/api/v1/admin/deleteTransaction/${transactionId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      if (!res.ok) {
+        const resposne = await res.json()
+        return resposne
+      }
+      return { transactionId }
+    } catch (error) {
+      return error
+    }
+  }
+)

@@ -9,7 +9,6 @@ import SortIcon from "@mui/icons-material/Sort"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { checkAdmin } from "../../hook/checkAdmin"
 import {
   singleBookFilter,
   sortBookByAvailable,
@@ -18,7 +17,7 @@ import {
 import { AppDispatch, RootState } from "../../redux/store"
 import { BookDto, Days } from "../../types_variables/types"
 import "./Books.css"
-import { deleteBookById, fetchBooks } from "../../redux/middlewares/bookThunk"
+import { deleteBookById } from "../../redux/middlewares/bookThunk"
 import { LoginButton } from "../LoginButton"
 import { borrowBook } from "../../redux/middlewares/transactionThunk"
 import { toast } from "react-toastify"

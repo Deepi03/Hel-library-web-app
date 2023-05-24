@@ -15,6 +15,7 @@ import { borrowBook } from "../../redux/middlewares/transactionThunk"
 import { AppDispatch, RootState } from "../../redux/store"
 import { Days } from "../../types_variables/types"
 import { Login } from "../login/Login"
+import { LoginButton } from "../LoginButton"
 import "./SingleBook.css"
 
 export const SingleBook = () => {
@@ -108,7 +109,7 @@ export const SingleBook = () => {
                 </button>
               </div>
             ) : (
-              <Login></Login>
+              <LoginButton></LoginButton>
             )}
           </div>
         </section>
