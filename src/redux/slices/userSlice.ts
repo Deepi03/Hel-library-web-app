@@ -4,7 +4,7 @@ import { toast } from "react-toastify"
 import { getUserByToken } from "../../hook/getToken"
 
 import { UsersState } from "../../types_variables/types"
-import { allUsers, signin, signup, userById } from "../middlewares/userThunk"
+import { allUsers, signin, signup } from "../middlewares/userThunk"
 
 const initialState: UsersState = {
   items: [],
@@ -56,7 +56,6 @@ const userSlice = createSlice({
           position: "bottom-right"
         })
       } else {
-        console.log("error in login ")
         state.error = action.payload.message
         toast.error(state.error, {
           position: "bottom-right"
