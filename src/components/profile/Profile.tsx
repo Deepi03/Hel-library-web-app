@@ -19,11 +19,7 @@ export const Profile = () => {
           id="services"
           sx={{ mt: "2rem", pt: "3rem", pl: "4rem", pr: "3rem" }}
         >
-          <Avatar
-            alt={user.username}
-            src={user}
-            sx={{ width: 70, height: 70 }}
-          ></Avatar>
+          <Avatar alt={user.username} sx={{ width: 70, height: 70 }}></Avatar>
           <Typography
             variant="h4"
             sx={{
