@@ -25,9 +25,9 @@ export const AddBook = () => {
     if (book) {
       dispatch(createBook(book))
     }
-    setTimeout(() => {
+    /* setTimeout(() => {
       navigate("/books")
-    }, 300)
+    }, 300) */
   }
 
   return (

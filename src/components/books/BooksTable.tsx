@@ -21,6 +21,7 @@ import { deleteBookById } from "../../redux/middlewares/bookThunk"
 import { LoginButton } from "../LoginButton"
 import { borrowBook } from "../../redux/middlewares/transactionThunk"
 import { toast } from "react-toastify"
+import { useEffect } from "react"
 
 export const BooksTable = ({ books }: { books: BookDto[] }) => {
   const navigate = useNavigate()
@@ -57,6 +58,7 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
   const handleSortByAvailable = () => {
     dispatch(sortBookByAvailable())
   }
+
   return (
     <div className="books-table">
       {user?.role === "ADMIN" && (
@@ -183,10 +185,10 @@ export const BooksTable = ({ books }: { books: BookDto[] }) => {
           ))}
         </tbody>
       </table>
-      {error &&
+      {/*  {error &&
         toast.error(<div>{error}</div>, {
           position: "bottom-right"
-        })}
+        })} */}
     </div>
   )
 }

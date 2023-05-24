@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { createSlice } from "@reduxjs/toolkit"
+import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { Author, BookState, Genre } from "../../types_variables/types"
 import {
@@ -107,6 +108,7 @@ const bookSlice = createSlice({
     builder.addCase(fetchBooks.fulfilled, (state, action: any) => {
       state.items = action.payload
       state.isLoading = false
+      state.error = undefined
     })
 
     builder.addCase(fetchBooks.rejected, (state, action) => {
@@ -123,6 +125,9 @@ const bookSlice = createSlice({
         action.payload.statusCode === 403
       ) {
         state.error = action.payload.message
+        toast.error(state.error, {
+          position: "bottom-right"
+        })
       } else {
         state.isLoading = false
         state.items = [...state.items, action.payload]
@@ -146,6 +151,9 @@ const bookSlice = createSlice({
         action.payload.statusCode === 403
       ) {
         state.error = action.payload.message
+        toast.error(state.error, {
+          position: "bottom-right"
+        })
       } else {
         state.isLoading = false
         const updatedBook = state.items.map((item) => {
@@ -167,6 +175,9 @@ const bookSlice = createSlice({
         action.payload.statusCode === 403
       ) {
         state.error = action.payload.message
+        toast.error(state.error, {
+          position: "bottom-right"
+        })
       } else {
         state.isLoading = false
         const { id } = action.payload

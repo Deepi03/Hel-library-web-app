@@ -65,6 +65,9 @@ const authorSlice = createSlice({
         action.payload.statusCode === 403
       ) {
         state.error = action.payload.message
+        toast.error(state.error, {
+          position: "bottom-right"
+        })
       } else {
         state.isLoading = false
         state.items = [...state.items, action.payload]
@@ -82,6 +85,9 @@ const authorSlice = createSlice({
         action.payload.statusCode === 403
       ) {
         state.error = action.payload.message
+        toast.error(state.error, {
+          position: "bottom-right"
+        })
       } else {
         const updatedAuthor = state.items.map((item) => {
           if (item.id === action.payload.id) {
@@ -107,6 +113,9 @@ const authorSlice = createSlice({
         action.payload.statusCode === 403
       ) {
         state.error = action.payload.message
+        toast.error(state.error, {
+          position: "bottom-right"
+        })
       } else {
         state.isLoading = false
         const { id } = action.payload

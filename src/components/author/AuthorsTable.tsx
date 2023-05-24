@@ -38,7 +38,6 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
   const dispatch = useDispatch<AppDispatch>()
   const { items: books } = useSelector((state: RootState) => state.book)
   const { item: user } = useSelector((state: RootState) => state.user)
-  const { error } = useSelector((state: RootState) => state.author)
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [info, setInfo] = useState("")
@@ -183,10 +182,6 @@ export const AuthorsTable = ({ authors }: { authors: Author[] }) => {
           </Box>
         </Modal>
       </Container>
-      {error &&
-        toast.error(<div>{error}</div>, {
-          position: "bottom-right"
-        })}
     </Box>
   )
 }

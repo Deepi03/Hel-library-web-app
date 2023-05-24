@@ -11,14 +11,12 @@ export const signup = createAsyncThunk("signup", async (user: User) => {
       },
       body: JSON.stringify(user)
     })
-    const message = await res.status
-    if (message !== 201) {
-      throw new Error("Something went wrong")
+    const response = await res.json()
+    if (!res.ok) {
+      return response
     }
-    console.log("message", message)
-    return message
+    return response
   } catch (error) {
-    console.log("signup error", error)
     return error
   }
 })
@@ -32,14 +30,12 @@ export const signin = createAsyncThunk("signin", async (user: User) => {
       },
       body: JSON.stringify(user)
     })
-    if (!res.ok) {
-      throw res.status
-    }
     const response = await res.json()
-    console.log("response signin", response)
+    if (!res.ok) {
+      return response
+    }
     return response
   } catch (error) {
-    console.log("response error", error)
     return error
   }
 })

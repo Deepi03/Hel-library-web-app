@@ -34,24 +34,31 @@ const userSlice = createSlice({
       state.isLoading = true
     })
     builder.addCase(signup.fulfilled, (state, action: any) => {
-      state.status = action.payload
-      if (action.apyload === 201) {
-        toast.success("User SingUped", {
+      if (action.payload.statusCode === 400) {
+        state.error = action.payload.message
+        toast.error(state.error, {
           position: "bottom-right"
         })
       } else {
-        toast.error("Username already exist", {
+        state.status = action.payload.message
+        toast.success("User Created", {
           position: "bottom-right"
         })
       }
     })
     builder.addCase(signin.fulfilled, (state, action: any) => {
       console.log("ac", action.payload)
-      if (action.payload.token.length > 0) {
+      if (action.payload.token) {
         localStorage.setItem("token", action.payload.token)
         const user = getUserByToken()
         state.item = user
         toast.success("User loggedIn", {
+          position: "bottom-right"
+        })
+      } else {
+        console.log("error in login ")
+        state.error = action.payload.message
+        toast.error(state.error, {
           position: "bottom-right"
         })
       }
@@ -66,10 +73,6 @@ const userSlice = createSlice({
       state.isLoading = false
       state.items = action.payload
     })
-    /* builder.addCase(userById.fulfilled, (state, action: any) => {
-      state.isLoading = false
-      state.items = action.payload
-    }) */
   }
 })
 
