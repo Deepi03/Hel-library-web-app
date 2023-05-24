@@ -4,7 +4,9 @@ import { Author } from "../../types_variables/types"
 
 export const fetchAuthors = createAsyncThunk("fetchAuthors", async () => {
   try {
-    const res = await fetch("http://localhost:8080/api/v1/authors/")
+    const res = await fetch(
+      "https://hel-library-web-service.onrender.com/api/v1/authors/"
+    )
     const authors = await res.json()
     if (!res.ok) {
       throw new Error("Something went wrong")
@@ -19,7 +21,9 @@ export const fetchAuthorById = createAsyncThunk(
   "fetchAuthorById",
   async (id: string) => {
     try {
-      const res = await fetch(`http://localhost:8080/api/v1/authors/${id}`)
+      const res = await fetch(
+        `https://hel-library-web-service.onrender.com/api/v1/authors/${id}`
+      )
       const author = await res.json()
 
       if (!res.ok) {
@@ -37,14 +41,17 @@ export const createAuthor = createAsyncThunk(
   async (author: Partial<Author>) => {
     try {
       const token = localStorage.getItem("token")
-      const res = await fetch(`http://localhost:8080/api/v1/admin/addAuthor`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(author)
-      })
+      const res = await fetch(
+        `https://hel-library-web-service.onrender.com/api/v1/admin/addAuthor`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(author)
+        }
+      )
       const response = await res.json()
       if (!res.ok) {
         return response
@@ -62,7 +69,7 @@ export const updateAuthorById = createAsyncThunk(
     try {
       const token = localStorage.getItem("token")
       const res = await fetch(
-        `http://localhost:8080/api/v1/admin/updateAuthor/${author.id}`,
+        `https://hel-library-web-service.onrender.com/api/v1/admin/updateAuthor/${author.id}`,
         {
           method: "PUT",
           headers: {
@@ -91,7 +98,7 @@ export const deleteAuthorById = createAsyncThunk(
     try {
       const token = localStorage.getItem("token")
       const res = await fetch(
-        `http://localhost:8080/api/v1/admin/deleteAuthor/${id}`,
+        `https://hel-library-web-service.onrender.com/api/v1/admin/deleteAuthor/${id}`,
         {
           method: "DELETE",
           headers: {

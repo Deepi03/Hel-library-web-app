@@ -29,6 +29,9 @@ const transactionSlice = createSlice({
     })
     builder.addCase(borrowBook.fulfilled, (state, action: any) => {
       state.isLoading = false
+      toast.success("Book Borrowed", {
+        position: "bottom-right"
+      })
     })
     builder.addCase(borrowBook.rejected, (state, action) => {
       state.isLoading = false
@@ -38,6 +41,9 @@ const transactionSlice = createSlice({
     builder.addCase(returnBook.fulfilled, (state, action: any) => {
       state.message = action.payload
       state.isLoading = false
+      toast.success("Book Returned", {
+        position: "bottom-right"
+      })
     })
     builder.addCase(transactionsOfUser.fulfilled, (state, action: any) => {
       state.items = action.payload
