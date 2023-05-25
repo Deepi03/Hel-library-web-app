@@ -100,7 +100,7 @@ export const allTransactions = createAsyncThunk("allTransactions", async () => {
   try {
     const token = localStorage.getItem("token")
     const res = await fetch(
-      `https://hel-library-web-service.onrender.com/api/v1/admin/allTransactions`,
+      `https://hel-library-web-service.onrender.com/api/v1/admin/transactions`,
       {
         method: "GET",
         headers: {
@@ -125,7 +125,7 @@ export const deleteTransactionById = createAsyncThunk(
     try {
       const token = localStorage.getItem("token")
       const res = await fetch(
-        `https://hel-library-web-service.onrender.com/api/v1/admin/deleteTransaction/${transactionId}`,
+        `https://hel-library-web-service.onrender.com/api/v1/admin/transactions/${transactionId}`,
         {
           method: "DELETE",
           headers: {

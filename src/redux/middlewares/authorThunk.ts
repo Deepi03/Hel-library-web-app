@@ -42,7 +42,7 @@ export const createAuthor = createAsyncThunk(
     try {
       const token = localStorage.getItem("token")
       const res = await fetch(
-        `https://hel-library-web-service.onrender.com/api/v1/admin/addAuthor`,
+        `https://hel-library-web-service.onrender.com/api/v1/admin/authors`,
         {
           method: "POST",
           headers: {
@@ -69,7 +69,7 @@ export const updateAuthorById = createAsyncThunk(
     try {
       const token = localStorage.getItem("token")
       const res = await fetch(
-        `https://hel-library-web-service.onrender.com/api/v1/admin/updateAuthor/${author.id}`,
+        `https://hel-library-web-service.onrender.com/api/v1/admin/authors/${author.id}`,
         {
           method: "PUT",
           headers: {
@@ -98,7 +98,7 @@ export const deleteAuthorById = createAsyncThunk(
     try {
       const token = localStorage.getItem("token")
       const res = await fetch(
-        `https://hel-library-web-service.onrender.com/api/v1/admin/deleteAuthor/${id}`,
+        `https://hel-library-web-service.onrender.com/api/v1/admin/authors/${id}`,
         {
           method: "DELETE",
           headers: {
