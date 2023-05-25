@@ -62,7 +62,7 @@ export const Login = () => {
               <TextField
                 variant="outlined"
                 placeholder="password"
-                type="text"
+                type="password"
                 fullWidth
                 autoComplete="password"
                 autoFocus
