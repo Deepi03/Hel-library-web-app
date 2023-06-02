@@ -7,6 +7,7 @@ export const fetchAuthors = createAsyncThunk("fetchAuthors", async () => {
     const res = await fetch(
       "https://hel-library-web-service.onrender.com/api/v1/authors/"
     )
+    /* const res = await fetch("http://localhost:8080/api/v1/authors/") */
     const authors = await res.json()
     if (!res.ok) {
       throw new Error("Something went wrong")
@@ -52,6 +53,14 @@ export const createAuthor = createAsyncThunk(
           body: JSON.stringify(author)
         }
       )
+      /* const res = await fetch(`http://localhost:8080/api/v1/admin/authors`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(author)
+      }) */
       const response = await res.json()
       if (!res.ok) {
         return response
@@ -79,6 +88,17 @@ export const updateAuthorById = createAsyncThunk(
           body: JSON.stringify(author)
         }
       )
+      /*  const res = await fetch(
+        `http://localhost:8080/api/v1/admin/authors/${author.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(author)
+        }
+      ) */
 
       const response = await res.json()
       if (!res.ok) {
@@ -107,6 +127,16 @@ export const deleteAuthorById = createAsyncThunk(
           }
         }
       )
+      /*   const res = await fetch(
+        `http://localhost:8080/api/v1/admin/authors/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
+        }
+      ) */
       if (!res.ok) {
         const response = await res.json()
         return response

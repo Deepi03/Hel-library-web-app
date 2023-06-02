@@ -14,6 +14,13 @@ export const signup = createAsyncThunk("signup", async (user: User) => {
         body: JSON.stringify(user)
       }
     )
+    /* const res = await fetch(`http://localhost:8080/api/v1/users/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(user)
+    }) */
     const response = await res.json()
     if (!res.ok) {
       return response
@@ -36,6 +43,13 @@ export const signin = createAsyncThunk("signin", async (user: User) => {
         body: JSON.stringify(user)
       }
     )
+    /* const res = await fetch(`http://localhost:8080/api/v1/users/signin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(user)
+    }) */
     const response = await res.json()
     if (!res.ok) {
       return response
@@ -59,6 +73,14 @@ export const allUsers = createAsyncThunk("allUsers", async () => {
         }
       }
     )
+    /* const res = await fetch(`http://localhost:8080/api/v1/admin/users`, {
+      method: `GET`,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    }) */
+
     if (!res.ok) {
       throw new Error("Something went wrong")
     }

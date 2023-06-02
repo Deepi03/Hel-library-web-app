@@ -113,10 +113,6 @@ export const AllTransactions = () => {
             </Box>{" "}
           </div>
         )}
-        {transaction.error &&
-          toast.error(<div>{transaction.error}</div>, {
-            position: "bottom-right"
-          })}
       </Card>
     </>
   )

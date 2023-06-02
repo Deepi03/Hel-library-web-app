@@ -1,12 +1,10 @@
 /* eslint-disable prettier/prettier */
-import { Avatar, Box, Card, IconButton, Typography } from "@mui/material"
-import { useDispatch, useSelector } from "react-redux"
+import { Avatar, Card, Typography } from "@mui/material"
+import { useSelector } from "react-redux"
 
-import { AppDispatch, RootState } from "../../redux/store"
+import { RootState } from "../../redux/store"
 import "./Profile.css"
-import { User } from "../../types_variables/types"
-//import { returnBook } from "../../redux/slices/bookSlice"
-import { getUserByToken } from "../../hook/getToken"
+
 import { TransactionsButtons } from "../transaction/TransactionsButtons"
 
 export const Profile = () => {

@@ -20,6 +20,18 @@ export const borrowBook = createAsyncThunk(
           body: JSON.stringify(borrow)
         }
       )
+      /* const res = await fetch(
+        ` http://localhost:8080/api/v1/transactions/borrow`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(borrow)
+        }
+      ) */
+
       const createdBorrow = await res.json()
       if (!res.ok) {
         throw new Error("Something went wrong")
@@ -55,6 +67,16 @@ export const returnBook = createAsyncThunk(
           }
         }
       )
+      /* const res = await fetch(
+        ` http://localhost:8080/api/v1/transactions/return/${transactionId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
+        }
+      ) */
       const message = await res
       if (!res.ok) {
         throw new Error("Something went wrong")
@@ -84,6 +106,16 @@ export const transactionsOfUser = createAsyncThunk(
           }
         }
       )
+      /* const res = await fetch(
+        `http://localhost:8080/api/v1/transactions/user/${userId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
+        }
+      ) */
 
       const transactions: Transaction[] = await res.json()
       if (!res.ok) {
@@ -109,6 +141,13 @@ export const allTransactions = createAsyncThunk("allTransactions", async () => {
         }
       }
     )
+    /* const res = await fetch(`http://localhost:8080/api/v1/admin/transactions`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    }) */
     if (!res.ok) {
       throw new Error("Something went wrong")
     }
@@ -134,6 +173,16 @@ export const deleteTransactionById = createAsyncThunk(
           }
         }
       )
+      /* const res = await fetch(
+        `http://localhost:8080/api/v1/admin/transactions/${transactionId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
+        }
+      ) */
       if (!res.ok) {
         const resposne = await res.json()
         return resposne

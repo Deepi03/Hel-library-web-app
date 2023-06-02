@@ -8,6 +8,7 @@ export const fetchBooks = createAsyncThunk("fetchBooks", async () => {
     const res = await fetch(
       "https://hel-library-web-service.onrender.com/api/v1/books/"
     )
+    /* const res = await fetch("http://localhost:8080/api/v1/books/") */
     const books: BookDto[] = await res.json()
     if (!res.ok) {
       throw new Error("Something went wrong")
@@ -51,6 +52,15 @@ export const createBook = createAsyncThunk(
           body: JSON.stringify(book)
         }
       )
+      /*   const res = await fetch(`http://localhost:8080/api/v1/admin/books`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(book)
+      }) */
+
       const response = await res.json()
       if (!res.ok) {
         return response
@@ -78,6 +88,17 @@ export const updateBookById = createAsyncThunk(
           body: JSON.stringify(book)
         }
       )
+      /* const res = await fetch(
+        `http://localhost:8080/api/v1/admin/books/${book.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(book)
+        }
+      ) */
       const resposne = await res.json()
       if (!res.ok) {
         return resposne
@@ -104,6 +125,16 @@ export const deleteBookById = createAsyncThunk(
           }
         }
       )
+      /*  const res = await fetch(
+        `http://localhost:8080/api/v1/admin/books/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
+        }
+      ) */
       if (!res.ok) {
         const resposne = await res.json()
         return resposne

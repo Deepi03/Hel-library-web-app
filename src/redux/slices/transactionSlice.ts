@@ -47,7 +47,6 @@ const transactionSlice = createSlice({
     })
     builder.addCase(transactionsOfUser.fulfilled, (state, action: any) => {
       state.items = action.payload
-      console.log("transactions of user", state.items)
       state.isLoading = false
     })
     builder.addCase(allTransactions.fulfilled, (state, action: any) => {
@@ -61,6 +60,9 @@ const transactionSlice = createSlice({
         action.payload.statusCode === 403
       ) {
         state.error = action.payload.message
+        toast.error(state.error, {
+          position: "bottom-right"
+        })
       } else {
         state.isLoading = false
         const { id } = action.payload

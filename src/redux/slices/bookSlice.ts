@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 import { createSlice } from "@reduxjs/toolkit"
-import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { Author, BookState, Genre } from "../../types_variables/types"
 import {
