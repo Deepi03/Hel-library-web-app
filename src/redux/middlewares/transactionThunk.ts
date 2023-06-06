@@ -160,7 +160,7 @@ export const allTransactions = createAsyncThunk("allTransactions", async () => {
 
 export const deleteTransactionById = createAsyncThunk(
   "deleteTransactionById",
-  async (transactionId: string) => {
+  async (transactionId: string, { dispatch }) => {
     try {
       const token = localStorage.getItem("token")
       const res = await fetch(
@@ -187,6 +187,7 @@ export const deleteTransactionById = createAsyncThunk(
         const resposne = await res.json()
         return resposne
       }
+      dispatch(allTransactions)
       return { transactionId }
     } catch (error) {
       return error
