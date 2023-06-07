@@ -82,7 +82,7 @@ export type Transaction = {
   borrowDate: string
   returnDate: string
   returned: boolean
-  toBeReturned: boolean
+  toBeReturned: string
 }
 
 export type BorrowDto = {

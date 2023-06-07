@@ -7,7 +7,7 @@ export const fetchAuthors = createAsyncThunk("fetchAuthors", async () => {
     const res = await fetch(
       "https://hel-library-web-service.onrender.com/api/v1/authors/"
     )
-    /* const res = await fetch("http://localhost:8080/api/v1/authors/") */
+    //const res = await fetch("http://localhost:8080/api/v1/authors/")
     const authors = await res.json()
     if (!res.ok) {
       throw new Error("Something went wrong")

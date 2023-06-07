@@ -85,9 +85,12 @@ export const AllTransactions = () => {
                             })?.title
                           }
                         </td>
-                        <td>{transaction.borrowDate}</td>
-                        <td>{transaction.returnDate}</td>
-                        <td>{transaction.toBeReturned}</td>
+                        <td>{transaction.borrowDate.substring(0, 10)}</td>
+                        <td>
+                          {transaction.returnDate &&
+                            transaction.returnDate.substring(0, 10)}
+                        </td>
+                        <td>{transaction.toBeReturned.substring(0, 10)}</td>
                         <td>{transaction.returned ? "Yes" : "No"}</td>
                         <td>
                           <IconButton>

@@ -85,9 +85,16 @@ export const Transactions = () => {
                             })?.title
                           }
                         </td>
-                        <td>{filteredTransaction.borrowDate}</td>
-                        <td>{filteredTransaction.returnDate}</td>
-                        <td>{filteredTransaction.toBeReturned}</td>
+                        <td>
+                          {filteredTransaction.borrowDate.substring(0, 10)}
+                        </td>
+                        <td>
+                          {filteredTransaction.returnDate &&
+                            filteredTransaction.returnDate.substring(0, 10)}
+                        </td>
+                        <td>
+                          {filteredTransaction.toBeReturned.substring(0, 10)}
+                        </td>
                         <td>{filteredTransaction.returned ? "Yes" : "No"}</td>
                         <td>
                           {!filteredTransaction.returned && (

@@ -43,7 +43,7 @@ export const signin = createAsyncThunk("signin", async (user: User) => {
         body: JSON.stringify(user)
       }
     )
-    /* const res = await fetch(`http://localhost:8080/api/v1/users/signin`, {
+    /*   const res = await fetch(`http://localhost:8080/api/v1/users/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -73,7 +73,7 @@ export const allUsers = createAsyncThunk("allUsers", async () => {
         }
       }
     )
-    /* const res = await fetch(`http://localhost:8080/api/v1/admin/users`, {
+    /*  const res = await fetch(`http://localhost:8080/api/v1/admin/users`, {
       method: `GET`,
       headers: {
         "Content-Type": "application/json",

@@ -20,7 +20,7 @@ export const borrowBook = createAsyncThunk(
           body: JSON.stringify(borrow)
         }
       )
-      /* const res = await fetch(
+      /*  const res = await fetch(
         ` http://localhost:8080/api/v1/transactions/borrow`,
         {
           method: "POST",
@@ -31,7 +31,6 @@ export const borrowBook = createAsyncThunk(
           body: JSON.stringify(borrow)
         }
       ) */
-
       const createdBorrow = await res.json()
       if (!res.ok) {
         throw new Error("Something went wrong")
@@ -106,7 +105,7 @@ export const transactionsOfUser = createAsyncThunk(
           }
         }
       )
-      /* const res = await fetch(
+      /*  const res = await fetch(
         `http://localhost:8080/api/v1/transactions/user/${userId}`,
         {
           method: "GET",
@@ -187,7 +186,7 @@ export const deleteTransactionById = createAsyncThunk(
         const resposne = await res.json()
         return resposne
       }
-      dispatch(allTransactions)
+      dispatch(allTransactions())
       return { transactionId }
     } catch (error) {
       return error

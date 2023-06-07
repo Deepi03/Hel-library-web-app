@@ -42,6 +42,8 @@ service should start in `http://localhost:5173`
 
 * list of authors in table view along with its corresponding books and informations of authors
 
+* sort books based on title(a-z),availablity and authors based on name
+* search for genres
 * Under the book tab list of books and and its corresponding author can be viewed.If a visitor is logged in  as an USER with a unique USERNAME and PASSWORD, the user can borrow  any number available books from the book table it self or the user can chhose the return days and borrow a book from its detialed view.
 
 * A borrowed book (which is in transaction) will not be available for the other users.
@@ -86,9 +88,10 @@ Admin User has special privilege to make crud operations on Books and Authors.
 ### Potential plan
  
 * more clean code with good documentation
-* Better UI and mobile view
-* Better validations and exception handling
-* As there is no space for unit testing , planning to implement integration and e2e testing
+* implement search for books ans authors as well
+* better UI and mobile view
+* better validations and exception handling
+* bs there is no space for unit testing , planning to implement integration and e2e testing
 
 
 ### Back Note
